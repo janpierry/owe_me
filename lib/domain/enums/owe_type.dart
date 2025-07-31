@@ -1,0 +1,1 @@
+enum OweType { debt, credit }

@@ -1,0 +1,2 @@
+/home/jan/development/apps/owe_me/android/app/.cxx/Debug/2g5b1p3p/x86/CMakeFiles/edit_cache.dir
+/home/jan/development/apps/owe_me/android/app/.cxx/Debug/2g5b1p3p/x86/CMakeFiles/rebuild_cache.dir

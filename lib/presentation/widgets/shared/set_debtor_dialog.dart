@@ -1,0 +1,179 @@
+import 'package:flutter/material.dart';
+import 'package:owe_me/presentation/shared/callbacks.dart';
+import 'package:owe_me/presentation/shared/design_system/app_colors.dart';
+import 'package:owe_me/presentation/shared/design_system/app_text_styles.dart';
+
+class SetDebtorDialog extends StatefulWidget {
+  final String? initialName;
+  final SetDebtorPressedCallback? onSetDebtorPressed;
+
+  const SetDebtorDialog({
+    super.key,
+    this.initialName,
+    this.onSetDebtorPressed,
+  });
+
+  @override
+  State<SetDebtorDialog> createState() => _SetDebtorDialogState();
+}
+
+class _SetDebtorDialogState extends State<SetDebtorDialog> {
+  late TextEditingController _controller;
+  final FocusNode _focusNode = FocusNode();
+  bool _isButtonEnabled = false;
+
+  String? _errorText;
+
+  bool get _isEditing => widget.initialName != null;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = TextEditingController(text: widget.initialName ?? '');
+    _isButtonEnabled = _controller.text.trim().isNotEmpty;
+
+    _controller.addListener(() {
+      final hasText = _controller.text.trim().isNotEmpty;
+      if (hasText != _isButtonEnabled) {
+        setState(() {
+          _isButtonEnabled = hasText;
+          _errorText = null;
+        });
+      }
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      FocusScope.of(context).requestFocus(_focusNode);
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  void _validateAndSubmit() {
+    final name = _controller.text.trim();
+    if (name.isEmpty) {
+      setState(() {
+        _errorText = "Name can't be empty";
+      });
+    } else {
+      widget.onSetDebtorPressed?.call(name);
+      Navigator.of(context).pop();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      insetPadding: const EdgeInsets.symmetric(horizontal: 24),
+      backgroundColor: AppColors.surfaceWhite,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Container(
+        width: 312,
+        padding: const EdgeInsets.fromLTRB(20, 24, 20, 16),
+        decoration: BoxDecoration(
+          color: AppColors.surfaceWhite,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: const [
+            //TODO create file for shadows
+            BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.1),
+              blurRadius: 16,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              _isEditing ? 'Edit Debtor' : 'Add New Debtor',
+              style: AppTextStyles.headline1,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Name', style: AppTextStyles.body),
+                const SizedBox(height: 4),
+                TextFormField(
+                  controller: _controller,
+                  focusNode: _focusNode,
+                  decoration: InputDecoration(
+                    hintText: "Enter debtor's name",
+                    hintStyle: AppTextStyles.body.copyWith(
+                      color: AppColors.textGray,
+                    ),
+                    filled: true,
+                    //TODO test this
+                    fillColor: AppColors.surfaceWhite,
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(
+                        color: AppColors.primaryBlue,
+                        width: 1,
+                      ),
+                    ),
+                  ),
+                  style: AppTextStyles.body,
+                ),
+                if (_errorText != null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4, left: 4),
+                    child: Text(
+                      _errorText!,
+                      style: AppTextStyles.body.copyWith(color: AppColors.red),
+                    ),
+                  ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                  ),
+                  child: Text(
+                    'Cancel',
+                    style: AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                ElevatedButton(
+                  onPressed: _isButtonEnabled ? _validateAndSubmit : null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primaryBlue,
+                    foregroundColor: AppColors.surfaceWhite,
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    minimumSize: const Size(0, 40),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: Text(
+                    _isEditing ? 'Edit' : 'Add',
+                    style: AppTextStyles.subtitle.copyWith(color: AppColors.white),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
