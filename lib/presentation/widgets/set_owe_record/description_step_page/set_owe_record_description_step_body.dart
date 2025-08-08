@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:owe_me/domain/entities/favorite_description.dart';
 import 'package:owe_me/domain/enums/owe_type.dart';
-import 'package:owe_me/presentation/extensions/owe_type_ui.dart';
+import 'package:owe_me/presentation/extensions/owe_type_ui_extensions.dart';
 import 'package:owe_me/presentation/shared/design_system/app_text_styles.dart';
 import 'package:owe_me/presentation/widgets/set_owe_record/description_step_page/set_owe_record_description_step_favorite_button.dart';
 import 'package:owe_me/presentation/widgets/set_owe_record/description_step_page/set_owe_record_description_step_favorite_descriptions_section.dart';
@@ -13,14 +13,12 @@ class SetOweRecordDescriptionStepBody extends StatelessWidget {
   final String initialDescription;
   final List<FavoriteDescription> initialFavoriteDescriptions;
   final OweType oweRecordType;
-  final bool isEdition;
 
   const SetOweRecordDescriptionStepBody({
     super.key,
     required this.initialDescription,
     required this.initialFavoriteDescriptions,
     required this.oweRecordType,
-    required this.isEdition,
   });
 
   String get _stepTitle => 'Descreva a que se refere este ${oweRecordType.label}:';
@@ -61,7 +59,7 @@ class SetOweRecordDescriptionStepBody extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(16),
-          child: SetOweRecordDescriptionStepPrimaryButton(isEdition: isEdition),
+          child: SetOweRecordDescriptionStepPrimaryButton(),
         )
       ],
     );

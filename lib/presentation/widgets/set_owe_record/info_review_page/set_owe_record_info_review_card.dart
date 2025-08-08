@@ -5,7 +5,8 @@ import 'package:owe_me/domain/entities/debtor.dart';
 import 'package:owe_me/presentation/containers/set_owe_record/set_owe_record_amount_step_container.dart';
 import 'package:owe_me/presentation/containers/set_owe_record/set_owe_record_debtor_selection_container.dart';
 import 'package:owe_me/presentation/containers/set_owe_record/set_owe_record_description_step_container.dart';
-import 'package:owe_me/presentation/extensions/owe_type_ui.dart';
+import 'package:owe_me/presentation/extensions/money_ui_extensions.dart';
+import 'package:owe_me/presentation/extensions/owe_type_ui_extensions.dart';
 import 'package:owe_me/presentation/pages/set_owe_record/set_owe_record_date_step_page.dart';
 import 'package:owe_me/presentation/shared/design_system/app_colors.dart';
 import 'package:owe_me/presentation/shared/design_system/app_text_styles.dart';
@@ -92,7 +93,7 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                       style: AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
                       children: [
                         TextSpan(
-                          text: ' has a new ',
+                          text: ' tem um novo ',
                           style: AppTextStyles.subtitle,
                         ),
                         TextSpan(
@@ -101,7 +102,7 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                             color: AppColors.textGray,
                           ),
                         ),
-                        TextSpan(text: ' with you', style: AppTextStyles.subtitle),
+                        TextSpan(text: ' com você', style: AppTextStyles.subtitle),
                       ],
                     ),
                     overflow: TextOverflow.clip,
@@ -123,11 +124,11 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                   child: Text.rich(
                     overflow: TextOverflow.clip,
                     TextSpan(
-                      text: 'Amount: ',
+                      text: 'Valor: ',
                       style: AppTextStyles.subtitle,
                       children: [
                         TextSpan(
-                          text: oweRecordDraft.amount?.toString() ?? 'R\$0,00',
+                          text: oweRecordDraft.amount?.toFormattedString(),
                           style:
                               AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
                         ),
@@ -151,7 +152,7 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                   child: Text.rich(
                     overflow: TextOverflow.clip,
                     TextSpan(
-                      text: 'Description: ',
+                      text: 'Descrição: ',
                       style: AppTextStyles.subtitle,
                       children: [
                         TextSpan(
@@ -176,13 +177,13 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
               children: [
                 Text.rich(
                   TextSpan(
-                    text: 'Date: ',
+                    text: 'Data: ',
                     style: AppTextStyles.subtitle,
                     children: [
                       TextSpan(
                         text: oweRecordDraft.date != null
                             ? AppDateUtils.getFormattedDate(oweRecordDraft.date!)
-                            : 'Not specified',
+                            : 'Não informada',
                         style: AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
                       ),
                     ],

@@ -65,12 +65,12 @@ It’s still in development, but it already covers the basic functionality I had
 This app follows a Clean Architecture structure, using the following tools and technologies:
 
 - **Architecture**: Clean Architecture (domain, data, presentation separation)
-- **State Management**: BLoC Pattern
+- **State Management**: BLoC Pattern using `flutter_bloc`
 - **Local Storage**: `sqflite`
 - **Dependency Injection**: `get_it`
 - **Unit Testing**: `flutter_test` and `mocktail`
-- **Language**: Dart
 - **Framework**: Flutter
+- **Language**: Dart
 
 ---
 
@@ -151,6 +151,7 @@ It was a great learning experience and gave me more confidence working with loca
 - [ ] Implement filters for the transaction list
 - [ ] Polish the UI for better usability
 - [ ] Add remote storage
+- [ ] Improve test coverage
 
 ---
 
@@ -159,12 +160,12 @@ It was a great learning experience and gave me more confidence working with loca
 If you're a recruiter, developer, or just curious—thanks for checking out this project! Feel free to reach out:
 
 **Jan Pierry**  
-📧 [Your Email]  
-🌐 [LinkedIn or Portfolio URL]  
-📂 [GitHub Profile](https://github.com/your-username)
+📧 [janpierrycoelho@gmail.com]  
+🌐 [LinkedIn](https://www.linkedin.com/in/jan-pierry/)
+📂 [GitHub Profile](https://github.com/janpierry)
 
 ---
 
 ## 📝 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is open source and available under the [MIT License](LICENSE).

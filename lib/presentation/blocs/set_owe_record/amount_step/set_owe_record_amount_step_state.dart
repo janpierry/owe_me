@@ -20,7 +20,7 @@ final class SetOweRecordAmountStepPageLoading
 
 final class SetOweRecordAmountStepPageLoaded
     extends SetOweRecordAmountStepPageBuildState {
-  final Money? amountToEdit;
+  final Money amountToEdit;
 
   const SetOweRecordAmountStepPageLoaded({required this.amountToEdit});
 

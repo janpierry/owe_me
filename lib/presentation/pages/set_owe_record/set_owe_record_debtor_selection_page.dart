@@ -62,7 +62,7 @@ class SetOweRecordDebtorSelectionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Choose Debtor', style: AppTextStyles.headline1),
+        title: Text('Selecione o Devedor', style: AppTextStyles.headline1),
         backgroundColor: AppColors.surfaceWhite,
         centerTitle: true,
         elevation: 1,

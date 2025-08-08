@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/domain/entities/favorite_description.dart';
 import 'package:owe_me/domain/enums/owe_type.dart';
 import 'package:owe_me/presentation/blocs/set_owe_record/description_step/set_owe_record_description_step_bloc.dart';
-import 'package:owe_me/presentation/extensions/owe_type_ui.dart';
+import 'package:owe_me/presentation/extensions/owe_type_ui_extensions.dart';
 
 class SetOweRecordDescriptionStepFavoriteDescriptionsSection extends StatelessWidget {
   final List<FavoriteDescription> initialFavoriteDescriptions;

@@ -33,7 +33,7 @@ class HomeDebtorsSection extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                'Debtors',
+                'Devedores',
                 style: AppTextStyles.headline2,
               ),
             ),

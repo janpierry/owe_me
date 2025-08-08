@@ -19,7 +19,7 @@ class DebtorHeader extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              Text('Total Debt', style: AppTextStyles.caption),
+              Text('Débito total', style: AppTextStyles.caption),
               const SizedBox(height: 8),
               Text(debtor.totalDebt.toString(), style: AppTextStyles.headline1),
             ],

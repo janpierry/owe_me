@@ -40,7 +40,7 @@ class SetOweRecordDateStepPrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppElevatedButton(
-      label: isEdition ? 'Confirmar' : 'Próximo',
+      label: 'Confirmar',
       onPressed: () =>
           isEdition ? _finishEdition(context) : _navigateToInfoReviewPage(context),
     );

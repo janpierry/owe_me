@@ -33,7 +33,7 @@ class SetPaymentRecordInfoReviewPage extends StatelessWidget {
     } else if (state is SetPaymentRecordInfoReviewError) {
       // TODO Handle error state, e.g., show a snackbar or dialog
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('An error occurred while setting the record.')),
+        const SnackBar(content: Text('Um erro ocorreu ao registrar o pagamento.')),
       );
     }
   }
@@ -42,7 +42,7 @@ class SetPaymentRecordInfoReviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Review Info', style: AppTextStyles.headline1),
+        title: Text('Confira as Informações', style: AppTextStyles.headline1),
         backgroundColor: AppColors.surfaceWhite,
         centerTitle: true,
         elevation: 1,

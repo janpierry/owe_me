@@ -11,7 +11,7 @@ class DebtorMonetaryRecordHistorySection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Record History',
+          'Histórico',
           style: AppTextStyles.headline2,
         ),
         const SizedBox(height: 8),

@@ -28,7 +28,7 @@ class HomeHeader extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              Text('Total to be received', style: AppTextStyles.caption),
+              Text('Total a receber', style: AppTextStyles.caption),
               const SizedBox(height: 8),
               Text(
                 _totalDebt,

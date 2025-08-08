@@ -12,7 +12,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('OweMe', style: AppTextStyles.headline1),
+        title: Text('OweMe',
+            style: AppTextStyles.headline1.copyWith(
+              color: AppColors.primaryBlue,
+            )),
         backgroundColor: AppColors.surfaceWhite,
         centerTitle: true,
         elevation: 1,

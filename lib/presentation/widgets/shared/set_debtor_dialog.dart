@@ -59,7 +59,7 @@ class _SetDebtorDialogState extends State<SetDebtorDialog> {
     final name = _controller.text.trim();
     if (name.isEmpty) {
       setState(() {
-        _errorText = "Name can't be empty";
+        _errorText = "Nome é obrigatório";
       });
     } else {
       widget.onSetDebtorPressed?.call(name);
@@ -92,7 +92,7 @@ class _SetDebtorDialogState extends State<SetDebtorDialog> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              _isEditing ? 'Edit Debtor' : 'Add New Debtor',
+              _isEditing ? 'Editar Devedor' : 'Novo Devedor',
               style: AppTextStyles.headline1,
               textAlign: TextAlign.center,
             ),
@@ -100,13 +100,13 @@ class _SetDebtorDialogState extends State<SetDebtorDialog> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Name', style: AppTextStyles.body),
+                Text('Nome', style: AppTextStyles.body),
                 const SizedBox(height: 4),
                 TextFormField(
                   controller: _controller,
                   focusNode: _focusNode,
                   decoration: InputDecoration(
-                    hintText: "Enter debtor's name",
+                    hintText: "Insira o nome do devedor",
                     hintStyle: AppTextStyles.body.copyWith(
                       color: AppColors.textGray,
                     ),
@@ -148,7 +148,7 @@ class _SetDebtorDialogState extends State<SetDebtorDialog> {
                     padding: EdgeInsets.zero,
                   ),
                   child: Text(
-                    'Cancel',
+                    'Cancelar',
                     style: AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
                   ),
                 ),
@@ -165,7 +165,7 @@ class _SetDebtorDialogState extends State<SetDebtorDialog> {
                     ),
                   ),
                   child: Text(
-                    _isEditing ? 'Edit' : 'Add',
+                    _isEditing ? 'Editar' : 'Adicionar',
                     style: AppTextStyles.subtitle.copyWith(color: AppColors.white),
                   ),
                 ),

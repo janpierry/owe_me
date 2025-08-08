@@ -4,12 +4,7 @@ import 'package:owe_me/presentation/blocs/set_owe_record/description_step/set_ow
 import 'package:owe_me/presentation/widgets/shared/app_elevated_button.dart';
 
 class SetOweRecordDescriptionStepPrimaryButton extends StatelessWidget {
-  final bool isEdition;
-
-  const SetOweRecordDescriptionStepPrimaryButton({
-    super.key,
-    required this.isEdition,
-  });
+  const SetOweRecordDescriptionStepPrimaryButton({super.key});
 
   void _navigateToNextPage(BuildContext context) {
     context
@@ -20,7 +15,7 @@ class SetOweRecordDescriptionStepPrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppElevatedButton(
-      label: isEdition ? 'Confirmar' : 'Próximo',
+      label: 'Confirmar',
       onPressed: () => _navigateToNextPage(context),
     );
   }

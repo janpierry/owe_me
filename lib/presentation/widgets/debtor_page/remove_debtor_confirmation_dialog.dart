@@ -37,13 +37,13 @@ class RemoveDebtorConfirmationDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Remove Debtor?',
+              'Excluir o Devedor?',
               style: AppTextStyles.headline1,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
             Text(
-              'This action will permanently remove this debtor and all associated records. This cannot be undone.',
+              'Esta ação vai excluir permatentemente este devedor e todos os registros associados a ele. Esta ação não poderá ser desfeita.',
               style: AppTextStyles.body.copyWith(color: AppColors.textGray),
               textAlign: TextAlign.center,
             ),
@@ -57,7 +57,7 @@ class RemoveDebtorConfirmationDialog extends StatelessWidget {
                     padding: EdgeInsets.zero,
                   ),
                   child: Text(
-                    'Cancel',
+                    'Cancelar',
                     style: AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
                   ),
                 ),
@@ -74,7 +74,7 @@ class RemoveDebtorConfirmationDialog extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    'Remove',
+                    'Excluir',
                     style: AppTextStyles.subtitle.copyWith(color: AppColors.white),
                   ),
                 ),

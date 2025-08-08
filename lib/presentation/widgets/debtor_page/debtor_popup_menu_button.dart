@@ -56,11 +56,11 @@ class DebtorPopupMenuButton extends StatelessWidget {
       itemBuilder: (context) => [
         const PopupMenuItem(
           value: _PopupMenuButtonOptions.edit,
-          child: Text('Edit debtor'),
+          child: Text('Editar devedor'),
         ),
         const PopupMenuItem(
           value: _PopupMenuButtonOptions.remove,
-          child: Text('Remove debtor'),
+          child: Text('Excluir devedor'),
         ),
       ],
     );

@@ -15,7 +15,7 @@ class SetPaymentRecordDebtorSelectionBody extends StatelessWidget {
     required this.onDebtorSelected,
   });
 
-  String get _title => 'Select the debtor who is paying you';
+  String get _title => 'Quem está realizando um pagamento a você?';
 
   @override
   Widget build(BuildContext context) {

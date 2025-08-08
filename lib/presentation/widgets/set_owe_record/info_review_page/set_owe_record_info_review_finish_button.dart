@@ -16,7 +16,7 @@ class SetOweRecordInfoReviewFinishButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppElevatedButton(
-      label: 'Confirm',
+      label: 'Confirmar',
       onPressed: () => _requestRecordSetting(context),
     );
   }

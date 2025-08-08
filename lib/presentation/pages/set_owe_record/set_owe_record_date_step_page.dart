@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:owe_me/presentation/drafts/owe_record_draft.dart';
 import 'package:owe_me/domain/entities/debtor.dart';
-import 'package:owe_me/presentation/extensions/owe_type_ui.dart';
+import 'package:owe_me/presentation/extensions/owe_type_ui_extensions.dart';
+import 'package:owe_me/presentation/shared/design_system/app_colors.dart';
 import 'package:owe_me/presentation/shared/design_system/app_text_styles.dart';
 import 'package:owe_me/presentation/widgets/set_owe_record/date_step_page/set_owe_record_date_step_primary_button.dart';
 import 'package:owe_me/presentation/widgets/shared/app_date_picker.dart';
@@ -46,7 +47,15 @@ class _SetOweRecordDateStepPageState extends State<SetOweRecordDateStepPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(
+          'Informe a Data',
+          style: AppTextStyles.headline1,
+        ),
+        backgroundColor: AppColors.surfaceWhite,
+        centerTitle: true,
+        elevation: 1,
+      ),
       body: Column(
         children: [
           Expanded(

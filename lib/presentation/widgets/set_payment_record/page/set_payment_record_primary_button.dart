@@ -28,7 +28,7 @@ class SetPaymentRecordPrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppElevatedButton(
-      label: 'Next',
+      label: 'Confirmar',
       onPressed: () => _navigateToInfoReviewPage(context),
     );
   }

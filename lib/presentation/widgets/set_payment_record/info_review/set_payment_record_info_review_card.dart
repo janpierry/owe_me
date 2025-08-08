@@ -3,7 +3,8 @@ import 'package:owe_me/core/utils/app_date_utils.dart';
 import 'package:owe_me/domain/entities/debtor.dart';
 import 'package:owe_me/presentation/containers/set_payment_record/set_payment_record_debtor_selection_container.dart';
 import 'package:owe_me/presentation/drafts/payment_record_draft.dart';
-import 'package:owe_me/presentation/extensions/payment_method_ui.dart';
+import 'package:owe_me/presentation/extensions/money_ui_extensions.dart';
+import 'package:owe_me/presentation/extensions/payment_method_ui_extensions.dart';
 import 'package:owe_me/presentation/pages/set_payment_record/set_payment_record_page.dart';
 import 'package:owe_me/presentation/shared/design_system/app_colors.dart';
 import 'package:owe_me/presentation/shared/design_system/app_text_styles.dart';
@@ -62,7 +63,7 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
                 Expanded(
                   child: Text.rich(
                     TextSpan(
-                      text: 'Who is paying you: ',
+                      text: 'Quem está te pagando: ',
                       style: AppTextStyles.subtitle,
                       children: [
                         TextSpan(
@@ -89,11 +90,11 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
               children: [
                 Text.rich(
                   TextSpan(
-                    text: 'Amount: ',
+                    text: 'Valor: ',
                     style: AppTextStyles.subtitle,
                     children: [
                       TextSpan(
-                        text: paymentRecordDraft.amount?.toString() ?? 'R\$0,00',
+                        text: paymentRecordDraft.amount?.toFormattedString(),
                         style: AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
                       ),
                     ],
@@ -113,7 +114,7 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
                 //TODO test if null or empty check necessary
                 Text.rich(
                   TextSpan(
-                    text: 'Payment method: ',
+                    text: 'Método de pagamento: ',
                     style: AppTextStyles.subtitle,
                     children: [
                       TextSpan(
@@ -136,13 +137,13 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
               children: [
                 Text.rich(
                   TextSpan(
-                    text: 'Date: ',
+                    text: 'Data: ',
                     style: AppTextStyles.subtitle,
                     children: [
                       TextSpan(
                         text: paymentRecordDraft.date != null
                             ? AppDateUtils.getFormattedDate(paymentRecordDraft.date!)
-                            : 'Not specified',
+                            : 'Não informada',
                         style: AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
                       ),
                     ],

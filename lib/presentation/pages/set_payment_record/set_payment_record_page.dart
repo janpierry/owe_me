@@ -3,7 +3,7 @@ import 'package:owe_me/domain/entities/debtor.dart';
 import 'package:owe_me/domain/entities/money.dart';
 import 'package:owe_me/domain/enums/payment_method.dart';
 import 'package:owe_me/presentation/drafts/payment_record_draft.dart';
-import 'package:owe_me/presentation/extensions/payment_method_ui.dart';
+import 'package:owe_me/presentation/extensions/payment_method_ui_extensions.dart';
 import 'package:owe_me/presentation/shared/design_system/app_colors.dart';
 import 'package:owe_me/presentation/shared/design_system/app_text_styles.dart';
 import 'package:owe_me/presentation/widgets/set_payment_record/page/set_payment_record_primary_button.dart';
@@ -57,7 +57,7 @@ class _SetPaymentRecordPageState extends State<SetPaymentRecordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Payment', style: AppTextStyles.headline1),
+        title: Text('Novo Pagamento', style: AppTextStyles.headline1),
         backgroundColor: AppColors.surfaceWhite,
         centerTitle: true,
         elevation: 1,

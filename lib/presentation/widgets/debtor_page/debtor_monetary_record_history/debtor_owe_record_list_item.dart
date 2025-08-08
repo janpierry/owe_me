@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:owe_me/core/utils/date_formatters.dart';
 import 'package:owe_me/domain/entities/owe_record.dart';
-import 'package:owe_me/presentation/extensions/owe_type_ui.dart';
+import 'package:owe_me/presentation/extensions/owe_type_ui_extensions.dart';
 import 'package:owe_me/presentation/shared/design_system/app_colors.dart';
 import 'package:owe_me/presentation/shared/design_system/app_text_styles.dart';
 

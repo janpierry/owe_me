@@ -5,12 +5,18 @@ class CurrencyInputFormatter extends TextInputFormatter {
   int _numericValue = 0;
 
   String formatNumber(int valueInCents) {
-    final formatter = NumberFormat.currency(
+    //TODO adapt this to the user's locale
+    final ptBRFormatter = NumberFormat.currency(
       locale: "pt_BR",
       symbol: "R\$",
       decimalDigits: 2,
     );
-    return formatter.format(valueInCents / 100).trim();
+    // final enUSFormatter = NumberFormat.currency(
+    //   locale: "en_US",
+    //   symbol: "\$",
+    //   decimalDigits: 2,
+    // );
+    return ptBRFormatter.format(valueInCents / 100).trim();
   }
 
   @override

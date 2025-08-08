@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:owe_me/domain/entities/debtor.dart';
 import 'package:owe_me/domain/enums/owe_type.dart';
-import 'package:owe_me/presentation/extensions/owe_type_ui.dart';
+import 'package:owe_me/presentation/extensions/owe_type_ui_extensions.dart';
 import 'package:owe_me/presentation/shared/callbacks.dart';
 import 'package:owe_me/presentation/shared/design_system/app_colors.dart';
 import 'package:owe_me/presentation/shared/design_system/app_text_styles.dart';
@@ -19,8 +19,7 @@ class SetOweRecordDebtorSelectionBody extends StatelessWidget {
     required this.oweRecordType,
   });
 
-  String get _stepTitle =>
-      'Select the debtor who has a new ${oweRecordType.label} with you';
+  String get _stepTitle => 'Quem tem um novo ${oweRecordType.label} com você?';
 
   @override
   Widget build(BuildContext context) {

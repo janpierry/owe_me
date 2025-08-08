@@ -7,6 +7,8 @@ import 'package:owe_me/domain/enums/owe_type.dart';
 import 'package:owe_me/presentation/blocs/set_owe_record/amount_step/set_owe_record_amount_step_bloc.dart';
 import 'package:owe_me/presentation/containers/set_owe_record/set_owe_record_description_step_container.dart';
 import 'package:owe_me/presentation/containers/set_owe_record/set_owe_record_info_review_container.dart';
+import 'package:owe_me/presentation/shared/design_system/app_colors.dart';
+import 'package:owe_me/presentation/shared/design_system/app_text_styles.dart';
 import 'package:owe_me/presentation/widgets/set_owe_record/amount_step_page/set_owe_record_amount_step_body.dart';
 
 class SetOweRecordAmountStepPage extends StatelessWidget {
@@ -76,7 +78,15 @@ class SetOweRecordAmountStepPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(
+          'Informe o Valor',
+          style: AppTextStyles.headline1,
+        ),
+        backgroundColor: AppColors.surfaceWhite,
+        centerTitle: true,
+        elevation: 1,
+      ),
       body: BlocConsumer<SetOweRecordAmountStepBloc, SetOweRecordAmountStepState>(
         listener: _listen,
         buildWhen: (_, current) => current is SetOweRecordAmountStepPageBuildState,

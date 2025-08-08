@@ -42,7 +42,10 @@ class SetOweRecordInfoReviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Review Info', style: AppTextStyles.headline1),
+        title: Text(
+          'Confira as Informações',
+          style: AppTextStyles.headline1,
+        ),
         backgroundColor: AppColors.surfaceWhite,
         centerTitle: true,
         elevation: 1,

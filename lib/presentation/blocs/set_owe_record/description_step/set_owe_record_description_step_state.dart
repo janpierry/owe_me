@@ -22,13 +22,11 @@ final class SetOweRecordDescriptionStepPageLoaded
   final String initialDescription;
   final List<FavoriteDescription> initialFavoriteDescriptions;
   final OweType oweRecordType;
-  final bool isEdition;
 
   const SetOweRecordDescriptionStepPageLoaded({
     required this.initialDescription,
     required this.initialFavoriteDescriptions,
     required this.oweRecordType,
-    required this.isEdition,
   });
 
   @override
@@ -36,7 +34,6 @@ final class SetOweRecordDescriptionStepPageLoaded
         initialDescription,
         initialFavoriteDescriptions,
         oweRecordType,
-        isEdition,
       ];
 }
 

@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/presentation/blocs/set_owe_record/description_step/set_owe_record_description_step_bloc.dart';
 import 'package:owe_me/presentation/containers/set_owe_record/set_owe_record_info_review_container.dart';
 import 'package:owe_me/presentation/pages/set_owe_record/set_owe_record_date_step_page.dart';
+import 'package:owe_me/presentation/shared/design_system/app_colors.dart';
+import 'package:owe_me/presentation/shared/design_system/app_text_styles.dart';
 import 'package:owe_me/presentation/widgets/set_owe_record/description_step_page/set_owe_record_description_step_body.dart';
 
 class SetOweRecordDescriptionStepPage extends StatelessWidget {
@@ -65,7 +67,15 @@ class SetOweRecordDescriptionStepPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(
+          'Adicione uma Descrição',
+          style: AppTextStyles.headline1,
+        ),
+        backgroundColor: AppColors.surfaceWhite,
+        centerTitle: true,
+        elevation: 1,
+      ),
       body:
           BlocConsumer<SetOweRecordDescriptionStepBloc, SetOweRecordDescriptionStepState>(
         listener: _listen,
@@ -77,7 +87,6 @@ class SetOweRecordDescriptionStepPage extends StatelessWidget {
               initialDescription: state.initialDescription,
               initialFavoriteDescriptions: state.initialFavoriteDescriptions,
               oweRecordType: state.oweRecordType,
-              isEdition: state.isEdition,
             );
           }
           return const Center(

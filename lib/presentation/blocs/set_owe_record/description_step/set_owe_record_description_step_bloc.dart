@@ -75,7 +75,6 @@ class SetOweRecordDescriptionStepBloc
         initialDescription: _description,
         initialFavoriteDescriptions: _favoriteDescriptions,
         oweRecordType: oweRecordType,
-        isEdition: _isEdition,
       ),
     );
   }

@@ -40,19 +40,19 @@ class HomeQuickActionButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         QuickActionButton(
-          label: 'Payment',
+          label: 'Pagamento',
           icon: Icons.credit_card,
           onPressed: () => _navigateToSetPaymentRecordPage(context),
         ),
         const SizedBox(width: 8),
         QuickActionButton(
-          label: 'Credit',
+          label: 'Crédito',
           icon: Icons.money_off_csred,
           onPressed: () => _navigateToSetRecordDebtorSelectionPageAsCredit(context),
         ),
         const SizedBox(width: 8),
         QuickActionButton(
-          label: 'Debt',
+          label: 'Débito',
           icon: Icons.attach_money,
           onPressed: () => _navigateToSetRecordDebtorSelectionPageAsDebt(context),
         ),

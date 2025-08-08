@@ -4,7 +4,7 @@ import 'package:owe_me/domain/entities/debtor.dart';
 import 'package:owe_me/domain/entities/money.dart';
 import 'package:owe_me/domain/enums/owe_type.dart';
 import 'package:owe_me/presentation/blocs/set_owe_record/amount_step/set_owe_record_amount_step_bloc.dart';
-import 'package:owe_me/presentation/extensions/owe_type_ui.dart';
+import 'package:owe_me/presentation/extensions/owe_type_ui_extensions.dart';
 import 'package:owe_me/presentation/shared/design_system/app_text_styles.dart';
 import 'package:owe_me/presentation/widgets/set_owe_record/amount_step_page/set_owe_record_amount_step_primary_button.dart';
 import 'package:owe_me/presentation/widgets/shared/app_amount_text_form_field.dart';
@@ -12,7 +12,7 @@ import 'package:owe_me/presentation/widgets/shared/app_amount_text_form_field.da
 class SetOweRecordAmountStepBody extends StatelessWidget {
   final Debtor recordDebtor;
   final OweType oweRecordType;
-  final Money? amountToEdit;
+  final Money amountToEdit;
 
   const SetOweRecordAmountStepBody({
     super.key,
@@ -28,7 +28,7 @@ class SetOweRecordAmountStepBody extends StatelessWidget {
   }
 
   String get _stepTitle =>
-      'Qual o valor do novo ${oweRecordType.label} que ${recordDebtor.name} tem como você?';
+      'Qual o valor do novo ${oweRecordType.label} que ${recordDebtor.name} tem com você?';
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class SetOweRecordAmountStepBody extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(16),
-          child: SetOweRecordAmountStepPrimaryButton(isEdition: amountToEdit != null),
+          child: SetOweRecordAmountStepPrimaryButton(),
         ),
       ],
     );
