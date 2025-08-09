@@ -4,6 +4,7 @@ import 'package:owe_me/presentation/blocs/debtors/debtors_bloc.dart';
 import 'package:owe_me/presentation/shared/design_system/app_colors.dart';
 import 'package:owe_me/presentation/shared/design_system/app_text_styles.dart';
 import 'package:owe_me/presentation/widgets/home_page/home_body.dart';
+import 'package:owe_me/presentation/widgets/home_page/home_no_debtors_yet_placeholder.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -26,6 +27,9 @@ class HomePage extends StatelessWidget {
         builder: (context, state) {
           if (state is DebtorsLoaded) {
             return HomeBody(debtors: state.debtors);
+          }
+          if (state is DebtorsEmpty) {
+            return HomeNoDebtorsYetPlaceholder();
           }
           return const Center(
             child: CircularProgressIndicator(),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/presentation/blocs/debtor_monetary_record_history/debtor_monetary_record_history_bloc.dart';
+import 'package:owe_me/presentation/widgets/debtor_page/debtor_monetary_record_history/debtor_monetary_record_history_empty_placeholder.dart';
 import 'package:owe_me/presentation/widgets/debtor_page/debtor_monetary_record_history/debtor_monetary_record_history_list.dart';
 
 class DebtorMonetaryRecordHistoryBuilder extends StatelessWidget {
@@ -14,6 +15,9 @@ class DebtorMonetaryRecordHistoryBuilder extends StatelessWidget {
           return DebtorMonetaryRecordHistoryList(
             monetaryRecords: state.monetaryRecordHistory,
           );
+        }
+        if (state is DebtorMonetaryRecordHistoryEmpty) {
+          return DebtorMonetaryRecordHistoryEmptyPlaceholder();
         }
         if (state is DebtorMonetaryRecordHistoryLoading) {
           return const Center(

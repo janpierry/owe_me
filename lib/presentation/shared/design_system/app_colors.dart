@@ -30,4 +30,7 @@ class AppColors {
   static const Color disabledGray = Color(0xFFD1D5DB);
 
   static const Color white = Color(0xFFFFFFFF);
+
+  static const Color gray600 = Color(0xFF607D8B);
+  static const Color gray400 = Color(0xFFB0BEC5);
 }

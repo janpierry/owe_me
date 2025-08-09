@@ -20,4 +20,6 @@ final class DebtorsLoaded extends DebtorsState {
   List<Object> get props => [debtors];
 }
 
+final class DebtorsEmpty extends DebtorsState {}
+
 final class DebtorsError extends DebtorsState {}

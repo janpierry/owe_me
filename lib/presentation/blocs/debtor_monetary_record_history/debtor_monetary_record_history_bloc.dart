@@ -40,6 +40,10 @@ class DebtorMonetaryRecordHistoryBloc
     response.fold(
       (exception) => emit(DebtorMonetaryRecordHistoryError(message: exception.message)),
       (monetaryRecordHistory) {
+        if (monetaryRecordHistory.isEmpty) {
+          emit(DebtorMonetaryRecordHistoryEmpty());
+          return;
+        }
         emit(
           DebtorMonetaryRecordHistoryLoaded(monetaryRecordHistory: monetaryRecordHistory),
         );

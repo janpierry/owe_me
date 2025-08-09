@@ -35,6 +35,10 @@ class DebtorsBloc extends Bloc<DebtorsEvent, DebtorsState> {
       (exception) => emit(DebtorsError()),
       (debtors) {
         _debtors = debtors;
+        if (_debtors.isEmpty) {
+          emit(DebtorsEmpty());
+          return;
+        }
         emit(DebtorsLoaded(debtors: _debtors));
       },
     );

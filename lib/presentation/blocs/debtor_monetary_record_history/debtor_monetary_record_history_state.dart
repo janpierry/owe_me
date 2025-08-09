@@ -20,6 +20,8 @@ final class DebtorMonetaryRecordHistoryLoaded extends DebtorMonetaryRecordHistor
   List<Object> get props => [monetaryRecordHistory];
 }
 
+final class DebtorMonetaryRecordHistoryEmpty extends DebtorMonetaryRecordHistoryState {}
+
 final class DebtorMonetaryRecordHistoryError extends DebtorMonetaryRecordHistoryState {
   final String message;
 
