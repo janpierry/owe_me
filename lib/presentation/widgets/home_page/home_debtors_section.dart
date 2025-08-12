@@ -11,9 +11,9 @@ class HomeDebtorsSection extends StatelessWidget {
 
   const HomeDebtorsSection({super.key, required this.debtors});
 
-  void _showAddNewDebtorDialog(BuildContext context) {
+  Future<void> _showAddNewDebtorDialog(BuildContext context) {
     final bloc = context.read<DebtorsBloc>();
-    showDialog(
+    return showDialog(
       context: context,
       barrierDismissible: true,
       builder: (context) => SetDebtorDialog(

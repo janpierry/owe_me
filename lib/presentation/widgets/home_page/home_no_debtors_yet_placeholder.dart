@@ -9,9 +9,9 @@ import 'package:owe_me/presentation/widgets/shared/set_debtor_dialog.dart';
 class HomeNoDebtorsYetPlaceholder extends StatelessWidget {
   const HomeNoDebtorsYetPlaceholder({super.key});
 
-  void _showSetDebtorDialog(BuildContext context) {
+  Future<void> _showSetDebtorDialog(BuildContext context) {
     final bloc = context.read<DebtorsBloc>();
-    showDialog(
+    return showDialog(
       context: context,
       barrierDismissible: true,
       builder: (context) => SetDebtorDialog(
@@ -24,34 +24,37 @@ class HomeNoDebtorsYetPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 48),
-      child: Column(
-        children: [
-          Icon(Icons.person, size: 96, color: AppColors.gray400),
-          const SizedBox(height: 16),
-          Text(
-            'Sem devedores por enquanto',
-            textAlign: TextAlign.center,
-            style: AppTextStyles.headline2.copyWith(
-              fontWeight: FontWeight.w600,
-              color: AppColors.textGray,
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 48),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.person, size: 96, color: AppColors.gray400),
+            const SizedBox(height: 16),
+            Text(
+              'Sem devedores por enquanto',
+              textAlign: TextAlign.center,
+              style: AppTextStyles.headline2.copyWith(
+                fontWeight: FontWeight.w600,
+                color: AppColors.textGray,
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Comece adicionando alguém que tem alguma dívida com você ou que você deve',
-            textAlign: TextAlign.center,
-            style: AppTextStyles.body.copyWith(
-              color: AppColors.gray600,
+            const SizedBox(height: 8),
+            Text(
+              'Comece adicionando um devedor para acompanhar os débitos, créditos e pagamentos que ele tem com você.',
+              textAlign: TextAlign.center,
+              style: AppTextStyles.body.copyWith(
+                color: AppColors.gray600,
+              ),
             ),
-          ),
-          const SizedBox(height: 24),
-          AppElevatedButton(
-            label: 'Adicionar devedor',
-            onPressed: () => _showSetDebtorDialog(context),
-          ),
-        ],
+            const SizedBox(height: 24),
+            AppElevatedButton(
+              label: 'Adicionar devedor',
+              onPressed: () => _showSetDebtorDialog(context),
+            ),
+          ],
+        ),
       ),
     );
   }

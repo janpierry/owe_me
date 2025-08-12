@@ -78,6 +78,7 @@ class _SetOweRecordDescriptionTextFormFieldState
         ),
         style: AppTextStyles.body,
         controller: _controller,
+        autofocus: true,
         keyboardType: TextInputType.text,
       ),
     );

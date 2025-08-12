@@ -11,9 +11,9 @@ class DebtorPopupMenuButton extends StatelessWidget {
 
   const DebtorPopupMenuButton({super.key, required this.debtor});
 
-  void _showSetDebtorDialog(BuildContext context) {
+  Future<void> _showSetDebtorDialog(BuildContext context) {
     // final bloc = context.read<DebtorMonetaryRecordHistoryBloc>();
-    showDialog(
+    return showDialog(
       context: context,
       barrierDismissible: true,
       builder: (context) => SetDebtorDialog(
@@ -27,9 +27,9 @@ class DebtorPopupMenuButton extends StatelessWidget {
     );
   }
 
-  void _showRemoveDebtorConfirmationDialog(BuildContext context) {
+  Future<void> _showRemoveDebtorConfirmationDialog(BuildContext context) {
     final bloc = context.read<DebtorMonetaryRecordHistoryBloc>();
-    showDialog(
+    return showDialog(
       context: context,
       barrierDismissible: true,
       builder: (context) => RemoveDebtorConfirmationDialog(
