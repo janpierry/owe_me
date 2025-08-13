@@ -1,6 +1,6 @@
 # OweMe
 
-**A simple Flutter app to track personal debts and credits.**
+**A simple Flutter app to track personal debts, credits, and payments.**
 
 ---
 
@@ -34,14 +34,14 @@ It’s still in development, but it already covers the basic functionality I had
 - **Manage Debtors**  
   Keep a list of people who owe you or whom you owe.
 
-- **Log Transactions**  
+- **Log Records**  
   Add debts (they owe you), credits (you owe them), and payments (of their debt).
 
 - **View Balances**  
   See the current balance for each person and a global total.
 
 - **Transaction History**  
-  View a list of all records for better tracking and accountability.
+  View a list of all records for each debtor for better tracking and accountability.
 
 ---
 
@@ -49,14 +49,17 @@ It’s still in development, but it already covers the basic functionality I had
 
 > *Screenshots and demo coming soon. For now, here are a few placeholders:*
 
-- **Dashboard View**  
-  ![Dashboard Screenshot](screenshots/[add-screenshot-of-dashboard.png])
+- **Home Page**  
+  ![Home Screenshot](screenshots/[home-page-screenshot.png])
 
-- **Add Debt Flow**  
-  ![Add Debt Demo](screenshots/[add-gif-of-adding-debt.gif])
+- **Debtor Page**  
+  ![Debtor Screenshot](screenshots/[debtor-page-screenshot.png])
 
-- **History List**  
-  ![History Screenshot](screenshots/[add-screenshot-of-history.png])
+<!-- - **Add Debt Record Flow**  
+  ![Add Debt Record Demo](screenshots/[add-debt-flow.gif])
+
+- **Add Payment Record Flow**  
+  ![Add Payment Flow](screenshots/[add-payment-flow.gif]) -->
 
 ---
 

@@ -68,8 +68,9 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
                       children: [
                         TextSpan(
                           text: recordDebtor.nickname,
-                          style:
-                              AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
+                          style: AppTextStyles.subtitle.copyWith(
+                            color: AppColors.primaryBlue,
+                          ),
                         ),
                       ],
                     ),
@@ -95,7 +96,9 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: paymentRecordDraft.amount?.toFormattedString(),
-                        style: AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
+                        style: AppTextStyles.subtitle.copyWith(
+                          color: AppColors.primaryBlue,
+                        ),
                       ),
                     ],
                   ),
@@ -119,7 +122,9 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: paymentRecordDraft.paymentMethod?.label ?? 'Not specified',
-                        style: AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
+                        style: AppTextStyles.subtitle.copyWith(
+                          color: AppColors.primaryBlue,
+                        ),
                       ),
                     ],
                   ),
@@ -144,7 +149,9 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
                         text: paymentRecordDraft.date != null
                             ? AppDateUtils.getFormattedDate(paymentRecordDraft.date!)
                             : 'Não informada',
-                        style: AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
+                        style: AppTextStyles.subtitle.copyWith(
+                          color: AppColors.primaryBlue,
+                        ),
                       ),
                     ],
                   ),

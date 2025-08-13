@@ -90,7 +90,9 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                   child: Text.rich(
                     TextSpan(
                       text: recordDebtor.nickname,
-                      style: AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
+                      style: AppTextStyles.subtitle.copyWith(
+                        color: AppColors.primaryBlue,
+                      ),
                       children: [
                         TextSpan(
                           text: ' tem um novo ',
@@ -99,7 +101,7 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                         TextSpan(
                           text: oweRecordDraft.oweType.label,
                           style: AppTextStyles.subtitle.copyWith(
-                            color: AppColors.textGray,
+                            color: AppColors.primaryBlue,
                           ),
                         ),
                         TextSpan(text: ' com você', style: AppTextStyles.subtitle),
@@ -129,8 +131,9 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                       children: [
                         TextSpan(
                           text: oweRecordDraft.amount?.toFormattedString(),
-                          style:
-                              AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
+                          style: AppTextStyles.subtitle.copyWith(
+                            color: AppColors.primaryBlue,
+                          ),
                         ),
                       ],
                     ),
@@ -156,9 +159,10 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                       style: AppTextStyles.subtitle,
                       children: [
                         TextSpan(
-                          text: oweRecordDraft.description ?? 'Not specified',
-                          style:
-                              AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
+                          text: oweRecordDraft.description ?? 'Não informada',
+                          style: AppTextStyles.subtitle.copyWith(
+                            color: AppColors.primaryBlue,
+                          ),
                         ),
                       ],
                     ),
@@ -184,7 +188,9 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                         text: oweRecordDraft.date != null
                             ? AppDateUtils.getFormattedDate(oweRecordDraft.date!)
                             : 'Não informada',
-                        style: AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
+                        style: AppTextStyles.subtitle.copyWith(
+                          color: AppColors.primaryBlue,
+                        ),
                       ),
                     ],
                   ),
