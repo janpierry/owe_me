@@ -89,7 +89,7 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                 Expanded(
                   child: Text.rich(
                     TextSpan(
-                      text: recordDebtor.name,
+                      text: recordDebtor.nickname,
                       style: AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
                       children: [
                         TextSpan(

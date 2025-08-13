@@ -28,7 +28,7 @@ class SetOweRecordAmountStepBody extends StatelessWidget {
   }
 
   String get _stepTitle =>
-      'Qual o valor do novo ${oweRecordType.label} que ${recordDebtor.name} tem com você?';
+      'Qual o valor do novo ${oweRecordType.label} que ${recordDebtor.nickname} tem com você?';
 
   @override
   Widget build(BuildContext context) {

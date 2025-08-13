@@ -32,7 +32,7 @@ class DebtorSelectionListItem extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(debtor.name, style: AppTextStyles.subtitle),
+                  Text(debtor.nickname, style: AppTextStyles.subtitle),
                   Text(
                     debtor.totalDebt.toString(),
                     style: AppTextStyles.body,

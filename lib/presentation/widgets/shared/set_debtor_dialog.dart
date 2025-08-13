@@ -4,12 +4,12 @@ import 'package:owe_me/presentation/shared/design_system/app_colors.dart';
 import 'package:owe_me/presentation/shared/design_system/app_text_styles.dart';
 
 class SetDebtorDialog extends StatefulWidget {
-  final String? initialName;
+  final String? initialNickname;
   final SetDebtorPressedCallback? onSetDebtorPressed;
 
   const SetDebtorDialog({
     super.key,
-    this.initialName,
+    this.initialNickname,
     this.onSetDebtorPressed,
   });
 
@@ -24,13 +24,13 @@ class _SetDebtorDialogState extends State<SetDebtorDialog> {
 
   String? _errorText;
 
-  bool get _isEditing => widget.initialName != null;
+  bool get _isEditing => widget.initialNickname != null;
 
   @override
   void initState() {
     super.initState();
 
-    _controller = TextEditingController(text: widget.initialName ?? '');
+    _controller = TextEditingController(text: widget.initialNickname ?? '');
     _isButtonEnabled = _controller.text.trim().isNotEmpty;
 
     _controller.addListener(() {
@@ -56,13 +56,13 @@ class _SetDebtorDialogState extends State<SetDebtorDialog> {
   }
 
   void _validateAndSubmit() {
-    final name = _controller.text.trim();
-    if (name.isEmpty) {
+    final nickname = _controller.text.trim();
+    if (nickname.isEmpty) {
       setState(() {
-        _errorText = "Nome é obrigatório";
+        _errorText = 'Apelido é obrigatório';
       });
     } else {
-      widget.onSetDebtorPressed?.call(name);
+      widget.onSetDebtorPressed?.call(nickname);
       Navigator.of(context).pop();
     }
   }
@@ -100,13 +100,13 @@ class _SetDebtorDialogState extends State<SetDebtorDialog> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Nome', style: AppTextStyles.body),
+                Text('Apelido', style: AppTextStyles.body),
                 const SizedBox(height: 4),
                 TextFormField(
                   controller: _controller,
                   focusNode: _focusNode,
                   decoration: InputDecoration(
-                    hintText: "Insira o nome do devedor",
+                    hintText: "Insira um apelido para o devedor",
                     hintStyle: AppTextStyles.body.copyWith(
                       color: AppColors.textGray,
                     ),

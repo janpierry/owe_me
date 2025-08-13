@@ -87,7 +87,7 @@ This app follows a Clean Architecture structure, using the following tools and t
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/oweme.git
+git clone https://github.com/janpierry/oweme.git
 cd oweme
 flutter pub get
 ```

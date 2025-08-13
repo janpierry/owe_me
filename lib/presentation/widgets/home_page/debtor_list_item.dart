@@ -72,7 +72,7 @@ class DebtorListItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    debtor.name,
+                    debtor.nickname,
                     style: AppTextStyles.subtitle,
                   ),
                   const SizedBox(width: 8),

@@ -26,8 +26,8 @@ void main() {
     test('should return a list of DebtorModel when query succeeds', () async {
       // Arrange
       final mockMapList = [
-        {'id': 1, 'name': 'John', 'total_debt_in_cents': 0},
-        {'id': 2, 'name': 'Jane', 'total_debt_in_cents': 1000},
+        {'id': 1, 'nickname': 'John', 'total_debt_in_cents': 0},
+        {'id': 2, 'nickname': 'Jane', 'total_debt_in_cents': 1000},
       ];
 
       when(() => mockAppDatabase.database).thenAnswer((_) async => mockDatabase);
@@ -41,8 +41,9 @@ void main() {
       // Assert
       expect(result, isA<List<DebtorModel>>());
       expect(result.length, 2);
-      expect(result[0], const DebtorModel(id: 1, name: 'John', totalDebtInCents: 0));
-      expect(result[1], const DebtorModel(id: 2, name: 'Jane', totalDebtInCents: 1000));
+      expect(result[0], const DebtorModel(id: 1, nickname: 'John', totalDebtInCents: 0));
+      expect(
+          result[1], const DebtorModel(id: 2, nickname: 'Jane', totalDebtInCents: 1000));
 
       verify(() => mockAppDatabase.database).called(1);
       verify(() => mockDatabase.query(DebtorModel.table)).called(1);

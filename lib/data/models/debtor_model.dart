@@ -1,12 +1,12 @@
 import 'package:owe_me/data/models/model.dart';
 
 class DebtorModel extends Model {
-  final String name;
+  final String nickname;
   final int totalDebtInCents;
 
   const DebtorModel({
     required super.id,
-    required this.name,
+    required this.nickname,
     required this.totalDebtInCents,
   });
 
@@ -18,7 +18,7 @@ class DebtorModel extends Model {
   factory DebtorModel.fromMap(Map<String, dynamic> map) {
     return DebtorModel(
       id: map['id'],
-      name: map['name'],
+      nickname: map['nickname'],
       totalDebtInCents: map['total_debt_in_cents'],
     );
   }
@@ -27,11 +27,11 @@ class DebtorModel extends Model {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'name': name,
+      'nickname': nickname,
       'total_debt_in_cents': totalDebtInCents,
     };
   }
 
   @override
-  List<Object?> get props => super.props + [name, totalDebtInCents];
+  List<Object?> get props => super.props + [nickname, totalDebtInCents];
 }

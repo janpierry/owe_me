@@ -15,8 +15,8 @@ class HomeNoDebtorsYetPlaceholder extends StatelessWidget {
       context: context,
       barrierDismissible: true,
       builder: (context) => SetDebtorDialog(
-        onSetDebtorPressed: (name) => bloc.add(
-          AddDebtorRequestedEvent(debtorName: name),
+        onSetDebtorPressed: (nickname) => bloc.add(
+          AddDebtorRequestedEvent(debtorNickname: nickname),
         ),
       ),
     );

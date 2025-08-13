@@ -67,7 +67,7 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
                       style: AppTextStyles.subtitle,
                       children: [
                         TextSpan(
-                          text: recordDebtor.name,
+                          text: recordDebtor.nickname,
                           style:
                               AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
                         ),

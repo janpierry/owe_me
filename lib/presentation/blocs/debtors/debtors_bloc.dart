@@ -50,7 +50,7 @@ class DebtorsBloc extends Bloc<DebtorsEvent, DebtorsState> {
   ) async {
     emit(DebtorsLoading());
     final response = await _addDebtorUseCase(
-      debtor: Debtor(name: event.debtorName),
+      debtor: Debtor(nickname: event.debtorNickname),
     );
     response.fold(
       (exception) => emit(DebtorsError()),

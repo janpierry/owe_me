@@ -17,7 +17,7 @@ class DebtorBody extends StatelessWidget {
     return Scaffold(
       //TODO create curstom app bar
       appBar: AppBar(
-        title: Text(debtor.name, style: AppTextStyles.headline1),
+        title: Text(debtor.nickname, style: AppTextStyles.headline1),
         backgroundColor: AppColors.surfaceWhite,
         centerTitle: true,
         elevation: 1,

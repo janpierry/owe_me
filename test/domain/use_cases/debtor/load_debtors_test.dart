@@ -24,7 +24,7 @@ void main() {
       final tDebtors = [
         const Debtor(
           id: 1,
-          name: 'Alice',
+          nickname: 'Nickname',
           totalDebt: Money(cents: 1000),
         )
       ];

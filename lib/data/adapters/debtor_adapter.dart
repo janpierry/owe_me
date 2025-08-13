@@ -8,7 +8,7 @@ class DebtorAdapter {
   static DebtorModel toModel(Debtor entity) {
     return DebtorModel(
       id: entity.id,
-      name: entity.name,
+      nickname: entity.nickname,
       totalDebtInCents: entity.totalDebt.cents,
     );
   }
@@ -16,7 +16,7 @@ class DebtorAdapter {
   static Debtor toEntity(DebtorModel model) {
     return Debtor(
       id: model.id,
-      name: model.name,
+      nickname: model.nickname,
       totalDebt: Money(cents: model.totalDebtInCents),
     );
   }

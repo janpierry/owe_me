@@ -36,7 +36,7 @@ class AppDatabase {
     await db.execute('''
       CREATE TABLE ${DebtorModel.table} (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
+        nickname TEXT NOT NULL,
         total_debt_in_cents INTEGER NOT NULL
       );
     ''');

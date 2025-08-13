@@ -4,13 +4,13 @@ import 'package:owe_me/domain/entities/money.dart';
 
 void main() {
   const debtorId = 1;
-  const name = 'Mãe';
+  const nickname = 'Nickname';
   const totalDebtInCents = 10000;
   const totalDebt = Money(cents: totalDebtInCents);
 
   const model = DebtorModel(
     id: debtorId,
-    name: name,
+    nickname: nickname,
     totalDebtInCents: totalDebtInCents,
   );
 
@@ -18,7 +18,7 @@ void main() {
     test('When two models have the same props, they should be equal', () {
       const second = DebtorModel(
         id: debtorId,
-        name: name,
+        nickname: nickname,
         totalDebtInCents: totalDebtInCents,
       );
 
@@ -28,16 +28,16 @@ void main() {
     test('When two models have different [id], they should not be equal', () {
       const second = DebtorModel(
         id: 2,
-        name: name,
+        nickname: nickname,
         totalDebtInCents: totalDebtInCents,
       );
 
       assert(model != second);
     });
-    test('When two models have different [name], they should not be equal', () {
+    test('When two models have different [nickname], they should not be equal', () {
       const second = DebtorModel(
         id: debtorId,
-        name: 'Vó',
+        nickname: 'Another Nickname',
         totalDebtInCents: totalDebtInCents,
       );
 
@@ -47,7 +47,7 @@ void main() {
         () {
       const second = DebtorModel(
         id: debtorId,
-        name: name,
+        nickname: nickname,
         totalDebtInCents: 20000,
       );
 
@@ -59,7 +59,7 @@ void main() {
     test('should return a valid DebtorModel from map', () {
       final map = {
         'id': debtorId,
-        'name': name,
+        'nickname': nickname,
         'total_debt_in_cents': totalDebt.cents,
       };
 
@@ -72,7 +72,7 @@ void main() {
     test('should return a valid map from DebtorModel', () {
       final expectedMap = {
         'id': debtorId,
-        'name': name,
+        'nickname': nickname,
         'total_debt_in_cents': totalDebt.cents,
       };
 
