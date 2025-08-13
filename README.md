@@ -6,16 +6,16 @@
 
 ## 📋 Table of Contents
 
-- [About the Project](#about-the-project)
-- [Key Features](#key-features)
-- [Screenshots & Demo](#screenshots--demo)
-- [Architecture & Technologies Used](#architecture--technologies-used)
-- [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
-- [Challenges & Learning Journey](#challenges--learning-journey)
-- [Current Status & Roadmap](#current-status--roadmap)
-- [Contact](#contact)
-- [License](#license)
+- [About the Project](#-about-the-project)
+- [Key Features](#-key-features)
+- [Screenshots](#%EF%B8%8F-screenshots)
+- [Architecture & Technologies Used](#%EF%B8%8F-architecture--technologies-used)
+- [Getting Started](#-getting-started)
+- [Project Structure](#-project-structure)
+- [Challenges & Learning Journey](#-challenges--learning-journey)
+- [Current Status & Roadmap](#%EF%B8%8F-current-status--roadmap)
+- [Contact](#-contact)
+- [License](#-license)
 
 ---
 
@@ -45,21 +45,29 @@ It’s still in development, but it already covers the basic functionality I had
 
 ---
 
-## 🖼️ Screenshots & Demo
+## 🖼️ Screenshots
 
-> *Screenshots and demo coming soon. For now, here are a few placeholders:*
+<details open>
+  <summary><strong>Home Page & Debtor Page</strong></summary>
+  <img src="screenshots/home-page-screenshot.jpeg" alt="Home Page" width="200"/>
+  <img src="screenshots/debtor-page-screenshot.jpeg" alt="Debtor Page" width="200"/>
+</details>
 
-- **Home Page**  
-  ![Home Screenshot](screenshots/[home-page-screenshot.png])
+<details open>
+  <summary><strong>New Debt Record Flow</strong></summary>
+  <img src="screenshots/new_debt_record/new-debt-debtor-selection.jpeg" alt="New Debt Debtor Selection" width="150"/>
+  <img src="screenshots/new_debt_record/new-debt-amount-step.jpeg" alt="New Debt Amount Step" width="150"/>
+  <img src="screenshots/new_debt_record/new-debt-description-step.jpeg" alt="New Debt Description Step" width="150"/>
+  <img src="screenshots/new_debt_record/new-debt-date-step.jpeg" alt="New Debt Date Step" width="150"/>
+  <img src="screenshots/new_debt_record/new-debt-info-review.jpeg" alt="New Debt Info Review" width="150"/>
+</details>
 
-- **Debtor Page**  
-  ![Debtor Screenshot](screenshots/[debtor-page-screenshot.png])
-
-<!-- - **Add Debt Record Flow**  
-  ![Add Debt Record Demo](screenshots/[add-debt-flow.gif])
-
-- **Add Payment Record Flow**  
-  ![Add Payment Flow](screenshots/[add-payment-flow.gif]) -->
+<details open>
+  <summary><strong>New Payment Record Flow</strong></summary>
+  <img src="screenshots/new_payment_record/new-payment-debtor-selection.jpeg" alt="New Payment Debtor Selection" width="150"/>
+  <img src="screenshots/new_payment_record/new-payment.jpeg" alt="New Payment" width="150"/>
+  <img src="screenshots/new_payment_record/new-payment-info-review.jpeg" alt="New Payment Info Review" width="150"/>
+</details>
 
 ---
 
@@ -137,21 +145,22 @@ It was a great learning experience and gave me more confidence working with loca
 
 ### ✅ What Works:
 - Adding and managing debtors
-- Logging different types of transactions
-- Viewing balances and transaction history
+- Logging different types of records
+- Viewing balances and record history
 
 ---
 
 ### 🔧 Next Steps to MVP:
 - [ ] Add error handling
-- [ ] Edit and delete transactions
+- [ ] Edit and delete records
 
 ---
 
 ### 🚀 Future Ideas:
 - [ ] Add visual charts for balance trends
 - [ ] Add user authentication
-- [ ] Implement filters for the transaction list
+- [ ] Add integration with Firebase Crashlytics
+- [ ] Implement filters for the record list
 - [ ] Polish the UI for better usability
 - [ ] Add remote storage
 - [ ] Improve test coverage
@@ -163,7 +172,7 @@ It was a great learning experience and gave me more confidence working with loca
 If you're a recruiter, developer, or just curious—thanks for checking out this project! Feel free to reach out:
 
 **Jan Pierry**  
-📧 [janpierrycoelho@gmail.com]  
+📧 janpierrycoelho@gmail.com
 🌐 [LinkedIn](https://www.linkedin.com/in/jan-pierry/)
 📂 [GitHub Profile](https://github.com/janpierry)
 
