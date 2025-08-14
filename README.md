@@ -116,12 +116,25 @@ flutter run
 ```bash
 lib/
 │
-├── data/                # Repositories, models, data sources
-├── domain/              # Entities, use cases, interfaces
-├── presentation/        # UI code and BLoCs
-├── core/                # Constants, helpers, themes
-├── di/                  # Dependency injection
-└── main.dart            # Entry point
+├── src/
+│   ├── app/
+│   │   ├── di/            # Dependency injection configuration
+│   │   ├── app.dart       # Main application widget
+│   │   └── bootstrap.dart # Application bootstrapping logic
+│   ├── core/              # Core utilities and shared functionality
+│   ├── data/              # Data layer
+│   │   ├── adapters/      # Entity <-> Model conversion
+│   │   ├── data_sources/
+│   │   ├── models/
+│   │   └── repositories/  # Concrete repository implementations
+│   ├── domain/            # Domain Layer
+│   │   ├── entities/
+│   │   ├── enums/
+│   │   ├── repositories/  # Repository interfaces
+│   │   └── use_cases/     # Business logic use cases
+│   └── presentation/      # Presentation layer (UI)
+│       ├── blocs/         # BLoC (Business Logic Component) classes
+│       └── containers/    # UI page containers
 ```
 
 This layout helps organize the code and keep responsibilities separate.
@@ -135,7 +148,6 @@ Although I was already familiar with Clean Architecture and BLoC, this was my fi
 - Set up a local database
 - Create and manage tables
 - Perform CRUD operations
-- Convert between domain entities and database models
 
 It was a great learning experience and gave me more confidence working with local storage in Flutter.
 
