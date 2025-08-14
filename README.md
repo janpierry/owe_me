@@ -116,25 +116,32 @@ flutter run
 ```bash
 lib/
 │
-├── src/
-│   ├── app/
-│   │   ├── di/            # Dependency injection configuration
-│   │   ├── app.dart       # Main application widget
-│   │   └── bootstrap.dart # Application bootstrapping logic
-│   ├── core/              # Core utilities and shared functionality
-│   ├── data/              # Data layer
-│   │   ├── adapters/      # Entity <-> Model conversion
-│   │   ├── data_sources/
-│   │   ├── models/
-│   │   └── repositories/  # Concrete repository implementations
-│   ├── domain/            # Domain Layer
-│   │   ├── entities/
-│   │   ├── enums/
-│   │   ├── repositories/  # Repository interfaces
-│   │   └── use_cases/     # Business logic use cases
-│   └── presentation/      # Presentation layer (UI)
-│       ├── blocs/         # BLoC (Business Logic Component) classes
-│       └── containers/    # UI page containers
+├── src/                     # Source code directory
+│   ├── app/                 # Application setup and core components
+│   │   ├── di/              # Dependency injection configuration
+│   │   ├── app.dart         # Main application widget
+│   │   └── bootstrap.dart   # Application bootstrapping logic
+│   ├── core/                # Core utilities
+│   │   ├── presentation/    # Design system, ui formatters, etc.
+│   │   └── shared/          # Utilities shared across layers
+│   ├── data/                # Data layer
+│   │   ├── adapters/        # Entity <-> Model conversion
+│   │   ├── data_sources/    # Data sources (e.g., APIs, databases)
+│   │   ├── models/          # Data models
+│   │   └── repositories/    # Concrete repository implementations
+│   ├── domain/              # Domain Layer
+│   │   ├── entities/        # Core business entities
+│   │   ├── enums/           # Enums for the domain
+│   │   ├── repositories/    # Repository interfaces
+│   │   └── use_cases/       # Business logic use cases
+│   └── presentation/        # Presentation layer (UI)
+│       ├── blocs/           # BLoC (Business Logic Component) classes
+│       └── containers/      # Page containers
+│       ├── drafts/          # Draft or temporary UI components
+│       ├── mappers/         # Draft <-> Entity conversion
+│       ├── pages/           # Application pages/screens
+│       └── widgets/         # UI widgets
+└── main.dart                # Application's entry point
 ```
 
 This layout helps organize the code and keep responsibilities separate.
