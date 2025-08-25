@@ -11,7 +11,6 @@
 - [Screenshots](#%EF%B8%8F-screenshots)
 - [Architecture & Technologies Used](#%EF%B8%8F-architecture--technologies-used)
 - [Getting Started](#-getting-started)
-- [Project Structure](#-project-structure)
 - [Challenges & Learning Journey](#-challenges--learning-journey)
 - [Current Status & Roadmap](#%EF%B8%8F-current-status--roadmap)
 - [Contact](#-contact)
@@ -73,45 +72,34 @@ It’s still in development, but it already covers the basic functionality I had
 
 ## 🏗️ Architecture & Technologies Used
 
-This app follows a Clean Architecture structure, using the following tools and technologies:
+OweMe follows **Clean Architecture** combined with the **BLoC pattern** to ensure separation of concerns and maintainability.
 
-- **Architecture**: Clean Architecture (domain, data, presentation separation)
-- **State Management**: BLoC Pattern using `flutter_bloc`
-- **Local Storage**: `sqflite`
+### Layers Overview
+- **Presentation**: UI components (pages, widgets), BLoCs for state management, drafts, and mappers.
+- **Domain**: Core business logic with use cases, entities, and repository interfaces.
+- **Data**: Repositories, data sources, models, and adapters that handle persistence.
+
+### Application Flow
+User interaction begins in the **presentation layer**, where widgets communicate with BLoCs through events and states.  
+BLoCs handle business logic by invoking **use cases** in the **domain layer**.  
+The **domain** remains independent, defining repository interfaces that the **data layer** implements to keep dependencies pointing inward, following the Dependency Inversion principle.  
+Finally, the **data layer** interacts with the local database using `sqflite`, and in the future, will integrate with remote APIs.
+
+### Architecture Diagram
+<p align="center">
+  <img src="screenshots/owe-me-clean-architecture.png" alt="OweMe Clean Architecture Diagram" width="700"/>
+</p>
+
+### Tech Stack
+- **Architecture**: Clean Architecture (presentation, domain, data)
+- **State Management**: `flutter_bloc`
+- **Local Database**: `sqflite`
 - **Dependency Injection**: `get_it`
-- **Unit Testing**: `flutter_test` and `mocktail`
+- **Unit Testing**: `flutter_test`, `mocktail`
 - **Framework**: Flutter
 - **Language**: Dart
 
----
-
-## 🚀 Getting Started
-
-> If you’d like to try it out locally, here’s how:
-
-### Prerequisites
-
-- Flutter SDK (3.x or higher)
-- Android Studio or VSCode
-- A connected device or emulator
-
-### Installation
-
-```bash
-git clone https://github.com/janpierry/oweme.git
-cd oweme
-flutter pub get
-```
-
-### Run the App
-
-```bash
-flutter run
-```
-
----
-
-## 🧱 Project Structure
+### Project Structure
 
 ```bash
 lib/
@@ -145,6 +133,32 @@ lib/
 ```
 
 This layout helps organize the code and keep responsibilities separate.
+
+---
+
+## 🚀 Getting Started
+
+> If you’d like to try it out locally, here’s how:
+
+### Prerequisites
+
+- Flutter SDK (3.x or higher)
+- Android Studio or VSCode
+- A connected device or emulator
+
+### Installation
+
+```bash
+git clone https://github.com/janpierry/oweme.git
+cd oweme
+flutter pub get
+```
+
+### Run the App
+
+```bash
+flutter run
+```
 
 ---
 
