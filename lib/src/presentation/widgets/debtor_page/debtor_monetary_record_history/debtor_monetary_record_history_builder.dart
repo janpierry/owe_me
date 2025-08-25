@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:owe_me/src/presentation/blocs/debtor_monetary_record_history/debtor_monetary_record_history_bloc.dart';
+import 'package:owe_me/src/presentation/blocs/debtor/debtor_bloc.dart';
 import 'package:owe_me/src/presentation/widgets/debtor_page/debtor_monetary_record_history/debtor_monetary_record_history_empty_placeholder.dart';
 import 'package:owe_me/src/presentation/widgets/debtor_page/debtor_monetary_record_history/debtor_monetary_record_history_list.dart';
 
@@ -9,7 +9,8 @@ class DebtorMonetaryRecordHistoryBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DebtorMonetaryRecordHistoryBloc, DebtorMonetaryRecordHistoryState>(
+    return BlocBuilder<DebtorBloc, DebtorState>(
+      buildWhen: (previous, current) => current is DebtorMonetaryRecordHistoryState,
       builder: (context, state) {
         if (state is DebtorMonetaryRecordHistoryLoaded) {
           return DebtorMonetaryRecordHistoryList(

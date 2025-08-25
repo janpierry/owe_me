@@ -8,17 +8,16 @@ import 'package:owe_me/src/domain/use_cases/debtor/edit_debtor.dart';
 import 'package:owe_me/src/domain/use_cases/debtor/remove_debtor.dart';
 import 'package:owe_me/src/domain/use_cases/monetary_record/load_debtor_monetary_record_history.dart';
 
-part 'debtor_monetary_record_history_event.dart';
-part 'debtor_monetary_record_history_state.dart';
+part 'debtor_event.dart';
+part 'debtor_state.dart';
 
-//TODO this Bloc needs to be DebtorBloc
-class DebtorMonetaryRecordHistoryBloc
-    extends Bloc<DebtorMonetaryRecordHistoryEvent, DebtorMonetaryRecordHistoryState> {
+class DebtorBloc extends Bloc<DebtorEvent, DebtorState> {
   final LoadDebtorMonetaryRecordHistory _loadDebtorMonetaryRecordHistoryUseCase;
   final EditDebtor _editDebtorUseCase;
   final RemoveDebtor _removeDebtorUseCase;
+  late Debtor _debtor;
 
-  DebtorMonetaryRecordHistoryBloc({
+  DebtorBloc({
     required LoadDebtorMonetaryRecordHistory loadDebtorMonetaryRecordHistory,
     required EditDebtor editDebtor,
     required RemoveDebtor removeDebtor,
@@ -26,17 +25,32 @@ class DebtorMonetaryRecordHistoryBloc
         _editDebtorUseCase = editDebtor,
         _removeDebtorUseCase = removeDebtor,
         super(DebtorMonetaryRecordHistoryInitial()) {
-    on<LoadDebtorMonetaryRecordHistoryEvent>(_loadDebtorMonetaryRecordHistory);
-    on<EditDebtorRequestedEvent>(_editDebtor);
-    on<RemoveDebtorRequestedEvent>(_removeDebtor);
+    on<DebtorPageInitializedEvent>(_loadInitialData);
+    on<DebtorMonetaryRecordHistoryLoadRequestedEvent>(_loadDebtorMonetaryRecordHistory);
+    on<DebtorEditRequestedEvent>(_editDebtor);
+    on<DebtorRemoveRequestedEvent>(_removeDebtor);
+  }
+
+  FutureOr<void> _loadInitialData(
+    DebtorPageInitializedEvent event,
+    Emitter<DebtorState> emit,
+  ) {
+    _loadDebtor(emit, event.debtor);
+  }
+
+  FutureOr<void> _loadDebtor(Emitter<DebtorState> emit, Debtor debtor) {
+    emit(DebtorPageLoading());
+    _debtor = debtor;
+    emit(DebtorPageLoaded(debtor: _debtor));
+    add(DebtorMonetaryRecordHistoryLoadRequestedEvent());
   }
 
   FutureOr<void> _loadDebtorMonetaryRecordHistory(
-    LoadDebtorMonetaryRecordHistoryEvent event,
-    Emitter<DebtorMonetaryRecordHistoryState> emit,
+    DebtorMonetaryRecordHistoryLoadRequestedEvent event,
+    Emitter<DebtorState> emit,
   ) async {
     emit(DebtorMonetaryRecordHistoryLoading());
-    final response = await _loadDebtorMonetaryRecordHistoryUseCase(event.debtor);
+    final response = await _loadDebtorMonetaryRecordHistoryUseCase(_debtor);
     response.fold(
       (exception) => emit(DebtorMonetaryRecordHistoryError(message: exception.message)),
       (monetaryRecordHistory) {
@@ -52,32 +66,33 @@ class DebtorMonetaryRecordHistoryBloc
   }
 
   FutureOr<void> _editDebtor(
-    EditDebtorRequestedEvent event,
-    Emitter<DebtorMonetaryRecordHistoryState> emit,
+    DebtorEditRequestedEvent event,
+    Emitter<DebtorState> emit,
   ) async {
-    emit(DebtorMonetaryRecordHistoryLoading());
-    final response = await _editDebtorUseCase(debtor: event.debtor);
+    emit(DebtorEditInProgress());
+    final debtor = _debtor.copyWith(nickname: event.nickname);
+    final response = await _editDebtorUseCase(
+      debtor: debtor,
+    );
     response.fold(
-      //TODO create custom error
-      (exception) => emit(DebtorMonetaryRecordHistoryError(message: exception.message)),
+      (exception) => emit(DebtorEditError(message: exception.message)),
       (_) {
-        emit(EditDebtorSuccess(updatedDebtor: event.debtor));
+        _loadDebtor(emit, debtor);
+        emit(DebtorEditSuccess());
       },
     );
   }
 
   FutureOr<void> _removeDebtor(
-    RemoveDebtorRequestedEvent event,
-    Emitter<DebtorMonetaryRecordHistoryState> emit,
+    DebtorRemoveRequestedEvent event,
+    Emitter<DebtorState> emit,
   ) async {
-    //TODO create custom loading
-    emit(DebtorMonetaryRecordHistoryLoading());
-    final response = await _removeDebtorUseCase(debtor: event.debtor);
+    emit(DebtorRemoveInProgress());
+    final response = await _removeDebtorUseCase(debtor: _debtor);
     response.fold(
-      //TODO create custom error
-      (exception) => emit(DebtorMonetaryRecordHistoryError(message: exception.message)),
+      (exception) => emit(DebtorRemoveError(message: exception.message)),
       (_) {
-        emit(RemoveDebtorSuccess());
+        emit(DebtorRemoveSuccess());
       },
     );
   }

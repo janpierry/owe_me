@@ -24,6 +24,8 @@ class SetPaymentRecordInfoReviewPage extends StatelessWidget {
     SetPaymentRecordInfoReviewState state,
   ) {
     if (state is SetPaymentRecordInfoReviewRecordSetFinished) {
+      //TODO show a snackbar confirming the payment record was set
+      //TODO should go back to debtor page instead of home in some cases
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) => const HomeContainer(),

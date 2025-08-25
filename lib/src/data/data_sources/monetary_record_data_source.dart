@@ -36,7 +36,6 @@ class MonetaryRecordDataSourceImpl implements MonetaryRecordDataSource {
     await db.transaction((txn) async {
       final dataMap = monetaryRecordModel.toMap();
 
-      //TODO check if necessary
       // Remove 'id' so SQLite can autoincrement if it's null
       dataMap.remove('id');
 

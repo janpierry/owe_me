@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
-import 'package:owe_me/src/presentation/blocs/debtor_monetary_record_history/debtor_monetary_record_history_bloc.dart';
+import 'package:owe_me/src/presentation/blocs/debtor/debtor_bloc.dart';
 import 'package:owe_me/src/presentation/pages/debtor_page.dart';
 
 class DebtorContainer extends StatelessWidget {
@@ -13,9 +13,9 @@ class DebtorContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => GetIt.instance<DebtorMonetaryRecordHistoryBloc>()
-        ..add(LoadDebtorMonetaryRecordHistoryEvent(debtor: debtor)),
-      child: DebtorPage(debtor: debtor),
+      create: (_) =>
+          GetIt.instance<DebtorBloc>()..add(DebtorPageInitializedEvent(debtor: debtor)),
+      child: DebtorPage(),
     );
   }
 }

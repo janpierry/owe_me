@@ -6,14 +6,14 @@ import 'package:owe_me/src/domain/use_cases/debtor/edit_debtor.dart';
 import 'package:owe_me/src/domain/use_cases/debtor/remove_debtor.dart';
 import 'package:owe_me/src/domain/use_cases/monetary_record/add_monetary_record.dart';
 import 'package:owe_me/src/domain/use_cases/monetary_record/load_debtor_monetary_record_history.dart';
-import 'package:owe_me/src/presentation/blocs/debtor_monetary_record_history/debtor_monetary_record_history_bloc.dart';
+import 'package:owe_me/src/presentation/blocs/debtor/debtor_bloc.dart';
 
 void initMonetaryRecordInjections() {
   final inj = GetIt.instance;
 
   //Blocs
-  inj.registerFactory<DebtorMonetaryRecordHistoryBloc>(
-    () => DebtorMonetaryRecordHistoryBloc(
+  inj.registerFactory<DebtorBloc>(
+    () => DebtorBloc(
       loadDebtorMonetaryRecordHistory: inj(),
       editDebtor: inj(),
       removeDebtor: inj(),

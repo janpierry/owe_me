@@ -9,6 +9,7 @@ sealed class DebtorsEvent extends Equatable {
 
 class LoadDebtorsRequestedEvent extends DebtorsEvent {}
 
+//TODO if it makes sense, should not be debtors bloc, but home bloc
 class AddDebtorRequestedEvent extends DebtorsEvent {
   final String debtorNickname;
 

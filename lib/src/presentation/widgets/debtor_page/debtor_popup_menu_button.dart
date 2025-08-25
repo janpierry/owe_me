@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
-import 'package:owe_me/src/presentation/blocs/debtor_monetary_record_history/debtor_monetary_record_history_bloc.dart';
+import 'package:owe_me/src/presentation/blocs/debtor/debtor_bloc.dart';
 import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
 import 'package:owe_me/src/presentation/widgets/debtor_page/remove_debtor_confirmation_dialog.dart';
 import 'package:owe_me/src/presentation/widgets/shared/set_debtor_dialog.dart';
@@ -12,28 +12,26 @@ class DebtorPopupMenuButton extends StatelessWidget {
   const DebtorPopupMenuButton({super.key, required this.debtor});
 
   Future<void> _showSetDebtorDialog(BuildContext context) {
-    // final bloc = context.read<DebtorMonetaryRecordHistoryBloc>();
+    final bloc = context.read<DebtorBloc>();
     return showDialog(
       context: context,
       barrierDismissible: true,
       builder: (context) => SetDebtorDialog(
         initialNickname: debtor.nickname,
-        //TODO pass just the nickname to bloc after refactoring
-        //TODO uncomment this when edition is ready
-        // onSetDebtorPressed: (nickname) => bloc.add(
-        //   EditDebtorRequestedEvent(debtor: debtor.copyWith(nickname: nickname)),
-        // ),
+        onSetDebtorPressed: (nickname) => bloc.add(
+          DebtorEditRequestedEvent(nickname: nickname),
+        ),
       ),
     );
   }
 
   Future<void> _showRemoveDebtorConfirmationDialog(BuildContext context) {
-    final bloc = context.read<DebtorMonetaryRecordHistoryBloc>();
+    final bloc = context.read<DebtorBloc>();
     return showDialog(
       context: context,
       barrierDismissible: true,
       builder: (context) => RemoveDebtorConfirmationDialog(
-        onRemoveDebtorPressed: () => bloc.add(RemoveDebtorRequestedEvent(debtor: debtor)),
+        onRemoveDebtorPressed: () => bloc.add(DebtorRemoveRequestedEvent()),
       ),
     );
   }
