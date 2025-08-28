@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:owe_me/src/presentation/blocs/debtors/debtors_bloc.dart';
+import 'package:owe_me/src/presentation/blocs/home_debtors/home_debtors_bloc.dart';
 import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
 import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
 import 'package:owe_me/src/presentation/widgets/home_page/home_body.dart';
@@ -22,14 +22,13 @@ class HomePage extends StatelessWidget {
         elevation: 1,
       ),
       backgroundColor: AppColors.backgroundLight,
-      //TODO refresh page in case of debtor deleted
-      body: BlocBuilder<DebtorsBloc, DebtorsState>(
+      body: BlocBuilder<HomeDebtorsBloc, HomeDebtorsState>(
         builder: (context, state) {
-          if (state is DebtorsLoaded) {
+          if (state is HomeDebtorsLoaded) {
+            if (state.debtors.isEmpty) {
+              return HomeNoDebtorsYetPlaceholder();
+            }
             return HomeBody(debtors: state.debtors);
-          }
-          if (state is DebtorsEmpty) {
-            return HomeNoDebtorsYetPlaceholder();
           }
           return const Center(
             child: CircularProgressIndicator(),

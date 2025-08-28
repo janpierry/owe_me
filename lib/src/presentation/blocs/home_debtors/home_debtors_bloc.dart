@@ -6,57 +6,52 @@ import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/use_cases/debtor/add_debtor.dart';
 import 'package:owe_me/src/domain/use_cases/debtor/load_debtors.dart';
 
-part 'debtors_event.dart';
-part 'debtors_state.dart';
+part 'home_debtors_event.dart';
+part 'home_debtors_state.dart';
 
-//TODO Have a single bloc for each page. Will be better to handle behaviors
-class DebtorsBloc extends Bloc<DebtorsEvent, DebtorsState> {
+class HomeDebtorsBloc extends Bloc<HomeDebtorsEvent, HomeDebtorsState> {
   final LoadDebtors _loadDebtorsUseCase;
   final AddDebtor _addDebtorUseCase;
   List<Debtor> _debtors = [];
 
-  DebtorsBloc({
+  HomeDebtorsBloc({
     required LoadDebtors loadDebtors,
     required AddDebtor addDebtor,
   })  : _loadDebtorsUseCase = loadDebtors,
         _addDebtorUseCase = addDebtor,
-        super(DebtorsInitial()) {
-    on<LoadDebtorsRequestedEvent>(_loadDebtors);
-    on<AddDebtorRequestedEvent>(_addNewDebtor);
+        super(HomeDebtorsInitial()) {
+    on<HomeLoadDebtorsRequestedEvent>(_loadDebtors);
+    on<HomeAddDebtorRequestedEvent>(_addNewDebtor);
   }
 
   FutureOr<void> _loadDebtors(
-    LoadDebtorsRequestedEvent event,
-    Emitter<DebtorsState> emit,
+    HomeLoadDebtorsRequestedEvent event,
+    Emitter<HomeDebtorsState> emit,
   ) async {
-    emit(DebtorsLoading());
+    emit(HomeDebtorsLoading());
     final response = await _loadDebtorsUseCase();
     response.fold(
-      (exception) => emit(DebtorsError()),
+      (exception) => emit(HomeDebtorsError()),
       (debtors) {
         _debtors = debtors;
-        if (_debtors.isEmpty) {
-          emit(DebtorsEmpty());
-          return;
-        }
-        emit(DebtorsLoaded(debtors: _debtors));
+        emit(HomeDebtorsLoaded(debtors: _debtors));
       },
     );
   }
 
   FutureOr<void> _addNewDebtor(
-    AddDebtorRequestedEvent event,
-    Emitter<DebtorsState> emit,
+    HomeAddDebtorRequestedEvent event,
+    Emitter<HomeDebtorsState> emit,
   ) async {
-    emit(DebtorsLoading());
+    emit(HomeDebtorsLoading());
     final response = await _addDebtorUseCase(
       debtor: Debtor(nickname: event.debtorNickname),
     );
     response.fold(
-      (exception) => emit(DebtorsError()),
+      (exception) => emit(HomeDebtorsError()),
       (savedDebtor) {
         _debtors.add(savedDebtor);
-        emit(DebtorsLoaded(debtors: _debtors));
+        emit(HomeDebtorsLoaded(debtors: _debtors));
       },
     );
   }

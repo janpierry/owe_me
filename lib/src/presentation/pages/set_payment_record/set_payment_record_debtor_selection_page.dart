@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
-import 'package:owe_me/src/presentation/blocs/debtors/debtors_bloc.dart';
+import 'package:owe_me/src/presentation/blocs/debtor_selection/debtor_selection_bloc.dart';
 import 'package:owe_me/src/presentation/drafts/payment_record_draft.dart';
 import 'package:owe_me/src/presentation/pages/set_payment_record/set_payment_record_info_review_page.dart';
 import 'package:owe_me/src/presentation/pages/set_payment_record/set_payment_record_page.dart';
@@ -64,9 +64,9 @@ class SetPaymentRecordDebtorSelectionPage extends StatelessWidget {
         elevation: 1,
       ),
       backgroundColor: AppColors.backgroundLight,
-      body: BlocBuilder<DebtorsBloc, DebtorsState>(
+      body: BlocBuilder<DebtorSelectionBloc, DebtorSelectionState>(
         builder: (context, state) {
-          if (state is DebtorsLoaded) {
+          if (state is DebtorSelectionLoadDebtorsSuccess) {
             return SetPaymentRecordDebtorSelectionBody(
               debtors: state.debtors,
               onDebtorSelected: (debtor) => _handleNavigationOnDebtorSelected(

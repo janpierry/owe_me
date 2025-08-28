@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
+import 'package:owe_me/src/presentation/blocs/debtor_selection/debtor_selection_bloc.dart';
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_amount_step_container.dart';
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_info_review_container.dart';
 import 'package:owe_me/src/presentation/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
-import 'package:owe_me/src/presentation/blocs/debtors/debtors_bloc.dart';
 import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
 import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/debtor_selection_page/set_owe_record_debtor_selection_body.dart';
@@ -68,9 +68,9 @@ class SetOweRecordDebtorSelectionPage extends StatelessWidget {
         elevation: 1,
       ),
       backgroundColor: AppColors.backgroundLight,
-      body: BlocBuilder<DebtorsBloc, DebtorsState>(
+      body: BlocBuilder<DebtorSelectionBloc, DebtorSelectionState>(
         builder: (context, state) {
-          if (state is DebtorsLoaded) {
+          if (state is DebtorSelectionLoadDebtorsSuccess) {
             return SetOweRecordDebtorSelectionBody(
               debtors: state.debtors,
               onDebtorSelected: (debtor) => _handleNavigationOnDebtorSelected(

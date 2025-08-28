@@ -4,14 +4,18 @@ import 'package:owe_me/src/data/repositories/debtor_repository_impl.dart';
 import 'package:owe_me/src/domain/repositories/debtor_repository.dart';
 import 'package:owe_me/src/domain/use_cases/debtor/add_debtor.dart';
 import 'package:owe_me/src/domain/use_cases/debtor/load_debtors.dart';
-import 'package:owe_me/src/presentation/blocs/debtors/debtors_bloc.dart';
+import 'package:owe_me/src/presentation/blocs/debtor_selection/debtor_selection_bloc.dart';
+import 'package:owe_me/src/presentation/blocs/home_debtors/home_debtors_bloc.dart';
 
 void initDebtorsInjections() {
   final inj = GetIt.instance;
 
   //Blocs
-  inj.registerFactory<DebtorsBloc>(
-    () => DebtorsBloc(loadDebtors: inj(), addDebtor: inj()),
+  inj.registerFactory<HomeDebtorsBloc>(
+    () => HomeDebtorsBloc(loadDebtors: inj(), addDebtor: inj()),
+  );
+  inj.registerFactory<DebtorSelectionBloc>(
+    () => DebtorSelectionBloc(loadDebtors: inj()),
   );
 
   //Use Cases
