@@ -10,7 +10,6 @@ class SetOweRecordDescriptionStepFavoriteButton extends StatelessWidget {
     context
         .read<SetOweRecordDescriptionStepBloc>()
         .add(const SetOweRecordDescriptionStepDescriptionAddedToFavorites());
-    //TODO two in a row works?
   }
 
   @override

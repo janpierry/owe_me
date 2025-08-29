@@ -1,5 +1,6 @@
 part of 'set_owe_record_description_step_bloc.dart';
 
+//TODO multiple state types. Separate in multiple blocs?
 sealed class SetOweRecordDescriptionStepState extends Equatable {
   const SetOweRecordDescriptionStepState();
 
@@ -49,7 +50,16 @@ final class SetOweRecordDescriptionStepFavoriteDescriptionsLoading
     extends SetOweRecordDescriptionStepFavoriteDescriptionsState {}
 
 final class SetOweRecordDescriptionStepFavoriteDescriptionsError
-    extends SetOweRecordDescriptionStepFavoriteDescriptionsState {}
+    extends SetOweRecordDescriptionStepFavoriteDescriptionsState {
+  final String message;
+
+  const SetOweRecordDescriptionStepFavoriteDescriptionsError({
+    required this.message,
+  });
+
+  @override
+  List<Object> get props => [message];
+}
 
 final class SetOweRecordDescriptionStepFavoriteDescriptionsUpdated
     extends SetOweRecordDescriptionStepFavoriteDescriptionsState {

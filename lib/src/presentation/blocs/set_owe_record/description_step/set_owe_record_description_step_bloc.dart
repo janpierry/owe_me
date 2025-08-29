@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
 import 'package:owe_me/src/core/shared/error/failures.dart';
 import 'package:owe_me/src/presentation/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
@@ -53,7 +54,7 @@ class SetOweRecordDescriptionStepBloc
     SetOweRecordDescriptionStepPageInitialized event,
     Emitter<SetOweRecordDescriptionStepState> emit,
   ) async {
-    emit(SetOweRecordDescriptionStepLoading());
+    emit(SetOweRecordDescriptionStepPageLoading());
     final oweRecordDraft = event.oweRecordDraft;
     final oweRecordType = oweRecordDraft.oweType;
     final recordDebtor = event.recordDebtor;
@@ -112,13 +113,11 @@ class SetOweRecordDescriptionStepBloc
     SetOweRecordDescriptionStepDescriptionAddedToFavorites event,
     Emitter<SetOweRecordDescriptionStepState> emit,
   ) async {
-    //TODO should affect the page?
     emit(SetOweRecordDescriptionStepFavoriteDescriptionsLoading());
 
-    if (_description.isEmpty || _isDescriptionInFavorites(_description)) {
-      emit(SetOweRecordDescriptionStepFavoriteDescriptionsError());
+    final isDescriptionValid = _validateDescriptionToAddToFavorites(_description, emit);
+    if (!isDescriptionValid) {
       return;
-      //TODO Show page again or it does not affect page?
     }
 
     final newFavoriteDescription =
@@ -131,7 +130,10 @@ class SetOweRecordDescriptionStepBloc
       ),
     );
     if (result.isLeft()) {
-      emit(SetOweRecordDescriptionStepFavoriteDescriptionsError());
+      emit(SetOweRecordDescriptionStepFavoriteDescriptionsError(
+        //TODO map failures to messages
+        message: result.asLeft().message,
+      ));
       return;
     }
 
@@ -144,6 +146,30 @@ class SetOweRecordDescriptionStepBloc
         favoriteDescriptions: _favoriteDescriptions,
       ),
     );
+  }
+
+  bool _validateDescriptionToAddToFavorites(
+    String description,
+    Emitter<SetOweRecordDescriptionStepState> emit,
+  ) {
+    if (description.trim().isEmpty) {
+      emit(
+        SetOweRecordDescriptionStepFavoriteDescriptionsError(
+          message: 'Descrição não pode estar vazia para ser adicionada aos favoritos',
+        ),
+      );
+      return false;
+    }
+
+    if (_isDescriptionInFavorites(description)) {
+      emit(
+        SetOweRecordDescriptionStepFavoriteDescriptionsError(
+          message: 'Descrição já está entre os favoritos',
+        ),
+      );
+      return false;
+    }
+    return true;
   }
 
   bool _isDescriptionInFavorites(String description) {
