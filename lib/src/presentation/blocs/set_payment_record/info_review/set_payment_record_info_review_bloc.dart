@@ -18,12 +18,12 @@ class SetPaymentRecordInfoReviewBloc
     required AddMonetaryRecord addMonetaryRecord,
   })  : _addMonetaryRecordUseCase = addMonetaryRecord,
         super(SetPaymentRecordInfoReviewInitial()) {
-    on<SetPaymentRecordInfoReviewPageInitializedEvent>(_loadInitialData);
+    on<SetPaymentRecordInfoReviewPageInitialized>(_loadInitialData);
     on<SetPaymentRecordInfoReviewSetRecordRequested>(_setPaymentRecord);
   }
 
   Future<void> _loadInitialData(
-    SetPaymentRecordInfoReviewPageInitializedEvent event,
+    SetPaymentRecordInfoReviewPageInitialized event,
     Emitter<SetPaymentRecordInfoReviewState> emit,
   ) async {
     _paymentRecordDraft = event.paymentRecordDraft;

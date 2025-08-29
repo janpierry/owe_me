@@ -10,8 +10,7 @@ class HomeContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) =>
-          GetIt.instance<HomeDebtorsBloc>()..add(HomeLoadDebtorsRequestedEvent()),
+      create: (_) => GetIt.instance<HomeDebtorsBloc>()..add(HomeLoadDebtorsRequested()),
       child: const HomePage(),
     );
   }

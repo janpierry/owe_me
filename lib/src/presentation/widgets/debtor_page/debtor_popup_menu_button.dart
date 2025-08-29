@@ -19,7 +19,7 @@ class DebtorPopupMenuButton extends StatelessWidget {
       builder: (context) => SetDebtorDialog(
         initialNickname: debtor.nickname,
         onSetDebtorPressed: (nickname) => bloc.add(
-          DebtorEditRequestedEvent(nickname: nickname),
+          DebtorEditRequested(nickname: nickname),
         ),
       ),
     );
@@ -31,7 +31,7 @@ class DebtorPopupMenuButton extends StatelessWidget {
       context: context,
       barrierDismissible: true,
       builder: (context) => RemoveDebtorConfirmationDialog(
-        onRemoveDebtorPressed: () => bloc.add(DebtorRemoveRequestedEvent()),
+        onRemoveDebtorPressed: () => bloc.add(DebtorRemoveRequested()),
       ),
     );
   }

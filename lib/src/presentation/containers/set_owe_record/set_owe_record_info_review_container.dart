@@ -21,7 +21,7 @@ class SetOweRecordInfoReviewContainer extends StatelessWidget {
     return BlocProvider(
       create: (_) => GetIt.instance<SetOweRecordInfoReviewBloc>()
         ..add(
-          SetOweRecordInfoReviewPageInitializedEvent(
+          SetOweRecordInfoReviewPageInitialized(
             oweRecordDraft: oweRecordDraft,
             recordDebtor: recordDebtor,
           ),

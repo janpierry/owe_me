@@ -24,7 +24,7 @@ class SetOweRecordAmountStepContainer extends StatelessWidget {
     return BlocProvider(
       create: (_) => GetIt.instance<SetOweRecordAmountStepBloc>()
         ..add(
-          SetOweRecordAmountStepPageInitializedEvent(
+          SetOweRecordAmountStepPageInitialized(
             amountToEdit: oweRecordDraftToEdit?.amount,
           ),
         ),

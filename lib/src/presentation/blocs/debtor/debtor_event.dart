@@ -7,24 +7,24 @@ sealed class DebtorEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class DebtorPageInitializedEvent extends DebtorEvent {
+class DebtorPageInitialized extends DebtorEvent {
   final Debtor debtor;
 
-  const DebtorPageInitializedEvent({required this.debtor});
+  const DebtorPageInitialized({required this.debtor});
 
   @override
   List<Object?> get props => [debtor];
 }
 
-class DebtorMonetaryRecordHistoryLoadRequestedEvent extends DebtorEvent {}
+class DebtorMonetaryRecordHistoryLoadRequested extends DebtorEvent {}
 
-class DebtorEditRequestedEvent extends DebtorEvent {
+class DebtorEditRequested extends DebtorEvent {
   final String nickname;
 
-  const DebtorEditRequestedEvent({required this.nickname});
+  const DebtorEditRequested({required this.nickname});
 
   @override
   List<Object?> get props => [nickname];
 }
 
-class DebtorRemoveRequestedEvent extends DebtorEvent {}
+class DebtorRemoveRequested extends DebtorEvent {}

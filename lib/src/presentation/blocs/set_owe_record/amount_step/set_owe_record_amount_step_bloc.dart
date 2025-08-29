@@ -12,13 +12,13 @@ class SetOweRecordAmountStepBloc
   late Money _amount;
 
   SetOweRecordAmountStepBloc() : super(SetOweRecordAmountStepInitial()) {
-    on<SetOweRecordAmountStepPageInitializedEvent>(_loadInitialData);
-    on<SetOweRecordAmountStepAmountChangedEvent>(_setAmount);
-    on<SetOweRecordAmountStepNextPageRequestedEvent>(_sendAmountToNavigateToNextPage);
+    on<SetOweRecordAmountStepPageInitialized>(_loadInitialData);
+    on<SetOweRecordAmountStepAmountChanged>(_setAmount);
+    on<SetOweRecordAmountStepNextPageRequested>(_sendAmountToNavigateToNextPage);
   }
 
   FutureOr<void> _loadInitialData(
-    SetOweRecordAmountStepPageInitializedEvent event,
+    SetOweRecordAmountStepPageInitialized event,
     Emitter<SetOweRecordAmountStepState> emit,
   ) async {
     emit(SetOweRecordAmountStepPageLoading());
@@ -27,14 +27,14 @@ class SetOweRecordAmountStepBloc
   }
 
   FutureOr<void> _setAmount(
-    SetOweRecordAmountStepAmountChangedEvent event,
+    SetOweRecordAmountStepAmountChanged event,
     Emitter<SetOweRecordAmountStepState> emit,
   ) async {
     _amount = event.amount;
   }
 
   FutureOr<void> _sendAmountToNavigateToNextPage(
-    SetOweRecordAmountStepNextPageRequestedEvent event,
+    SetOweRecordAmountStepNextPageRequested event,
     Emitter<SetOweRecordAmountStepState> emit,
   ) async {
     emit(SetOweRecordAmountStepLoading());

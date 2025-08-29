@@ -21,7 +21,7 @@ class SetOweRecordDebtorSelectionContainer extends StatelessWidget {
     return BlocProvider(
       create: (_) => GetIt.instance<DebtorSelectionBloc>()
         ..add(
-          DebtorSelectionLoadDebtorsRequestedEvent(),
+          DebtorSelectionLoadDebtorsRequested(),
         ),
       child: SetOweRecordDebtorSelectionPage(
         oweRecordType: oweRecordType,

@@ -23,7 +23,7 @@ class SetOweRecordAmountStepBody extends StatelessWidget {
 
   void _onAmountChanged(Money amount, BuildContext context) {
     context.read<SetOweRecordAmountStepBloc>().add(
-          SetOweRecordAmountStepAmountChangedEvent(amount: amount),
+          SetOweRecordAmountStepAmountChanged(amount: amount),
         );
   }
 

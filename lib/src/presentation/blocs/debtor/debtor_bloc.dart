@@ -25,14 +25,14 @@ class DebtorBloc extends Bloc<DebtorEvent, DebtorState> {
         _editDebtorUseCase = editDebtor,
         _removeDebtorUseCase = removeDebtor,
         super(DebtorMonetaryRecordHistoryInitial()) {
-    on<DebtorPageInitializedEvent>(_loadInitialData);
-    on<DebtorMonetaryRecordHistoryLoadRequestedEvent>(_loadDebtorMonetaryRecordHistory);
-    on<DebtorEditRequestedEvent>(_editDebtor);
-    on<DebtorRemoveRequestedEvent>(_removeDebtor);
+    on<DebtorPageInitialized>(_loadInitialData);
+    on<DebtorMonetaryRecordHistoryLoadRequested>(_loadDebtorMonetaryRecordHistory);
+    on<DebtorEditRequested>(_editDebtor);
+    on<DebtorRemoveRequested>(_removeDebtor);
   }
 
   FutureOr<void> _loadInitialData(
-    DebtorPageInitializedEvent event,
+    DebtorPageInitialized event,
     Emitter<DebtorState> emit,
   ) {
     _loadDebtor(emit, event.debtor);
@@ -42,11 +42,11 @@ class DebtorBloc extends Bloc<DebtorEvent, DebtorState> {
     emit(DebtorPageLoading());
     _debtor = debtor;
     emit(DebtorPageLoaded(debtor: _debtor));
-    add(DebtorMonetaryRecordHistoryLoadRequestedEvent());
+    add(DebtorMonetaryRecordHistoryLoadRequested());
   }
 
   FutureOr<void> _loadDebtorMonetaryRecordHistory(
-    DebtorMonetaryRecordHistoryLoadRequestedEvent event,
+    DebtorMonetaryRecordHistoryLoadRequested event,
     Emitter<DebtorState> emit,
   ) async {
     emit(DebtorMonetaryRecordHistoryLoading());
@@ -66,7 +66,7 @@ class DebtorBloc extends Bloc<DebtorEvent, DebtorState> {
   }
 
   FutureOr<void> _editDebtor(
-    DebtorEditRequestedEvent event,
+    DebtorEditRequested event,
     Emitter<DebtorState> emit,
   ) async {
     emit(DebtorEditInProgress());
@@ -84,7 +84,7 @@ class DebtorBloc extends Bloc<DebtorEvent, DebtorState> {
   }
 
   FutureOr<void> _removeDebtor(
-    DebtorRemoveRequestedEvent event,
+    DebtorRemoveRequested event,
     Emitter<DebtorState> emit,
   ) async {
     emit(DebtorRemoveInProgress());

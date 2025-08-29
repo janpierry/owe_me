@@ -18,7 +18,7 @@ class SetPaymentRecordDebtorSelectionContainer extends StatelessWidget {
     return BlocProvider(
       create: (_) => GetIt.instance<DebtorSelectionBloc>()
         ..add(
-          DebtorSelectionLoadDebtorsRequestedEvent(),
+          DebtorSelectionLoadDebtorsRequested(),
         ),
       child: SetPaymentRecordDebtorSelectionPage(
         paymentRecordDraftToEdit: paymentRecordDraftToEdit,

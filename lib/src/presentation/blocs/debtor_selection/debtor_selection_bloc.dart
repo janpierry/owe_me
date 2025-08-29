@@ -15,11 +15,11 @@ class DebtorSelectionBloc extends Bloc<DebtorSelectionEvent, DebtorSelectionStat
     required LoadDebtors loadDebtors,
   })  : _loadDebtorsUseCase = loadDebtors,
         super(DebtorSelectionLoadDebtorsInitial()) {
-    on<DebtorSelectionLoadDebtorsRequestedEvent>(_loadDebtors);
+    on<DebtorSelectionLoadDebtorsRequested>(_loadDebtors);
   }
 
   FutureOr<void> _loadDebtors(
-    DebtorSelectionLoadDebtorsRequestedEvent event,
+    DebtorSelectionLoadDebtorsRequested event,
     Emitter<DebtorSelectionState> emit,
   ) async {
     emit(DebtorSelectionLoadDebtorsInProgress());

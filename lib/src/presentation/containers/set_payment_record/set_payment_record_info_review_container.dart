@@ -21,7 +21,7 @@ class SetPaymentRecordInfoReviewContainer extends StatelessWidget {
     return BlocProvider(
       create: (_) => GetIt.instance<SetPaymentRecordInfoReviewBloc>()
         ..add(
-          SetPaymentRecordInfoReviewPageInitializedEvent(
+          SetPaymentRecordInfoReviewPageInitialized(
             paymentRecordDraft: paymentRecordDraft,
             recordDebtor: recordDebtor,
           ),

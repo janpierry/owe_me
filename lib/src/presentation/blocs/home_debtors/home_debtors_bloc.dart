@@ -20,12 +20,12 @@ class HomeDebtorsBloc extends Bloc<HomeDebtorsEvent, HomeDebtorsState> {
   })  : _loadDebtorsUseCase = loadDebtors,
         _addDebtorUseCase = addDebtor,
         super(HomeDebtorsInitial()) {
-    on<HomeLoadDebtorsRequestedEvent>(_loadDebtors);
-    on<HomeAddDebtorRequestedEvent>(_addNewDebtor);
+    on<HomeLoadDebtorsRequested>(_loadDebtors);
+    on<HomeAddDebtorRequested>(_addNewDebtor);
   }
 
   FutureOr<void> _loadDebtors(
-    HomeLoadDebtorsRequestedEvent event,
+    HomeLoadDebtorsRequested event,
     Emitter<HomeDebtorsState> emit,
   ) async {
     emit(HomeDebtorsLoading());
@@ -40,7 +40,7 @@ class HomeDebtorsBloc extends Bloc<HomeDebtorsEvent, HomeDebtorsState> {
   }
 
   FutureOr<void> _addNewDebtor(
-    HomeAddDebtorRequestedEvent event,
+    HomeAddDebtorRequested event,
     Emitter<HomeDebtorsState> emit,
   ) async {
     emit(HomeDebtorsLoading());

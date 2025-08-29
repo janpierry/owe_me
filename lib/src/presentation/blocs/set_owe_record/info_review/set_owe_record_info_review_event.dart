@@ -7,11 +7,11 @@ sealed class SetOweRecordInfoReviewEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SetOweRecordInfoReviewPageInitializedEvent extends SetOweRecordInfoReviewEvent {
+class SetOweRecordInfoReviewPageInitialized extends SetOweRecordInfoReviewEvent {
   final OweRecordDraft oweRecordDraft;
   final Debtor recordDebtor;
 
-  const SetOweRecordInfoReviewPageInitializedEvent({
+  const SetOweRecordInfoReviewPageInitialized({
     required this.oweRecordDraft,
     required this.recordDebtor,
   });

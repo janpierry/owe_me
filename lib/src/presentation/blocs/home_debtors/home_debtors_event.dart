@@ -7,12 +7,12 @@ sealed class HomeDebtorsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class HomeLoadDebtorsRequestedEvent extends HomeDebtorsEvent {}
+class HomeLoadDebtorsRequested extends HomeDebtorsEvent {}
 
-class HomeAddDebtorRequestedEvent extends HomeDebtorsEvent {
+class HomeAddDebtorRequested extends HomeDebtorsEvent {
   final String debtorNickname;
 
-  const HomeAddDebtorRequestedEvent({required this.debtorNickname});
+  const HomeAddDebtorRequested({required this.debtorNickname});
 
   @override
   List<Object> get props => [debtorNickname];

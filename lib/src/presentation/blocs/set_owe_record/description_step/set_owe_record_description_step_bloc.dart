@@ -34,15 +34,15 @@ class SetOweRecordDescriptionStepBloc
         _loadDebtorFavoriteDebtsUseCase = loadDebtorFavoriteDebts,
         _loadDebtorFavoriteCreditsUseCase = loadDebtorFavoriteCredits,
         super(SetOweRecordDescriptionStepInitial()) {
-    on<SetOweRecordDescriptionStepPageInitializedEvent>(_loadInitialData);
-    on<SetOweRecordDescriptionStepDescriptionChangedEvent>(_setDescription);
-    on<SetOweRecordDescriptionStepFavoriteDescriptionSelectedEvent>(
+    on<SetOweRecordDescriptionStepPageInitialized>(_loadInitialData);
+    on<SetOweRecordDescriptionStepDescriptionChanged>(_setDescription);
+    on<SetOweRecordDescriptionStepFavoriteDescriptionSelected>(
       _setDescriptionAndSendValueToTextField,
     );
-    on<SetOweRecordDescriptionStepDescriptionAddedToFavoritesEvent>(
+    on<SetOweRecordDescriptionStepDescriptionAddedToFavorites>(
       _addDescriptionToFavorites,
     );
-    on<SetOweRecordDescriptionStepNextPageRequestedEvent>(
+    on<SetOweRecordDescriptionStepNextPageRequested>(
       _sendDescriptionToNavigateToNextPage,
     );
   }
@@ -50,7 +50,7 @@ class SetOweRecordDescriptionStepBloc
   OweType get _oweRecordType => _initialOweRecordDraft.oweType;
 
   FutureOr<void> _loadInitialData(
-    SetOweRecordDescriptionStepPageInitializedEvent event,
+    SetOweRecordDescriptionStepPageInitialized event,
     Emitter<SetOweRecordDescriptionStepState> emit,
   ) async {
     emit(SetOweRecordDescriptionStepLoading());
@@ -92,14 +92,14 @@ class SetOweRecordDescriptionStepBloc
   }
 
   FutureOr<void> _setDescription(
-    SetOweRecordDescriptionStepDescriptionChangedEvent event,
+    SetOweRecordDescriptionStepDescriptionChanged event,
     Emitter<SetOweRecordDescriptionStepState> emit,
   ) async {
     _description = event.description;
   }
 
   FutureOr<void> _setDescriptionAndSendValueToTextField(
-    SetOweRecordDescriptionStepFavoriteDescriptionSelectedEvent event,
+    SetOweRecordDescriptionStepFavoriteDescriptionSelected event,
     Emitter<SetOweRecordDescriptionStepState> emit,
   ) async {
     _description = event.selectedDescription.description;
@@ -109,7 +109,7 @@ class SetOweRecordDescriptionStepBloc
   }
 
   FutureOr<void> _addDescriptionToFavorites(
-    SetOweRecordDescriptionStepDescriptionAddedToFavoritesEvent event,
+    SetOweRecordDescriptionStepDescriptionAddedToFavorites event,
     Emitter<SetOweRecordDescriptionStepState> emit,
   ) async {
     //TODO should affect the page?
@@ -156,7 +156,7 @@ class SetOweRecordDescriptionStepBloc
   }
 
   FutureOr<void> _sendDescriptionToNavigateToNextPage(
-    SetOweRecordDescriptionStepNextPageRequestedEvent event,
+    SetOweRecordDescriptionStepNextPageRequested event,
     Emitter<SetOweRecordDescriptionStepState> emit,
   ) async {
     emit(SetOweRecordDescriptionStepLoading());

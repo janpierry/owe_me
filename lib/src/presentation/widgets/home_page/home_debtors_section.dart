@@ -18,7 +18,7 @@ class HomeDebtorsSection extends StatelessWidget {
       barrierDismissible: true,
       builder: (context) => SetDebtorDialog(
         onSetDebtorPressed: (nickname) => bloc.add(
-          HomeAddDebtorRequestedEvent(debtorNickname: nickname),
+          HomeAddDebtorRequested(debtorNickname: nickname),
         ),
       ),
     );

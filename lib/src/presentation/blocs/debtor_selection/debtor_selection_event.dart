@@ -7,5 +7,4 @@ sealed class DebtorSelectionEvent extends Equatable {
   List<Object> get props => [];
 }
 
-//TODO remove 'event' suffix?
-class DebtorSelectionLoadDebtorsRequestedEvent extends DebtorSelectionEvent {}
+class DebtorSelectionLoadDebtorsRequested extends DebtorSelectionEvent {}

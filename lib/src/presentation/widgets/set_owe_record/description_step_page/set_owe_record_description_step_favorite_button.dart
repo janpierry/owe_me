@@ -9,7 +9,7 @@ class SetOweRecordDescriptionStepFavoriteButton extends StatelessWidget {
   void _addDescriptionToFavorites(BuildContext context) {
     context
         .read<SetOweRecordDescriptionStepBloc>()
-        .add(const SetOweRecordDescriptionStepDescriptionAddedToFavoritesEvent());
+        .add(const SetOweRecordDescriptionStepDescriptionAddedToFavorites());
     //TODO two in a row works?
   }
 

@@ -7,12 +7,11 @@ sealed class SetPaymentRecordInfoReviewEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SetPaymentRecordInfoReviewPageInitializedEvent
-    extends SetPaymentRecordInfoReviewEvent {
+class SetPaymentRecordInfoReviewPageInitialized extends SetPaymentRecordInfoReviewEvent {
   final PaymentRecordDraft paymentRecordDraft;
   final Debtor recordDebtor;
 
-  const SetPaymentRecordInfoReviewPageInitializedEvent({
+  const SetPaymentRecordInfoReviewPageInitialized({
     required this.paymentRecordDraft,
     required this.recordDebtor,
   });

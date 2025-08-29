@@ -18,12 +18,12 @@ class SetOweRecordInfoReviewBloc
     required AddMonetaryRecord addMonetaryRecord,
   })  : _addMonetaryRecordUseCase = addMonetaryRecord,
         super(SetOweRecordInfoReviewInitial()) {
-    on<SetOweRecordInfoReviewPageInitializedEvent>(_loadInitialData);
+    on<SetOweRecordInfoReviewPageInitialized>(_loadInitialData);
     on<SetOweRecordInfoReviewSetRecordRequested>(_setOweRecord);
   }
 
   Future<void> _loadInitialData(
-    SetOweRecordInfoReviewPageInitializedEvent event,
+    SetOweRecordInfoReviewPageInitialized event,
     Emitter<SetOweRecordInfoReviewState> emit,
   ) async {
     _oweRecordDraft = event.oweRecordDraft;

@@ -28,7 +28,7 @@ class _SetOweRecordDescriptionTextFormFieldState
     _controller.text = widget.initialDescription;
     _controller.addListener(
       () => context.read<SetOweRecordDescriptionStepBloc>().add(
-            SetOweRecordDescriptionStepDescriptionChangedEvent(
+            SetOweRecordDescriptionStepDescriptionChanged(
               description: _controller.text,
             ),
           ),

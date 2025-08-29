@@ -23,7 +23,7 @@ class SetOweRecordDescriptionStepFavoriteDescriptionsSection extends StatelessWi
     FavoriteDescription selectedDescription,
   ) {
     context.read<SetOweRecordDescriptionStepBloc>().add(
-          SetOweRecordDescriptionStepFavoriteDescriptionSelectedEvent(
+          SetOweRecordDescriptionStepFavoriteDescriptionSelected(
             selectedDescription: selectedDescription,
           ),
         );

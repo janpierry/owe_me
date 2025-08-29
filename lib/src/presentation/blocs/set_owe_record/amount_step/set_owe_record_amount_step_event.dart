@@ -7,10 +7,10 @@ sealed class SetOweRecordAmountStepEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class SetOweRecordAmountStepPageInitializedEvent extends SetOweRecordAmountStepEvent {
+class SetOweRecordAmountStepPageInitialized extends SetOweRecordAmountStepEvent {
   final Money? amountToEdit;
 
-  const SetOweRecordAmountStepPageInitializedEvent({
+  const SetOweRecordAmountStepPageInitialized({
     required this.amountToEdit,
   });
 
@@ -18,13 +18,13 @@ class SetOweRecordAmountStepPageInitializedEvent extends SetOweRecordAmountStepE
   List<Object?> get props => [amountToEdit];
 }
 
-class SetOweRecordAmountStepAmountChangedEvent extends SetOweRecordAmountStepEvent {
+class SetOweRecordAmountStepAmountChanged extends SetOweRecordAmountStepEvent {
   final Money amount;
 
-  const SetOweRecordAmountStepAmountChangedEvent({required this.amount});
+  const SetOweRecordAmountStepAmountChanged({required this.amount});
 
   @override
   List<Object> get props => [amount];
 }
 
-class SetOweRecordAmountStepNextPageRequestedEvent extends SetOweRecordAmountStepEvent {}
+class SetOweRecordAmountStepNextPageRequested extends SetOweRecordAmountStepEvent {}

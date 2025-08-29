@@ -14,7 +14,7 @@ class DebtorContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) =>
-          GetIt.instance<DebtorBloc>()..add(DebtorPageInitializedEvent(debtor: debtor)),
+          GetIt.instance<DebtorBloc>()..add(DebtorPageInitialized(debtor: debtor)),
       child: DebtorPage(),
     );
   }

@@ -21,7 +21,7 @@ class SetOweRecordDescriptionStepContainer extends StatelessWidget {
     return BlocProvider(
       create: (_) => GetIt.instance<SetOweRecordDescriptionStepBloc>()
         ..add(
-          SetOweRecordDescriptionStepPageInitializedEvent(
+          SetOweRecordDescriptionStepPageInitialized(
             oweRecordDraft: oweRecordDraft,
             recordDebtor: recordDebtor,
           ),
