@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:owe_me/src/core/presentation/extensions/owe_type_ui_extensions.dart';
+import 'package:owe_me/src/core/presentation/extensions/string_extensions.dart';
 import 'package:owe_me/src/presentation/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/presentation/blocs/set_owe_record/info_review/set_owe_record_info_review_bloc.dart';
@@ -24,6 +26,13 @@ class SetOweRecordInfoReviewPage extends StatelessWidget {
     SetOweRecordInfoReviewState state,
   ) {
     if (state is SetOweRecordInfoReviewRecordSetFinished) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            '${oweRecordDraft.oweType.label.capitalize()} registrado com sucesso.',
+          ),
+        ),
+      );
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) => const HomeContainer(),
@@ -31,9 +40,12 @@ class SetOweRecordInfoReviewPage extends StatelessWidget {
         (route) => false,
       );
     } else if (state is SetOweRecordInfoReviewError) {
-      // TODO Handle error state, e.g., show a snackbar or dialog
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('An error occurred while setting the record.')),
+        SnackBar(
+          content: Text(
+            'Um erro ocorreu ao registrar o ${oweRecordDraft.oweType.label}.',
+          ),
+        ),
       );
     }
   }

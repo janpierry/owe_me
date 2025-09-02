@@ -1,6 +1,5 @@
 part of 'set_owe_record_description_step_bloc.dart';
 
-//TODO multiple state types. Separate in multiple blocs?
 sealed class SetOweRecordDescriptionStepState extends Equatable {
   const SetOweRecordDescriptionStepState();
 

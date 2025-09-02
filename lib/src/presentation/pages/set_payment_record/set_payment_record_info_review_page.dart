@@ -24,8 +24,10 @@ class SetPaymentRecordInfoReviewPage extends StatelessWidget {
     SetPaymentRecordInfoReviewState state,
   ) {
     if (state is SetPaymentRecordInfoReviewRecordSetFinished) {
-      //TODO show a snackbar confirming the payment record was set
       //TODO should go back to debtor page instead of home in some cases
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Pagamento registrado com sucesso.')),
+      );
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) => const HomeContainer(),
@@ -33,7 +35,6 @@ class SetPaymentRecordInfoReviewPage extends StatelessWidget {
         (route) => false,
       );
     } else if (state is SetPaymentRecordInfoReviewError) {
-      // TODO Handle error state, e.g., show a snackbar or dialog
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Um erro ocorreu ao registrar o pagamento.')),
       );
