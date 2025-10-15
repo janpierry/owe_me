@@ -32,7 +32,9 @@ class SetOweRecordDescriptionStepFavoriteDescriptionsSection extends StatelessWi
   void _listen(BuildContext context, SetOweRecordDescriptionStepState state) {
     if (state is SetOweRecordDescriptionStepFavoriteDescriptionsError) {
       final snackBar = SnackBar(content: Text(state.message));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(snackBar);
     }
   }
 

@@ -26,13 +26,15 @@ class SetOweRecordInfoReviewPage extends StatelessWidget {
     SetOweRecordInfoReviewState state,
   ) {
     if (state is SetOweRecordInfoReviewRecordSetFinished) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            '${oweRecordDraft.oweType.label.capitalize()} registrado com sucesso.',
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: Text(
+              '${oweRecordDraft.oweType.label.capitalize()} registrado com sucesso.',
+            ),
           ),
-        ),
-      );
+        );
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) => const HomeContainer(),
@@ -40,13 +42,15 @@ class SetOweRecordInfoReviewPage extends StatelessWidget {
         (route) => false,
       );
     } else if (state is SetOweRecordInfoReviewError) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            'Um erro ocorreu ao registrar o ${oweRecordDraft.oweType.label}.',
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: Text(
+              'Um erro ocorreu ao registrar o ${oweRecordDraft.oweType.label}.',
+            ),
           ),
-        ),
-      );
+        );
     }
   }
 

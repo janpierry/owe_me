@@ -22,7 +22,9 @@ class DebtorPage extends StatelessWidget {
     final snackBar = SnackBar(
       content: Text('Devedor removido com sucesso'),
     );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
   }
 
   void _navigateToHomePage(BuildContext context) {
@@ -38,7 +40,9 @@ class DebtorPage extends StatelessWidget {
     final snackBar = SnackBar(
       content: Text('Devedor editado com sucesso'),
     );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
   }
 
   void _showMonetaryRecordHistoryErrorSnackbar(BuildContext context, String message) {
@@ -46,7 +50,9 @@ class DebtorPage extends StatelessWidget {
       //TODO adapt this
       content: Text('Erro: $message'),
     );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
   }
 
   @override

@@ -25,9 +25,11 @@ class SetPaymentRecordInfoReviewPage extends StatelessWidget {
   ) {
     if (state is SetPaymentRecordInfoReviewRecordSetFinished) {
       //TODO should go back to debtor page instead of home in some cases
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Pagamento registrado com sucesso.')),
-      );
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(content: Text('Pagamento registrado com sucesso.')),
+        );
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) => const HomeContainer(),
@@ -35,9 +37,11 @@ class SetPaymentRecordInfoReviewPage extends StatelessWidget {
         (route) => false,
       );
     } else if (state is SetPaymentRecordInfoReviewError) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Um erro ocorreu ao registrar o pagamento.')),
-      );
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(content: Text('Um erro ocorreu ao registrar o pagamento.')),
+        );
     }
   }
 
