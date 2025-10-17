@@ -9,11 +9,13 @@ import 'package:owe_me/src/presentation/pages/set_owe_record/set_owe_record_desc
 class SetOweRecordDescriptionStepContainer extends StatelessWidget {
   final OweRecordDraft oweRecordDraft;
   final Debtor recordDebtor;
+  final bool fromDebtorPage;
 
   const SetOweRecordDescriptionStepContainer({
     super.key,
     required this.oweRecordDraft,
     required this.recordDebtor,
+    required this.fromDebtorPage,
   });
 
   @override
@@ -26,7 +28,9 @@ class SetOweRecordDescriptionStepContainer extends StatelessWidget {
             recordDebtor: recordDebtor,
           ),
         ),
-      child: const SetOweRecordDescriptionStepPage(),
+      child: SetOweRecordDescriptionStepPage(
+        fromDebtorPage: fromDebtorPage,
+      ),
     );
   }
 }

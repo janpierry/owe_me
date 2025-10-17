@@ -15,12 +15,14 @@ class SetOweRecordAmountStepPage extends StatelessWidget {
   final Debtor recordDebtor;
   final OweType oweRecordType;
   final OweRecordDraft? oweRecordDraftToEdit;
+  final bool fromDebtorPage;
 
   const SetOweRecordAmountStepPage({
     super.key,
     required this.recordDebtor,
     required this.oweRecordType,
     this.oweRecordDraftToEdit,
+    required this.fromDebtorPage,
   });
 
   void _listen(BuildContext context, SetOweRecordAmountStepState state) {
@@ -48,6 +50,7 @@ class SetOweRecordAmountStepPage extends StatelessWidget {
         builder: (context) => SetOweRecordInfoReviewContainer(
           oweRecordDraft: oweRecordDraftToEdit!.copyWith(amount: amount),
           recordDebtor: recordDebtor,
+          fromDebtorPage: fromDebtorPage,
         ),
       ),
     );
@@ -70,6 +73,7 @@ class SetOweRecordAmountStepPage extends StatelessWidget {
             amount: amount,
           ),
           recordDebtor: recordDebtor,
+          fromDebtorPage: fromDebtorPage,
         ),
       ),
     );

@@ -13,11 +13,13 @@ import 'package:owe_me/src/presentation/widgets/set_owe_record/debtor_selection_
 class SetOweRecordDebtorSelectionPage extends StatelessWidget {
   final OweType oweRecordType;
   final OweRecordDraft? oweRecordDraftToEdit;
+  final bool fromDebtorPage;
 
   const SetOweRecordDebtorSelectionPage({
     super.key,
     required this.oweRecordType,
     required this.oweRecordDraftToEdit,
+    required this.fromDebtorPage,
   });
 
   void _handleNavigationOnDebtorSelected(BuildContext context, Debtor selectedDebtor) {
@@ -34,6 +36,7 @@ class SetOweRecordDebtorSelectionPage extends StatelessWidget {
         builder: (context) => SetOweRecordAmountStepContainer(
           recordDebtor: selectedDebtor,
           oweRecordType: oweRecordType,
+          fromDebtorPage: fromDebtorPage,
         ),
       ),
     );
@@ -46,6 +49,7 @@ class SetOweRecordDebtorSelectionPage extends StatelessWidget {
         builder: (context) => SetOweRecordInfoReviewContainer(
           oweRecordDraft: oweRecordDraftToEdit!,
           recordDebtor: selectedDebtor,
+          fromDebtorPage: fromDebtorPage,
         ),
       ),
     );

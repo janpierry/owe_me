@@ -12,11 +12,13 @@ import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart'
 class SetPaymentRecordInfoReviewCard extends StatelessWidget {
   final PaymentRecordDraft paymentRecordDraft;
   final Debtor recordDebtor;
+  final bool fromDebtorPage;
 
   const SetPaymentRecordInfoReviewCard({
     super.key,
     required this.paymentRecordDraft,
     required this.recordDebtor,
+    required this.fromDebtorPage,
   });
 
   //TODO check this
@@ -29,6 +31,7 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
       MaterialPageRoute(
         builder: (context) => SetPaymentRecordDebtorSelectionContainer(
           paymentRecordDraftToEdit: paymentRecordDraft,
+          fromDebtorPage: fromDebtorPage,
         ),
       ),
     );
@@ -40,6 +43,7 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
         builder: (context) => SetPaymentRecordPage(
           paymentRecordDraftToEdit: paymentRecordDraft,
           recordDebtor: recordDebtor,
+          fromDebtorPage: fromDebtorPage,
         ),
       ),
     );

@@ -13,7 +13,10 @@ class DebtorQuickActionSection extends StatelessWidget {
   void _navigateToSetPaymentRecordPage(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => SetPaymentRecordPage(recordDebtor: debtor),
+        builder: (context) => SetPaymentRecordPage(
+          recordDebtor: debtor,
+          fromDebtorPage: true,
+        ),
       ),
     );
   }
@@ -24,6 +27,7 @@ class DebtorQuickActionSection extends StatelessWidget {
         builder: (context) => SetOweRecordAmountStepContainer(
           recordDebtor: debtor,
           oweRecordType: OweType.credit,
+          fromDebtorPage: true,
         ),
       ),
     );
@@ -35,6 +39,7 @@ class DebtorQuickActionSection extends StatelessWidget {
         builder: (context) => SetOweRecordAmountStepContainer(
           recordDebtor: debtor,
           oweRecordType: OweType.debt,
+          fromDebtorPage: true,
         ),
       ),
     );

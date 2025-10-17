@@ -11,12 +11,14 @@ class SetOweRecordAmountStepContainer extends StatelessWidget {
   final Debtor recordDebtor;
   final OweType oweRecordType;
   final OweRecordDraft? oweRecordDraftToEdit;
+  final bool fromDebtorPage;
 
   const SetOweRecordAmountStepContainer({
     super.key,
     required this.recordDebtor,
     required this.oweRecordType,
     this.oweRecordDraftToEdit,
+    required this.fromDebtorPage,
   });
 
   @override
@@ -32,6 +34,7 @@ class SetOweRecordAmountStepContainer extends StatelessWidget {
         recordDebtor: recordDebtor,
         oweRecordType: oweRecordType,
         oweRecordDraftToEdit: oweRecordDraftToEdit,
+        fromDebtorPage: fromDebtorPage,
       ),
     );
   }

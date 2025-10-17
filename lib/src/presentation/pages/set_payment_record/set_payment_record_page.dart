@@ -14,11 +14,13 @@ import 'package:owe_me/src/presentation/widgets/shared/app_dropdown.dart';
 class SetPaymentRecordPage extends StatefulWidget {
   final PaymentRecordDraft? paymentRecordDraftToEdit;
   final Debtor recordDebtor;
+  final bool fromDebtorPage;
 
   const SetPaymentRecordPage({
     super.key,
     this.paymentRecordDraftToEdit,
     required this.recordDebtor,
+    required this.fromDebtorPage,
   });
 
   @override
@@ -32,7 +34,10 @@ class _SetPaymentRecordPageState extends State<SetPaymentRecordPage> {
   void initState() {
     super.initState();
     _paymentRecordDraft = widget.paymentRecordDraftToEdit ??
-        PaymentRecordDraft().copyWith(date: DateTime.now());
+        PaymentRecordDraft().copyWith(
+          date: DateTime.now(),
+          paymentMethod: PaymentMethod.cash,
+        );
   }
 
   void _onAmountChanged(Money amount) {
@@ -113,6 +118,7 @@ class _SetPaymentRecordPageState extends State<SetPaymentRecordPage> {
             child: SetPaymentRecordPrimaryButton(
               paymentRecordDraft: _paymentRecordDraft,
               recordDebtor: widget.recordDebtor,
+              fromDebtorPage: widget.fromDebtorPage,
             ),
           ),
         ],

@@ -7,10 +7,12 @@ import 'package:owe_me/src/presentation/pages/set_payment_record/set_payment_rec
 
 class SetPaymentRecordDebtorSelectionContainer extends StatelessWidget {
   final PaymentRecordDraft? paymentRecordDraftToEdit;
+  final bool fromDebtorPage;
 
   const SetPaymentRecordDebtorSelectionContainer({
     super.key,
     this.paymentRecordDraftToEdit,
+    required this.fromDebtorPage,
   });
 
   @override
@@ -22,6 +24,7 @@ class SetPaymentRecordDebtorSelectionContainer extends StatelessWidget {
         ),
       child: SetPaymentRecordDebtorSelectionPage(
         paymentRecordDraftToEdit: paymentRecordDraftToEdit,
+        fromDebtorPage: fromDebtorPage,
       ),
     );
   }

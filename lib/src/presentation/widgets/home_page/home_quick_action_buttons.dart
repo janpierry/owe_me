@@ -10,7 +10,9 @@ class HomeQuickActionButtons extends StatelessWidget {
   void _navigateToSetPaymentRecordPage(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const SetPaymentRecordDebtorSelectionContainer(),
+        builder: (context) => const SetPaymentRecordDebtorSelectionContainer(
+          fromDebtorPage: false,
+        ),
       ),
     );
   }
@@ -18,8 +20,10 @@ class HomeQuickActionButtons extends StatelessWidget {
   void _navigateToSetRecordDebtorSelectionPageAsCredit(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) =>
-            const SetOweRecordDebtorSelectionContainer(oweRecordType: OweType.credit),
+        builder: (context) => const SetOweRecordDebtorSelectionContainer(
+          oweRecordType: OweType.credit,
+          fromDebtorPage: false,
+        ),
       ),
     );
   }
@@ -27,8 +31,10 @@ class HomeQuickActionButtons extends StatelessWidget {
   void _navigateToSetRecordDebtorSelectionPageAsDebt(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) =>
-            const SetOweRecordDebtorSelectionContainer(oweRecordType: OweType.debt),
+        builder: (context) => const SetOweRecordDebtorSelectionContainer(
+          oweRecordType: OweType.debt,
+          fromDebtorPage: false,
+        ),
       ),
     );
   }
