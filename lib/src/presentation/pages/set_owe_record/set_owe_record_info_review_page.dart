@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/core/presentation/extensions/owe_type_ui_extensions.dart';
 import 'package:owe_me/src/core/presentation/extensions/string_extensions.dart';
+import 'package:owe_me/src/presentation/containers/debtor_container.dart';
 import 'package:owe_me/src/presentation/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/presentation/blocs/set_owe_record/info_review/set_owe_record_info_review_bloc.dart';
@@ -14,11 +15,13 @@ import 'package:owe_me/src/presentation/widgets/set_owe_record/info_review_page/
 class SetOweRecordInfoReviewPage extends StatelessWidget {
   final OweRecordDraft oweRecordDraft;
   final Debtor recordDebtor;
+  final bool fromDebtorPage;
 
   const SetOweRecordInfoReviewPage({
     super.key,
     required this.oweRecordDraft,
     required this.recordDebtor,
+    required this.fromDebtorPage,
   });
 
   void _listen(
@@ -41,6 +44,13 @@ class SetOweRecordInfoReviewPage extends StatelessWidget {
         ),
         (route) => false,
       );
+      if (fromDebtorPage) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => DebtorContainer(debtor: recordDebtor),
+          ),
+        );
+      }
     } else if (state is SetOweRecordInfoReviewError) {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
@@ -77,6 +87,7 @@ class SetOweRecordInfoReviewPage extends StatelessWidget {
                 child: SetOweRecordInfoReviewCard(
                   oweRecordDraft: oweRecordDraft,
                   recordDebtor: recordDebtor,
+                  fromDebtorPage: fromDebtorPage,
                 ),
               ),
             ),

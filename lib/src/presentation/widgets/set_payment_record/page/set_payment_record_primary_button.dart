@@ -7,11 +7,13 @@ import 'package:owe_me/src/presentation/widgets/shared/app_elevated_button.dart'
 class SetPaymentRecordPrimaryButton extends StatelessWidget {
   final PaymentRecordDraft paymentRecordDraft;
   final Debtor recordDebtor;
+  final bool fromDebtorPage;
 
   const SetPaymentRecordPrimaryButton({
     super.key,
     required this.paymentRecordDraft,
     required this.recordDebtor,
+    required this.fromDebtorPage,
   });
 
   void _navigateToInfoReviewPage(BuildContext context) {
@@ -20,6 +22,7 @@ class SetPaymentRecordPrimaryButton extends StatelessWidget {
         builder: (context) => SetPaymentRecordInfoReviewContainer(
           paymentRecordDraft: paymentRecordDraft,
           recordDebtor: recordDebtor,
+          fromDebtorPage: fromDebtorPage,
         ),
       ),
     );

@@ -9,11 +9,13 @@ import 'package:owe_me/src/presentation/pages/set_owe_record/set_owe_record_debt
 class SetOweRecordDebtorSelectionContainer extends StatelessWidget {
   final OweType oweRecordType;
   final OweRecordDraft? oweRecordDraftToEdit;
+  final bool fromDebtorPage;
 
   const SetOweRecordDebtorSelectionContainer({
     super.key,
     required this.oweRecordType,
     this.oweRecordDraftToEdit,
+    required this.fromDebtorPage,
   });
 
   @override
@@ -26,6 +28,7 @@ class SetOweRecordDebtorSelectionContainer extends StatelessWidget {
       child: SetOweRecordDebtorSelectionPage(
         oweRecordType: oweRecordType,
         oweRecordDraftToEdit: oweRecordDraftToEdit,
+        fromDebtorPage: fromDebtorPage,
       ),
     );
   }

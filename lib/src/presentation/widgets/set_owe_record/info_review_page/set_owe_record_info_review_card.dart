@@ -14,11 +14,13 @@ import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart'
 class SetOweRecordInfoReviewCard extends StatelessWidget {
   final OweRecordDraft oweRecordDraft;
   final Debtor recordDebtor;
+  final bool fromDebtorPage;
 
   const SetOweRecordInfoReviewCard({
     super.key,
     required this.oweRecordDraft,
     required this.recordDebtor,
+    required this.fromDebtorPage,
   });
 
   //TODO check this
@@ -32,6 +34,7 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
         builder: (context) => SetOweRecordDebtorSelectionContainer(
           oweRecordDraftToEdit: oweRecordDraft,
           oweRecordType: oweRecordDraft.oweType,
+          fromDebtorPage: fromDebtorPage,
         ),
       ),
     );
@@ -44,6 +47,7 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
           oweRecordDraftToEdit: oweRecordDraft,
           recordDebtor: recordDebtor,
           oweRecordType: oweRecordDraft.oweType,
+          fromDebtorPage: fromDebtorPage,
         ),
       ),
     );
@@ -55,6 +59,7 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
         builder: (context) => SetOweRecordDescriptionStepContainer(
           oweRecordDraft: oweRecordDraft,
           recordDebtor: recordDebtor,
+          fromDebtorPage: fromDebtorPage,
         ),
       ),
     );
@@ -66,6 +71,7 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
         builder: (context) => SetOweRecordDateStepPage(
           oweRecordDraft: oweRecordDraft,
           recordDebtor: recordDebtor,
+          fromDebtorPage: fromDebtorPage,
         ),
       ),
     );

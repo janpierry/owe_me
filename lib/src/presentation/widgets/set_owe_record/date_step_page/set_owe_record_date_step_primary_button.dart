@@ -8,12 +8,14 @@ class SetOweRecordDateStepPrimaryButton extends StatelessWidget {
   final OweRecordDraft oweRecordDraft;
   final Debtor recordDebtor;
   final bool isEdition;
+  final bool fromDebtorPage;
 
   const SetOweRecordDateStepPrimaryButton({
     super.key,
     required this.oweRecordDraft,
     required this.recordDebtor,
     required this.isEdition,
+    required this.fromDebtorPage,
   });
 
   void _finishEdition(BuildContext context) {
@@ -32,6 +34,7 @@ class SetOweRecordDateStepPrimaryButton extends StatelessWidget {
         builder: (context) => SetOweRecordInfoReviewContainer(
           oweRecordDraft: oweRecordDraft,
           recordDebtor: recordDebtor,
+          fromDebtorPage: fromDebtorPage,
         ),
       ),
     );

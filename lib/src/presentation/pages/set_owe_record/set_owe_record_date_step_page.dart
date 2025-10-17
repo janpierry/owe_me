@@ -10,11 +10,13 @@ import 'package:owe_me/src/presentation/widgets/shared/app_date_picker.dart';
 class SetOweRecordDateStepPage extends StatefulWidget {
   final OweRecordDraft oweRecordDraft;
   final Debtor recordDebtor;
+  final bool fromDebtorPage;
 
   const SetOweRecordDateStepPage({
     super.key,
     required this.oweRecordDraft,
     required this.recordDebtor,
+    required this.fromDebtorPage,
   });
 
   @override
@@ -80,6 +82,7 @@ class _SetOweRecordDateStepPageState extends State<SetOweRecordDateStepPage> {
               oweRecordDraft: _updatedOweRecordDraft,
               recordDebtor: widget.recordDebtor,
               isEdition: _isEdition,
+              fromDebtorPage: widget.fromDebtorPage,
             ),
           ),
         ],

@@ -9,11 +9,13 @@ import 'package:owe_me/src/presentation/pages/set_payment_record/set_payment_rec
 class SetPaymentRecordInfoReviewContainer extends StatelessWidget {
   final Debtor recordDebtor;
   final PaymentRecordDraft paymentRecordDraft;
+  final bool fromDebtorPage;
 
   const SetPaymentRecordInfoReviewContainer({
     super.key,
     required this.recordDebtor,
     required this.paymentRecordDraft,
+    required this.fromDebtorPage,
   });
 
   @override
@@ -29,6 +31,7 @@ class SetPaymentRecordInfoReviewContainer extends StatelessWidget {
       child: SetPaymentRecordInfoReviewPage(
         recordDebtor: recordDebtor,
         paymentRecordDraft: paymentRecordDraft,
+        fromDebtorPage: fromDebtorPage,
       ),
     );
   }

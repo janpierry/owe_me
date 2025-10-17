@@ -8,8 +8,11 @@ import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart'
 import 'package:owe_me/src/presentation/widgets/set_owe_record/description_step_page/set_owe_record_description_step_body.dart';
 
 class SetOweRecordDescriptionStepPage extends StatelessWidget {
+  final bool fromDebtorPage;
+
   const SetOweRecordDescriptionStepPage({
     super.key,
+    required this.fromDebtorPage,
   });
 
   void _listen(BuildContext context, SetOweRecordDescriptionStepState state) {
@@ -40,6 +43,7 @@ class SetOweRecordDescriptionStepPage extends StatelessWidget {
         builder: (context) => SetOweRecordInfoReviewContainer(
           oweRecordDraft: state.oweRecordDraft,
           recordDebtor: state.recordDebtor,
+          fromDebtorPage: fromDebtorPage,
         ),
       ),
     );
@@ -59,6 +63,7 @@ class SetOweRecordDescriptionStepPage extends StatelessWidget {
         builder: (context) => SetOweRecordDateStepPage(
           oweRecordDraft: state.oweRecordDraft,
           recordDebtor: state.recordDebtor,
+          fromDebtorPage: fromDebtorPage,
         ),
       ),
     );
