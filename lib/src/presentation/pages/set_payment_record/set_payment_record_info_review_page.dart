@@ -27,7 +27,6 @@ class SetPaymentRecordInfoReviewPage extends StatelessWidget {
     SetPaymentRecordInfoReviewState state,
   ) {
     if (state is SetPaymentRecordInfoReviewRecordSetFinished) {
-      //TODO should go back to debtor page instead of home in some cases
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(
