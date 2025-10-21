@@ -13,6 +13,13 @@ final class SetPaymentRecordInfoReviewSettingRecord
     extends SetPaymentRecordInfoReviewState {}
 
 final class SetPaymentRecordInfoReviewRecordSetFinished
-    extends SetPaymentRecordInfoReviewState {}
+    extends SetPaymentRecordInfoReviewState {
+  final Debtor updatedDebtor;
+
+  const SetPaymentRecordInfoReviewRecordSetFinished({required this.updatedDebtor});
+
+  @override
+  List<Object> get props => [updatedDebtor];
+}
 
 final class SetPaymentRecordInfoReviewError extends SetPaymentRecordInfoReviewState {}

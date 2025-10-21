@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/presentation/blocs/debtor/debtor_bloc.dart';
+import 'package:owe_me/src/presentation/containers/debtor_container.dart';
 import 'package:owe_me/src/presentation/containers/home_container.dart';
 import 'package:owe_me/src/presentation/widgets/debtor_page/debtor_body.dart';
 
 class DebtorPage extends StatelessWidget {
-  const DebtorPage({super.key});
+  final Debtor debtor;
+
+  const DebtorPage({super.key, required this.debtor});
 
   void _listen(BuildContext context, DebtorState state) {
     if (state is DebtorRemoveSuccess) {
@@ -13,8 +17,17 @@ class DebtorPage extends StatelessWidget {
       _navigateToHomePage(context);
     } else if (state is DebtorEditSuccess) {
       _showDebtorEditedSnackbar(context);
+    } else if (state is DebtorRemoveMonetaryRecordSuccess) {
+      _refreshHomeAndDebtorPages(context, state.updatedDebtor);
+      _showDebtorMonetaryRecordRemovedSnackbar(context);
     } else if (state is DebtorMonetaryRecordHistoryError) {
-      _showMonetaryRecordHistoryErrorSnackbar(context, state.message);
+      _showErrorSnackbar(context, state.message);
+    } else if (state is DebtorEditError) {
+      _showErrorSnackbar(context, state.message);
+    } else if (state is DebtorRemoveError) {
+      _showErrorSnackbar(context, state.message);
+    } else if (state is DebtorRemoveMonetaryRecordError) {
+      _showErrorSnackbar(context, state.message);
     }
   }
 
@@ -45,7 +58,25 @@ class DebtorPage extends StatelessWidget {
       ..showSnackBar(snackBar);
   }
 
-  void _showMonetaryRecordHistoryErrorSnackbar(BuildContext context, String message) {
+  void _refreshHomeAndDebtorPages(BuildContext context, Debtor updatedDebtor) {
+    _navigateToHomePage(context);
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DebtorContainer(debtor: updatedDebtor),
+      ),
+    );
+  }
+
+  void _showDebtorMonetaryRecordRemovedSnackbar(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text('Registro removido com sucesso'),
+    );
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
+  }
+
+  void _showErrorSnackbar(BuildContext context, String message) {
     final snackBar = SnackBar(
       //TODO adapt this
       content: Text('Erro: $message'),

@@ -15,6 +15,7 @@ class DebtorMonetaryRecordHistoryBuilder extends StatelessWidget {
         if (state is DebtorMonetaryRecordHistoryLoaded) {
           return DebtorMonetaryRecordHistoryList(
             monetaryRecords: state.monetaryRecordHistory,
+            debtor: state.debtor,
           );
         }
         if (state is DebtorMonetaryRecordHistoryEmpty) {

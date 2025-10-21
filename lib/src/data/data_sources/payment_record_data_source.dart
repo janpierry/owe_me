@@ -1,5 +1,5 @@
 import 'package:owe_me/src/data/data_sources/app_data_base.dart';
-import 'package:owe_me/src/data/models/payment_record_model.dart';
+import 'package:owe_me/src/data/models/monetary_record_model.dart';
 
 abstract class PaymentRecordDataSource {
   Future<List<PaymentRecordModel>> queryPaymentRecordsByDebtorId(int debtorId);

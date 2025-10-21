@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
+import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/domain/entities/money.dart';
 import 'package:owe_me/src/domain/enums/payment_method.dart';
-import 'package:owe_me/src/presentation/drafts/payment_record_draft.dart';
+import 'package:owe_me/src/presentation/models/drafts/payment_record_draft.dart';
 import 'package:owe_me/src/core/presentation/extensions/payment_method_ui_extensions.dart';
 import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
 import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
@@ -12,13 +13,15 @@ import 'package:owe_me/src/presentation/widgets/shared/app_date_picker.dart';
 import 'package:owe_me/src/presentation/widgets/shared/app_dropdown.dart';
 
 class SetPaymentRecordPage extends StatefulWidget {
-  final PaymentRecordDraft? paymentRecordDraftToEdit;
+  final PaymentRecord? paymentRecordToEdit;
+  final PaymentRecordDraft? paymentRecordDraftToReview;
   final Debtor recordDebtor;
   final bool fromDebtorPage;
 
   const SetPaymentRecordPage({
     super.key,
-    this.paymentRecordDraftToEdit,
+    this.paymentRecordToEdit,
+    this.paymentRecordDraftToReview,
     required this.recordDebtor,
     required this.fromDebtorPage,
   });
@@ -33,10 +36,11 @@ class _SetPaymentRecordPageState extends State<SetPaymentRecordPage> {
   @override
   void initState() {
     super.initState();
-    _paymentRecordDraft = widget.paymentRecordDraftToEdit ??
-        PaymentRecordDraft().copyWith(
-          date: DateTime.now(),
-          paymentMethod: PaymentMethod.cash,
+    _paymentRecordDraft = widget.paymentRecordDraftToReview ??
+        PaymentRecordDraft(
+          amount: widget.paymentRecordToEdit?.amount ?? Money.zero(),
+          paymentMethod: widget.paymentRecordToEdit?.paymentMethod ?? PaymentMethod.cash,
+          date: widget.paymentRecordToEdit?.date ?? DateTime.now(),
         );
   }
 
@@ -58,11 +62,17 @@ class _SetPaymentRecordPageState extends State<SetPaymentRecordPage> {
     });
   }
 
+  bool get _isReviewing => widget.paymentRecordDraftToReview != null;
+
+  bool get _isEditing => widget.paymentRecordToEdit != null;
+
+  String get _pageTitle => _isEditing ? 'Editar Pagamento' : 'Novo Pagamento';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Novo Pagamento', style: AppTextStyles.headline1),
+        title: Text(_pageTitle, style: AppTextStyles.headline1),
         backgroundColor: AppColors.surfaceWhite,
         centerTitle: true,
         elevation: 1,
@@ -118,6 +128,8 @@ class _SetPaymentRecordPageState extends State<SetPaymentRecordPage> {
             child: SetPaymentRecordPrimaryButton(
               paymentRecordDraft: _paymentRecordDraft,
               recordDebtor: widget.recordDebtor,
+              paymentRecordToEdit: widget.paymentRecordToEdit,
+              isReviewing: _isReviewing,
               fromDebtorPage: widget.fromDebtorPage,
             ),
           ),

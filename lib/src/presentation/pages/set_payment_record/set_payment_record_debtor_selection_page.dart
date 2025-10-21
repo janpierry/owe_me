@@ -3,24 +3,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/presentation/blocs/debtor_selection/debtor_selection_bloc.dart';
 import 'package:owe_me/src/presentation/containers/set_payment_record/set_payment_record_info_review_container.dart';
-import 'package:owe_me/src/presentation/drafts/payment_record_draft.dart';
+import 'package:owe_me/src/presentation/models/drafts/payment_record_draft.dart';
 import 'package:owe_me/src/presentation/pages/set_payment_record/set_payment_record_page.dart';
 import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
 import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
 import 'package:owe_me/src/presentation/widgets/set_payment_record/debtor_selection_page/set_payment_record_debtor_selection_body.dart';
 
 class SetPaymentRecordDebtorSelectionPage extends StatelessWidget {
-  final PaymentRecordDraft? paymentRecordDraftToEdit;
+  final PaymentRecordDraft? paymentRecordDraftToReview;
   final bool fromDebtorPage;
 
   const SetPaymentRecordDebtorSelectionPage({
     super.key,
-    this.paymentRecordDraftToEdit,
+    this.paymentRecordDraftToReview,
     required this.fromDebtorPage,
   });
 
   void _handleNavigationOnDebtorSelected(BuildContext context, Debtor selectedDebtor) {
-    if (_isEdition) {
+    if (_isReviewing) {
       _navigateToInfoReview(context, selectedDebtor);
     } else {
       _navigateToNextStep(context, selectedDebtor);
@@ -32,8 +32,9 @@ class SetPaymentRecordDebtorSelectionPage extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SetPaymentRecordInfoReviewContainer(
-          paymentRecordDraft: paymentRecordDraftToEdit!,
+          paymentRecordDraft: paymentRecordDraftToReview!,
           recordDebtor: selectedDebtor,
+          paymentRecordToEdit: null,
           fromDebtorPage: fromDebtorPage,
         ),
       ),
@@ -56,7 +57,7 @@ class SetPaymentRecordDebtorSelectionPage extends StatelessWidget {
     );
   }
 
-  bool get _isEdition => paymentRecordDraftToEdit != null;
+  bool get _isReviewing => paymentRecordDraftToReview != null;
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,5 @@
-import 'package:owe_me/src/presentation/drafts/owe_record_draft.dart';
-import 'package:owe_me/src/domain/entities/owe_record.dart';
+import 'package:owe_me/src/domain/entities/monetary_record.dart';
+import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 
 class OweRecordMapper {
   const OweRecordMapper._();

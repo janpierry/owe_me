@@ -1,7 +1,6 @@
 import 'package:owe_me/src/data/models/debtor_model.dart';
 import 'package:owe_me/src/data/models/favorite_description_model.dart';
-import 'package:owe_me/src/data/models/owe_record_model.dart';
-import 'package:owe_me/src/data/models/payment_record_model.dart';
+import 'package:owe_me/src/data/models/monetary_record_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 

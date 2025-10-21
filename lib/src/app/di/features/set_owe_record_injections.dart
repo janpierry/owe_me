@@ -18,7 +18,10 @@ void initSetOweRecordInjections() {
     ),
   );
   inj.registerFactory<SetOweRecordInfoReviewBloc>(
-    () => SetOweRecordInfoReviewBloc(addMonetaryRecord: inj()),
+    () => SetOweRecordInfoReviewBloc(
+      addMonetaryRecordAndUpdateDebtor: inj(),
+      editMonetaryRecordAndUpdateDebtor: inj(),
+    ),
   );
 
   //Use Cases

@@ -1,6 +1,4 @@
-import 'package:owe_me/src/domain/entities/monetary_record.dart';
-import 'package:owe_me/src/domain/entities/money.dart';
-import 'package:owe_me/src/domain/enums/payment_method.dart';
+part of 'monetary_record.dart';
 
 class PaymentRecord extends MonetaryRecord {
   final PaymentMethod paymentMethod;
@@ -15,6 +13,25 @@ class PaymentRecord extends MonetaryRecord {
   @override
   Money applyAmountToTotalDebt(Money totalDebt) {
     return totalDebt - amount;
+  }
+
+  @override
+  Money revertAmountFromTotalDebt(Money totalDebt) {
+    return totalDebt + amount;
+  }
+
+  PaymentRecord copyWith({
+    int? id,
+    Money? amount,
+    DateTime? date,
+    PaymentMethod? paymentMethod,
+  }) {
+    return PaymentRecord(
+      id: id ?? this.id,
+      amount: amount ?? this.amount,
+      date: date ?? this.date,
+      paymentMethod: paymentMethod ?? this.paymentMethod,
+    );
   }
 
   @override

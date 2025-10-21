@@ -28,3 +28,12 @@ class DebtorEditRequested extends DebtorEvent {
 }
 
 class DebtorRemoveRequested extends DebtorEvent {}
+
+class DebtorRemoveMonetaryRecordRequested extends DebtorEvent {
+  final MonetaryRecord monetaryRecord;
+
+  const DebtorRemoveMonetaryRecordRequested({required this.monetaryRecord});
+
+  @override
+  List<Object?> get props => [monetaryRecord];
+}

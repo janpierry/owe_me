@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/domain/entities/money.dart';
-import 'package:owe_me/src/domain/entities/payment_record.dart';
 import 'package:owe_me/src/domain/enums/payment_method.dart';
 
 void main() {

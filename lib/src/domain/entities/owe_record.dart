@@ -1,6 +1,4 @@
-import 'package:owe_me/src/domain/entities/monetary_record.dart';
-import 'package:owe_me/src/domain/entities/money.dart';
-import 'package:owe_me/src/domain/enums/owe_type.dart';
+part of 'monetary_record.dart';
 
 class OweRecord extends MonetaryRecord {
   final String? description;
@@ -20,6 +18,31 @@ class OweRecord extends MonetaryRecord {
       OweType.debt => totalDebt + amount,
       OweType.credit => totalDebt - amount,
     };
+  }
+
+  @override
+  Money revertAmountFromTotalDebt(Money totalDebt) {
+    return switch (oweType) {
+      OweType.debt => totalDebt - amount,
+      OweType.credit => totalDebt + amount,
+    };
+  }
+
+  MonetaryRecord copyWith({
+    int? id,
+    Money? amount,
+    String? description,
+    bool eraseDescription = false,
+    DateTime? date,
+    OweType? oweType,
+  }) {
+    return OweRecord(
+      id: id ?? this.id,
+      amount: amount ?? this.amount,
+      description: eraseDescription ? null : (description ?? this.description),
+      date: date ?? this.date,
+      oweType: oweType ?? this.oweType,
+    );
   }
 
   @override

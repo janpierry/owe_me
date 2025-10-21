@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:owe_me/src/data/models/payment_record_model.dart';
+import 'package:owe_me/src/data/models/monetary_record_model.dart';
 
 void main() {
   const id = 1;

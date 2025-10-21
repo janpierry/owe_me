@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:owe_me/src/core/presentation/formatters/money_formatter.dart';
 import 'package:owe_me/src/core/presentation/utils/app_date_utils.dart';
-import 'package:owe_me/src/presentation/drafts/owe_record_draft.dart';
+import 'package:owe_me/src/domain/entities/monetary_record.dart';
+import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_amount_step_container.dart';
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_debtor_selection_container.dart';
@@ -14,12 +15,14 @@ import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart'
 class SetOweRecordInfoReviewCard extends StatelessWidget {
   final OweRecordDraft oweRecordDraft;
   final Debtor recordDebtor;
+  final OweRecord? oweRecordToEdit;
   final bool fromDebtorPage;
 
   const SetOweRecordInfoReviewCard({
     super.key,
     required this.oweRecordDraft,
     required this.recordDebtor,
+    this.oweRecordToEdit,
     required this.fromDebtorPage,
   });
 
@@ -32,7 +35,7 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SetOweRecordDebtorSelectionContainer(
-          oweRecordDraftToEdit: oweRecordDraft,
+          oweRecordDraftToReview: oweRecordDraft,
           oweRecordType: oweRecordDraft.oweType,
           fromDebtorPage: fromDebtorPage,
         ),
@@ -44,9 +47,10 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SetOweRecordAmountStepContainer(
-          oweRecordDraftToEdit: oweRecordDraft,
+          oweRecordDraftToReview: oweRecordDraft,
           recordDebtor: recordDebtor,
           oweRecordType: oweRecordDraft.oweType,
+          oweRecordToEdit: oweRecordToEdit,
           fromDebtorPage: fromDebtorPage,
         ),
       ),
@@ -59,6 +63,8 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
         builder: (context) => SetOweRecordDescriptionStepContainer(
           oweRecordDraft: oweRecordDraft,
           recordDebtor: recordDebtor,
+          oweRecordToEdit: oweRecordToEdit,
+          isReviewing: true,
           fromDebtorPage: fromDebtorPage,
         ),
       ),
@@ -71,6 +77,8 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
         builder: (context) => SetOweRecordDateStepPage(
           oweRecordDraft: oweRecordDraft,
           recordDebtor: recordDebtor,
+          oweRecordToEdit: oweRecordToEdit,
+          isReviewing: true,
           fromDebtorPage: fromDebtorPage,
         ),
       ),
@@ -101,7 +109,7 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: ' tem um novo ',
+                          text: ' tem este ',
                           style: AppTextStyles.subtitle,
                         ),
                         TextSpan(
@@ -117,10 +125,11 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                     style: AppTextStyles.subtitle,
                   ),
                 ),
-                IconButton(
-                  onPressed: () => _navigateToEditDebtor(context),
-                  icon: const Icon(Icons.edit),
-                ),
+                if (oweRecordToEdit == null)
+                  IconButton(
+                    onPressed: () => _navigateToEditDebtor(context),
+                    icon: const Icon(Icons.edit),
+                  ),
               ],
             ),
             const SizedBox(height: 16),

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
-import 'package:owe_me/src/domain/entities/owe_record.dart';
-import 'package:owe_me/src/domain/entities/payment_record.dart';
-import 'package:owe_me/src/presentation/widgets/debtor_page/debtor_monetary_record_history/debtor_owe_record_list_item.dart';
-import 'package:owe_me/src/presentation/widgets/debtor_page/debtor_monetary_record_history/debtor_payment_record_list_item.dart';
+import 'package:owe_me/src/presentation/widgets/debtor_page/debtor_monetary_record_history/debtor_monetary_record_list_item/debtor_monetary_record_list_item.dart';
 
 class DebtorMonetaryRecordHistoryList extends StatelessWidget {
   final List<MonetaryRecord> monetaryRecords;
+  final Debtor debtor;
 
   const DebtorMonetaryRecordHistoryList({
     super.key,
     required this.monetaryRecords,
+    required this.debtor,
   });
 
   @override
@@ -20,14 +20,10 @@ class DebtorMonetaryRecordHistoryList extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
         final currentRecord = monetaryRecords[index];
-        if (currentRecord is OweRecord) {
-          return DebtorOweRecordListItem(
-            oweRecord: currentRecord,
-          );
-        } else if (currentRecord is PaymentRecord) {
-          return DebtorPaymentRecordListItem(paymentRecord: currentRecord);
-        }
-        return const SizedBox.shrink(); // Fallback for unexpected types
+        return DebtorMonetaryRecordListItem(
+          monetaryRecord: currentRecord,
+          recordDebtor: debtor,
+        );
       },
       separatorBuilder: (context, index) => SizedBox(height: 12),
       itemCount: monetaryRecords.length,

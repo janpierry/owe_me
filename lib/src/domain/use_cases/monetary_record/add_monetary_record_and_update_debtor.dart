@@ -4,23 +4,27 @@ import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/domain/repositories/monetary_record_repository.dart';
 
-class AddMonetaryRecord {
+class AddMonetaryRecordAndUpdateDebtor {
   final MonetaryRecordRepository _repository;
 
-  AddMonetaryRecord({
+  AddMonetaryRecordAndUpdateDebtor({
     required MonetaryRecordRepository repository,
   }) : _repository = repository;
 
-  Future<Either<Failure, void>> call({
+  Future<Either<Failure, Debtor>> call({
     required MonetaryRecord monetaryRecord,
     required Debtor recordDebtor,
   }) async {
-    final debtorWithUpdatedDebt =
-        recordDebtor.updateTotalDebtWithMonetaryRecord(monetaryRecord);
+    final debtorWithUpdatedDebt = recordDebtor.withMonetaryRecordAdded(monetaryRecord);
 
-    return await _repository.addMonetaryRecordAndUpdateDebtorTotalDebt(
+    final result = await _repository.addMonetaryRecordAndUpdateDebtor(
       monetaryRecord,
       debtorWithUpdatedDebt,
+    );
+
+    return result.fold(
+      (failure) => Left(failure),
+      (_) => Right(debtorWithUpdatedDebt),
     );
   }
 }

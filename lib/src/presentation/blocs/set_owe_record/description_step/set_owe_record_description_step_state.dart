@@ -21,19 +21,16 @@ final class SetOweRecordDescriptionStepPageLoaded
     extends SetOweRecordDescriptionStepPageBuildState {
   final String initialDescription;
   final List<FavoriteDescription> initialFavoriteDescriptions;
-  final OweType oweRecordType;
 
   const SetOweRecordDescriptionStepPageLoaded({
     required this.initialDescription,
     required this.initialFavoriteDescriptions,
-    required this.oweRecordType,
   });
 
   @override
   List<Object> get props => [
         initialDescription,
         initialFavoriteDescriptions,
-        oweRecordType,
       ];
 }
 
@@ -90,14 +87,12 @@ class SetOweRecordDescriptionStepNavigatingToNextPage
     extends SetOweRecordDescriptionStepState {
   final OweRecordDraft oweRecordDraft;
   final Debtor recordDebtor;
-  final bool isEdition;
 
   const SetOweRecordDescriptionStepNavigatingToNextPage({
     required this.oweRecordDraft,
     required this.recordDebtor,
-    required this.isEdition,
   });
 
   @override
-  List<Object> get props => [oweRecordDraft, recordDebtor, isEdition];
+  List<Object> get props => [oweRecordDraft, recordDebtor];
 }

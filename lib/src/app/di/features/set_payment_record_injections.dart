@@ -6,7 +6,10 @@ void initSetPaymentRecordInjections() {
 
   //Blocs
   inj.registerFactory<SetPaymentRecordInfoReviewBloc>(
-    () => SetPaymentRecordInfoReviewBloc(addMonetaryRecord: inj()),
+    () => SetPaymentRecordInfoReviewBloc(
+      addMonetaryRecordAndUpdateDebtor: inj(),
+      editMonetaryRecordAndUpdateDebtor: inj(),
+    ),
   );
 
   //Use Cases

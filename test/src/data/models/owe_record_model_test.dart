@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:owe_me/src/data/models/owe_record_model.dart';
+import 'package:owe_me/src/data/models/monetary_record_model.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
 
 void main() {
