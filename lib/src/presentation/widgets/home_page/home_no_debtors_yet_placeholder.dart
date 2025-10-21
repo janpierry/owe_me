@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/presentation/blocs/home_debtors/home_debtors_bloc.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
-import 'package:owe_me/src/presentation/widgets/shared/app_elevated_button.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_elevated_button.dart';
 import 'package:owe_me/src/presentation/widgets/shared/set_debtor_dialog.dart';
 
 class HomeNoDebtorsYetPlaceholder extends StatelessWidget {
@@ -30,26 +30,26 @@ class HomeNoDebtorsYetPlaceholder extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.person, size: 96, color: AppColors.gray400),
+            Icon(Icons.person, size: 96, color: OweMeColors.gray400),
             const SizedBox(height: 16),
             Text(
               'Sem devedores por enquanto',
               textAlign: TextAlign.center,
-              style: AppTextStyles.headline2.copyWith(
+              style: OweMeTextStyles.headline2.copyWith(
                 fontWeight: FontWeight.w600,
-                color: AppColors.textGray,
+                color: OweMeColors.textGray,
               ),
             ),
             const SizedBox(height: 8),
             Text(
               'Comece adicionando um devedor para acompanhar os débitos, créditos e pagamentos que ele tem com você.',
               textAlign: TextAlign.center,
-              style: AppTextStyles.body.copyWith(
-                color: AppColors.gray600,
+              style: OweMeTextStyles.body.copyWith(
+                color: OweMeColors.gray600,
               ),
             ),
             const SizedBox(height: 24),
-            AppElevatedButton(
+            OweMeElevatedButton(
               label: 'Adicionar devedor',
               onPressed: () => _showSetDebtorDialog(context),
             ),

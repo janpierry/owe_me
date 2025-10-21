@@ -29,5 +29,5 @@ void initDebtorsInjections() {
 
   //Data Sources
   inj.registerLazySingleton<DebtorDataSource>(
-      () => DebtorDataSourceImpl(appDatabase: inj()));
+      () => DebtorDataSourceImpl(oweMeDatabase: inj()));
 }

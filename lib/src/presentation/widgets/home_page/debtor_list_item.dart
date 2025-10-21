@@ -5,9 +5,9 @@ import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:owe_me/src/presentation/containers/debtor_container.dart';
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_amount_step_container.dart';
 import 'package:owe_me/src/presentation/pages/set_payment_record/set_payment_record_page.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
-import 'package:owe_me/src/presentation/widgets/shared/app_spacer.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_spacer.dart';
 
 class DebtorListItem extends StatelessWidget {
   final Debtor debtor;
@@ -65,7 +65,7 @@ class DebtorListItem extends StatelessWidget {
     return Material(
       elevation: 1,
       borderRadius: BorderRadius.circular(12),
-      color: AppColors.surfaceWhite,
+      color: OweMeColors.surfaceWhite,
       child: InkWell(
         onTap: () => _navigateToDebtorPage(context),
         borderRadius: BorderRadius.circular(12),
@@ -79,35 +79,35 @@ class DebtorListItem extends StatelessWidget {
                 children: [
                   Text(
                     debtor.nickname,
-                    style: AppTextStyles.subtitle,
+                    style: OweMeTextStyles.subtitle,
                   ),
                   const SizedBox(width: 8),
                   Text(
                     MoneyFormatter.toStringCurrency(debtor.totalDebt),
-                    style: AppTextStyles.body,
+                    style: OweMeTextStyles.body,
                   ),
                 ],
               ),
-              const AppSpacer(minWidth: 8),
+              const OweMeSpacer(minWidth: 8),
               IconButton(
                 onPressed: () => _navigateToSetPaymentRecordPage(context),
                 icon: const Icon(
                   Icons.credit_card,
-                  color: AppColors.primaryBlue,
+                  color: OweMeColors.primaryBlue,
                 ),
               ),
               IconButton(
                 onPressed: () => _navigateToSetRecordAmountStepPageAsCredit(context),
                 icon: const Icon(
                   Icons.money_off_csred,
-                  color: AppColors.primaryBlue,
+                  color: OweMeColors.primaryBlue,
                 ),
               ),
               IconButton(
                 onPressed: () => _navigateToSetRecordAmountStepPageAsDebt(context),
                 icon: const Icon(
                   Icons.attach_money,
-                  color: AppColors.primaryBlue,
+                  color: OweMeColors.primaryBlue,
                 ),
               ),
             ],

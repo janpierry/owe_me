@@ -53,7 +53,7 @@ void initMonetaryRecordInjections() {
   //Data Sources
   inj.registerLazySingleton<MonetaryRecordDataSource>(
     () => MonetaryRecordDataSourceImpl(
-      appDatabase: inj(),
+      oweMeDatabase: inj(),
       oweRecordDataSource: inj(),
       paymentRecordDataSource: inj(),
     ),

@@ -3,10 +3,10 @@ import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/core/presentation/extensions/owe_type_ui_extensions.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/date_step_page/set_owe_record_date_step_primary_button.dart';
-import 'package:owe_me/src/presentation/widgets/shared/app_date_picker.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_date_picker.dart';
 
 class SetOweRecordDateStepPage extends StatefulWidget {
   final OweRecordDraft oweRecordDraft;
@@ -56,9 +56,9 @@ class _SetOweRecordDateStepPageState extends State<SetOweRecordDateStepPage> {
       appBar: AppBar(
         title: Text(
           'Informe a Data',
-          style: AppTextStyles.headline1,
+          style: OweMeTextStyles.headline1,
         ),
-        backgroundColor: AppColors.surfaceWhite,
+        backgroundColor: OweMeColors.surfaceWhite,
         centerTitle: true,
         elevation: 1,
       ),
@@ -70,9 +70,9 @@ class _SetOweRecordDateStepPageState extends State<SetOweRecordDateStepPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(_stepTitle, style: AppTextStyles.subtitle),
+                  Text(_stepTitle, style: OweMeTextStyles.subtitle),
                   const SizedBox(height: 8),
-                  AppDatePicker(
+                  OweMeDatePicker(
                     initialDate: widget.oweRecordDraft.date ?? DateTime.now(),
                     onDateChanged: _onDateChanged,
                   ),

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:owe_me/src/core/presentation/utils/money_utils.dart';
 import 'package:owe_me/src/domain/entities/money.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/core/presentation/text_input_formatters/currency_input_formatter.dart';
 
-class AppAmountTextFormField extends StatefulWidget {
+class OweMeAmountTextFormField extends StatefulWidget {
   final Money? initialAmount;
   final ValueChanged<Money>? onAmountChanged;
   final bool autoFocus;
 
-  const AppAmountTextFormField({
+  const OweMeAmountTextFormField({
     super.key,
     this.initialAmount,
     this.onAmountChanged,
@@ -18,10 +18,10 @@ class AppAmountTextFormField extends StatefulWidget {
   });
 
   @override
-  State<AppAmountTextFormField> createState() => _AppAmountTextFormFieldState();
+  State<OweMeAmountTextFormField> createState() => _OweMeAmountTextFormFieldState();
 }
 
-class _AppAmountTextFormFieldState extends State<AppAmountTextFormField> {
+class _OweMeAmountTextFormFieldState extends State<OweMeAmountTextFormField> {
   final _controller = TextEditingController();
   final _formatter = CurrencyInputFormatter();
 
@@ -48,23 +48,23 @@ class _AppAmountTextFormFieldState extends State<AppAmountTextFormField> {
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(12),
         filled: true,
-        fillColor: AppColors.surfaceWhite,
+        fillColor: OweMeColors.surfaceWhite,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(
-            color: AppColors.borderGray,
+            color: OweMeColors.borderGray,
             width: 1,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(
-            color: AppColors.primaryBlue,
+            color: OweMeColors.primaryBlue,
             width: 1,
           ),
         ),
       ),
-      style: AppTextStyles.body,
+      style: OweMeTextStyles.body,
       controller: _controller,
       inputFormatters: [_formatter],
       keyboardType: TextInputType.number,

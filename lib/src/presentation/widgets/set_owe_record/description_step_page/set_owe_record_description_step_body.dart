@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:owe_me/src/domain/entities/favorite_description.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:owe_me/src/core/presentation/extensions/owe_type_ui_extensions.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/description_step_page/set_owe_record_description_step_favorite_button.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/description_step_page/set_owe_record_description_step_favorite_descriptions_section.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/description_step_page/set_owe_record_description_step_primary_button.dart';
@@ -35,7 +35,7 @@ class SetOweRecordDescriptionStepBody extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(_stepTitle, style: AppTextStyles.subtitle),
+              Text(_stepTitle, style: OweMeTextStyles.subtitle),
               const SizedBox(height: 8),
               Row(
                 children: [

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:owe_me/src/core/presentation/formatters/money_formatter.dart';
-import 'package:owe_me/src/core/presentation/utils/app_date_utils.dart';
+import 'package:owe_me/src/core/presentation/utils/owe_me_date_utils.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
@@ -9,8 +9,8 @@ import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_description_step_container.dart';
 import 'package:owe_me/src/core/presentation/extensions/owe_type_ui_extensions.dart';
 import 'package:owe_me/src/presentation/pages/set_owe_record/set_owe_record_date_step_page.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 
 class SetOweRecordInfoReviewCard extends StatelessWidget {
   final OweRecordDraft oweRecordDraft;
@@ -88,7 +88,7 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: AppColors.surfaceWhite,
+      color: OweMeColors.surfaceWhite,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
@@ -104,25 +104,25 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                   child: Text.rich(
                     TextSpan(
                       text: recordDebtor.nickname,
-                      style: AppTextStyles.subtitle.copyWith(
-                        color: AppColors.primaryBlue,
+                      style: OweMeTextStyles.subtitle.copyWith(
+                        color: OweMeColors.primaryBlue,
                       ),
                       children: [
                         TextSpan(
                           text: ' tem este ',
-                          style: AppTextStyles.subtitle,
+                          style: OweMeTextStyles.subtitle,
                         ),
                         TextSpan(
                           text: oweRecordDraft.oweType.label,
-                          style: AppTextStyles.subtitle.copyWith(
-                            color: AppColors.primaryBlue,
+                          style: OweMeTextStyles.subtitle.copyWith(
+                            color: OweMeColors.primaryBlue,
                           ),
                         ),
-                        TextSpan(text: ' com você', style: AppTextStyles.subtitle),
+                        TextSpan(text: ' com você', style: OweMeTextStyles.subtitle),
                       ],
                     ),
                     overflow: TextOverflow.clip,
-                    style: AppTextStyles.subtitle,
+                    style: OweMeTextStyles.subtitle,
                   ),
                 ),
                 if (oweRecordToEdit == null)
@@ -142,14 +142,14 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                     overflow: TextOverflow.clip,
                     TextSpan(
                       text: 'Valor: ',
-                      style: AppTextStyles.subtitle,
+                      style: OweMeTextStyles.subtitle,
                       children: [
                         TextSpan(
                           text: MoneyFormatter.toStringCurrencyNullable(
                             oweRecordDraft.amount,
                           ),
-                          style: AppTextStyles.subtitle.copyWith(
-                            color: AppColors.primaryBlue,
+                          style: OweMeTextStyles.subtitle.copyWith(
+                            color: OweMeColors.primaryBlue,
                           ),
                         ),
                       ],
@@ -173,12 +173,12 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                     overflow: TextOverflow.clip,
                     TextSpan(
                       text: 'Descrição: ',
-                      style: AppTextStyles.subtitle,
+                      style: OweMeTextStyles.subtitle,
                       children: [
                         TextSpan(
                           text: oweRecordDraft.description ?? 'Não informada',
-                          style: AppTextStyles.subtitle.copyWith(
-                            color: AppColors.primaryBlue,
+                          style: OweMeTextStyles.subtitle.copyWith(
+                            color: OweMeColors.primaryBlue,
                           ),
                         ),
                       ],
@@ -199,14 +199,14 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                 Text.rich(
                   TextSpan(
                     text: 'Data: ',
-                    style: AppTextStyles.subtitle,
+                    style: OweMeTextStyles.subtitle,
                     children: [
                       TextSpan(
                         text: oweRecordDraft.date != null
-                            ? AppDateUtils.getFormattedDate(oweRecordDraft.date!)
+                            ? OweMeDateUtils.getFormattedDate(oweRecordDraft.date!)
                             : 'Não informada',
-                        style: AppTextStyles.subtitle.copyWith(
-                          color: AppColors.primaryBlue,
+                        style: OweMeTextStyles.subtitle.copyWith(
+                          color: OweMeColors.primaryBlue,
                         ),
                       ),
                     ],

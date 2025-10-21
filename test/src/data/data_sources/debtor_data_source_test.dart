@@ -1,24 +1,24 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:owe_me/src/data/data_sources/app_data_base.dart';
+import 'package:owe_me/src/data/data_sources/owe_me_data_base.dart';
 import 'package:owe_me/src/data/data_sources/debtor_data_source.dart';
 import 'package:owe_me/src/data/models/debtor_model.dart';
 import 'package:sqflite/sqflite.dart';
 
-class MockAppDatabase extends Mock implements AppDatabase {}
+class MockOweMeDatabase extends Mock implements OweMeDatabase {}
 
 class MockDatabase extends Mock implements Database {}
 
 void main() {
   late DebtorDataSourceImpl dataSource;
-  late MockAppDatabase mockAppDatabase;
+  late MockOweMeDatabase mockOweMeDatabase;
   late MockDatabase mockDatabase;
 
   setUp(() {
-    mockAppDatabase = MockAppDatabase();
+    mockOweMeDatabase = MockOweMeDatabase();
     mockDatabase = MockDatabase();
 
-    dataSource = DebtorDataSourceImpl(appDatabase: mockAppDatabase);
+    dataSource = DebtorDataSourceImpl(oweMeDatabase: mockOweMeDatabase);
     registerFallbackValue(<String, dynamic>{}); // for safety
   });
 
@@ -30,7 +30,7 @@ void main() {
         {'id': 2, 'nickname': 'Jane', 'total_debt_in_cents': 1000},
       ];
 
-      when(() => mockAppDatabase.database).thenAnswer((_) async => mockDatabase);
+      when(() => mockOweMeDatabase.database).thenAnswer((_) async => mockDatabase);
       when(() => mockDatabase.query(DebtorModel.table)).thenAnswer(
         (_) async => mockMapList,
       );
@@ -45,12 +45,12 @@ void main() {
       expect(
           result[1], const DebtorModel(id: 2, nickname: 'Jane', totalDebtInCents: 1000));
 
-      verify(() => mockAppDatabase.database).called(1);
+      verify(() => mockOweMeDatabase.database).called(1);
       verify(() => mockDatabase.query(DebtorModel.table)).called(1);
     });
 
     test('should return an empty list when no records are found', () async {
-      when(() => mockAppDatabase.database).thenAnswer((_) async => mockDatabase);
+      when(() => mockOweMeDatabase.database).thenAnswer((_) async => mockDatabase);
       when(() => mockDatabase.query(DebtorModel.table)).thenAnswer((_) async => []);
 
       final result = await dataSource.queryAllDebtors();
@@ -59,7 +59,7 @@ void main() {
     });
 
     test('should throw when database throws', () async {
-      when(() => mockAppDatabase.database).thenAnswer((_) async => mockDatabase);
+      when(() => mockOweMeDatabase.database).thenAnswer((_) async => mockDatabase);
       when(() => mockDatabase.query(DebtorModel.table)).thenThrow(Exception('DB error'));
 
       expect(() => dataSource.queryAllDebtors(), throwsException);

@@ -4,12 +4,12 @@ import 'package:owe_me/src/data/models/monetary_record_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-class AppDatabase {
-  AppDatabase._internal();
+class OweMeDatabase {
+  OweMeDatabase._internal();
 
-  static final AppDatabase _instance = AppDatabase._internal();
+  static final OweMeDatabase _instance = OweMeDatabase._internal();
 
-  factory AppDatabase() => _instance;
+  factory OweMeDatabase() => _instance;
 
   static Database? _db;
 

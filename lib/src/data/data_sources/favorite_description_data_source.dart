@@ -1,4 +1,4 @@
-import 'package:owe_me/src/data/data_sources/app_data_base.dart';
+import 'package:owe_me/src/data/data_sources/owe_me_data_base.dart';
 import 'package:owe_me/src/data/models/favorite_description_model.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:sqflite/sqflite.dart';
@@ -12,17 +12,17 @@ abstract class FavoriteDescriptionDataSource {
 }
 
 class FavoriteDescriptionDataSourceImpl implements FavoriteDescriptionDataSource {
-  final AppDatabase _appDatabase;
+  final OweMeDatabase _oweMeDatabase;
 
   FavoriteDescriptionDataSourceImpl({
-    required AppDatabase appDatabase,
-  }) : _appDatabase = appDatabase;
+    required OweMeDatabase oweMeDatabase,
+  }) : _oweMeDatabase = oweMeDatabase;
 
   @override
   Future<void> insertFavoriteDescription(
     FavoriteDescriptionModel favoriteDescription,
   ) async {
-    final db = await _appDatabase.database;
+    final db = await _oweMeDatabase.database;
     final Map<String, dynamic> descriptionMap = favoriteDescription.toMap();
     await db.insert(
       FavoriteDescriptionModel.table,
@@ -56,7 +56,7 @@ class FavoriteDescriptionDataSourceImpl implements FavoriteDescriptionDataSource
     int debtorId,
     OweType favoriteType,
   ) async {
-    final db = await _appDatabase.database;
+    final db = await _oweMeDatabase.database;
     final List<Map<String, dynamic>> maps = await db.query(
       FavoriteDescriptionModel.table,
       where: 'debtor_id = ? AND favorite_type = ?',

@@ -6,8 +6,8 @@ import 'package:owe_me/src/presentation/blocs/set_payment_record/info_review/set
 import 'package:owe_me/src/presentation/containers/debtor_container.dart';
 import 'package:owe_me/src/presentation/containers/home_container.dart';
 import 'package:owe_me/src/presentation/models/drafts/payment_record_draft.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/presentation/widgets/set_payment_record/info_review/set_payment_record_info_review_card.dart';
 import 'package:owe_me/src/presentation/widgets/set_payment_record/info_review/set_payment_record_info_review_finish_button.dart';
 
@@ -69,12 +69,12 @@ class SetPaymentRecordInfoReviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Confira as Informações', style: AppTextStyles.headline1),
-        backgroundColor: AppColors.surfaceWhite,
+        title: Text('Confira as Informações', style: OweMeTextStyles.headline1),
+        backgroundColor: OweMeColors.surfaceWhite,
         centerTitle: true,
         elevation: 1,
       ),
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: OweMeColors.backgroundLight,
       body: BlocListener<SetPaymentRecordInfoReviewBloc, SetPaymentRecordInfoReviewState>(
         listener: _listen,
         child: Column(

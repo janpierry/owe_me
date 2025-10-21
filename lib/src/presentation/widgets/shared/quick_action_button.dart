@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 
 class QuickActionButton extends StatelessWidget {
   final String label;
@@ -14,18 +14,18 @@ class QuickActionButton extends StatelessWidget {
     required this.onPressed,
   });
 
-  Color get _primaryColor => AppColors.primaryBlue;
+  Color get _primaryColor => OweMeColors.primaryBlue;
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: AppColors.primaryBlueLightest,
+      color: OweMeColors.primaryBlueLightest,
       borderRadius: BorderRadius.circular(24),
       child: InkWell(
         onTap: onPressed,
         borderRadius: BorderRadius.circular(24),
         highlightColor:
-            AppColors.primaryBlueLight, //TODO update widget to have fixed color
+            OweMeColors.primaryBlueLight, //TODO update widget to have fixed color
         child: Container(
           height: 80,
           width: 104,
@@ -46,7 +46,7 @@ class QuickActionButton extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   label,
-                  style: AppTextStyles.caption.copyWith(color: _primaryColor),
+                  style: OweMeTextStyles.caption.copyWith(color: _primaryColor),
                   textAlign: TextAlign.center,
                 ),
               ],

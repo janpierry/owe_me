@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/presentation/blocs/set_owe_record/description_step/set_owe_record_description_step_bloc.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 
 class SetOweRecordDescriptionTextFormField extends StatefulWidget {
   final String initialDescription;
@@ -55,28 +55,28 @@ class _SetOweRecordDescriptionTextFormFieldState
       child: TextFormField(
         decoration: InputDecoration(
           hintText: 'Descrição não informada',
-          hintStyle: AppTextStyles.body.copyWith(
-            color: AppColors.textGray,
+          hintStyle: OweMeTextStyles.body.copyWith(
+            color: OweMeColors.textGray,
           ),
           contentPadding: const EdgeInsets.all(12),
           filled: true,
-          fillColor: AppColors.surfaceWhite,
+          fillColor: OweMeColors.surfaceWhite,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: const BorderSide(
-              color: AppColors.borderGray,
+              color: OweMeColors.borderGray,
               width: 1,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: const BorderSide(
-              color: AppColors.primaryBlue,
+              color: OweMeColors.primaryBlue,
               width: 1,
             ),
           ),
         ),
-        style: AppTextStyles.body,
+        style: OweMeTextStyles.body,
         controller: _controller,
         autofocus: true,
         keyboardType: TextInputType.text,

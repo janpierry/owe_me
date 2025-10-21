@@ -3,7 +3,7 @@ import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/presentation/containers/set_payment_record/set_payment_record_info_review_container.dart';
 import 'package:owe_me/src/presentation/models/drafts/payment_record_draft.dart';
-import 'package:owe_me/src/presentation/widgets/shared/app_elevated_button.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_elevated_button.dart';
 
 class SetPaymentRecordPrimaryButton extends StatelessWidget {
   final PaymentRecordDraft paymentRecordDraft;
@@ -46,7 +46,7 @@ class SetPaymentRecordPrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppElevatedButton(
+    return OweMeElevatedButton(
       label: isReviewing ? 'Salvar alterações' : 'Continuar',
       onPressed: () =>
           isReviewing ? _finishInfoReview(context) : _navigateToInfoReviewPage(context),

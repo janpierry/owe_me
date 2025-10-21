@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 
-class AppElevatedButton extends StatelessWidget {
+class OweMeElevatedButton extends StatelessWidget {
   final String label;
   final Color? backgroundColor;
   final VoidCallback? onPressed;
 
-  const AppElevatedButton({
+  const OweMeElevatedButton({
     super.key,
     required this.label,
-    this.backgroundColor = AppColors.primaryBlue,
+    this.backgroundColor = OweMeColors.primaryBlue,
     this.onPressed,
   });
 
@@ -30,7 +30,7 @@ class AppElevatedButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           label,
-          style: AppTextStyles.subtitle.copyWith(color: AppColors.white),
+          style: OweMeTextStyles.subtitle.copyWith(color: OweMeColors.white),
         ),
       ),
     );

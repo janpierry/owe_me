@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/presentation/widgets/debtor_page/debtor_monetary_record_history/debtor_monetary_record_history_builder.dart';
 
 class DebtorMonetaryRecordHistorySection extends StatelessWidget {
@@ -12,7 +12,7 @@ class DebtorMonetaryRecordHistorySection extends StatelessWidget {
       children: [
         Text(
           'Histórico',
-          style: AppTextStyles.headline2,
+          style: OweMeTextStyles.headline2,
         ),
         const SizedBox(height: 8),
         const DebtorMonetaryRecordHistoryBuilder(),

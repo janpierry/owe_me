@@ -8,8 +8,8 @@ import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/presentation/blocs/set_owe_record/info_review/set_owe_record_info_review_bloc.dart';
 import 'package:owe_me/src/presentation/containers/home_container.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/info_review_page/set_owe_record_info_review_card.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/info_review_page/set_owe_record_info_review_finish_button.dart';
 
@@ -77,13 +77,13 @@ class SetOweRecordInfoReviewPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Confira as Informações',
-          style: AppTextStyles.headline1,
+          style: OweMeTextStyles.headline1,
         ),
-        backgroundColor: AppColors.surfaceWhite,
+        backgroundColor: OweMeColors.surfaceWhite,
         centerTitle: true,
         elevation: 1,
       ),
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: OweMeColors.backgroundLight,
       body: BlocListener<SetOweRecordInfoReviewBloc, SetOweRecordInfoReviewState>(
         listener: _listen,
         child: Column(

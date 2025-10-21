@@ -6,8 +6,8 @@ import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_info_review_container.dart';
 import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/debtor_selection_page/set_owe_record_debtor_selection_body.dart';
 
 class SetOweRecordDebtorSelectionPage extends StatelessWidget {
@@ -66,12 +66,12 @@ class SetOweRecordDebtorSelectionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Selecione o Devedor', style: AppTextStyles.headline1),
-        backgroundColor: AppColors.surfaceWhite,
+        title: Text('Selecione o Devedor', style: OweMeTextStyles.headline1),
+        backgroundColor: OweMeColors.surfaceWhite,
         centerTitle: true,
         elevation: 1,
       ),
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: OweMeColors.backgroundLight,
       body: BlocBuilder<DebtorSelectionBloc, DebtorSelectionState>(
         builder: (context, state) {
           if (state is DebtorSelectionLoadDebtorsSuccess) {

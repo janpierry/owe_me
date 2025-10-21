@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
-class AppDateUtils {
-  AppDateUtils._();
+class OweMeDateUtils {
+  OweMeDateUtils._();
 
   static String getFormattedDate(DateTime date) {
     return DateFormat('dd/MM/yyyy').format(date);
