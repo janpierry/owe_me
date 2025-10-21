@@ -3,9 +3,9 @@ import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/core/presentation/extensions/owe_type_ui_extensions.dart';
-import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/date_step_page/set_owe_record_date_step_primary_button.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_app_bar.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_date_picker.dart';
 
 class SetOweRecordDateStepPage extends StatefulWidget {
@@ -53,14 +53,8 @@ class _SetOweRecordDateStepPageState extends State<SetOweRecordDateStepPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Informe a Data',
-          style: OweMeTextStyles.headline1,
-        ),
-        backgroundColor: OweMeColors.surfaceWhite,
-        centerTitle: true,
-        elevation: 1,
+      appBar: OweMeAppBar(
+        titleText: 'Informe a Data',
       ),
       body: Column(
         children: [

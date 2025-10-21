@@ -6,9 +6,8 @@ import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:owe_me/src/presentation/blocs/set_owe_record/description_step/set_owe_record_description_step_bloc.dart';
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_info_review_container.dart';
 import 'package:owe_me/src/presentation/pages/set_owe_record/set_owe_record_date_step_page.dart';
-import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/description_step_page/set_owe_record_description_step_body.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_app_bar.dart';
 
 class SetOweRecordDescriptionStepPage extends StatelessWidget {
   final OweType oweRecordType;
@@ -83,14 +82,8 @@ class SetOweRecordDescriptionStepPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Descreva o ${oweRecordType.label}',
-          style: OweMeTextStyles.headline1,
-        ),
-        backgroundColor: OweMeColors.surfaceWhite,
-        centerTitle: true,
-        elevation: 1,
+      appBar: OweMeAppBar(
+        titleText: 'Descreva o ${oweRecordType.label}',
       ),
       body:
           BlocConsumer<SetOweRecordDescriptionStepBloc, SetOweRecordDescriptionStepState>(

@@ -7,8 +7,8 @@ import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record
 import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/debtor_selection_page/set_owe_record_debtor_selection_body.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_app_bar.dart';
 
 class SetOweRecordDebtorSelectionPage extends StatelessWidget {
   final OweType oweRecordType;
@@ -65,11 +65,8 @@ class SetOweRecordDebtorSelectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Selecione o Devedor', style: OweMeTextStyles.headline1),
-        backgroundColor: OweMeColors.surfaceWhite,
-        centerTitle: true,
-        elevation: 1,
+      appBar: OweMeAppBar(
+        titleText: 'Selecione o Devedor',
       ),
       backgroundColor: OweMeColors.backgroundLight,
       body: BlocBuilder<DebtorSelectionBloc, DebtorSelectionState>(

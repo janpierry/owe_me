@@ -9,6 +9,7 @@ import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/presentation/widgets/set_payment_record/page/set_payment_record_primary_button.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_amount_text_form_field.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_app_bar.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_date_picker.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_dropdown.dart';
 
@@ -71,11 +72,8 @@ class _SetPaymentRecordPageState extends State<SetPaymentRecordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_pageTitle, style: OweMeTextStyles.headline1),
-        backgroundColor: OweMeColors.surfaceWhite,
-        centerTitle: true,
-        elevation: 1,
+      appBar: OweMeAppBar(
+        titleText: _pageTitle,
       ),
       backgroundColor: OweMeColors.backgroundLight,
       body: Column(
