@@ -4,7 +4,12 @@ import 'package:owe_me/src/presentation/blocs/set_owe_record/amount_step/set_owe
 import 'package:owe_me/src/presentation/widgets/shared/app_elevated_button.dart';
 
 class SetOweRecordAmountStepPrimaryButton extends StatelessWidget {
-  const SetOweRecordAmountStepPrimaryButton({super.key});
+  final bool isReviewing;
+
+  const SetOweRecordAmountStepPrimaryButton({
+    super.key,
+    required this.isReviewing,
+  });
 
   void _navigateToNextPage(BuildContext context) {
     context
@@ -15,7 +20,7 @@ class SetOweRecordAmountStepPrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppElevatedButton(
-      label: 'Confirmar',
+      label: isReviewing ? 'Salvar alterações' : 'Continuar',
       onPressed: () => _navigateToNextPage(context),
     );
   }

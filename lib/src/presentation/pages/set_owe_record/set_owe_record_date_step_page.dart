@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:owe_me/src/presentation/drafts/owe_record_draft.dart';
+import 'package:owe_me/src/domain/entities/monetary_record.dart';
+import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/core/presentation/extensions/owe_type_ui_extensions.dart';
 import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
@@ -10,12 +11,16 @@ import 'package:owe_me/src/presentation/widgets/shared/app_date_picker.dart';
 class SetOweRecordDateStepPage extends StatefulWidget {
   final OweRecordDraft oweRecordDraft;
   final Debtor recordDebtor;
+  final OweRecord? oweRecordToEdit;
+  final bool isReviewing;
   final bool fromDebtorPage;
 
   const SetOweRecordDateStepPage({
     super.key,
     required this.oweRecordDraft,
     required this.recordDebtor,
+    required this.oweRecordToEdit,
+    required this.isReviewing,
     required this.fromDebtorPage,
   });
 
@@ -29,7 +34,8 @@ class _SetOweRecordDateStepPageState extends State<SetOweRecordDateStepPage> {
   @override
   void initState() {
     super.initState();
-    _selectedDate = widget.oweRecordDraft.date ?? DateTime.now();
+    _selectedDate =
+        widget.oweRecordDraft.date ?? widget.oweRecordToEdit?.date ?? DateTime.now();
   }
 
   void _onDateChanged(DateTime date) {
@@ -43,8 +49,6 @@ class _SetOweRecordDateStepPageState extends State<SetOweRecordDateStepPage> {
 
   OweRecordDraft get _updatedOweRecordDraft =>
       widget.oweRecordDraft.copyWith(date: _selectedDate);
-
-  bool get _isEdition => widget.oweRecordDraft.date != null;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +85,8 @@ class _SetOweRecordDateStepPageState extends State<SetOweRecordDateStepPage> {
             child: SetOweRecordDateStepPrimaryButton(
               oweRecordDraft: _updatedOweRecordDraft,
               recordDebtor: widget.recordDebtor,
-              isEdition: _isEdition,
+              oweRecordToEdit: widget.oweRecordToEdit,
+              isReviewing: widget.isReviewing,
               fromDebtorPage: widget.fromDebtorPage,
             ),
           ),

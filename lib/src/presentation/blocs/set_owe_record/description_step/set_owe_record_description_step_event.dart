@@ -11,10 +11,12 @@ class SetOweRecordDescriptionStepPageInitialized
     extends SetOweRecordDescriptionStepEvent {
   final OweRecordDraft oweRecordDraft;
   final Debtor recordDebtor;
+  final OweRecord? oweRecordToEdit;
 
   const SetOweRecordDescriptionStepPageInitialized({
     required this.oweRecordDraft,
     required this.recordDebtor,
+    required this.oweRecordToEdit,
   });
 
   @override

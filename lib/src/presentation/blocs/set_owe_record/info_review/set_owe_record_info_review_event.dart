@@ -10,10 +10,12 @@ sealed class SetOweRecordInfoReviewEvent extends Equatable {
 class SetOweRecordInfoReviewPageInitialized extends SetOweRecordInfoReviewEvent {
   final OweRecordDraft oweRecordDraft;
   final Debtor recordDebtor;
+  final OweRecord? oweRecordToEdit;
 
   const SetOweRecordInfoReviewPageInitialized({
     required this.oweRecordDraft,
     required this.recordDebtor,
+    required this.oweRecordToEdit,
   });
 
   @override

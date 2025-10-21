@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/core/presentation/extensions/owe_type_ui_extensions.dart';
 import 'package:owe_me/src/core/presentation/extensions/string_extensions.dart';
+import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/presentation/containers/debtor_container.dart';
-import 'package:owe_me/src/presentation/drafts/owe_record_draft.dart';
+import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/presentation/blocs/set_owe_record/info_review/set_owe_record_info_review_bloc.dart';
 import 'package:owe_me/src/presentation/containers/home_container.dart';
@@ -15,12 +16,14 @@ import 'package:owe_me/src/presentation/widgets/set_owe_record/info_review_page/
 class SetOweRecordInfoReviewPage extends StatelessWidget {
   final OweRecordDraft oweRecordDraft;
   final Debtor recordDebtor;
+  final OweRecord? oweRecordToEdit;
   final bool fromDebtorPage;
 
   const SetOweRecordInfoReviewPage({
     super.key,
     required this.oweRecordDraft,
     required this.recordDebtor,
+    required this.oweRecordToEdit,
     required this.fromDebtorPage,
   });
 
@@ -29,13 +32,14 @@ class SetOweRecordInfoReviewPage extends StatelessWidget {
     SetOweRecordInfoReviewState state,
   ) {
     if (state is SetOweRecordInfoReviewRecordSetFinished) {
+      final successMessage = _isEditing
+          ? '${oweRecordDraft.oweType.label.capitalize()} atualizado com sucesso.'
+          : '${oweRecordDraft.oweType.label.capitalize()} registrado com sucesso.';
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(
           SnackBar(
-            content: Text(
-              '${oweRecordDraft.oweType.label.capitalize()} registrado com sucesso.',
-            ),
+            content: Text(successMessage),
           ),
         );
       Navigator.of(context).pushAndRemoveUntil(
@@ -47,22 +51,25 @@ class SetOweRecordInfoReviewPage extends StatelessWidget {
       if (fromDebtorPage) {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => DebtorContainer(debtor: recordDebtor),
+            builder: (context) => DebtorContainer(debtor: state.updatedDebtor),
           ),
         );
       }
     } else if (state is SetOweRecordInfoReviewError) {
+      final errorMessage = _isEditing
+          ? 'Um erro ocorreu ao atualizar o ${oweRecordDraft.oweType.label}.'
+          : 'Um erro ocorreu ao registrar o ${oweRecordDraft.oweType.label}.';
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(
           SnackBar(
-            content: Text(
-              'Um erro ocorreu ao registrar o ${oweRecordDraft.oweType.label}.',
-            ),
+            content: Text(errorMessage),
           ),
         );
     }
   }
+
+  bool get _isEditing => oweRecordToEdit != null;
 
   @override
   Widget build(BuildContext context) {
@@ -87,13 +94,16 @@ class SetOweRecordInfoReviewPage extends StatelessWidget {
                 child: SetOweRecordInfoReviewCard(
                   oweRecordDraft: oweRecordDraft,
                   recordDebtor: recordDebtor,
+                  oweRecordToEdit: oweRecordToEdit,
                   fromDebtorPage: fromDebtorPage,
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(16),
-              child: SetOweRecordInfoReviewFinishButton(),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: SetOweRecordInfoReviewFinishButton(
+                isEditing: _isEditing,
+              ),
             ),
           ],
         ),

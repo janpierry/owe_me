@@ -1,4 +1,4 @@
-import 'package:owe_me/src/data/models/monetary_record_model.dart';
+part of 'monetary_record_model.dart';
 
 class OweRecordModel extends MonetaryRecordModel {
   final String? description;

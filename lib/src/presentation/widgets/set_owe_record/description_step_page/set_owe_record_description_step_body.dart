@@ -13,12 +13,14 @@ class SetOweRecordDescriptionStepBody extends StatelessWidget {
   final String initialDescription;
   final List<FavoriteDescription> initialFavoriteDescriptions;
   final OweType oweRecordType;
+  final bool isReviewing;
 
   const SetOweRecordDescriptionStepBody({
     super.key,
     required this.initialDescription,
     required this.initialFavoriteDescriptions,
     required this.oweRecordType,
+    required this.isReviewing,
   });
 
   String get _stepTitle => 'Descreva a que se refere este ${oweRecordType.label}:';
@@ -59,7 +61,9 @@ class SetOweRecordDescriptionStepBody extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(16),
-          child: SetOweRecordDescriptionStepPrimaryButton(),
+          child: SetOweRecordDescriptionStepPrimaryButton(
+            isReviewing: isReviewing,
+          ),
         )
       ],
     );

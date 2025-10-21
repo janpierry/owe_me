@@ -4,7 +4,9 @@ import 'package:owe_me/src/presentation/blocs/set_payment_record/info_review/set
 import 'package:owe_me/src/presentation/widgets/shared/app_elevated_button.dart';
 
 class SetPaymentRecordInfoReviewFinishButton extends StatelessWidget {
-  const SetPaymentRecordInfoReviewFinishButton({super.key});
+  final bool isEditing;
+
+  const SetPaymentRecordInfoReviewFinishButton({super.key, required this.isEditing});
 
   void _requestRecordSetting(BuildContext context) {
     context
@@ -15,7 +17,7 @@ class SetPaymentRecordInfoReviewFinishButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppElevatedButton(
-      label: 'Confirmar',
+      label: isEditing ? 'Salvar alterações' : 'Confirmar',
       onPressed: () => _requestRecordSetting(context),
     );
   }

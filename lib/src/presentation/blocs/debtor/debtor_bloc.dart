@@ -7,6 +7,7 @@ import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/domain/use_cases/debtor/edit_debtor.dart';
 import 'package:owe_me/src/domain/use_cases/debtor/remove_debtor.dart';
 import 'package:owe_me/src/domain/use_cases/monetary_record/load_debtor_monetary_record_history.dart';
+import 'package:owe_me/src/domain/use_cases/monetary_record/remove_monetary_record_and_update_debtor.dart';
 
 part 'debtor_event.dart';
 part 'debtor_state.dart';
@@ -15,20 +16,24 @@ class DebtorBloc extends Bloc<DebtorEvent, DebtorState> {
   final LoadDebtorMonetaryRecordHistory _loadDebtorMonetaryRecordHistoryUseCase;
   final EditDebtor _editDebtorUseCase;
   final RemoveDebtor _removeDebtorUseCase;
+  final RemoveMonetaryRecordAndUpdateDebtor _removeMonetaryRecordAndUpdateDebtorUseCase;
   late Debtor _debtor;
 
   DebtorBloc({
     required LoadDebtorMonetaryRecordHistory loadDebtorMonetaryRecordHistory,
     required EditDebtor editDebtor,
     required RemoveDebtor removeDebtor,
+    required RemoveMonetaryRecordAndUpdateDebtor removeMonetaryRecordAndUpdateDebtor,
   })  : _loadDebtorMonetaryRecordHistoryUseCase = loadDebtorMonetaryRecordHistory,
         _editDebtorUseCase = editDebtor,
         _removeDebtorUseCase = removeDebtor,
+        _removeMonetaryRecordAndUpdateDebtorUseCase = removeMonetaryRecordAndUpdateDebtor,
         super(DebtorMonetaryRecordHistoryInitial()) {
     on<DebtorPageInitialized>(_loadInitialData);
     on<DebtorMonetaryRecordHistoryLoadRequested>(_loadDebtorMonetaryRecordHistory);
     on<DebtorEditRequested>(_editDebtor);
     on<DebtorRemoveRequested>(_removeDebtor);
+    on<DebtorRemoveMonetaryRecordRequested>(_removeDebtorMonetaryRecord);
   }
 
   FutureOr<void> _loadInitialData(
@@ -59,7 +64,10 @@ class DebtorBloc extends Bloc<DebtorEvent, DebtorState> {
           return;
         }
         emit(
-          DebtorMonetaryRecordHistoryLoaded(monetaryRecordHistory: monetaryRecordHistory),
+          DebtorMonetaryRecordHistoryLoaded(
+            monetaryRecordHistory: monetaryRecordHistory,
+            debtor: _debtor,
+          ),
         );
       },
     );
@@ -93,6 +101,23 @@ class DebtorBloc extends Bloc<DebtorEvent, DebtorState> {
       (exception) => emit(DebtorRemoveError(message: exception.message)),
       (_) {
         emit(DebtorRemoveSuccess());
+      },
+    );
+  }
+
+  FutureOr<void> _removeDebtorMonetaryRecord(
+    DebtorRemoveMonetaryRecordRequested event,
+    Emitter<DebtorState> emit,
+  ) async {
+    emit(DebtorRemoveMonetaryRecordInProgress());
+    final response = await _removeMonetaryRecordAndUpdateDebtorUseCase(
+      monetaryRecord: event.monetaryRecord,
+      recordDebtor: _debtor,
+    );
+    response.fold(
+      (exception) => emit(DebtorRemoveMonetaryRecordError(message: exception.message)),
+      (updatedDebtor) {
+        emit(DebtorRemoveMonetaryRecordSuccess(updatedDebtor: updatedDebtor));
       },
     );
   }

@@ -1,6 +1,9 @@
 import 'package:owe_me/src/data/models/model.dart';
 
-abstract class MonetaryRecordModel extends Model {
+part 'owe_record_model.dart';
+part 'payment_record_model.dart';
+
+sealed class MonetaryRecordModel extends Model {
   final int debtorId;
   final int amountInCents;
   final String date;

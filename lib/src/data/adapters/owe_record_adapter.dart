@@ -1,6 +1,6 @@
-import 'package:owe_me/src/data/models/owe_record_model.dart';
+import 'package:owe_me/src/data/models/monetary_record_model.dart';
+import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/domain/entities/money.dart';
-import 'package:owe_me/src/domain/entities/owe_record.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
 
 class OweRecordAdapter {

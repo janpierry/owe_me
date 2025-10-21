@@ -13,9 +13,25 @@ class Debtor extends Equatable {
     this.totalDebt = const Money(cents: 0),
   });
 
-  Debtor updateTotalDebtWithMonetaryRecord(MonetaryRecord record) {
+  Debtor withMonetaryRecordAdded(MonetaryRecord record) {
     return copyWith(
       totalDebt: record.applyAmountToTotalDebt(totalDebt),
+    );
+  }
+
+  Debtor withMonetaryRecordRemoved(MonetaryRecord removedRecord) {
+    return copyWith(
+      totalDebt: removedRecord.revertAmountFromTotalDebt(totalDebt),
+    );
+  }
+
+  Debtor withMonetaryRecordEdited({
+    required MonetaryRecord newRecord,
+    required MonetaryRecord oldRecord,
+  }) {
+    final intermediateDebt = oldRecord.revertAmountFromTotalDebt(totalDebt);
+    return copyWith(
+      totalDebt: newRecord.applyAmountToTotalDebt(intermediateDebt),
     );
   }
 

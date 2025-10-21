@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:owe_me/src/core/presentation/extensions/owe_type_ui_extensions.dart';
+import 'package:owe_me/src/domain/entities/monetary_record.dart';
+import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:owe_me/src/presentation/blocs/set_owe_record/description_step/set_owe_record_description_step_bloc.dart';
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_info_review_container.dart';
 import 'package:owe_me/src/presentation/pages/set_owe_record/set_owe_record_date_step_page.dart';
@@ -8,10 +11,16 @@ import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart'
 import 'package:owe_me/src/presentation/widgets/set_owe_record/description_step_page/set_owe_record_description_step_body.dart';
 
 class SetOweRecordDescriptionStepPage extends StatelessWidget {
+  final OweType oweRecordType;
+  final OweRecord? oweRecordToEdit;
+  final bool isReviewing;
   final bool fromDebtorPage;
 
   const SetOweRecordDescriptionStepPage({
     super.key,
+    required this.oweRecordType,
+    required this.oweRecordToEdit,
+    required this.isReviewing,
     required this.fromDebtorPage,
   });
 
@@ -25,31 +34,31 @@ class SetOweRecordDescriptionStepPage extends StatelessWidget {
     BuildContext context,
     SetOweRecordDescriptionStepNavigatingToNextPage state,
   ) {
-    final isEdition = state.isEdition;
-    if (isEdition) {
-      _finishEdition(context, state);
+    if (isReviewing) {
+      _finishInfoReview(context, state);
     } else {
       _navigateToDateStep(context, state);
     }
   }
 
-  void _finishEdition(
+  void _finishInfoReview(
     BuildContext context,
     SetOweRecordDescriptionStepNavigatingToNextPage state,
   ) {
-    _popCurrentEditDescriptionPageAndPreviousInfoReviewPage(context);
+    _popCurrentDescriptionPageAndPreviousInfoReviewPage(context);
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SetOweRecordInfoReviewContainer(
           oweRecordDraft: state.oweRecordDraft,
           recordDebtor: state.recordDebtor,
+          oweRecordToEdit: oweRecordToEdit,
           fromDebtorPage: fromDebtorPage,
         ),
       ),
     );
   }
 
-  void _popCurrentEditDescriptionPageAndPreviousInfoReviewPage(BuildContext context) {
+  void _popCurrentDescriptionPageAndPreviousInfoReviewPage(BuildContext context) {
     Navigator.of(context).pop();
     Navigator.of(context).pop();
   }
@@ -63,6 +72,8 @@ class SetOweRecordDescriptionStepPage extends StatelessWidget {
         builder: (context) => SetOweRecordDateStepPage(
           oweRecordDraft: state.oweRecordDraft,
           recordDebtor: state.recordDebtor,
+          oweRecordToEdit: oweRecordToEdit,
+          isReviewing: false,
           fromDebtorPage: fromDebtorPage,
         ),
       ),
@@ -74,7 +85,7 @@ class SetOweRecordDescriptionStepPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Adicione uma Descrição',
+          'Descreva o ${oweRecordType.label}',
           style: AppTextStyles.headline1,
         ),
         backgroundColor: AppColors.surfaceWhite,
@@ -91,7 +102,8 @@ class SetOweRecordDescriptionStepPage extends StatelessWidget {
             return SetOweRecordDescriptionStepBody(
               initialDescription: state.initialDescription,
               initialFavoriteDescriptions: state.initialFavoriteDescriptions,
-              oweRecordType: state.oweRecordType,
+              oweRecordType: oweRecordType,
+              isReviewing: isReviewing,
             );
           }
           return const Center(

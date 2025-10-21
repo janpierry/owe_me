@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:owe_me/src/core/presentation/formatters/money_formatter.dart';
 import 'package:owe_me/src/core/presentation/utils/app_date_utils.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
+import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/presentation/containers/set_payment_record/set_payment_record_debtor_selection_container.dart';
-import 'package:owe_me/src/presentation/drafts/payment_record_draft.dart';
+import 'package:owe_me/src/presentation/models/drafts/payment_record_draft.dart';
 import 'package:owe_me/src/core/presentation/extensions/payment_method_ui_extensions.dart';
 import 'package:owe_me/src/presentation/pages/set_payment_record/set_payment_record_page.dart';
 import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
@@ -12,12 +13,14 @@ import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart'
 class SetPaymentRecordInfoReviewCard extends StatelessWidget {
   final PaymentRecordDraft paymentRecordDraft;
   final Debtor recordDebtor;
+  final PaymentRecord? paymentRecordToEdit;
   final bool fromDebtorPage;
 
   const SetPaymentRecordInfoReviewCard({
     super.key,
     required this.paymentRecordDraft,
     required this.recordDebtor,
+    required this.paymentRecordToEdit,
     required this.fromDebtorPage,
   });
 
@@ -30,7 +33,7 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SetPaymentRecordDebtorSelectionContainer(
-          paymentRecordDraftToEdit: paymentRecordDraft,
+          paymentRecordDraftToReview: paymentRecordDraft,
           fromDebtorPage: fromDebtorPage,
         ),
       ),
@@ -41,8 +44,9 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SetPaymentRecordPage(
-          paymentRecordDraftToEdit: paymentRecordDraft,
+          paymentRecordDraftToReview: paymentRecordDraft,
           recordDebtor: recordDebtor,
+          paymentRecordToEdit: paymentRecordToEdit,
           fromDebtorPage: fromDebtorPage,
         ),
       ),
@@ -67,7 +71,7 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
                 Expanded(
                   child: Text.rich(
                     TextSpan(
-                      text: 'Quem está te pagando: ',
+                      text: 'Quem te pagou: ',
                       style: AppTextStyles.subtitle,
                       children: [
                         TextSpan(
@@ -82,10 +86,11 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
                     style: AppTextStyles.subtitle,
                   ),
                 ),
-                IconButton(
-                  onPressed: () => _navigateToEditDebtor(context),
-                  icon: const Icon(Icons.edit),
-                ),
+                if (paymentRecordToEdit == null)
+                  IconButton(
+                    onPressed: () => _navigateToEditDebtor(context),
+                    icon: const Icon(Icons.edit),
+                  ),
               ],
             ),
             const SizedBox(height: 16),

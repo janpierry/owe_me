@@ -4,7 +4,7 @@ import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/presentation/blocs/debtor_selection/debtor_selection_bloc.dart';
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_amount_step_container.dart';
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_info_review_container.dart';
-import 'package:owe_me/src/presentation/drafts/owe_record_draft.dart';
+import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
 import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
@@ -12,18 +12,19 @@ import 'package:owe_me/src/presentation/widgets/set_owe_record/debtor_selection_
 
 class SetOweRecordDebtorSelectionPage extends StatelessWidget {
   final OweType oweRecordType;
-  final OweRecordDraft? oweRecordDraftToEdit;
+  final OweRecordDraft? oweRecordDraftToReview;
   final bool fromDebtorPage;
 
   const SetOweRecordDebtorSelectionPage({
     super.key,
     required this.oweRecordType,
-    required this.oweRecordDraftToEdit,
+    required this.oweRecordDraftToReview,
     required this.fromDebtorPage,
   });
 
   void _handleNavigationOnDebtorSelected(BuildContext context, Debtor selectedDebtor) {
-    if (_isEdition) {
+    final isReviewing = oweRecordDraftToReview != null;
+    if (isReviewing) {
       _navigateToInfoReview(context, selectedDebtor);
     } else {
       _navigateToNextStep(context, selectedDebtor);
@@ -47,8 +48,9 @@ class SetOweRecordDebtorSelectionPage extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SetOweRecordInfoReviewContainer(
-          oweRecordDraft: oweRecordDraftToEdit!,
+          oweRecordDraft: oweRecordDraftToReview!,
           recordDebtor: selectedDebtor,
+          oweRecordToEdit: null,
           fromDebtorPage: fromDebtorPage,
         ),
       ),
@@ -59,8 +61,6 @@ class SetOweRecordDebtorSelectionPage extends StatelessWidget {
     Navigator.of(context).pop();
     Navigator.of(context).pop();
   }
-
-  bool get _isEdition => oweRecordDraftToEdit != null;
 
   @override
   Widget build(BuildContext context) {

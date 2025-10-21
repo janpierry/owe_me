@@ -4,8 +4,10 @@ import 'package:owe_me/src/data/repositories/monetary_record_repository_impl.dar
 import 'package:owe_me/src/domain/repositories/monetary_record_repository.dart';
 import 'package:owe_me/src/domain/use_cases/debtor/edit_debtor.dart';
 import 'package:owe_me/src/domain/use_cases/debtor/remove_debtor.dart';
-import 'package:owe_me/src/domain/use_cases/monetary_record/add_monetary_record.dart';
+import 'package:owe_me/src/domain/use_cases/monetary_record/add_monetary_record_and_update_debtor.dart';
+import 'package:owe_me/src/domain/use_cases/monetary_record/edit_monetary_record_and_update_debtor.dart';
 import 'package:owe_me/src/domain/use_cases/monetary_record/load_debtor_monetary_record_history.dart';
+import 'package:owe_me/src/domain/use_cases/monetary_record/remove_monetary_record_and_update_debtor.dart';
 import 'package:owe_me/src/presentation/blocs/debtor/debtor_bloc.dart';
 
 void initMonetaryRecordInjections() {
@@ -17,6 +19,7 @@ void initMonetaryRecordInjections() {
       loadDebtorMonetaryRecordHistory: inj(),
       editDebtor: inj(),
       removeDebtor: inj(),
+      removeMonetaryRecordAndUpdateDebtor: inj(),
     ),
   );
 
@@ -24,8 +27,14 @@ void initMonetaryRecordInjections() {
   inj.registerLazySingleton<LoadDebtorMonetaryRecordHistory>(
     () => LoadDebtorMonetaryRecordHistory(repository: inj()),
   );
-  inj.registerLazySingleton<AddMonetaryRecord>(
-    () => AddMonetaryRecord(repository: inj()),
+  inj.registerLazySingleton<AddMonetaryRecordAndUpdateDebtor>(
+    () => AddMonetaryRecordAndUpdateDebtor(repository: inj()),
+  );
+  inj.registerLazySingleton<EditMonetaryRecordAndUpdateDebtor>(
+    () => EditMonetaryRecordAndUpdateDebtor(repository: inj()),
+  );
+  inj.registerLazySingleton<RemoveMonetaryRecordAndUpdateDebtor>(
+    () => RemoveMonetaryRecordAndUpdateDebtor(repository: inj()),
   );
   inj.registerLazySingleton<EditDebtor>(
     () => EditDebtor(repository: inj()),

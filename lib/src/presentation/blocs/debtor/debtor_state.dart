@@ -38,11 +38,15 @@ final class DebtorMonetaryRecordHistoryLoading extends DebtorMonetaryRecordHisto
 
 final class DebtorMonetaryRecordHistoryLoaded extends DebtorMonetaryRecordHistoryState {
   final List<MonetaryRecord> monetaryRecordHistory;
+  final Debtor debtor;
 
-  const DebtorMonetaryRecordHistoryLoaded({required this.monetaryRecordHistory});
+  const DebtorMonetaryRecordHistoryLoaded({
+    required this.monetaryRecordHistory,
+    required this.debtor,
+  });
 
   @override
-  List<Object> get props => [monetaryRecordHistory];
+  List<Object> get props => [monetaryRecordHistory, debtor];
 }
 
 final class DebtorMonetaryRecordHistoryEmpty extends DebtorMonetaryRecordHistoryState {}
@@ -85,6 +89,30 @@ final class DebtorRemoveError extends DebtorRemoveState {
   final String message;
 
   const DebtorRemoveError({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+abstract class DebtorRemoveMonetaryRecordState extends DebtorState {
+  const DebtorRemoveMonetaryRecordState();
+}
+
+final class DebtorRemoveMonetaryRecordInProgress extends DebtorRemoveState {}
+
+final class DebtorRemoveMonetaryRecordSuccess extends DebtorRemoveState {
+  final Debtor updatedDebtor;
+
+  const DebtorRemoveMonetaryRecordSuccess({required this.updatedDebtor});
+
+  @override
+  List<Object> get props => [updatedDebtor];
+}
+
+final class DebtorRemoveMonetaryRecordError extends DebtorRemoveState {
+  final String message;
+
+  const DebtorRemoveMonetaryRecordError({required this.message});
 
   @override
   List<Object> get props => [message];

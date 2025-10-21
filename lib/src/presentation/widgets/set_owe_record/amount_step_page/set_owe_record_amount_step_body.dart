@@ -13,12 +13,14 @@ class SetOweRecordAmountStepBody extends StatelessWidget {
   final Debtor recordDebtor;
   final OweType oweRecordType;
   final Money amountToEdit;
+  final bool isReviewing;
 
   const SetOweRecordAmountStepBody({
     super.key,
     required this.recordDebtor,
     required this.oweRecordType,
     required this.amountToEdit,
+    required this.isReviewing,
   });
 
   void _onAmountChanged(Money amount, BuildContext context) {
@@ -28,7 +30,7 @@ class SetOweRecordAmountStepBody extends StatelessWidget {
   }
 
   String get _stepTitle =>
-      'Qual o valor do novo ${oweRecordType.label} que ${recordDebtor.nickname} tem com você?';
+      'Qual o valor deste ${oweRecordType.label} que ${recordDebtor.nickname} tem com você?';
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,9 @@ class SetOweRecordAmountStepBody extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(16),
-          child: SetOweRecordAmountStepPrimaryButton(),
+          child: SetOweRecordAmountStepPrimaryButton(
+            isReviewing: isReviewing,
+          ),
         ),
       ],
     );

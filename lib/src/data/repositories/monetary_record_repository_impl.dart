@@ -14,7 +14,7 @@ class MonetaryRecordRepositoryImpl implements MonetaryRecordRepository {
   }) : _monetaryRecordDataSource = monetaryRecordDataSource;
 
   @override
-  Future<Either<Failure, void>> addMonetaryRecordAndUpdateDebtorTotalDebt(
+  Future<Either<Failure, void>> addMonetaryRecordAndUpdateDebtor(
     MonetaryRecord monetaryRecord,
     Debtor recordDebtor,
   ) async {
@@ -27,7 +27,57 @@ class MonetaryRecordRepositoryImpl implements MonetaryRecordRepository {
         entity: monetaryRecord,
         debtorId: debtorId,
       );
-      await _monetaryRecordDataSource.insertMonetaryRecordAndUpdateDebtorTotalDebt(
+      await _monetaryRecordDataSource.insertMonetaryRecordAndUpdateDebtor(
+        monetaryRecordModel,
+        recordDebtor.totalDebt.cents,
+      );
+      return const Right(null);
+    } on Exception catch (e) {
+      //TODO: handle specific Failures
+      return Left(DefaultFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> editMonetaryRecordAndUpdateDebtor(
+    MonetaryRecord monetaryRecord,
+    Debtor recordDebtor,
+  ) async {
+    try {
+      final debtorId = recordDebtor.id;
+      if (debtorId == null) {
+        return const Left(DebtorIdNotFoundFailure('Debtor ID cannot be null'));
+      }
+      final monetaryRecordModel = MonetaryRecordAdapter.toModel(
+        entity: monetaryRecord,
+        debtorId: debtorId,
+      );
+      await _monetaryRecordDataSource.updateMonetaryRecordAndUpdateDebtor(
+        monetaryRecordModel,
+        recordDebtor.totalDebt.cents,
+      );
+      return const Right(null);
+    } on Exception catch (e) {
+      //TODO: handle specific Failures
+      return Left(DefaultFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> removeMonetaryRecordAndUpdateDebtor(
+    MonetaryRecord monetaryRecord,
+    Debtor recordDebtor,
+  ) async {
+    try {
+      final debtorId = recordDebtor.id;
+      if (debtorId == null) {
+        return const Left(DebtorIdNotFoundFailure('Debtor ID cannot be null'));
+      }
+      final monetaryRecordModel = MonetaryRecordAdapter.toModel(
+        entity: monetaryRecord,
+        debtorId: debtorId,
+      );
+      await _monetaryRecordDataSource.deleteMonetaryRecordAndUpdateDebtor(
         monetaryRecordModel,
         recordDebtor.totalDebt.cents,
       );

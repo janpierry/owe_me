@@ -5,7 +5,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
 import 'package:owe_me/src/core/shared/error/failures.dart';
-import 'package:owe_me/src/presentation/drafts/owe_record_draft.dart';
+import 'package:owe_me/src/domain/entities/monetary_record.dart';
+import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/entities/favorite_description.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
@@ -20,9 +21,8 @@ class SetOweRecordDescriptionStepBloc
     extends Bloc<SetOweRecordDescriptionStepEvent, SetOweRecordDescriptionStepState> {
   late String _description;
   late List<FavoriteDescription> _favoriteDescriptions;
-  late final OweRecordDraft _initialOweRecordDraft;
-  late final Debtor _initialRecordDebtor;
-  late bool _isEdition;
+  late final OweRecordDraft _oweRecordDraft;
+  late final Debtor _recordDebtor;
   final AddFavoriteDescription _addFavoriteDescriptionUseCase;
   final LoadDebtorFavoriteDebts _loadDebtorFavoriteDebtsUseCase;
   final LoadDebtorFavoriteCredits _loadDebtorFavoriteCreditsUseCase;
@@ -48,7 +48,7 @@ class SetOweRecordDescriptionStepBloc
     );
   }
 
-  OweType get _oweRecordType => _initialOweRecordDraft.oweType;
+  OweType get _oweRecordType => _oweRecordDraft.oweType;
 
   FutureOr<void> _loadInitialData(
     SetOweRecordDescriptionStepPageInitialized event,
@@ -57,12 +57,12 @@ class SetOweRecordDescriptionStepBloc
     emit(SetOweRecordDescriptionStepPageLoading());
     final oweRecordDraft = event.oweRecordDraft;
     final oweRecordType = oweRecordDraft.oweType;
+    final oweRecordToEdit = event.oweRecordToEdit;
     final recordDebtor = event.recordDebtor;
 
-    _description = oweRecordDraft.description ?? '';
-    _initialOweRecordDraft = oweRecordDraft;
-    _initialRecordDebtor = recordDebtor;
-    _isEdition = oweRecordDraft.date != null;
+    _description = oweRecordDraft.description ?? oweRecordToEdit?.description ?? '';
+    _oweRecordDraft = oweRecordDraft;
+    _recordDebtor = recordDebtor;
 
     final result = await _loadFavoriteDescriptions(oweRecordType, recordDebtor);
     if (result.isLeft()) {
@@ -75,7 +75,6 @@ class SetOweRecordDescriptionStepBloc
       SetOweRecordDescriptionStepPageLoaded(
         initialDescription: _description,
         initialFavoriteDescriptions: _favoriteDescriptions,
-        oweRecordType: oweRecordType,
       ),
     );
   }
@@ -125,7 +124,7 @@ class SetOweRecordDescriptionStepBloc
 
     final result = await _addFavoriteDescriptionUseCase(
       AddFavoriteDescriptionParams(
-        debtor: _initialRecordDebtor,
+        debtor: _recordDebtor,
         favoriteDescription: newFavoriteDescription,
       ),
     );
@@ -188,9 +187,8 @@ class SetOweRecordDescriptionStepBloc
     emit(SetOweRecordDescriptionStepLoading());
     emit(
       SetOweRecordDescriptionStepNavigatingToNextPage(
-        oweRecordDraft: _initialOweRecordDraft.copyWith(description: _description),
-        recordDebtor: _initialRecordDebtor,
-        isEdition: _isEdition,
+        oweRecordDraft: _oweRecordDraft.copyWith(description: _description),
+        recordDebtor: _recordDebtor,
       ),
     );
   }

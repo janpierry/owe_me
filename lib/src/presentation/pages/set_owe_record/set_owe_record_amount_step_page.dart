@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:owe_me/src/presentation/drafts/owe_record_draft.dart';
+import 'package:owe_me/src/domain/entities/monetary_record.dart';
+import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/entities/money.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
@@ -14,14 +15,16 @@ import 'package:owe_me/src/presentation/widgets/set_owe_record/amount_step_page/
 class SetOweRecordAmountStepPage extends StatelessWidget {
   final Debtor recordDebtor;
   final OweType oweRecordType;
-  final OweRecordDraft? oweRecordDraftToEdit;
+  final OweRecord? oweRecordToEdit;
+  final OweRecordDraft? oweRecordDraftToReview;
   final bool fromDebtorPage;
 
   const SetOweRecordAmountStepPage({
     super.key,
     required this.recordDebtor,
     required this.oweRecordType,
-    this.oweRecordDraftToEdit,
+    required this.oweRecordToEdit,
+    required this.oweRecordDraftToReview,
     required this.fromDebtorPage,
   });
 
@@ -35,21 +38,22 @@ class SetOweRecordAmountStepPage extends StatelessWidget {
     BuildContext context,
     SetOweRecordAmountStepNavigatingToNextPage state,
   ) {
-    final isEdition = oweRecordDraftToEdit != null;
-    if (isEdition) {
-      _finishEdition(context, state.amount);
+    final isReviewing = oweRecordDraftToReview != null;
+    if (isReviewing) {
+      _finishInfoReview(context, state.amount);
     } else {
       _navigateToDescriptionStep(context, state.amount);
     }
   }
 
-  void _finishEdition(BuildContext context, Money amount) {
+  void _finishInfoReview(BuildContext context, Money amount) {
     _popCurrentEditAmountPageAndPreviousInfoReviewPage(context);
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SetOweRecordInfoReviewContainer(
-          oweRecordDraft: oweRecordDraftToEdit!.copyWith(amount: amount),
+          oweRecordDraft: oweRecordDraftToReview!.copyWith(amount: amount),
           recordDebtor: recordDebtor,
+          oweRecordToEdit: oweRecordToEdit,
           fromDebtorPage: fromDebtorPage,
         ),
       ),
@@ -73,6 +77,8 @@ class SetOweRecordAmountStepPage extends StatelessWidget {
             amount: amount,
           ),
           recordDebtor: recordDebtor,
+          oweRecordToEdit: oweRecordToEdit,
+          isReviewing: false,
           fromDebtorPage: fromDebtorPage,
         ),
       ),
@@ -100,6 +106,7 @@ class SetOweRecordAmountStepPage extends StatelessWidget {
               recordDebtor: recordDebtor,
               oweRecordType: oweRecordType,
               amountToEdit: state.amountToEdit,
+              isReviewing: oweRecordDraftToReview != null,
             );
           }
 

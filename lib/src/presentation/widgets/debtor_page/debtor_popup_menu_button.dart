@@ -39,8 +39,10 @@ class DebtorPopupMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<_PopupMenuButtonOptions>(
-      icon: const Icon(Icons.more_vert,
-          color: AppColors.textGray), //TODO refactor the color names
+      icon: const Icon(
+        Icons.more_vert,
+        color: AppColors.textGray,
+      ), //TODO refactor the color names
       onSelected: (value) {
         switch (value) {
           case _PopupMenuButtonOptions.edit:
