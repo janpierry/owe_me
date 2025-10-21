@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:owe_me/src/core/presentation/formatters/money_formatter.dart';
-import 'package:owe_me/src/core/presentation/utils/app_date_utils.dart';
+import 'package:owe_me/src/core/presentation/utils/owe_me_date_utils.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/presentation/containers/set_payment_record/set_payment_record_debtor_selection_container.dart';
 import 'package:owe_me/src/presentation/models/drafts/payment_record_draft.dart';
 import 'package:owe_me/src/core/presentation/extensions/payment_method_ui_extensions.dart';
 import 'package:owe_me/src/presentation/pages/set_payment_record/set_payment_record_page.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 
 class SetPaymentRecordInfoReviewCard extends StatelessWidget {
   final PaymentRecordDraft paymentRecordDraft;
@@ -56,7 +56,7 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: AppColors.surfaceWhite,
+      color: OweMeColors.surfaceWhite,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
@@ -72,18 +72,18 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
                   child: Text.rich(
                     TextSpan(
                       text: 'Quem te pagou: ',
-                      style: AppTextStyles.subtitle,
+                      style: OweMeTextStyles.subtitle,
                       children: [
                         TextSpan(
                           text: recordDebtor.nickname,
-                          style: AppTextStyles.subtitle.copyWith(
-                            color: AppColors.primaryBlue,
+                          style: OweMeTextStyles.subtitle.copyWith(
+                            color: OweMeColors.primaryBlue,
                           ),
                         ),
                       ],
                     ),
                     overflow: TextOverflow.clip,
-                    style: AppTextStyles.subtitle,
+                    style: OweMeTextStyles.subtitle,
                   ),
                 ),
                 if (paymentRecordToEdit == null)
@@ -101,14 +101,14 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
                 Text.rich(
                   TextSpan(
                     text: 'Valor: ',
-                    style: AppTextStyles.subtitle,
+                    style: OweMeTextStyles.subtitle,
                     children: [
                       TextSpan(
                         text: MoneyFormatter.toStringCurrencyNullable(
                           paymentRecordDraft.amount,
                         ),
-                        style: AppTextStyles.subtitle.copyWith(
-                          color: AppColors.primaryBlue,
+                        style: OweMeTextStyles.subtitle.copyWith(
+                          color: OweMeColors.primaryBlue,
                         ),
                       ),
                     ],
@@ -129,12 +129,12 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
                 Text.rich(
                   TextSpan(
                     text: 'Método de pagamento: ',
-                    style: AppTextStyles.subtitle,
+                    style: OweMeTextStyles.subtitle,
                     children: [
                       TextSpan(
                         text: paymentRecordDraft.paymentMethod?.label ?? 'Not specified',
-                        style: AppTextStyles.subtitle.copyWith(
-                          color: AppColors.primaryBlue,
+                        style: OweMeTextStyles.subtitle.copyWith(
+                          color: OweMeColors.primaryBlue,
                         ),
                       ),
                     ],
@@ -154,14 +154,14 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
                 Text.rich(
                   TextSpan(
                     text: 'Data: ',
-                    style: AppTextStyles.subtitle,
+                    style: OweMeTextStyles.subtitle,
                     children: [
                       TextSpan(
                         text: paymentRecordDraft.date != null
-                            ? AppDateUtils.getFormattedDate(paymentRecordDraft.date!)
+                            ? OweMeDateUtils.getFormattedDate(paymentRecordDraft.date!)
                             : 'Não informada',
-                        style: AppTextStyles.subtitle.copyWith(
-                          color: AppColors.primaryBlue,
+                        style: OweMeTextStyles.subtitle.copyWith(
+                          color: OweMeColors.primaryBlue,
                         ),
                       ),
                     ],

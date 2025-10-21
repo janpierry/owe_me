@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 
-class AppDropdown<T> extends StatelessWidget {
+class OweMeDropdown<T> extends StatelessWidget {
   final String? hintText;
   final List<T> items;
   final T? selectedItem;
   final ValueChanged<T?>? onChanged;
   final String Function(T) itemLabelBuilder;
 
-  const AppDropdown({
+  const OweMeDropdown({
     super.key,
     this.hintText,
     required this.items,
@@ -34,29 +34,29 @@ class AppDropdown<T> extends StatelessWidget {
       icon: const Icon(
         Icons.arrow_drop_down,
         size: 24,
-        color: AppColors.textGray,
+        color: OweMeColors.textGray,
       ),
       decoration: InputDecoration(
         hintText: hintText,
         contentPadding: const EdgeInsets.all(12),
         filled: true,
-        fillColor: AppColors.surfaceWhite,
+        fillColor: OweMeColors.surfaceWhite,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(
-            color: AppColors.borderGray,
+            color: OweMeColors.borderGray,
             width: 1,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(
-            color: AppColors.primaryBlue,
+            color: OweMeColors.primaryBlue,
             width: 1,
           ),
         ),
       ),
-      style: AppTextStyles.body,
+      style: OweMeTextStyles.body,
     );
   }
 }

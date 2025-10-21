@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:owe_me/src/core/presentation/utils/app_date_utils.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/utils/owe_me_date_utils.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 
-class AppDatePicker extends StatefulWidget {
+class OweMeDatePicker extends StatefulWidget {
   final DateTime? initialDate;
   final ValueChanged<DateTime>? onDateChanged;
 
-  const AppDatePicker({
+  const OweMeDatePicker({
     super.key,
     this.initialDate,
     this.onDateChanged,
   });
 
   @override
-  State<AppDatePicker> createState() => _AppDatePickerState();
+  State<OweMeDatePicker> createState() => _OweMeDatePickerState();
 }
 
-class _AppDatePickerState extends State<AppDatePicker> {
+class _OweMeDatePickerState extends State<OweMeDatePicker> {
   final TextEditingController _dateController = TextEditingController();
   DateTime? _selectedDate;
 
@@ -27,7 +27,7 @@ class _AppDatePickerState extends State<AppDatePicker> {
     final initialDate = widget.initialDate;
     if (initialDate != null) {
       _selectedDate = initialDate;
-      _dateController.text = AppDateUtils.getFormattedDate(initialDate);
+      _dateController.text = OweMeDateUtils.getFormattedDate(initialDate);
     }
   }
 
@@ -47,7 +47,7 @@ class _AppDatePickerState extends State<AppDatePicker> {
 
     if (selectedDate != null) {
       setState(() {
-        String formattedDate = AppDateUtils.getFormattedDate(selectedDate);
+        String formattedDate = OweMeDateUtils.getFormattedDate(selectedDate);
         _dateController.text = formattedDate;
         _selectedDate = selectedDate;
       });
@@ -66,28 +66,28 @@ class _AppDatePickerState extends State<AppDatePicker> {
         hintText: 'Select a date',
         contentPadding: const EdgeInsets.all(12),
         filled: true,
-        fillColor: AppColors.surfaceWhite,
+        fillColor: OweMeColors.surfaceWhite,
         suffixIcon: const Icon(
           Icons.calendar_today,
           size: 20,
-          color: AppColors.textGray,
+          color: OweMeColors.textGray,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(
-            color: AppColors.borderGray,
+            color: OweMeColors.borderGray,
             width: 1,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(
-            color: AppColors.primaryBlue,
+            color: OweMeColors.primaryBlue,
             width: 1,
           ),
         ),
       ),
-      style: AppTextStyles.body,
+      style: OweMeTextStyles.body,
     );
   }
 }

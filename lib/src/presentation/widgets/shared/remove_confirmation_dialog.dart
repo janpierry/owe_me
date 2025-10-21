@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 
 class RemoveConfirmationDialog extends StatelessWidget {
   final String title;
@@ -23,13 +23,13 @@ class RemoveConfirmationDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       insetPadding: const EdgeInsets.symmetric(horizontal: 24),
-      backgroundColor: AppColors.surfaceWhite,
+      backgroundColor: OweMeColors.surfaceWhite,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
         width: 312,
         padding: const EdgeInsets.fromLTRB(20, 24, 20, 16),
         decoration: BoxDecoration(
-          color: AppColors.surfaceWhite,
+          color: OweMeColors.surfaceWhite,
           borderRadius: BorderRadius.circular(20),
           boxShadow: const [
             //TODO create file for shadows
@@ -45,13 +45,13 @@ class RemoveConfirmationDialog extends StatelessWidget {
           children: [
             Text(
               title,
-              style: AppTextStyles.headline1,
+              style: OweMeTextStyles.headline1,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
             Text(
               description,
-              style: AppTextStyles.body.copyWith(color: AppColors.textGray),
+              style: OweMeTextStyles.body.copyWith(color: OweMeColors.textGray),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
@@ -65,15 +65,15 @@ class RemoveConfirmationDialog extends StatelessWidget {
                   ),
                   child: Text(
                     'Cancelar',
-                    style: AppTextStyles.subtitle.copyWith(color: AppColors.textGray),
+                    style: OweMeTextStyles.subtitle.copyWith(color: OweMeColors.textGray),
                   ),
                 ),
                 const SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: () => _remove(context),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.red,
-                    foregroundColor: AppColors.surfaceWhite,
+                    backgroundColor: OweMeColors.red,
+                    foregroundColor: OweMeColors.surfaceWhite,
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     minimumSize: const Size(0, 40),
                     shape: RoundedRectangleBorder(
@@ -82,7 +82,7 @@ class RemoveConfirmationDialog extends StatelessWidget {
                   ),
                   child: Text(
                     'Excluir',
-                    style: AppTextStyles.subtitle.copyWith(color: AppColors.white),
+                    style: OweMeTextStyles.subtitle.copyWith(color: OweMeColors.white),
                   ),
                 ),
               ],

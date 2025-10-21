@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:owe_me/src/core/presentation/formatters/money_formatter.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/core/presentation/callbacks.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
-import 'package:owe_me/src/presentation/widgets/shared/app_spacer.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_spacer.dart';
 
 class DebtorSelectionListItem extends StatelessWidget {
   final Debtor debtor;
@@ -21,7 +21,7 @@ class DebtorSelectionListItem extends StatelessWidget {
     return Material(
       elevation: 1,
       borderRadius: BorderRadius.circular(12),
-      color: AppColors.surfaceWhite,
+      color: OweMeColors.surfaceWhite,
       child: InkWell(
         onTap: () => onDebtorSelected(debtor),
         borderRadius: BorderRadius.circular(12),
@@ -33,15 +33,15 @@ class DebtorSelectionListItem extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(debtor.nickname, style: AppTextStyles.subtitle),
+                  Text(debtor.nickname, style: OweMeTextStyles.subtitle),
                   Text(
                     MoneyFormatter.toStringCurrency(debtor.totalDebt),
-                    style: AppTextStyles.body,
+                    style: OweMeTextStyles.body,
                   ),
                 ],
               ),
-              AppSpacer(minWidth: 8),
-              Icon(Icons.chevron_right, color: AppColors.textGray),
+              OweMeSpacer(minWidth: 8),
+              Icon(Icons.chevron_right, color: OweMeColors.textGray),
             ],
           ),
         ),

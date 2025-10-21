@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
 import 'package:owe_me/src/presentation/widgets/debtor_page/debtor_header.dart';
 import 'package:owe_me/src/presentation/widgets/debtor_page/debtor_monetary_record_history/debtor_monetary_record_history_section.dart';
 import 'package:owe_me/src/presentation/widgets/debtor_page/debtor_popup_menu_button.dart';
 import 'package:owe_me/src/presentation/widgets/debtor_page/debtor_quick_action_section.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_app_bar.dart';
 
 class DebtorBody extends StatelessWidget {
   final Debtor debtor;
@@ -15,19 +15,13 @@ class DebtorBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //TODO create curstom app bar
-      appBar: AppBar(
-        title: Text(debtor.nickname, style: AppTextStyles.headline1),
-        backgroundColor: AppColors.surfaceWhite,
-        centerTitle: true,
-        elevation: 1,
+      appBar: OweMeAppBar(
+        titleText: debtor.nickname,
         actions: [
-          DebtorPopupMenuButton(
-            debtor: debtor,
-          )
+          DebtorPopupMenuButton(debtor: debtor),
         ],
       ),
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: OweMeColors.backgroundLight,
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(

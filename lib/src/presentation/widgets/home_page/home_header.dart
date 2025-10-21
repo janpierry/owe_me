@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:owe_me/src/core/presentation/formatters/money_formatter.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/entities/money.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 
 class HomeHeader extends StatelessWidget {
   final List<Debtor> debtors;
@@ -24,16 +24,16 @@ class HomeHeader extends StatelessWidget {
       width: double.infinity,
       height: 96,
       child: Card(
-        color: AppColors.surfaceWhite,
+        color: OweMeColors.surfaceWhite,
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              Text('Total a receber', style: AppTextStyles.caption),
+              Text('Total a receber', style: OweMeTextStyles.caption),
               const SizedBox(height: 8),
               Text(
                 _totalDebt,
-                style: AppTextStyles.headline1,
+                style: OweMeTextStyles.headline1,
               ),
             ],
           ),

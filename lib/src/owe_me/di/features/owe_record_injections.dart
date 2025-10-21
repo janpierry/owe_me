@@ -12,6 +12,6 @@ void initOweRecordInjections() {
 
   //Data Sources
   inj.registerLazySingleton<OweRecordDataSource>(
-    () => OweRecordDataSourceImpl(appDatabase: inj()),
+    () => OweRecordDataSourceImpl(oweMeDatabase: inj()),
   );
 }

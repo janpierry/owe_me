@@ -1,4 +1,4 @@
-import 'package:owe_me/src/data/data_sources/app_data_base.dart';
+import 'package:owe_me/src/data/data_sources/owe_me_data_base.dart';
 import 'package:owe_me/src/data/data_sources/owe_record_data_source.dart';
 import 'package:owe_me/src/data/data_sources/payment_record_data_source.dart';
 import 'package:owe_me/src/data/models/debtor_model.dart';
@@ -22,15 +22,15 @@ abstract class MonetaryRecordDataSource {
 }
 
 class MonetaryRecordDataSourceImpl implements MonetaryRecordDataSource {
-  final AppDatabase _appDatabase;
+  final OweMeDatabase _oweMeDatabase;
   final OweRecordDataSource _oweRecordDataSource;
   final PaymentRecordDataSource _paymentRecordDataSource;
 
   MonetaryRecordDataSourceImpl({
-    required AppDatabase appDatabase,
+    required OweMeDatabase oweMeDatabase,
     required OweRecordDataSource oweRecordDataSource,
     required PaymentRecordDataSource paymentRecordDataSource,
-  })  : _appDatabase = appDatabase,
+  })  : _oweMeDatabase = oweMeDatabase,
         _oweRecordDataSource = oweRecordDataSource,
         _paymentRecordDataSource = paymentRecordDataSource;
 
@@ -39,7 +39,7 @@ class MonetaryRecordDataSourceImpl implements MonetaryRecordDataSource {
     MonetaryRecordModel monetaryRecordModel,
     int debtorTotalDebtInCents,
   ) async {
-    final db = await _appDatabase.database;
+    final db = await _oweMeDatabase.database;
 
     await db.transaction((txn) async {
       final dataMap = monetaryRecordModel.toMap();
@@ -69,7 +69,7 @@ class MonetaryRecordDataSourceImpl implements MonetaryRecordDataSource {
     MonetaryRecordModel monetaryRecordModel,
     int debtorTotalDebtInCents,
   ) async {
-    final db = await _appDatabase.database;
+    final db = await _oweMeDatabase.database;
 
     await db.transaction(
       (txn) async {
@@ -99,7 +99,7 @@ class MonetaryRecordDataSourceImpl implements MonetaryRecordDataSource {
     MonetaryRecordModel monetaryRecordModel,
     int debtorTotalDebtInCents,
   ) async {
-    final db = await _appDatabase.database;
+    final db = await _oweMeDatabase.database;
 
     await db.transaction((txn) async {
       // Remove monetary record

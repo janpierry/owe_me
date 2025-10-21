@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:owe_me/src/presentation/containers/home_container.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
 
-class App extends StatelessWidget {
-  const App({super.key});
+class OweMe extends StatelessWidget {
+  const OweMe({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryBlue),
+        colorScheme: ColorScheme.fromSeed(seedColor: OweMeColors.primaryBlue),
         useMaterial3: true,
       ),
       home: const HomeContainer(),

@@ -1,4 +1,4 @@
-import 'package:owe_me/src/data/data_sources/app_data_base.dart';
+import 'package:owe_me/src/data/data_sources/owe_me_data_base.dart';
 import 'package:owe_me/src/data/models/monetary_record_model.dart';
 
 abstract class OweRecordDataSource {
@@ -6,15 +6,15 @@ abstract class OweRecordDataSource {
 }
 
 class OweRecordDataSourceImpl implements OweRecordDataSource {
-  final AppDatabase _appDatabase;
+  final OweMeDatabase _oweMeDatabase;
 
   OweRecordDataSourceImpl({
-    required AppDatabase appDatabase,
-  }) : _appDatabase = appDatabase;
+    required OweMeDatabase oweMeDatabase,
+  }) : _oweMeDatabase = oweMeDatabase;
 
   @override
   Future<List<OweRecordModel>> queryOweRecordsByDebtorId(int debtorId) async {
-    final db = await _appDatabase.database;
+    final db = await _oweMeDatabase.database;
     final List<Map<String, dynamic>> maps = await db.query(
       OweRecordModel.table,
       where: 'debtor_id = ?',

@@ -29,6 +29,6 @@ void initFavoriteDescriptionInjections() {
 
   //Data Sources
   inj.registerLazySingleton<FavoriteDescriptionDataSource>(
-    () => FavoriteDescriptionDataSourceImpl(appDatabase: inj()),
+    () => FavoriteDescriptionDataSourceImpl(oweMeDatabase: inj()),
   );
 }

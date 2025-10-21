@@ -5,8 +5,8 @@ import 'package:owe_me/src/core/presentation/formatters/money_formatter.dart';
 import 'package:owe_me/src/core/presentation/date_formats.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/presentation/widgets/debtor_page/debtor_monetary_record_history/debtor_monetary_record_list_item/debtor_monetary_record_list_item_popup_menu_button.dart';
 
 class DebtorMonetaryRecordListItem extends StatelessWidget {
@@ -34,14 +34,14 @@ class DebtorMonetaryRecordListItem extends StatelessWidget {
     return Material(
       elevation: 1,
       borderRadius: BorderRadius.circular(12),
-      color: AppColors.surfaceWhite,
+      color: OweMeColors.surfaceWhite,
       child: Container(
         padding: const EdgeInsets.only(top: 8, bottom: 8, left: 12, right: 4),
         child: Row(
           children: [
             Icon(
               monetaryRecord.iconData,
-              color: AppColors.primaryBlue,
+              color: OweMeColors.primaryBlue,
             ),
             const SizedBox(width: 8),
             Expanded(
@@ -51,12 +51,12 @@ class DebtorMonetaryRecordListItem extends StatelessWidget {
                 children: [
                   Text(
                     _description,
-                    style: AppTextStyles.body,
+                    style: OweMeTextStyles.body,
                   ),
                   const SizedBox(height: 4),
                   Text(
                     DateFormats.ddMMMyyyy.format(monetaryRecord.date),
-                    style: AppTextStyles.caption,
+                    style: OweMeTextStyles.caption,
                   ),
                 ],
               ),
@@ -64,7 +64,7 @@ class DebtorMonetaryRecordListItem extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               MoneyFormatter.toStringCurrency(monetaryRecord.amount),
-              style: AppTextStyles.subtitle,
+              style: OweMeTextStyles.subtitle,
             ),
             const SizedBox(width: 4),
             DebtorMonetaryRecordListItemPopupMenuButton(

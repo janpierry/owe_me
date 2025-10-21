@@ -1,5 +1,6 @@
-class AppSpacing {
-  AppSpacing._();
+//TODO use this?
+class OweMeSpacing {
+  OweMeSpacing._();
 
   static const double s0 = 0.0;
   static const double s2 = 2.0;

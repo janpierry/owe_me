@@ -12,6 +12,6 @@ void initPaymentRecordInjections() {
 
   //Data Sources
   inj.registerLazySingleton<PaymentRecordDataSource>(
-    () => PaymentRecordDataSourceImpl(appDatabase: inj()),
+    () => PaymentRecordDataSourceImpl(oweMeDatabase: inj()),
   );
 }

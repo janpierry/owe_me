@@ -1,4 +1,4 @@
-import 'package:owe_me/src/data/data_sources/app_data_base.dart';
+import 'package:owe_me/src/data/data_sources/owe_me_data_base.dart';
 import 'package:owe_me/src/data/models/debtor_model.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -10,15 +10,15 @@ abstract class DebtorDataSource {
 }
 
 class DebtorDataSourceImpl implements DebtorDataSource {
-  final AppDatabase _appDatabase;
+  final OweMeDatabase _oweMeDatabase;
 
   DebtorDataSourceImpl({
-    required AppDatabase appDatabase,
-  }) : _appDatabase = appDatabase;
+    required OweMeDatabase oweMeDatabase,
+  }) : _oweMeDatabase = oweMeDatabase;
 
   @override
   Future<List<DebtorModel>> queryAllDebtors() async {
-    final db = await _appDatabase.database;
+    final db = await _oweMeDatabase.database;
     final List<Map<String, dynamic>> maps = await db.query(DebtorModel.table);
     return List.generate(maps.length, (i) {
       return DebtorModel.fromMap(maps[i]);
@@ -27,7 +27,7 @@ class DebtorDataSourceImpl implements DebtorDataSource {
 
   @override
   Future<int> insertDebtor(DebtorModel debtor) async {
-    final db = await _appDatabase.database;
+    final db = await _oweMeDatabase.database;
     final Map<String, dynamic> debtorMap = debtor.toMap();
     return await db.insert(
       DebtorModel.table,
@@ -38,7 +38,7 @@ class DebtorDataSourceImpl implements DebtorDataSource {
 
   @override
   Future<void> updateDebtor(DebtorModel debtor) async {
-    final db = await _appDatabase.database;
+    final db = await _oweMeDatabase.database;
     final Map<String, dynamic> debtorMap = debtor.toMap();
     await db.update(
       DebtorModel.table,
@@ -50,7 +50,7 @@ class DebtorDataSourceImpl implements DebtorDataSource {
 
   @override
   Future<void> deleteDebtor(int debtorId) async {
-    final db = await _appDatabase.database;
+    final db = await _oweMeDatabase.database;
     await db.delete(
       DebtorModel.table,
       where: 'id = ?',

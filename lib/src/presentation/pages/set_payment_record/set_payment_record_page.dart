@@ -5,12 +5,13 @@ import 'package:owe_me/src/domain/entities/money.dart';
 import 'package:owe_me/src/domain/enums/payment_method.dart';
 import 'package:owe_me/src/presentation/models/drafts/payment_record_draft.dart';
 import 'package:owe_me/src/core/presentation/extensions/payment_method_ui_extensions.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/app_text_styles.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/presentation/widgets/set_payment_record/page/set_payment_record_primary_button.dart';
-import 'package:owe_me/src/presentation/widgets/shared/app_amount_text_form_field.dart';
-import 'package:owe_me/src/presentation/widgets/shared/app_date_picker.dart';
-import 'package:owe_me/src/presentation/widgets/shared/app_dropdown.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_amount_text_form_field.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_app_bar.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_date_picker.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_dropdown.dart';
 
 class SetPaymentRecordPage extends StatefulWidget {
   final PaymentRecord? paymentRecordToEdit;
@@ -71,13 +72,10 @@ class _SetPaymentRecordPageState extends State<SetPaymentRecordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_pageTitle, style: AppTextStyles.headline1),
-        backgroundColor: AppColors.surfaceWhite,
-        centerTitle: true,
-        elevation: 1,
+      appBar: OweMeAppBar(
+        titleText: _pageTitle,
       ),
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: OweMeColors.backgroundLight,
       body: Column(
         children: [
           Expanded(
@@ -88,10 +86,10 @@ class _SetPaymentRecordPageState extends State<SetPaymentRecordPage> {
                 children: [
                   Text(
                     'Qual foi o valor do pagamento?',
-                    style: AppTextStyles.subtitle,
+                    style: OweMeTextStyles.subtitle,
                   ),
                   SizedBox(height: 8),
-                  AppAmountTextFormField(
+                  OweMeAmountTextFormField(
                     initialAmount: _paymentRecordDraft.amount,
                     onAmountChanged: _onAmountChanged,
                     autoFocus: true,
@@ -99,10 +97,10 @@ class _SetPaymentRecordPageState extends State<SetPaymentRecordPage> {
                   const SizedBox(height: 24),
                   Text(
                     'Qual foi o método de pagamento?',
-                    style: AppTextStyles.subtitle,
+                    style: OweMeTextStyles.subtitle,
                   ),
                   const SizedBox(height: 8),
-                  AppDropdown<PaymentMethod>(
+                  OweMeDropdown<PaymentMethod>(
                     hintText: 'Selecione o método de pagamento',
                     items: PaymentMethod.values,
                     itemLabelBuilder: (paymentMethod) => paymentMethod.label,
@@ -112,10 +110,10 @@ class _SetPaymentRecordPageState extends State<SetPaymentRecordPage> {
                   const SizedBox(height: 24),
                   Text(
                     'Qual foi a data deste pagamento?',
-                    style: AppTextStyles.subtitle,
+                    style: OweMeTextStyles.subtitle,
                   ),
                   const SizedBox(height: 8),
-                  AppDatePicker(
+                  OweMeDatePicker(
                     initialDate: _paymentRecordDraft.date ?? DateTime.now(),
                     onDateChanged: _onDateChanged,
                   ),
