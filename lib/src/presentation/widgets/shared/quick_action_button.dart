@@ -24,8 +24,7 @@ class QuickActionButton extends StatelessWidget {
       child: InkWell(
         onTap: onPressed,
         borderRadius: BorderRadius.circular(24),
-        highlightColor:
-            OweMeColors.primaryBlueLight, //TODO update widget to have fixed color
+        highlightColor: OweMeColors.primaryBlueLight,
         child: Container(
           height: 80,
           width: 104,

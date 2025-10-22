@@ -5,13 +5,12 @@ import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.da
 class OweMeAppBar extends AppBar {
   final String titleText;
   final Color? titleColor;
-  final List<Widget>? actions;
 
   OweMeAppBar({
     super.key,
     required this.titleText,
     this.titleColor,
-    this.actions,
+    super.actions,
   }) : super(
           title: Text(
             titleText,
@@ -22,6 +21,5 @@ class OweMeAppBar extends AppBar {
           centerTitle: true,
           backgroundColor: OweMeColors.surfaceWhite,
           elevation: 1,
-          actions: actions,
         );
 }
