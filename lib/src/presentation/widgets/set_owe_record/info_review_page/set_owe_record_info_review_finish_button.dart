@@ -11,8 +11,7 @@ class SetOweRecordInfoReviewFinishButton extends StatelessWidget {
     required this.isEditing,
   });
 
-  //TODO fix name
-  void _requestRecordSetting(BuildContext context) {
+  void _requestToSetRecord(BuildContext context) {
     context
         .read<SetOweRecordInfoReviewBloc>()
         .add(SetOweRecordInfoReviewSetRecordRequested());
@@ -22,7 +21,7 @@ class SetOweRecordInfoReviewFinishButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OweMeElevatedButton(
       label: isEditing ? 'Salvar alterações' : 'Confirmar',
-      onPressed: () => _requestRecordSetting(context),
+      onPressed: () => _requestToSetRecord(context),
     );
   }
 }
