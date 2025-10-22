@@ -64,7 +64,6 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            //TODO check this
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -125,14 +124,13 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                //TODO test if null or empty check necessary
                 Text.rich(
                   TextSpan(
                     text: 'Método de pagamento: ',
                     style: OweMeTextStyles.subtitle,
                     children: [
                       TextSpan(
-                        text: paymentRecordDraft.paymentMethod?.label ?? 'Not specified',
+                        text: paymentRecordDraft.paymentMethod?.label ?? 'Não informado',
                         style: OweMeTextStyles.subtitle.copyWith(
                           color: OweMeColors.primaryBlue,
                         ),
