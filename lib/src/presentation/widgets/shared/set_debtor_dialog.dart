@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:owe_me/src/core/presentation/callbacks.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_shadows.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 
 class SetDebtorDialog extends StatefulWidget {
@@ -79,14 +80,7 @@ class _SetDebtorDialogState extends State<SetDebtorDialog> {
         decoration: BoxDecoration(
           color: OweMeColors.surfaceWhite,
           borderRadius: BorderRadius.circular(20),
-          boxShadow: const [
-            //TODO create file for shadows
-            BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.1),
-              blurRadius: 16,
-              offset: Offset(0, 4),
-            ),
-          ],
+          boxShadow: OweMeShadows.defaultShadow,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -110,9 +104,6 @@ class _SetDebtorDialogState extends State<SetDebtorDialog> {
                     hintStyle: OweMeTextStyles.body.copyWith(
                       color: OweMeColors.textGray,
                     ),
-                    filled: true,
-                    //TODO test this
-                    fillColor: OweMeColors.surfaceWhite,
                     contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),

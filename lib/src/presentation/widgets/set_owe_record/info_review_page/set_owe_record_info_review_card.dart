@@ -167,7 +167,6 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                //TODO test if null or empty check necessary
                 Expanded(
                   child: Text.rich(
                     overflow: TextOverflow.clip,

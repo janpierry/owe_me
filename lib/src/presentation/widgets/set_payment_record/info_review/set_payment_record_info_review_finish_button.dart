@@ -8,7 +8,7 @@ class SetPaymentRecordInfoReviewFinishButton extends StatelessWidget {
 
   const SetPaymentRecordInfoReviewFinishButton({super.key, required this.isEditing});
 
-  void _requestRecordSetting(BuildContext context) {
+  void _requestToSetRecord(BuildContext context) {
     context
         .read<SetPaymentRecordInfoReviewBloc>()
         .add(SetPaymentRecordInfoReviewSetRecordRequested());
@@ -18,7 +18,7 @@ class SetPaymentRecordInfoReviewFinishButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OweMeElevatedButton(
       label: isEditing ? 'Salvar alterações' : 'Confirmar',
-      onPressed: () => _requestRecordSetting(context),
+      onPressed: () => _requestToSetRecord(context),
     );
   }
 }

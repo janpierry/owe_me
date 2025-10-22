@@ -178,14 +178,13 @@ It was a great learning experience and gave me more confidence working with loca
 
 ### ✅ What Works:
 - Adding and managing debtors
-- Logging different types of records
+- Adding, editing, and deleting debts, credits, and payments
 - Viewing balances and record history
 
 ---
 
 ### 🔧 Next Steps to MVP:
 - [ ] Add error handling
-- [ ] Edit and delete records
 
 ---
 

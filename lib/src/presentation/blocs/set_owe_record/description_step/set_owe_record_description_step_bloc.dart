@@ -185,9 +185,10 @@ class SetOweRecordDescriptionStepBloc
     Emitter<SetOweRecordDescriptionStepState> emit,
   ) async {
     emit(SetOweRecordDescriptionStepLoading());
+    final description = _description.isNotEmpty ? _description : null;
     emit(
       SetOweRecordDescriptionStepNavigatingToNextPage(
-        oweRecordDraft: _oweRecordDraft.copyWith(description: _description),
+        oweRecordDraft: _oweRecordDraft.copyWith(description: description),
         recordDebtor: _recordDebtor,
       ),
     );
