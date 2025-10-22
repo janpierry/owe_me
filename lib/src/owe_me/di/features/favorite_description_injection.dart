@@ -5,22 +5,31 @@ import 'package:owe_me/src/domain/repositories/favorite_description_repository.d
 import 'package:owe_me/src/domain/use_cases/favorite_descriptions/add_favorite_description.dart';
 import 'package:owe_me/src/domain/use_cases/favorite_descriptions/load_debtor_favorite_credits.dart';
 import 'package:owe_me/src/domain/use_cases/favorite_descriptions/load_debtor_favorite_debts.dart';
+import 'package:owe_me/src/presentation/blocs/set_owe_record/description_step/set_owe_record_description_step_bloc.dart';
 
 void initFavoriteDescriptionInjections() {
   final inj = GetIt.instance;
 
   //Blocs
+  inj.registerFactory<SetOweRecordDescriptionStepBloc>(
+    () => SetOweRecordDescriptionStepBloc(
+      addFavoriteDescription: inj(),
+      loadDebtorFavoriteDebts: inj(),
+      loadDebtorFavoriteCredits: inj(),
+    ),
+  );
 
   //Use Cases
-  inj.registerLazySingleton<AddFavoriteDescription>(
-    () => AddFavoriteDescription(repository: inj()),
-  );
-  inj.registerLazySingleton<LoadDebtorFavoriteCredits>(
-    () => LoadDebtorFavoriteCredits(repository: inj()),
-  );
-  inj.registerLazySingleton<LoadDebtorFavoriteDebts>(
-    () => LoadDebtorFavoriteDebts(repository: inj()),
-  );
+  inj
+    ..registerLazySingleton<AddFavoriteDescription>(
+      () => AddFavoriteDescription(repository: inj()),
+    )
+    ..registerLazySingleton<LoadDebtorFavoriteCredits>(
+      () => LoadDebtorFavoriteCredits(repository: inj()),
+    )
+    ..registerLazySingleton<LoadDebtorFavoriteDebts>(
+      () => LoadDebtorFavoriteDebts(repository: inj()),
+    );
 
   //Repositories
   inj.registerLazySingleton<FavoriteDescriptionRepository>(
