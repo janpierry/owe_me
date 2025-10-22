@@ -104,9 +104,6 @@ class _SetDebtorDialogState extends State<SetDebtorDialog> {
                     hintStyle: OweMeTextStyles.body.copyWith(
                       color: OweMeColors.textGray,
                     ),
-                    filled: true,
-                    //TODO test this
-                    fillColor: OweMeColors.surfaceWhite,
                     contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
