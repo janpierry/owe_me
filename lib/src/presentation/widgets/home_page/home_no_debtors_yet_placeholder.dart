@@ -30,7 +30,7 @@ class HomeNoDebtorsYetPlaceholder extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.person, size: 96, color: OweMeColors.gray400),
+            const Icon(Icons.person, size: 96, color: OweMeColors.gray400),
             const SizedBox(height: 16),
             Text(
               'Sem devedores por enquanto',

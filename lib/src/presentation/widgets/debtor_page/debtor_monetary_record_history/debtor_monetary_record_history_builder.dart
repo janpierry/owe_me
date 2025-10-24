@@ -19,7 +19,7 @@ class DebtorMonetaryRecordHistoryBuilder extends StatelessWidget {
           );
         }
         if (state is DebtorMonetaryRecordHistoryEmpty) {
-          return DebtorMonetaryRecordHistoryEmptyPlaceholder();
+          return const DebtorMonetaryRecordHistoryEmptyPlaceholder();
         }
         if (state is DebtorMonetaryRecordHistoryLoading) {
           return const Center(

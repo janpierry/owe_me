@@ -153,7 +153,7 @@ class SetOweRecordDescriptionStepBloc
   ) {
     if (description.trim().isEmpty) {
       emit(
-        SetOweRecordDescriptionStepFavoriteDescriptionsError(
+        const SetOweRecordDescriptionStepFavoriteDescriptionsError(
           message: 'Descrição não pode estar vazia para ser adicionada aos favoritos',
         ),
       );
@@ -162,7 +162,7 @@ class SetOweRecordDescriptionStepBloc
 
     if (_isDescriptionInFavorites(description)) {
       emit(
-        SetOweRecordDescriptionStepFavoriteDescriptionsError(
+        const SetOweRecordDescriptionStepFavoriteDescriptionsError(
           message: 'Descrição já está entre os favoritos',
         ),
       );

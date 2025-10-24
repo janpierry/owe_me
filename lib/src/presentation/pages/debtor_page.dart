@@ -32,7 +32,7 @@ class DebtorPage extends StatelessWidget {
   }
 
   void _showDebtorRemovedSnackbar(BuildContext context) {
-    final snackBar = SnackBar(
+    const snackBar = SnackBar(
       content: Text('Devedor removido com sucesso'),
     );
     ScaffoldMessenger.of(context)
@@ -50,7 +50,7 @@ class DebtorPage extends StatelessWidget {
   }
 
   void _showDebtorEditedSnackbar(BuildContext context) {
-    final snackBar = SnackBar(
+    const snackBar = SnackBar(
       content: Text('Devedor editado com sucesso'),
     );
     ScaffoldMessenger.of(context)
@@ -68,7 +68,7 @@ class DebtorPage extends StatelessWidget {
   }
 
   void _showDebtorMonetaryRecordRemovedSnackbar(BuildContext context) {
-    final snackBar = SnackBar(
+    const snackBar = SnackBar(
       content: Text('Registro removido com sucesso'),
     );
     ScaffoldMessenger.of(context)

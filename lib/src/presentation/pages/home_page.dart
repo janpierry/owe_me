@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
         builder: (context, state) {
           if (state is HomeDebtorsLoaded) {
             if (state.debtors.isEmpty) {
-              return HomeNoDebtorsYetPlaceholder();
+              return const HomeNoDebtorsYetPlaceholder();
             }
             return HomeBody(debtors: state.debtors);
           }

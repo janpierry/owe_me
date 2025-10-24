@@ -39,7 +39,7 @@ class _SetPaymentRecordPageState extends State<SetPaymentRecordPage> {
     super.initState();
     _paymentRecordDraft = widget.paymentRecordDraftToReview ??
         PaymentRecordDraft(
-          amount: widget.paymentRecordToEdit?.amount ?? Money.zero(),
+          amount: widget.paymentRecordToEdit?.amount ?? const Money.zero(),
           paymentMethod: widget.paymentRecordToEdit?.paymentMethod ?? PaymentMethod.cash,
           date: widget.paymentRecordToEdit?.date ?? DateTime.now(),
         );
@@ -88,7 +88,7 @@ class _SetPaymentRecordPageState extends State<SetPaymentRecordPage> {
                     'Qual foi o valor do pagamento?',
                     style: OweMeTextStyles.subtitle,
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   OweMeAmountTextFormField(
                     initialAmount: _paymentRecordDraft.amount,
                     onAmountChanged: _onAmountChanged,
