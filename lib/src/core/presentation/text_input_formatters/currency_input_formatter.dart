@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 class CurrencyInputFormatter extends TextInputFormatter {
   int _numericValue = 0;
+  final _maxDigits = 14;
 
   String formatNumber(int valueInCents) {
     //TODO adapt this to the user's locale
@@ -24,7 +25,12 @@ class CurrencyInputFormatter extends TextInputFormatter {
     TextEditingValue oldValue,
     TextEditingValue newValue,
   ) {
-    final newText = newValue.text.replaceAll(RegExp(r'[^0-9]'), '');
+    String newText = newValue.text.replaceAll(RegExp(r'[^0-9]'), '');
+
+    if (newText.length > _maxDigits) {
+      newText = newText.substring(0, _maxDigits);
+    }
+
     _numericValue = int.tryParse(newText) ?? 0;
 
     final formatted = formatNumber(_numericValue);
