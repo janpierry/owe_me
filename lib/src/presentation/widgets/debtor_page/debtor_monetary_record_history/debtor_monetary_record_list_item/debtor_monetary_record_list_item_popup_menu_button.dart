@@ -6,7 +6,7 @@ import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/presentation/blocs/debtor/debtor_bloc.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_amount_step_container.dart';
-import 'package:owe_me/src/presentation/pages/set_payment_record/set_payment_record_page.dart';
+import 'package:owe_me/src/presentation/containers/set_payment_record/set_payment_record_form_container.dart';
 import 'package:owe_me/src/presentation/widgets/debtor_page/debtor_monetary_record_history/debtor_monetary_record_list_item/remove_debtor_monetary_record_confirmation_dialog.dart';
 
 class DebtorMonetaryRecordListItemPopupMenuButton extends StatelessWidget {
@@ -22,7 +22,7 @@ class DebtorMonetaryRecordListItemPopupMenuButton extends StatelessWidget {
   void _navigateToEditMonetaryRecordPage(BuildContext context) {
     final record = monetaryRecord;
     final page = switch (record) {
-      PaymentRecord() => SetPaymentRecordPage(
+      PaymentRecord() => SetPaymentRecordFormContainer(
           recordDebtor: recordDebtor,
           paymentRecordToEdit: record,
           fromDebtorPage: true,

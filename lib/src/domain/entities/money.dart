@@ -5,7 +5,10 @@ class Money extends Equatable {
 
   const Money({required this.cents});
 
-  const Money.zero() : cents = 0;
+  static const Money zero = Money(cents: 0);
+
+  // Limit of 999,999,999,999.99
+  static const Money max = Money(cents: 99999999999999);
 
   double get inReal => cents / 100;
 

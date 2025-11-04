@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_amount_step_container.dart';
-import 'package:owe_me/src/presentation/pages/set_payment_record/set_payment_record_page.dart';
+import 'package:owe_me/src/presentation/containers/set_payment_record/set_payment_record_form_container.dart';
 import 'package:owe_me/src/presentation/widgets/shared/quick_action_button.dart';
 
 class DebtorQuickActionSection extends StatelessWidget {
@@ -10,10 +10,10 @@ class DebtorQuickActionSection extends StatelessWidget {
 
   const DebtorQuickActionSection({super.key, required this.debtor});
 
-  void _navigateToSetPaymentRecordPage(BuildContext context) {
+  void _navigateToSetPaymentRecordFormPage(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => SetPaymentRecordPage(
+        builder: (context) => SetPaymentRecordFormContainer(
           recordDebtor: debtor,
           fromDebtorPage: true,
         ),
@@ -54,7 +54,7 @@ class DebtorQuickActionSection extends StatelessWidget {
         QuickActionButton(
           label: 'Pagamento',
           icon: Icons.credit_card,
-          onPressed: () => _navigateToSetPaymentRecordPage(context),
+          onPressed: () => _navigateToSetPaymentRecordFormPage(context),
         ),
         const SizedBox(width: 8),
         QuickActionButton(
