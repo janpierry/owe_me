@@ -5,7 +5,7 @@ class AmountValidationMapper implements ValidationMapper<AmountValidationFailure
   const AmountValidationMapper();
 
   @override
-  String? mapFailureToErrorMessage(AmountValidationFailure? failure) {
+  String? mapFailureToMessage(AmountValidationFailure? failure) {
     if (failure == null) return null;
 
     return switch (failure) {

@@ -2,17 +2,18 @@ import 'package:owe_me/src/domain/validation/failures/validation_failure.dart';
 import 'package:owe_me/src/domain/validation/validators/validator.dart';
 import 'package:owe_me/src/presentation/validation/mappers/validation_mapper.dart';
 
-abstract class ValidationService<T, F extends ValidationFailure> {
-  final Validator<T, F> validator;
-  final ValidationMapper<F> mapper;
+class ValidationService<T, F extends ValidationFailure> {
+  final Validator<T, F> _validator;
+  final ValidationMapper<F> _mapper;
 
   const ValidationService({
-    required this.validator,
-    required this.mapper,
-  });
+    required Validator<T, F> validator,
+    required ValidationMapper<F> mapper,
+  })  : _validator = validator,
+        _mapper = mapper;
 
   String? validateAndMapFailureToErrorMessage(T value) {
-    final failure = validator.validate(value);
-    return mapper.mapFailureToErrorMessage(failure);
+    final failure = _validator.validate(value);
+    return _mapper.mapFailureToMessage(failure);
   }
 }

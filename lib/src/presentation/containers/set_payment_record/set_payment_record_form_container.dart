@@ -6,7 +6,7 @@ import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/presentation/blocs/set_payment_record/form/set_payment_record_form_bloc.dart';
 import 'package:owe_me/src/presentation/models/drafts/payment_record_draft.dart';
 import 'package:owe_me/src/presentation/pages/set_payment_record/set_payment_record_form_page.dart';
-import 'package:owe_me/src/presentation/validation/services/amount_validation_service.dart';
+import 'package:owe_me/src/presentation/validation/services/validation_services.dart';
 
 class SetPaymentRecordFormContainer extends StatelessWidget {
   final PaymentRecord? paymentRecordToEdit;

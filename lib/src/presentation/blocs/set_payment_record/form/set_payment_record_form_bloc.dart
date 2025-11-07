@@ -7,7 +7,8 @@ import 'package:owe_me/src/domain/entities/money.dart';
 import 'package:owe_me/src/domain/enums/payment_method.dart';
 import 'package:owe_me/src/presentation/models/drafts/payment_record_draft.dart';
 import 'package:owe_me/src/presentation/models/enums/form_status.dart';
-import 'package:owe_me/src/presentation/validation/services/amount_validation_service.dart';
+import 'package:owe_me/src/presentation/models/form_field_state.dart';
+import 'package:owe_me/src/presentation/validation/services/validation_services.dart';
 
 part 'set_payment_record_form_event.dart';
 part 'set_payment_record_form_state.dart';
@@ -25,6 +26,7 @@ class SetPaymentRecordFormBloc
           SetPaymentRecordFormState.initial(
             paymentRecordDraftToReview: paymentRecordDraftToReview,
             paymentRecordToEdit: paymentRecordToEdit,
+            amountValidationService: validationService,
           ),
         ) {
     on<SetPaymentRecordFormAmountChanged>(_onAmountChanged);
@@ -37,17 +39,24 @@ class SetPaymentRecordFormBloc
     SetPaymentRecordFormAmountChanged event,
     Emitter<SetPaymentRecordFormState> emit,
   ) {
-    final amountErrorMessage =
-        _amountValidationService.validateAndMapFailureToErrorMessage(event.amount);
+    final amount = event.amount;
+    final errorMessage = _validateAmount(amount);
+    final isValid = errorMessage == null;
 
     emit(
       state.copyWith(
-        paymentRecordDraft: state.paymentRecordDraft.copyWith(amount: event.amount),
-        eraseErrorMessage: amountErrorMessage == null,
-        amountErrorMessage: amountErrorMessage,
-        isValid: amountErrorMessage == null,
+        amount: state.amount.copyWith(
+          value: amount,
+          errorMessage: errorMessage,
+          removeErrorMessage: isValid,
+          showError: !isValid,
+        ),
       ),
     );
+  }
+
+  String? _validateAmount(Money amount) {
+    return _amountValidationService.validateAndMapFailureToErrorMessage(amount);
   }
 
   FutureOr<void> _onPaymentMethodChanged(
@@ -55,10 +64,7 @@ class SetPaymentRecordFormBloc
     Emitter<SetPaymentRecordFormState> emit,
   ) {
     emit(
-      state.copyWith(
-        paymentRecordDraft:
-            state.paymentRecordDraft.copyWith(paymentMethod: event.paymentMethod),
-      ),
+      state.copyWith(paymentMethod: event.paymentMethod),
     );
   }
 
@@ -67,9 +73,7 @@ class SetPaymentRecordFormBloc
     Emitter<SetPaymentRecordFormState> emit,
   ) {
     emit(
-      state.copyWith(
-        paymentRecordDraft: state.paymentRecordDraft.copyWith(date: event.date),
-      ),
+      state.copyWith(date: event.date),
     );
   }
 
@@ -78,18 +82,18 @@ class SetPaymentRecordFormBloc
     Emitter<SetPaymentRecordFormState> emit,
   ) {
     emit(state.copyWith(status: FormStatus.loading));
-    if (_areAllFieldsValid()) {
-      emit(state.copyWith(status: FormStatus.success));
-    } else {
-      emit(state.copyWith(status: FormStatus.error));
-    }
+    final amountErrorMessage = _validateAmount(state.amount.value);
+    final isAmountValid = amountErrorMessage == null;
+    emit(
+      state.copyWith(
+        amount: state.amount.copyWith(
+          errorMessage: amountErrorMessage,
+          removeErrorMessage: isAmountValid,
+          showError: !isAmountValid,
+        ),
+        status: isAmountValid ? FormStatus.success : FormStatus.error,
+      ),
+    );
     emit(state.copyWith(status: FormStatus.initial));
-  }
-
-  bool _areAllFieldsValid() {
-    final amount = state.paymentRecordDraft.amount;
-    if (amount == null) return false;
-
-    return _amountValidationService.validator.validate(amount) == null;
   }
 }

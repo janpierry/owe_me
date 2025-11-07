@@ -1,52 +1,74 @@
 part of 'set_payment_record_form_bloc.dart';
 
 class SetPaymentRecordFormState extends Equatable {
-  final PaymentRecordDraft paymentRecordDraft;
-  final String? amountErrorMessage;
-  final bool isValid;
+  final FormFieldState<Money> amount;
+  final PaymentMethod paymentMethod;
+  final DateTime date;
   final FormStatus status;
 
   const SetPaymentRecordFormState({
-    required this.paymentRecordDraft,
-    this.amountErrorMessage,
-    this.isValid = false,
+    required this.amount,
+    required this.paymentMethod,
+    required this.date,
     this.status = FormStatus.initial,
   });
+
+  bool get isValid => amount.isValid;
+
+  PaymentRecordDraft get paymentRecordDraft => PaymentRecordDraft(
+        amount: amount.value,
+        paymentMethod: paymentMethod,
+        date: date,
+      );
 
   factory SetPaymentRecordFormState.initial({
     required PaymentRecordDraft? paymentRecordDraftToReview,
     required PaymentRecord? paymentRecordToEdit,
+    required AmountValidationService amountValidationService,
   }) {
+    final amountToReview = paymentRecordDraftToReview?.amount;
+    final amount = amountToReview ?? paymentRecordToEdit?.amount ?? Money.zero;
+    final amountErrorMessage =
+        amountValidationService.validateAndMapFailureToErrorMessage(amount);
+    final amountFieldState = FormFieldState<Money>(
+      value: amount,
+      errorMessage: amountErrorMessage,
+      showError: false,
+    );
+
+    final paymentMethodToReview = paymentRecordDraftToReview?.paymentMethod;
+    final paymentMethod =
+        paymentMethodToReview ?? paymentRecordToEdit?.paymentMethod ?? PaymentMethod.cash;
+
+    final dateToReview = paymentRecordDraftToReview?.date;
+    final date = dateToReview ?? paymentRecordToEdit?.date ?? DateTime.now();
+
     return SetPaymentRecordFormState(
-      paymentRecordDraft: paymentRecordDraftToReview ??
-          PaymentRecordDraft(
-            amount: paymentRecordToEdit?.amount ?? Money.zero,
-            paymentMethod: paymentRecordToEdit?.paymentMethod ?? PaymentMethod.cash,
-            date: paymentRecordToEdit?.date ?? DateTime.now(),
-          ),
+      amount: amountFieldState,
+      paymentMethod: paymentMethod,
+      date: date,
     );
   }
 
   SetPaymentRecordFormState copyWith({
-    PaymentRecordDraft? paymentRecordDraft,
-    bool eraseErrorMessage = false,
-    String? amountErrorMessage,
-    bool? isValid,
+    FormFieldState<Money>? amount,
+    PaymentMethod? paymentMethod,
+    DateTime? date,
     FormStatus? status,
   }) {
     return SetPaymentRecordFormState(
-      paymentRecordDraft: paymentRecordDraft ?? this.paymentRecordDraft,
-      amountErrorMessage:
-          eraseErrorMessage ? null : amountErrorMessage ?? this.amountErrorMessage,
-      isValid: isValid ?? this.isValid,
+      amount: amount ?? this.amount,
+      paymentMethod: paymentMethod ?? this.paymentMethod,
+      date: date ?? this.date,
       status: status ?? this.status,
     );
   }
 
   @override
   List<Object?> get props => [
-        paymentRecordDraft,
-        amountErrorMessage,
+        amount,
+        paymentMethod,
+        date,
         isValid,
         status,
       ];

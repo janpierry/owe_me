@@ -119,7 +119,8 @@ class SetPaymentRecordFormPage extends StatelessWidget {
                                 .read<SetPaymentRecordFormBloc>()
                                 .add(SetPaymentRecordFormAmountChanged(amount: amount));
                           },
-                          errorText: state.amountErrorMessage,
+                          errorText:
+                              state.amount.showError ? state.amount.errorMessage : null,
                           autoFocus: true,
                         );
                       },
