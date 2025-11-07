@@ -37,11 +37,12 @@ class Debtor extends Equatable {
 
   Debtor copyWith({
     int? id,
+    bool removeId = false,
     String? nickname,
     Money? totalDebt,
   }) {
     return Debtor(
-      id: id ?? this.id,
+      id: removeId ? null : (id ?? this.id),
       nickname: nickname ?? this.nickname,
       totalDebt: totalDebt ?? this.totalDebt,
     );

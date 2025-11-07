@@ -14,16 +14,16 @@ class PaymentRecordDraft {
 
   PaymentRecordDraft copyWith({
     Money? amount,
-    bool eraseAmount = false,
+    bool removeAmount = false,
     DateTime? date,
-    bool eraseDate = false,
+    bool removeDate = false,
     PaymentMethod? paymentMethod,
-    bool erasePaymentMethod = false,
+    bool removePaymentMethod = false,
   }) {
     return PaymentRecordDraft(
-      amount: eraseAmount ? null : amount ?? this.amount,
-      date: eraseDate ? null : date ?? this.date,
-      paymentMethod: erasePaymentMethod ? null : paymentMethod ?? this.paymentMethod,
+      amount: removeAmount ? null : (amount ?? this.amount),
+      date: removeDate ? null : (date ?? this.date),
+      paymentMethod: removePaymentMethod ? null : (paymentMethod ?? this.paymentMethod),
     );
   }
 }

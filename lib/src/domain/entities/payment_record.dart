@@ -22,12 +22,13 @@ class PaymentRecord extends MonetaryRecord {
 
   PaymentRecord copyWith({
     int? id,
+    bool removeId = false,
     Money? amount,
     DateTime? date,
     PaymentMethod? paymentMethod,
   }) {
     return PaymentRecord(
-      id: id ?? this.id,
+      id: removeId ? null : (id ?? this.id),
       amount: amount ?? this.amount,
       date: date ?? this.date,
       paymentMethod: paymentMethod ?? this.paymentMethod,

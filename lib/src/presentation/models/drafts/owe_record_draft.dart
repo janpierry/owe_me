@@ -16,17 +16,17 @@ class OweRecordDraft {
 
   OweRecordDraft copyWith({
     Money? amount,
-    bool eraseAmount = false,
+    bool removeAmount = false,
     String? description,
-    bool eraseDescription = false,
+    bool removeDescription = false,
     DateTime? date,
-    bool eraseDate = false,
+    bool removeDate = false,
     OweType? oweType,
   }) {
     return OweRecordDraft(
-      amount: eraseAmount ? null : amount ?? this.amount,
-      description: eraseDescription ? null : description ?? this.description,
-      date: eraseDate ? null : date ?? this.date,
+      amount: removeAmount ? null : (amount ?? this.amount),
+      description: removeDescription ? null : (description ?? this.description),
+      date: removeDate ? null : (date ?? this.date),
       oweType: oweType ?? this.oweType,
     );
   }

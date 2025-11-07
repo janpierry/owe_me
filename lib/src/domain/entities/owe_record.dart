@@ -28,18 +28,19 @@ class OweRecord extends MonetaryRecord {
     };
   }
 
-  MonetaryRecord copyWith({
+  OweRecord copyWith({
     int? id,
+    bool removeId = false,
     Money? amount,
     String? description,
-    bool eraseDescription = false,
+    bool removeDescription = false,
     DateTime? date,
     OweType? oweType,
   }) {
     return OweRecord(
-      id: id ?? this.id,
+      id: removeId ? null : (id ?? this.id),
       amount: amount ?? this.amount,
-      description: eraseDescription ? null : (description ?? this.description),
+      description: removeDescription ? null : (description ?? this.description),
       date: date ?? this.date,
       oweType: oweType ?? this.oweType,
     );
