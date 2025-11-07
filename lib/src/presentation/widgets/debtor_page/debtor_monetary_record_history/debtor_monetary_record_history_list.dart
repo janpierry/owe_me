@@ -25,7 +25,7 @@ class DebtorMonetaryRecordHistoryList extends StatelessWidget {
           recordDebtor: debtor,
         );
       },
-      separatorBuilder: (context, index) => SizedBox(height: 12),
+      separatorBuilder: (context, index) => const SizedBox(height: 12),
       itemCount: monetaryRecords.length,
     );
   }

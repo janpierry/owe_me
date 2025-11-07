@@ -11,7 +11,7 @@ class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key, required this.debtors});
 
   String get _totalDebt {
-    Money totalBalance = const Money.zero();
+    Money totalBalance = Money.zero;
     for (final debtor in debtors) {
       totalBalance += debtor.totalDebt;
     }

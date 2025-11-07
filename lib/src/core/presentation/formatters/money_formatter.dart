@@ -11,7 +11,7 @@ class MoneyFormatter {
 
   static String toStringCurrencyNullable(Money? money) {
     if (money == null) {
-      return toStringCurrency(const Money.zero());
+      return toStringCurrency(Money.zero);
     }
     return toStringCurrency(money);
   }

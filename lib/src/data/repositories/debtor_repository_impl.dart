@@ -50,7 +50,7 @@ class DebtorRepositoryImpl implements DebtorRepository {
       }
       final debtorModel = DebtorAdapter.toModel(debtor);
       await _debtorDataSource.updateDebtor(debtorModel);
-      return Right(null);
+      return const Right(null);
     } on Exception catch (e) {
       //TODO: handle specific Failures
       return Left(DefaultFailure(e.toString()));
@@ -65,7 +65,7 @@ class DebtorRepositoryImpl implements DebtorRepository {
         return const Left(DebtorIdNotFoundFailure('Debtor ID cannot be null'));
       }
       await _debtorDataSource.deleteDebtor(debtorId);
-      return Right(null);
+      return const Right(null);
     } on Exception catch (e) {
       //TODO: handle specific Failures
       return Left(DefaultFailure(e.toString()));

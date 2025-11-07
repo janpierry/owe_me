@@ -7,7 +7,7 @@ import 'package:owe_me/src/presentation/widgets/shared/quick_action_button.dart'
 class HomeQuickActionButtons extends StatelessWidget {
   const HomeQuickActionButtons({super.key});
 
-  void _navigateToSetPaymentRecordPage(BuildContext context) {
+  void _navigateToSetPaymentRecordDebtorSelectionPage(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const SetPaymentRecordDebtorSelectionContainer(
@@ -48,7 +48,7 @@ class HomeQuickActionButtons extends StatelessWidget {
         QuickActionButton(
           label: 'Pagamento',
           icon: Icons.credit_card,
-          onPressed: () => _navigateToSetPaymentRecordPage(context),
+          onPressed: () => _navigateToSetPaymentRecordDebtorSelectionPage(context),
         ),
         const SizedBox(width: 8),
         QuickActionButton(

@@ -76,7 +76,7 @@ void main() {
         amount: amountTest,
         oweType: OweType.debt,
       );
-      final updatedDraft = draft.copyWith(eraseAmount: true);
+      final updatedDraft = draft.copyWith(removeAmount: true);
       expect(updatedDraft.amount, isNull);
     });
 
@@ -85,7 +85,7 @@ void main() {
         description: descriptionTest,
         oweType: OweType.debt,
       );
-      final updatedDraft = draft.copyWith(eraseDescription: true);
+      final updatedDraft = draft.copyWith(removeDescription: true);
       expect(updatedDraft.description, isNull);
     });
 
@@ -94,7 +94,7 @@ void main() {
         date: dateTest,
         oweType: OweType.debt,
       );
-      final updatedDraft = draft.copyWith(eraseDate: true);
+      final updatedDraft = draft.copyWith(removeDate: true);
       expect(updatedDraft.date, isNull);
     });
   });

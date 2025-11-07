@@ -11,7 +11,7 @@ class DebtorMonetaryRecordHistoryEmptyPlaceholder extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 48),
       child: Column(
         children: [
-          Icon(Icons.receipt_long_outlined, size: 80, color: OweMeColors.gray400),
+          const Icon(Icons.receipt_long_outlined, size: 80, color: OweMeColors.gray400),
           const SizedBox(height: 12),
           Text(
             'Sem registros por enquanto',

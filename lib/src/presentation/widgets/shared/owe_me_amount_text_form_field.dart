@@ -9,12 +9,14 @@ class OweMeAmountTextFormField extends StatefulWidget {
   final Money? initialAmount;
   final ValueChanged<Money>? onAmountChanged;
   final bool autoFocus;
+  final String? errorText;
 
   const OweMeAmountTextFormField({
     super.key,
     this.initialAmount,
     this.onAmountChanged,
     this.autoFocus = false,
+    this.errorText,
   });
 
   @override
@@ -24,20 +26,28 @@ class OweMeAmountTextFormField extends StatefulWidget {
 class _OweMeAmountTextFormFieldState extends State<OweMeAmountTextFormField> {
   final _controller = TextEditingController();
   final _formatter = CurrencyInputFormatter();
+  bool _isReady = false;
 
   @override
   void initState() {
     super.initState();
 
     _controller.text = _formatter.formatNumber(widget.initialAmount?.cents ?? 0);
-    _controller.addListener(() {
-      final amount = MoneyUtils.fromStringCurrency(_controller.text);
-      widget.onAmountChanged?.call(amount);
-    });
+    _controller.addListener(_onTextChanged);
+  }
+
+  void _onTextChanged() {
+    if (!_isReady) {
+      _isReady = true;
+      return;
+    }
+    final amount = MoneyUtils.fromStringCurrency(_controller.text);
+    widget.onAmountChanged?.call(amount);
   }
 
   @override
   void dispose() {
+    _controller.removeListener(_onTextChanged);
     _controller.dispose();
     super.dispose();
   }
@@ -46,6 +56,7 @@ class _OweMeAmountTextFormFieldState extends State<OweMeAmountTextFormField> {
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
+        errorText: widget.errorText,
         contentPadding: const EdgeInsets.all(12),
         filled: true,
         fillColor: OweMeColors.surfaceWhite,
@@ -60,6 +71,20 @@ class _OweMeAmountTextFormFieldState extends State<OweMeAmountTextFormField> {
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(
             color: OweMeColors.primaryBlue,
+            width: 1,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(
+            color: OweMeColors.red,
+            width: 1,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(
+            color: OweMeColors.red,
             width: 1,
           ),
         ),

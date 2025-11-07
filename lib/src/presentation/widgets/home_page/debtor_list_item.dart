@@ -4,7 +4,7 @@ import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:owe_me/src/presentation/containers/debtor_container.dart';
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_amount_step_container.dart';
-import 'package:owe_me/src/presentation/pages/set_payment_record/set_payment_record_page.dart';
+import 'package:owe_me/src/presentation/containers/set_payment_record/set_payment_record_form_container.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_spacer.dart';
@@ -25,10 +25,10 @@ class DebtorListItem extends StatelessWidget {
     );
   }
 
-  void _navigateToSetPaymentRecordPage(BuildContext context) {
+  void _navigateToSetPaymentRecordFormPage(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => SetPaymentRecordPage(
+        builder: (context) => SetPaymentRecordFormContainer(
           recordDebtor: debtor,
           fromDebtorPage: false,
         ),
@@ -90,7 +90,7 @@ class DebtorListItem extends StatelessWidget {
               ),
               const OweMeSpacer(minWidth: 8),
               IconButton(
-                onPressed: () => _navigateToSetPaymentRecordPage(context),
+                onPressed: () => _navigateToSetPaymentRecordFormPage(context),
                 icon: const Icon(
                   Icons.credit_card,
                   color: OweMeColors.primaryBlue,

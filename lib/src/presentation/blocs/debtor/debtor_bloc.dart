@@ -44,7 +44,7 @@ class DebtorBloc extends Bloc<DebtorEvent, DebtorState> {
   }
 
   FutureOr<void> _loadDebtor(Emitter<DebtorState> emit, Debtor debtor) {
-    emit(DebtorPageLoading());
+    emit(const DebtorPageLoading());
     _debtor = debtor;
     emit(DebtorPageLoaded(debtor: _debtor));
     add(DebtorMonetaryRecordHistoryLoadRequested());

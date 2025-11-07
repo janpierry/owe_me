@@ -4,9 +4,9 @@ import 'package:owe_me/src/core/presentation/utils/owe_me_date_utils.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/presentation/containers/set_payment_record/set_payment_record_debtor_selection_container.dart';
+import 'package:owe_me/src/presentation/containers/set_payment_record/set_payment_record_form_container.dart';
 import 'package:owe_me/src/presentation/models/drafts/payment_record_draft.dart';
 import 'package:owe_me/src/core/presentation/extensions/payment_method_ui_extensions.dart';
-import 'package:owe_me/src/presentation/pages/set_payment_record/set_payment_record_page.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 
@@ -43,7 +43,7 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
   void _navigateToEditRecordData(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => SetPaymentRecordPage(
+        builder: (context) => SetPaymentRecordFormContainer(
           paymentRecordDraftToReview: paymentRecordDraft,
           recordDebtor: recordDebtor,
           paymentRecordToEdit: paymentRecordToEdit,

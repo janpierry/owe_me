@@ -1,4 +1,4 @@
-import 'package:owe_me/src/owe_me/bootstrap.dart';
+import 'package:owe_me/src/app/bootstrap.dart';
 
 void main() {
   bootstrap();
