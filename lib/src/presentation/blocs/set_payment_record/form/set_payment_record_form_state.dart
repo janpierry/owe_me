@@ -1,7 +1,7 @@
 part of 'set_payment_record_form_bloc.dart';
 
 class SetPaymentRecordFormState extends Equatable {
-  final FormFieldState<Money> amount;
+  final ValidatableAmountState amount;
   final PaymentMethod paymentMethod;
   final DateTime date;
   final FormStatus status;
@@ -24,15 +24,14 @@ class SetPaymentRecordFormState extends Equatable {
   factory SetPaymentRecordFormState.initial({
     required PaymentRecordDraft? paymentRecordDraftToReview,
     required PaymentRecord? paymentRecordToEdit,
-    required AmountValidationService amountValidationService,
+    required AmountValidator amountValidator,
   }) {
     final amountToReview = paymentRecordDraftToReview?.amount;
     final amount = amountToReview ?? paymentRecordToEdit?.amount ?? Money.zero;
-    final amountErrorMessage =
-        amountValidationService.validateAndMapFailureToErrorMessage(amount);
-    final amountFieldState = FormFieldState<Money>(
+    final amountFailure = amountValidator.validate(amount);
+    final amountFieldState = ValidatableAmountState(
       value: amount,
-      errorMessage: amountErrorMessage,
+      failure: amountFailure,
       showError: false,
     );
 
@@ -51,7 +50,7 @@ class SetPaymentRecordFormState extends Equatable {
   }
 
   SetPaymentRecordFormState copyWith({
-    FormFieldState<Money>? amount,
+    ValidatableAmountState? amount,
     PaymentMethod? paymentMethod,
     DateTime? date,
     FormStatus? status,
