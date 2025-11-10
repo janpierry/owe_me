@@ -3,42 +3,68 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/domain/entities/money.dart';
+import 'package:owe_me/src/domain/validation/validators/amount_validator.dart';
+import 'package:owe_me/src/presentation/models/enums/form_status.dart';
+import 'package:owe_me/src/presentation/models/validatable_field_state/validatable_field_states.dart';
 
 part 'set_owe_record_amount_step_event.dart';
 part 'set_owe_record_amount_step_state.dart';
 
 class SetOweRecordAmountStepBloc
     extends Bloc<SetOweRecordAmountStepEvent, SetOweRecordAmountStepState> {
-  late Money _amount;
+  final AmountValidator _amountValidator;
 
-  SetOweRecordAmountStepBloc() : super(SetOweRecordAmountStepInitial()) {
-    on<SetOweRecordAmountStepPageInitialized>(_loadInitialData);
+  SetOweRecordAmountStepBloc({
+    required Money? amountToEdit,
+    required AmountValidator amountValidator,
+  })  : _amountValidator = amountValidator,
+        super(
+          SetOweRecordAmountStepState.initial(
+            amountToEdit: amountToEdit,
+            amountValidator: amountValidator,
+          ),
+        ) {
     on<SetOweRecordAmountStepAmountChanged>(_setAmount);
     on<SetOweRecordAmountStepNextPageRequested>(_sendAmountToNavigateToNextPage);
-  }
-
-  FutureOr<void> _loadInitialData(
-    SetOweRecordAmountStepPageInitialized event,
-    Emitter<SetOweRecordAmountStepState> emit,
-  ) async {
-    emit(SetOweRecordAmountStepPageLoading());
-    _amount = event.amountToEdit ?? const Money(cents: 0);
-    emit(SetOweRecordAmountStepPageLoaded(amountToEdit: _amount));
   }
 
   FutureOr<void> _setAmount(
     SetOweRecordAmountStepAmountChanged event,
     Emitter<SetOweRecordAmountStepState> emit,
   ) async {
-    _amount = event.amount;
+    final amount = event.amount;
+    final failure = _amountValidator.validate(event.amount);
+    final isValid = failure == null;
+
+    emit(
+      state.copyWith(
+        amount: state.amount.copyWith(
+          value: amount,
+          failure: failure,
+          removeFailure: isValid,
+          showError: !isValid,
+        ),
+      ),
+    );
   }
 
   FutureOr<void> _sendAmountToNavigateToNextPage(
     SetOweRecordAmountStepNextPageRequested event,
     Emitter<SetOweRecordAmountStepState> emit,
   ) async {
-    emit(SetOweRecordAmountStepLoading());
-    //TODO validate amount
-    emit(SetOweRecordAmountStepNavigatingToNextPage(amount: _amount));
+    emit(state.copyWith(status: FormStatus.loading));
+    final failure = _amountValidator.validate(state.amount.value);
+    final isValid = failure == null;
+    emit(
+      state.copyWith(
+        amount: state.amount.copyWith(
+          failure: failure,
+          removeFailure: isValid,
+          showError: !isValid,
+        ),
+        status: isValid ? FormStatus.success : FormStatus.error,
+      ),
+    );
+    emit(state.copyWith(status: FormStatus.initial));
   }
 }

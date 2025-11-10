@@ -8,6 +8,7 @@ import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:owe_me/src/presentation/blocs/set_owe_record/amount_step/set_owe_record_amount_step_bloc.dart';
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_description_step_container.dart';
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_info_review_container.dart';
+import 'package:owe_me/src/presentation/models/enums/form_status.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/amount_step_page/set_owe_record_amount_step_body.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_app_bar.dart';
 
@@ -28,20 +29,22 @@ class SetOweRecordAmountStepPage extends StatelessWidget {
   });
 
   void _listen(BuildContext context, SetOweRecordAmountStepState state) {
-    if (state is SetOweRecordAmountStepNavigatingToNextPage) {
+    if (state.status == FormStatus.success) {
       _navigateToNextPage(context, state);
+    } else if (state.status == FormStatus.error) {
+      _showErrorSnackBar(context);
     }
   }
 
   void _navigateToNextPage(
     BuildContext context,
-    SetOweRecordAmountStepNavigatingToNextPage state,
+    SetOweRecordAmountStepState state,
   ) {
     final isReviewing = oweRecordDraftToReview != null;
     if (isReviewing) {
-      _finishInfoReview(context, state.amount);
+      _finishInfoReview(context, state.amount.value);
     } else {
-      _navigateToDescriptionStep(context, state.amount);
+      _navigateToDescriptionStep(context, state.amount.value);
     }
   }
 
@@ -84,29 +87,28 @@ class SetOweRecordAmountStepPage extends StatelessWidget {
     );
   }
 
+  void _showErrorSnackBar(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text('Confira as informações.'),
+    );
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: OweMeAppBar(
         titleText: 'Informe o Valor',
       ),
-      body: BlocConsumer<SetOweRecordAmountStepBloc, SetOweRecordAmountStepState>(
+      body: BlocListener<SetOweRecordAmountStepBloc, SetOweRecordAmountStepState>(
         listener: _listen,
-        buildWhen: (_, current) => current is SetOweRecordAmountStepPageBuildState,
-        builder: (context, state) {
-          if (state is SetOweRecordAmountStepPageLoaded) {
-            return SetOweRecordAmountStepBody(
-              recordDebtor: recordDebtor,
-              oweRecordType: oweRecordType,
-              amountToEdit: state.amountToEdit,
-              isReviewing: oweRecordDraftToReview != null,
-            );
-          }
-
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+        child: SetOweRecordAmountStepBody(
+          recordDebtor: recordDebtor,
+          oweRecordType: oweRecordType,
+          isReviewing: oweRecordDraftToReview != null,
+        ),
       ),
     );
   }

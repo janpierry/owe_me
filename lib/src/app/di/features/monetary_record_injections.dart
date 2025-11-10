@@ -8,7 +8,6 @@ import 'package:owe_me/src/domain/use_cases/monetary_record/add_monetary_record_
 import 'package:owe_me/src/domain/use_cases/monetary_record/edit_monetary_record_and_update_debtor.dart';
 import 'package:owe_me/src/domain/use_cases/monetary_record/load_debtor_monetary_record_history.dart';
 import 'package:owe_me/src/domain/use_cases/monetary_record/remove_monetary_record_and_update_debtor.dart';
-import 'package:owe_me/src/presentation/blocs/set_owe_record/amount_step/set_owe_record_amount_step_bloc.dart';
 import 'package:owe_me/src/presentation/blocs/set_owe_record/info_review/set_owe_record_info_review_bloc.dart';
 import 'package:owe_me/src/presentation/blocs/set_payment_record/info_review/set_payment_record_info_review_bloc.dart';
 
@@ -17,9 +16,6 @@ void initMonetaryRecordInjections() {
 
   //Blocs
   inj
-    ..registerFactory<SetOweRecordAmountStepBloc>(
-      () => SetOweRecordAmountStepBloc(),
-    )
     ..registerFactory<SetOweRecordInfoReviewBloc>(
       () => SetOweRecordInfoReviewBloc(
         addMonetaryRecordAndUpdateDebtor: inj(),
