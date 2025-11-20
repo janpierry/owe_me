@@ -1,4 +1,4 @@
-import 'package:owe_me/src/domain/validation/failures/amount_failures.dart';
+import 'package:owe_me/src/domain/validation/failures/amount_validation_failures.dart';
 import 'package:owe_me/src/presentation/validation/mappers/validation_mapper.dart';
 
 class AmountValidationMapper implements ValidationMapper<AmountValidationFailure> {

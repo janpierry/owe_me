@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/domain/entities/money.dart';
 import 'package:owe_me/src/domain/enums/payment_method.dart';
-import 'package:owe_me/src/domain/validation/failures/amount_failures.dart';
+import 'package:owe_me/src/domain/validation/failures/amount_validation_failures.dart';
 import 'package:owe_me/src/domain/validation/validators/amount_validator.dart';
 import 'package:owe_me/src/presentation/models/drafts/payment_record_draft.dart';
 import 'package:owe_me/src/presentation/models/enums/form_status.dart';

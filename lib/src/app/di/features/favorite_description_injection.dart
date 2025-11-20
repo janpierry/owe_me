@@ -22,7 +22,7 @@ void initFavoriteDescriptionInjections() {
   //Use Cases
   inj
     ..registerLazySingleton<AddFavoriteDescription>(
-      () => AddFavoriteDescription(repository: inj()),
+      () => AddFavoriteDescription(repository: inj(), validator: inj()),
     )
     ..registerLazySingleton<LoadDebtorFavoriteCredits>(
       () => LoadDebtorFavoriteCredits(repository: inj()),

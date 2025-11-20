@@ -1,6 +1,6 @@
 import 'package:owe_me/src/domain/entities/money.dart';
 import 'package:owe_me/src/domain/validation/validators/validator.dart';
-import 'package:owe_me/src/domain/validation/failures/amount_failures.dart';
+import 'package:owe_me/src/domain/validation/failures/amount_validation_failures.dart';
 
 class AmountValidator implements Validator<Money, AmountValidationFailure> {
   const AmountValidator();
