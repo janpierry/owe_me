@@ -1,13 +1,13 @@
 import 'dart:async';
 
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
-import 'package:owe_me/src/core/shared/error/failures.dart';
+import 'package:owe_me/src/core/presentation/extensions/failure_extensions.dart';
+import 'package:owe_me/src/core/error/failures/failures.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
-import 'package:owe_me/src/domain/failures/favorite_description_failures.dart';
-import 'package:owe_me/src/domain/validation/failures/favorite_description_validation_failures.dart';
 import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/entities/favorite_description.dart';
@@ -44,6 +44,7 @@ class SetOweRecordDescriptionStepBloc
     );
     on<SetOweRecordDescriptionStepDescriptionAddedToFavorites>(
       _addDescriptionToFavorites,
+      transformer: droppable(),
     );
     on<SetOweRecordDescriptionStepNextPageRequested>(
       _sendDescriptionToNavigateToNextPage,
@@ -116,15 +117,22 @@ class SetOweRecordDescriptionStepBloc
   ) async {
     emit(SetOweRecordDescriptionStepFavoriteDescriptionsLoading());
 
-    final favoriteDescription = FavoriteDescription(
+    final favoriteDescriptionOrFailure = FavoriteDescription.create(
       description: _description,
       favoriteType: _oweRecordType,
     );
+
+    if (favoriteDescriptionOrFailure.isLeft()) {
+      final failure = favoriteDescriptionOrFailure.asLeft();
+      return _emitFavoriteDescriptionAdditionError(failure, emit);
+    }
+
+    final favoriteDescription = favoriteDescriptionOrFailure.asRight();
+
     final result = await _addFavoriteDescriptionUseCase(
       AddFavoriteDescriptionParams(
         debtor: _recordDebtor,
         favoriteDescription: favoriteDescription,
-        currentFavoriteDescriptions: _favoriteDescriptions,
       ),
     );
 
@@ -148,23 +156,9 @@ class SetOweRecordDescriptionStepBloc
     Failure failure,
     Emitter<SetOweRecordDescriptionStepState> emit,
   ) {
-    //TODO handle different failure types
-    // Can it be exaustive? Mixin?
-    String errorMessage = failure.message;
-    if (failure is FavoriteDescriptionValidationFailure) {
-      switch (failure) {
-        case FavoriteDescriptionEmptyFailure():
-          errorMessage =
-              'Descrição não pode estar vazia para ser adicionada aos favoritos';
-          break;
-      }
-    } else if (failure is FavoriteDescriptionAlreadyInFavoritesFailure) {
-      errorMessage = 'Descrição já está entre os favoritos';
-    }
-
     emit(
       SetOweRecordDescriptionStepFavoriteDescriptionsError(
-        message: errorMessage,
+        message: failure.uiMessage,
       ),
     );
   }

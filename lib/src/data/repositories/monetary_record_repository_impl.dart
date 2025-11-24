@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:owe_me/src/core/shared/error/failures.dart';
+import 'package:owe_me/src/core/error/failures/failures.dart';
 import 'package:owe_me/src/data/adapters/monetary_record_adapter.dart';
 import 'package:owe_me/src/data/data_sources/monetary_record_data_source.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';

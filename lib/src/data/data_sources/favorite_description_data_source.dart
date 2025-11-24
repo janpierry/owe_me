@@ -7,6 +7,9 @@ abstract class FavoriteDescriptionDataSource {
   Future<void> insertFavoriteDescription(
     FavoriteDescriptionModel favoriteDescription,
   );
+  Future<bool> queryFavoriteDescriptionExists(
+    FavoriteDescriptionModel favoriteDescription,
+  );
   Future<List<FavoriteDescriptionModel>> queryFavoriteDebtsByDebtorId(int debtorId);
   Future<List<FavoriteDescriptionModel>> queryFavoriteCreditsByDebtorId(int debtorId);
 }
@@ -29,6 +32,25 @@ class FavoriteDescriptionDataSourceImpl implements FavoriteDescriptionDataSource
       descriptionMap,
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+  }
+
+  @override
+  Future<bool> queryFavoriteDescriptionExists(
+    FavoriteDescriptionModel favoriteDescription,
+  ) {
+    final db = _oweMeDatabase.database;
+    return db.then((database) async {
+      final List<Map<String, dynamic>> maps = await database.query(
+        FavoriteDescriptionModel.table,
+        where: 'description = ? AND debtor_id = ? AND favorite_type = ?',
+        whereArgs: [
+          favoriteDescription.description,
+          favoriteDescription.debtorId,
+          favoriteDescription.favoriteType,
+        ],
+      );
+      return maps.isNotEmpty;
+    });
   }
 
   @override
