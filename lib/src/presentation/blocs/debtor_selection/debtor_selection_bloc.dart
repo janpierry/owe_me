@@ -25,7 +25,7 @@ class DebtorSelectionBloc extends Bloc<DebtorSelectionEvent, DebtorSelectionStat
     emit(DebtorSelectionLoadDebtorsInProgress());
     final response = await _loadDebtorsUseCase();
     response.fold(
-      (exception) => emit(DebtorSelectionLoadDebtorsError()),
+      (failure) => emit(DebtorSelectionLoadDebtorsError()),
       (debtors) {
         emit(DebtorSelectionLoadDebtorsSuccess(debtors: debtors));
       },

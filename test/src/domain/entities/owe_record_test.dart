@@ -1,12 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/domain/entities/money.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
+import 'package:owe_me/src/domain/value_objects/record_amount.dart';
 
 void main() {
   group('OweRecord Equatable props:', () {
     const id = 1;
-    const amount = Money(cents: 100);
+    final amount = RecordAmount.create(Money(cents: 100)).asRight();
     final date = DateTime(2023);
     const description = 'Description';
 
@@ -45,7 +47,7 @@ void main() {
     test('When two OweRecords have different [amount], they should not be equal', () {
       final second = OweRecord(
         id: id,
-        amount: const Money(cents: 200),
+        amount: RecordAmount.create(Money(cents: 200)).asRight(),
         date: date,
         description: description,
         oweType: OweType.debt,

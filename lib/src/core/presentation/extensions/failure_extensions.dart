@@ -1,6 +1,6 @@
 import 'package:owe_me/src/core/error/failures/failures.dart';
 import 'package:owe_me/src/domain/failures/favorite_description_failures.dart';
-import 'package:owe_me/src/presentation/validation/mappers/favorite_description_validation_mapper.dart';
+import 'package:owe_me/src/presentation/validation_mappers/favorite_description_validation_mapper.dart';
 
 extension UiFailureDisplay on Failure {
   String get uiMessage {

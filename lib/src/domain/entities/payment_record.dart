@@ -12,18 +12,18 @@ class PaymentRecord extends MonetaryRecord {
 
   @override
   Money applyAmountToTotalDebt(Money totalDebt) {
-    return totalDebt - amount;
+    return totalDebt - amount.value;
   }
 
   @override
   Money revertAmountFromTotalDebt(Money totalDebt) {
-    return totalDebt + amount;
+    return totalDebt + amount.value;
   }
 
   PaymentRecord copyWith({
     int? id,
     bool removeId = false,
-    Money? amount,
+    RecordAmount? amount,
     DateTime? date,
     PaymentMethod? paymentMethod,
   }) {

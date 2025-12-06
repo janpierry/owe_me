@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
 import 'package:owe_me/src/domain/entities/money.dart';
-import 'package:owe_me/src/domain/validation/validators/amount_validator.dart';
+import 'package:owe_me/src/domain/validation/failures/amount_validation_failures.dart';
+import 'package:owe_me/src/domain/value_objects/record_amount.dart';
 import 'package:owe_me/src/presentation/models/enums/form_status.dart';
 import 'package:owe_me/src/presentation/models/validatable_field_state/validatable_field_states.dart';
 
@@ -12,16 +14,11 @@ part 'set_owe_record_amount_step_state.dart';
 
 class SetOweRecordAmountStepBloc
     extends Bloc<SetOweRecordAmountStepEvent, SetOweRecordAmountStepState> {
-  final AmountValidator _amountValidator;
-
   SetOweRecordAmountStepBloc({
     required Money? amountToEdit,
-    required AmountValidator amountValidator,
-  })  : _amountValidator = amountValidator,
-        super(
+  }) : super(
           SetOweRecordAmountStepState.initial(
             amountToEdit: amountToEdit,
-            amountValidator: amountValidator,
           ),
         ) {
     on<SetOweRecordAmountStepAmountChanged>(_setAmount);
@@ -33,7 +30,7 @@ class SetOweRecordAmountStepBloc
     Emitter<SetOweRecordAmountStepState> emit,
   ) async {
     final amount = event.amount;
-    final failure = _amountValidator.validate(event.amount);
+    final failure = _validateAmount(amount);
     final isValid = failure == null;
 
     emit(
@@ -48,12 +45,17 @@ class SetOweRecordAmountStepBloc
     );
   }
 
+  AmountValidationFailure? _validateAmount(Money amount) {
+    final result = RecordAmount.create(amount);
+    return result.isLeft() ? result.asLeft() : null;
+  }
+
   FutureOr<void> _sendAmountToNavigateToNextPage(
     SetOweRecordAmountStepNextPageRequested event,
     Emitter<SetOweRecordAmountStepState> emit,
   ) async {
     emit(state.copyWith(status: FormStatus.loading));
-    final failure = _amountValidator.validate(state.amount.value);
+    final failure = _validateAmount(state.amount.value);
     final isValid = failure == null;
     emit(
       state.copyWith(

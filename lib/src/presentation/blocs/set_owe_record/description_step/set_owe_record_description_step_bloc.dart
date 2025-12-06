@@ -117,17 +117,17 @@ class SetOweRecordDescriptionStepBloc
   ) async {
     emit(SetOweRecordDescriptionStepFavoriteDescriptionsLoading());
 
-    final favoriteDescriptionOrFailure = FavoriteDescription.create(
+    final value = FavoriteDescription.create(
       description: _description,
       favoriteType: _oweRecordType,
     );
 
-    if (favoriteDescriptionOrFailure.isLeft()) {
-      final failure = favoriteDescriptionOrFailure.asLeft();
+    if (value.isLeft()) {
+      final failure = value.asLeft();
       return _emitFavoriteDescriptionAdditionError(failure, emit);
     }
 
-    final favoriteDescription = favoriteDescriptionOrFailure.asRight();
+    final favoriteDescription = value.asRight();
 
     final result = await _addFavoriteDescriptionUseCase(
       AddFavoriteDescriptionParams(

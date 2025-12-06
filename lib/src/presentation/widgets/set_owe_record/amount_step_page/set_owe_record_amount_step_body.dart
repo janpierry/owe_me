@@ -6,7 +6,7 @@ import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:owe_me/src/presentation/blocs/set_owe_record/amount_step/set_owe_record_amount_step_bloc.dart';
 import 'package:owe_me/src/core/presentation/extensions/owe_type_ui_extensions.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
-import 'package:owe_me/src/presentation/validation/mappers/amount_validation_mapper.dart';
+import 'package:owe_me/src/presentation/validation_mappers/amount_validation_mapper.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/amount_step_page/set_owe_record_amount_step_primary_button.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_amount_text_form_field.dart';
 
@@ -48,11 +48,8 @@ class SetOweRecordAmountStepBody extends StatelessWidget {
                     return OweMeAmountTextFormField(
                       initialAmount: state.amount.value,
                       onAmountChanged: (money) => _onAmountChanged(money, context),
-                      errorText: state.amount.showError
-                          ? context
-                              .read<AmountValidationMapper>()
-                              .mapFailureToMessage(state.amount.failure)
-                          : null,
+                      errorText:
+                          state.amount.showError ? state.amount.failure?.uiMessage : null,
                       autoFocus: true,
                     );
                   },

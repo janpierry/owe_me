@@ -83,6 +83,7 @@ class FavoriteDescriptionRepositoryImpl implements FavoriteDescriptionRepository
 
       return Right(favoriteDescriptions);
     } on DataIntegrityException catch (e) {
+      //TODO handle this
       return Left(DataIntegrityFailure(e.message));
     } on Exception catch (e) {
       //TODO: handle specific Failures

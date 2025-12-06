@@ -19,13 +19,13 @@ class FavoriteDescriptionAdapter {
   }
 
   static FavoriteDescription toEntity(FavoriteDescriptionModel model) {
-    final favoriteDescriptionOrFailure = FavoriteDescription.create(
+    final value = FavoriteDescription.create(
       id: model.id,
       description: model.description,
       favoriteType: OweType.values.byName(model.favoriteType),
     );
 
-    return favoriteDescriptionOrFailure.getOrElse(() {
+    return value.getOrElse(() {
       throw DataIntegrityException(
           'Invalid FavoriteDescriptionModel data of id ${model.id}');
     });
