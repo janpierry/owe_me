@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
-import 'package:owe_me/src/domain/entities/money.dart';
+import 'package:owe_me/src/domain/value_objects/money.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
 
 void main() {

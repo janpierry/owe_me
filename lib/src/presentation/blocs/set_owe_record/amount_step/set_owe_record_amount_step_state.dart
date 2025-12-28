@@ -15,8 +15,7 @@ final class SetOweRecordAmountStepState extends Equatable {
     required Money? amountToEdit,
   }) {
     final initialAmount = amountToEdit ?? Money.zero;
-    final result = RecordAmount.create(initialAmount);
-    final failure = result.isLeft() ? result.asLeft() : null;
+    final failure = RecordAmountRules.validate(initialAmount);
     return SetOweRecordAmountStepState(
       amount: ValidatableAmountState(
         value: initialAmount,

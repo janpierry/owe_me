@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:owe_me/src/core/presentation/utils/money_utils.dart';
-import 'package:owe_me/src/domain/entities/money.dart';
+import 'package:owe_me/src/domain/value_objects/money.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/core/presentation/text_input_formatters/currency_input_formatter.dart';

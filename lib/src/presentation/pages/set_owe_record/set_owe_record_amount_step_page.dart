@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
-import 'package:owe_me/src/domain/entities/money.dart';
+import 'package:owe_me/src/domain/value_objects/money.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:owe_me/src/presentation/blocs/set_owe_record/amount_step/set_owe_record_amount_step_bloc.dart';
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_description_step_container.dart';

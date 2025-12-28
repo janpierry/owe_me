@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:owe_me/src/domain/entities/money.dart';
+import 'package:owe_me/src/domain/value_objects/money.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:owe_me/src/domain/enums/payment_method.dart';
 import 'package:owe_me/src/domain/value_objects/record_amount.dart';

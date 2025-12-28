@@ -1,7 +1,7 @@
 import 'package:owe_me/src/core/error/exceptions/mapping_exceptions.dart';
 import 'package:owe_me/src/data/models/monetary_record_model.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
-import 'package:owe_me/src/domain/entities/money.dart';
+import 'package:owe_me/src/domain/value_objects/money.dart';
 import 'package:owe_me/src/domain/enums/payment_method.dart';
 import 'package:owe_me/src/domain/value_objects/record_amount.dart';
 

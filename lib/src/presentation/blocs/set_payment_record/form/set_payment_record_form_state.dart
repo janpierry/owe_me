@@ -27,8 +27,7 @@ class SetPaymentRecordFormState extends Equatable {
   }) {
     final amountToReview = paymentRecordDraftToReview?.amount;
     final amount = amountToReview ?? paymentRecordToEdit?.amount.value ?? Money.zero;
-    final result = RecordAmount.create(amount);
-    final failure = result.isLeft() ? result.asLeft() : null;
+    final failure = RecordAmountRules.validate(amount);
     final amountFieldState = ValidatableAmountState(
       value: amount,
       failure: failure,
