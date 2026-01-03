@@ -1,13 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
-import 'package:owe_me/src/domain/entities/money.dart';
+import 'package:owe_me/src/domain/value_objects/money.dart';
 import 'package:owe_me/src/domain/enums/payment_method.dart';
+import 'package:owe_me/src/domain/value_objects/record_amount.dart';
 
 void main() {
   group('Equatable props:', () {
     const id = 1;
     final date = DateTime(2023);
-    const amount = Money(cents: 1000);
+    final amount = RecordAmount.create(Money(cents: 1000)).asRight();
     const paymentType = PaymentMethod.cash;
 
     final entity = PaymentRecord(
@@ -54,7 +56,7 @@ void main() {
       PaymentRecord second = PaymentRecord(
         id: id,
         date: date,
-        amount: const Money(cents: 2000),
+        amount: RecordAmount.create(Money(cents: 2000)).asRight(),
         paymentMethod: paymentType,
       );
 

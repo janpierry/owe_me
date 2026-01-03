@@ -15,23 +15,23 @@ class OweRecord extends MonetaryRecord {
   @override
   Money applyAmountToTotalDebt(Money totalDebt) {
     return switch (oweType) {
-      OweType.debt => totalDebt + amount,
-      OweType.credit => totalDebt - amount,
+      OweType.debt => totalDebt + amount.value,
+      OweType.credit => totalDebt - amount.value,
     };
   }
 
   @override
   Money revertAmountFromTotalDebt(Money totalDebt) {
     return switch (oweType) {
-      OweType.debt => totalDebt - amount,
-      OweType.credit => totalDebt + amount,
+      OweType.debt => totalDebt - amount.value,
+      OweType.credit => totalDebt + amount.value,
     };
   }
 
   OweRecord copyWith({
     int? id,
     bool removeId = false,
-    Money? amount,
+    RecordAmount? amount,
     String? description,
     bool removeDescription = false,
     DateTime? date,

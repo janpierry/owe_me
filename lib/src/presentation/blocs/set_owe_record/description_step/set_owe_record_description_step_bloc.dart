@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
-import 'package:owe_me/src/core/shared/error/failures.dart';
+import 'package:owe_me/src/core/presentation/extensions/failure_extensions.dart';
+import 'package:owe_me/src/core/error/failures/failures.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
@@ -42,6 +44,7 @@ class SetOweRecordDescriptionStepBloc
     );
     on<SetOweRecordDescriptionStepDescriptionAddedToFavorites>(
       _addDescriptionToFavorites,
+      transformer: droppable(),
     );
     on<SetOweRecordDescriptionStepNextPageRequested>(
       _sendDescriptionToNavigateToNextPage,
@@ -114,29 +117,31 @@ class SetOweRecordDescriptionStepBloc
   ) async {
     emit(SetOweRecordDescriptionStepFavoriteDescriptionsLoading());
 
-    final isDescriptionValid = _validateDescriptionToAddToFavorites(_description, emit);
-    if (!isDescriptionValid) {
-      return;
+    final value = FavoriteDescription.create(
+      description: _description,
+      favoriteType: _oweRecordType,
+    );
+
+    if (value.isLeft()) {
+      final failure = value.asLeft();
+      return _emitFavoriteDescriptionAdditionError(failure, emit);
     }
 
-    final newFavoriteDescription =
-        FavoriteDescription(description: _description, favoriteType: _oweRecordType);
+    final favoriteDescription = value.asRight();
 
     final result = await _addFavoriteDescriptionUseCase(
       AddFavoriteDescriptionParams(
         debtor: _recordDebtor,
-        favoriteDescription: newFavoriteDescription,
+        favoriteDescription: favoriteDescription,
       ),
     );
+
     if (result.isLeft()) {
-      emit(SetOweRecordDescriptionStepFavoriteDescriptionsError(
-        //TODO map failures to messages
-        message: result.asLeft().message,
-      ));
-      return;
+      final failure = result.asLeft();
+      return _emitFavoriteDescriptionAdditionError(failure, emit);
     }
 
-    _favoriteDescriptions.add(newFavoriteDescription);
+    _favoriteDescriptions.add(favoriteDescription);
     _favoriteDescriptions.sort(
         (a, b) => a.description.toLowerCase().compareTo(b.description.toLowerCase()));
 
@@ -147,37 +152,15 @@ class SetOweRecordDescriptionStepBloc
     );
   }
 
-  bool _validateDescriptionToAddToFavorites(
-    String description,
+  void _emitFavoriteDescriptionAdditionError(
+    Failure failure,
     Emitter<SetOweRecordDescriptionStepState> emit,
   ) {
-    if (description.trim().isEmpty) {
-      emit(
-        const SetOweRecordDescriptionStepFavoriteDescriptionsError(
-          message: 'Descrição não pode estar vazia para ser adicionada aos favoritos',
-        ),
-      );
-      return false;
-    }
-
-    if (_isDescriptionInFavorites(description)) {
-      emit(
-        const SetOweRecordDescriptionStepFavoriteDescriptionsError(
-          message: 'Descrição já está entre os favoritos',
-        ),
-      );
-      return false;
-    }
-    return true;
-  }
-
-  bool _isDescriptionInFavorites(String description) {
-    for (var favoriteDescription in _favoriteDescriptions) {
-      if (favoriteDescription.description.toLowerCase() == description.toLowerCase()) {
-        return true;
-      }
-    }
-    return false;
+    emit(
+      SetOweRecordDescriptionStepFavoriteDescriptionsError(
+        message: failure.uiMessage,
+      ),
+    );
   }
 
   FutureOr<void> _sendDescriptionToNavigateToNextPage(

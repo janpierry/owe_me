@@ -23,7 +23,7 @@ class MonetaryRecordAdapter {
       case OweRecordModel():
         return OweRecordAdapter.toEntity(model);
       case PaymentRecordModel():
-        return PaymentRecordAdapter.modelToEntity(model);
+        return PaymentRecordAdapter.toEntity(model);
     }
   }
 }

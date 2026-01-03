@@ -1,6 +1,6 @@
 # OweMe
 
-**A simple Flutter app to track personal debts, credits, and payments.**
+**A Flutter app to track personal debts, credits, and payments.**
 
 ---
 
@@ -20,7 +20,7 @@
 
 ## 🧭 About the Project
 
-**OweMe** is a small personal project I built to practice my Flutter development skills. While I often find myself manually tracking small debts and credits between friends or family, I thought it would be a nice bonus to automate that process with an app.
+**OweMe** is a personal project I built to practice my Flutter development skills. While I often find myself manually tracking small debts and credits between friends or family, I thought it would be a nice bonus to automate that process with an app.
 
 The main goal of this project, though, was to explore mobile app architecture, state management, and local data persistence in a more structured and hands-on way.
 

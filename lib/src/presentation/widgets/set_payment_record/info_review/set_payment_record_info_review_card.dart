@@ -24,11 +24,6 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
     required this.fromDebtorPage,
   });
 
-  //TODO check this
-  //Flow of feature: SetRecordDebtorSelectionPage(OweRecord isDebt hasDebtor)
-  //=> SetRecordAmountPage(isEditing) => SetRecordDescriptionPage => SetRecordDatePage =>
-  //SetRecordInfoReview => Edit => pop pop push SetRecordInfoReview
-
   void _navigateToEditDebtor(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(

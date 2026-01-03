@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:owe_me/src/core/shared/error/failures.dart';
+import 'package:owe_me/src/core/error/exceptions/mapping_exceptions.dart';
+import 'package:owe_me/src/core/error/failures/failures.dart';
+import 'package:owe_me/src/core/error/failures/mapping_failures.dart';
 import 'package:owe_me/src/data/adapters/monetary_record_adapter.dart';
 import 'package:owe_me/src/data/data_sources/monetary_record_data_source.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
@@ -107,6 +109,9 @@ class MonetaryRecordRepositoryImpl implements MonetaryRecordRepository {
         ..sort((a, b) => b.date.compareTo(a.date));
 
       return Right(monetaryRecords);
+    } on DataIntegrityException catch (e) {
+      //TODO handle this
+      return Left(DataIntegrityFailure(e.message));
     } on Exception catch (e) {
       //TODO: handle specific Failures
       return Left(DefaultFailure(e.toString()));

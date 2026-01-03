@@ -1,6 +1,6 @@
 import 'package:owe_me/src/data/models/debtor_model.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
-import 'package:owe_me/src/domain/entities/money.dart';
+import 'package:owe_me/src/domain/value_objects/money.dart';
 
 class DebtorAdapter {
   const DebtorAdapter._();

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
-import 'package:owe_me/src/domain/entities/money.dart';
+import 'package:owe_me/src/domain/value_objects/money.dart';
 
 class Debtor extends Equatable {
   final int? id; // Null ID for new records

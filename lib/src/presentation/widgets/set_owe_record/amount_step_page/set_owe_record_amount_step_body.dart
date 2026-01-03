@@ -1,25 +1,24 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
-import 'package:owe_me/src/domain/entities/money.dart';
+import 'package:owe_me/src/domain/value_objects/money.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:owe_me/src/presentation/blocs/set_owe_record/amount_step/set_owe_record_amount_step_bloc.dart';
 import 'package:owe_me/src/core/presentation/extensions/owe_type_ui_extensions.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
+import 'package:owe_me/src/presentation/validation_mappers/amount_validation_mapper.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/amount_step_page/set_owe_record_amount_step_primary_button.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_amount_text_form_field.dart';
 
 class SetOweRecordAmountStepBody extends StatelessWidget {
   final Debtor recordDebtor;
   final OweType oweRecordType;
-  final Money amountToEdit;
   final bool isReviewing;
 
   const SetOweRecordAmountStepBody({
     super.key,
     required this.recordDebtor,
     required this.oweRecordType,
-    required this.amountToEdit,
     required this.isReviewing,
   });
 
@@ -44,10 +43,16 @@ class SetOweRecordAmountStepBody extends StatelessWidget {
               children: [
                 Text(_stepTitle, style: OweMeTextStyles.subtitle),
                 const SizedBox(height: 8),
-                OweMeAmountTextFormField(
-                  initialAmount: amountToEdit,
-                  onAmountChanged: (money) => _onAmountChanged(money, context),
-                  autoFocus: true,
+                BlocBuilder<SetOweRecordAmountStepBloc, SetOweRecordAmountStepState>(
+                  builder: (context, state) {
+                    return OweMeAmountTextFormField(
+                      initialAmount: state.amount.value,
+                      onAmountChanged: (money) => _onAmountChanged(money, context),
+                      errorText:
+                          state.amount.showError ? state.amount.failure?.uiMessage : null,
+                      autoFocus: true,
+                    );
+                  },
                 )
               ],
             ),
@@ -55,8 +60,13 @@ class SetOweRecordAmountStepBody extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(16),
-          child: SetOweRecordAmountStepPrimaryButton(
-            isReviewing: isReviewing,
+          child: BlocBuilder<SetOweRecordAmountStepBloc, SetOweRecordAmountStepState>(
+            builder: (context, state) {
+              return SetOweRecordAmountStepPrimaryButton(
+                isEnabled: state.isValid,
+                isReviewing: isReviewing,
+              );
+            },
           ),
         ),
       ],

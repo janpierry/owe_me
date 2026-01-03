@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/domain/use_cases/monetary_record/add_monetary_record_and_update_debtor.dart';
 import 'package:owe_me/src/domain/use_cases/monetary_record/edit_monetary_record_and_update_debtor.dart';
 import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
-import 'package:owe_me/src/presentation/models/mappers/owe_record_mapper.dart';
 
 part 'set_owe_record_info_review_event.dart';
 part 'set_owe_record_info_review_state.dart';
@@ -45,7 +45,14 @@ class SetOweRecordInfoReviewBloc
   ) async {
     emit(SetOweRecordInfoReviewSettingRecord());
     try {
-      final oweRecord = OweRecordMapper.toEntity(_oweRecordDraft);
+      final value = _oweRecordDraft.toEntity();
+      if (value.isLeft()) {
+        final failure = value.asLeft();
+        emit(SetOweRecordInfoReviewError(message: failure.message));
+        return;
+      }
+
+      final oweRecord = value.asRight();
       final result = _isEdition
           ? await _editMonetaryRecordAndUpdateDebtorUseCase(
               newMonetaryRecord: oweRecord.copyWith(id: _oweRecordToEdit!.id),

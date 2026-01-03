@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:owe_me/src/core/shared/error/failures.dart';
+import 'package:owe_me/src/core/error/exceptions/mapping_exceptions.dart';
+import 'package:owe_me/src/core/error/failures/failures.dart';
+import 'package:owe_me/src/core/error/failures/mapping_failures.dart';
 import 'package:owe_me/src/data/data_sources/favorite_description_data_source.dart';
 import 'package:owe_me/src/data/adapters/favorite_description_adapter.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
@@ -38,6 +40,31 @@ class FavoriteDescriptionRepositoryImpl implements FavoriteDescriptionRepository
   }
 
   @override
+  Future<Either<Failure, bool>> isDescriptionInFavorites(
+    FavoriteDescription favoriteDescription,
+    Debtor debtor,
+  ) async {
+    final debtorId = debtor.id;
+    if (debtorId == null) {
+      return const Left(DebtorIdNotFoundFailure('Debtor ID cannot be null'));
+    }
+    final favoriteDescriptionModel = FavoriteDescriptionAdapter.toModel(
+      entity: favoriteDescription,
+      debtorId: debtorId,
+    );
+    try {
+      final isInFavorites =
+          await _favoriteDescriptionDataSource.queryFavoriteDescriptionExists(
+        favoriteDescriptionModel,
+      );
+      return Right(isInFavorites);
+    } on Exception catch (e) {
+      //TODO: handle specific Failures
+      return Left(DefaultFailure(e.toString()));
+    }
+  }
+
+  @override
   Future<Either<Failure, List<FavoriteDescription>>> loadDebtorFavoriteDebts(
     Debtor debtor,
   ) async {
@@ -55,6 +82,9 @@ class FavoriteDescriptionRepositoryImpl implements FavoriteDescriptionRepository
       }).toList();
 
       return Right(favoriteDescriptions);
+    } on DataIntegrityException catch (e) {
+      //TODO handle this
+      return Left(DataIntegrityFailure(e.message));
     } on Exception catch (e) {
       //TODO: handle specific Failures
       return Left(DefaultFailure(e.toString()));
@@ -79,6 +109,8 @@ class FavoriteDescriptionRepositoryImpl implements FavoriteDescriptionRepository
       }).toList();
 
       return Right(favoriteDescriptions);
+    } on DataIntegrityException catch (e) {
+      return Left(DataIntegrityFailure(e.message));
     } on Exception catch (e) {
       //TODO: handle specific Failures
       return Left(DefaultFailure(e.toString()));

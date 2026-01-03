@@ -10,7 +10,7 @@ import 'package:owe_me/src/core/presentation/extensions/payment_method_ui_extens
 import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/presentation/models/enums/form_status.dart';
-import 'package:owe_me/src/presentation/validation/mappers/amount_validation_mapper.dart';
+import 'package:owe_me/src/presentation/validation_mappers/amount_validation_mapper.dart';
 import 'package:owe_me/src/presentation/widgets/set_payment_record/form/set_payment_record_form_primary_button.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_amount_text_form_field.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_app_bar.dart';
@@ -121,9 +121,7 @@ class SetPaymentRecordFormPage extends StatelessWidget {
                                 .add(SetPaymentRecordFormAmountChanged(amount: amount));
                           },
                           errorText: state.amount.showError
-                              ? context
-                                  .read<AmountValidationMapper>()
-                                  .mapFailureToMessage(state.amount.failure)
+                              ? state.amount.failure?.uiMessage
                               : null,
                           autoFocus: true,
                         );

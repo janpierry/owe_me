@@ -1,4 +1,5 @@
-abstract class ValidationFailure {
-  final String message;
-  const ValidationFailure(this.message);
+import 'package:owe_me/src/core/error/failures/failures.dart';
+
+abstract class ValidationFailure extends Failure {
+  const ValidationFailure(super.message);
 }

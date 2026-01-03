@@ -63,7 +63,7 @@ class DebtorMonetaryRecordListItem extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              MoneyFormatter.toStringCurrency(monetaryRecord.amount),
+              MoneyFormatter.toStringCurrency(monetaryRecord.amount.value),
               style: OweMeTextStyles.subtitle,
             ),
             const SizedBox(width: 4),

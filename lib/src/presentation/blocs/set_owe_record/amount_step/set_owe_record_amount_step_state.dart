@@ -1,38 +1,40 @@
 part of 'set_owe_record_amount_step_bloc.dart';
 
-sealed class SetOweRecordAmountStepState extends Equatable {
-  const SetOweRecordAmountStepState();
+final class SetOweRecordAmountStepState extends Equatable {
+  final ValidatableAmountState amount;
+  final FormStatus status;
+
+  const SetOweRecordAmountStepState({
+    required this.amount,
+    this.status = FormStatus.initial,
+  });
+
+  bool get isValid => amount.isValid;
+
+  factory SetOweRecordAmountStepState.initial({
+    required Money? amountToEdit,
+  }) {
+    final initialAmount = amountToEdit ?? Money.zero;
+    final failure = RecordAmountRules.validate(initialAmount);
+    return SetOweRecordAmountStepState(
+      amount: ValidatableAmountState(
+        value: initialAmount,
+        failure: failure,
+        showError: false,
+      ),
+    );
+  }
+
+  SetOweRecordAmountStepState copyWith({
+    ValidatableAmountState? amount,
+    FormStatus? status,
+  }) {
+    return SetOweRecordAmountStepState(
+      amount: amount ?? this.amount,
+      status: status ?? this.status,
+    );
+  }
 
   @override
-  List<Object?> get props => [];
-}
-
-final class SetOweRecordAmountStepInitial extends SetOweRecordAmountStepState {}
-
-final class SetOweRecordAmountStepLoading extends SetOweRecordAmountStepState {}
-
-sealed class SetOweRecordAmountStepPageBuildState extends SetOweRecordAmountStepState {
-  const SetOweRecordAmountStepPageBuildState();
-}
-
-final class SetOweRecordAmountStepPageLoading
-    extends SetOweRecordAmountStepPageBuildState {}
-
-final class SetOweRecordAmountStepPageLoaded
-    extends SetOweRecordAmountStepPageBuildState {
-  final Money amountToEdit;
-
-  const SetOweRecordAmountStepPageLoaded({required this.amountToEdit});
-
-  @override
-  List<Object?> get props => [amountToEdit];
-}
-
-class SetOweRecordAmountStepNavigatingToNextPage extends SetOweRecordAmountStepState {
-  final Money amount;
-
-  const SetOweRecordAmountStepNavigatingToNextPage({required this.amount});
-
-  @override
-  List<Object> get props => [amount];
+  List<Object?> get props => [amount, status];
 }
