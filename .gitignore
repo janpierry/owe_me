@@ -42,3 +42,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Claude Code: local settings + scratch files (not committed)
+.claude/settings.local.json
+issue-description.md
+pr-description.md
