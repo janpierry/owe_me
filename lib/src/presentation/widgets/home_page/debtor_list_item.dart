@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
+import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/core/presentation/formatters/money_formatter.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:owe_me/src/presentation/containers/debtor_container.dart';
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_amount_step_container.dart';
 import 'package:owe_me/src/presentation/containers/set_payment_record/set_payment_record_form_container.dart';
-import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
-import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
-import 'package:owe_me/src/presentation/widgets/shared/owe_me_spacer.dart';
 
 class DebtorListItem extends StatelessWidget {
   final Debtor debtor;
@@ -70,25 +69,27 @@ class DebtorListItem extends StatelessWidget {
         onTap: () => _navigateToDebtorPage(context),
         borderRadius: BorderRadius.circular(12),
         child: Container(
-          height: 80,
+          // height: 80,
           padding: const EdgeInsets.all(16),
           child: Row(
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    debtor.nickname,
-                    style: OweMeTextStyles.subtitle,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    MoneyFormatter.toStringCurrency(debtor.totalDebt),
-                    style: OweMeTextStyles.body,
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      debtor.nickname,
+                      style: OweMeTextStyles.subtitle,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      MoneyFormatter.toStringCurrency(debtor.totalDebt),
+                      style: OweMeTextStyles.body,
+                    ),
+                  ],
+                ),
               ),
-              const OweMeSpacer(minWidth: 8),
+              const SizedBox(width: 8),
               IconButton(
                 onPressed: () => _navigateToSetPaymentRecordFormPage(context),
                 icon: const Icon(
@@ -97,14 +98,16 @@ class DebtorListItem extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () => _navigateToSetRecordAmountStepPageAsCredit(context),
+                onPressed: () =>
+                    _navigateToSetRecordAmountStepPageAsCredit(context),
                 icon: const Icon(
                   Icons.money_off_csred,
                   color: OweMeColors.primaryBlue,
                 ),
               ),
               IconButton(
-                onPressed: () => _navigateToSetRecordAmountStepPageAsDebt(context),
+                onPressed: () =>
+                    _navigateToSetRecordAmountStepPageAsDebt(context),
                 icon: const Icon(
                   Icons.attach_money,
                   color: OweMeColors.primaryBlue,

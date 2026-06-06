@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:owe_me/src/core/presentation/formatters/money_formatter.dart';
-import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/core/presentation/callbacks.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
-import 'package:owe_me/src/presentation/widgets/shared/owe_me_spacer.dart';
+import 'package:owe_me/src/core/presentation/formatters/money_formatter.dart';
+import 'package:owe_me/src/domain/entities/debtor.dart';
 
 class DebtorSelectionListItem extends StatelessWidget {
   final Debtor debtor;
@@ -26,21 +25,25 @@ class DebtorSelectionListItem extends StatelessWidget {
         onTap: () => onDebtorSelected(debtor),
         borderRadius: BorderRadius.circular(12),
         child: Container(
-          height: 76,
           padding: const EdgeInsets.all(16),
           child: Row(
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(debtor.nickname, style: OweMeTextStyles.subtitle),
-                  Text(
-                    MoneyFormatter.toStringCurrency(debtor.totalDebt),
-                    style: OweMeTextStyles.body,
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      debtor.nickname,
+                      style: OweMeTextStyles.subtitle,
+                    ),
+                    Text(
+                      MoneyFormatter.toStringCurrency(debtor.totalDebt),
+                      style: OweMeTextStyles.body,
+                    ),
+                  ],
+                ),
               ),
-              const OweMeSpacer(minWidth: 8),
+              const SizedBox(width: 8),
               const Icon(Icons.chevron_right, color: OweMeColors.textGray),
             ],
           ),
