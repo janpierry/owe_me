@@ -5,6 +5,7 @@ import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/domain/value_objects/money.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:owe_me/src/domain/value_objects/record_amount.dart';
+import 'package:owe_me/src/presentation/validation_mappers/description_validation_mapper.dart';
 
 class OweRecordDraft {
   final Money? amount;
@@ -45,14 +46,15 @@ class OweRecordDraft {
       return Left(InvalidDraftFailure('Data é obrigatória'));
     }
 
-    return Right(
-      OweRecord(
-        id: null, // ID will be assigned when saved in database
-        amount: amount.asRight(),
-        description: description,
-        date: date!,
-        oweType: oweType,
-      ),
+    return OweRecord.create(
+      id: null, // ID will be assigned when saved in database
+      amount: amount.asRight(),
+      description: description,
+      date: date!,
+      oweType: oweType,
+    ).fold(
+      (failure) => Left(InvalidDraftFailure(failure.uiMessage)),
+      (record) => Right(record),
     );
   }
 }

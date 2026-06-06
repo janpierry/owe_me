@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/use_cases/debtor/add_debtor.dart';
 import 'package:owe_me/src/domain/use_cases/debtor/load_debtors.dart';
@@ -44,8 +45,13 @@ class HomeDebtorsBloc extends Bloc<HomeDebtorsEvent, HomeDebtorsState> {
     Emitter<HomeDebtorsState> emit,
   ) async {
     emit(HomeDebtorsLoading());
+    final newDebtor = Debtor.create(nickname: event.debtorNickname);
+    if (newDebtor.isLeft()) {
+      emit(HomeDebtorsError());
+      return;
+    }
     final response = await _addDebtorUseCase(
-      debtor: Debtor(nickname: event.debtorNickname),
+      debtor: newDebtor.asRight(),
     );
     response.fold(
       (exception) => emit(HomeDebtorsError()),
