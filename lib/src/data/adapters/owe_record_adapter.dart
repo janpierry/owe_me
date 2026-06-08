@@ -28,12 +28,15 @@ class OweRecordAdapter {
           'Invalid amountInCents ${model.amountInCents} for OweRecordModel id ${model.id}');
     });
 
-    return OweRecord(
+    return OweRecord.create(
       id: model.id,
       amount: amount,
       description: model.description,
       date: DateTime.parse(model.date),
       oweType: OweType.values.byName(model.oweType),
-    );
+    ).getOrElse(() {
+      throw DataIntegrityException(
+          'Invalid description for OweRecordModel id ${model.id}');
+    });
   }
 }

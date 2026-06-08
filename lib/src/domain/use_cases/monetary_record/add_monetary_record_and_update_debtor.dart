@@ -15,16 +15,18 @@ class AddMonetaryRecordAndUpdateDebtor {
     required MonetaryRecord monetaryRecord,
     required Debtor recordDebtor,
   }) async {
-    final debtorWithUpdatedDebt = recordDebtor.withMonetaryRecordAdded(monetaryRecord);
-
-    final result = await _repository.addMonetaryRecordAndUpdateDebtor(
-      monetaryRecord,
-      debtorWithUpdatedDebt,
-    );
-
-    return result.fold(
-      (failure) => Left(failure),
-      (_) => Right(debtorWithUpdatedDebt),
+    return recordDebtor.withMonetaryRecordAdded(monetaryRecord).fold(
+      (failure) async => Left(failure),
+      (debtorWithUpdatedDebt) async {
+        final result = await _repository.addMonetaryRecordAndUpdateDebtor(
+          monetaryRecord,
+          debtorWithUpdatedDebt,
+        );
+        return result.fold(
+          (failure) => Left(failure),
+          (_) => Right(debtorWithUpdatedDebt),
+        );
+      },
     );
   }
 }

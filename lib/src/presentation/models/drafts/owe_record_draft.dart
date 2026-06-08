@@ -45,14 +45,15 @@ class OweRecordDraft {
       return Left(InvalidDraftFailure('Data é obrigatória'));
     }
 
-    return Right(
-      OweRecord(
-        id: null, // ID will be assigned when saved in database
-        amount: amount.asRight(),
-        description: description,
-        date: date!,
-        oweType: oweType,
-      ),
+    return OweRecord.create(
+      id: null, // ID will be assigned when saved in database
+      amount: amount.asRight(),
+      description: description,
+      date: date!,
+      oweType: oweType,
+    ).fold(
+      (failure) => Left(InvalidDraftFailure(failure.message)),
+      (record) => Right(record),
     );
   }
 }
