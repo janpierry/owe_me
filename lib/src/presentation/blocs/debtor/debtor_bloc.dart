@@ -9,7 +9,6 @@ import 'package:owe_me/src/domain/use_cases/debtor/edit_debtor.dart';
 import 'package:owe_me/src/domain/use_cases/debtor/remove_debtor.dart';
 import 'package:owe_me/src/domain/use_cases/monetary_record/load_debtor_monetary_record_history.dart';
 import 'package:owe_me/src/domain/use_cases/monetary_record/remove_monetary_record_and_update_debtor.dart';
-import 'package:owe_me/src/presentation/validation_mappers/nickname_validation_mapper.dart';
 
 part 'debtor_event.dart';
 part 'debtor_state.dart';
@@ -86,7 +85,7 @@ class DebtorBloc extends Bloc<DebtorEvent, DebtorState> {
       totalDebt: _debtor.totalDebt,
     );
     if (editedDebtor.isLeft()) {
-      emit(DebtorEditError(message: editedDebtor.asLeft().uiMessage));
+      emit(DebtorEditError(message: editedDebtor.asLeft().message));
       return;
     }
     final debtor = editedDebtor.asRight();

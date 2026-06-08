@@ -12,7 +12,7 @@ class OweRecord extends MonetaryRecord {
     required this.oweType,
   });
 
-  static Either<DescriptionValidationFailure, OweRecord> create({
+  static Either<OweRecordValidationFailure, OweRecord> create({
     required int? id,
     required RecordAmount amount,
     required DateTime date,
@@ -22,7 +22,7 @@ class OweRecord extends MonetaryRecord {
     if (description != null) {
       final failure = DescriptionRules.validate(description);
       if (failure != null) {
-        return Left(failure);
+        return Left(OweRecordValidationFailure(failure));
       }
     }
     return Right(
@@ -52,19 +52,21 @@ class OweRecord extends MonetaryRecord {
     };
   }
 
-  // description is intentionally not copyable: it is validated, so changing it
-  // must go through [create]. copyWith only adjusts validity-preserving fields.
-  OweRecord copyWith({
+  // copyWith re-validates through [create] so no mutation can produce a broken
+  // entity (the always-valid invariant). Returns Either accordingly.
+  Either<OweRecordValidationFailure, OweRecord> copyWith({
     int? id,
     bool removeId = false,
     RecordAmount? amount,
+    String? description,
+    bool removeDescription = false,
     DateTime? date,
     OweType? oweType,
   }) {
-    return OweRecord._(
+    return create(
       id: removeId ? null : (id ?? this.id),
       amount: amount ?? this.amount,
-      description: description,
+      description: removeDescription ? null : (description ?? this.description),
       date: date ?? this.date,
       oweType: oweType ?? this.oweType,
     );

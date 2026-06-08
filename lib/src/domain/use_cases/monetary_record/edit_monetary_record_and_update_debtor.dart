@@ -16,19 +16,23 @@ class EditMonetaryRecordAndUpdateDebtor {
     required MonetaryRecord oldMonetaryRecord,
     required Debtor recordDebtor,
   }) async {
-    final debtorWithUpdatedDebt = recordDebtor.withMonetaryRecordEdited(
+    return recordDebtor
+        .withMonetaryRecordEdited(
       newRecord: newMonetaryRecord,
       oldRecord: oldMonetaryRecord,
-    );
-
-    final result = await _repository.editMonetaryRecordAndUpdateDebtor(
-      newMonetaryRecord,
-      debtorWithUpdatedDebt,
-    );
-
-    return result.fold(
-      (failure) => Left(failure),
-      (_) => Right(debtorWithUpdatedDebt),
+    )
+        .fold(
+      (failure) async => Left(failure),
+      (debtorWithUpdatedDebt) async {
+        final result = await _repository.editMonetaryRecordAndUpdateDebtor(
+          newMonetaryRecord,
+          debtorWithUpdatedDebt,
+        );
+        return result.fold(
+          (failure) => Left(failure),
+          (_) => Right(debtorWithUpdatedDebt),
+        );
+      },
     );
   }
 }

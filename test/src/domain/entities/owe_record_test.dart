@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
+import 'package:owe_me/src/domain/failures/owe_record_failures.dart';
 import 'package:owe_me/src/domain/validation/failures/description_validation_failures.dart';
 import 'package:owe_me/src/domain/validation/rules/description_rules.dart';
 import 'package:owe_me/src/domain/value_objects/money.dart';
@@ -39,7 +40,7 @@ void main() {
     });
 
     test(
-        'When description exceeds the limit, it returns DescriptionExceedsLimitFailure',
+        'When description exceeds the limit, it fails with DescriptionExceedsLimitFailure as cause',
         () {
       final result = OweRecord.create(
         id: 1,
@@ -49,7 +50,8 @@ void main() {
         oweType: OweType.debt,
       );
 
-      expect(result.asLeft(), isA<DescriptionExceedsLimitFailure>());
+      expect(result.asLeft(), isA<OweRecordValidationFailure>());
+      expect(result.asLeft().cause, isA<DescriptionExceedsLimitFailure>());
     });
 
     test('When description is within the limit, it returns an OweRecord', () {
@@ -62,6 +64,17 @@ void main() {
       );
 
       expect(result.asRight(), isA<OweRecord>());
+    });
+
+    test('When copyWith sets an over-limit description, it returns a Left', () {
+      final record = buildOweRecord();
+
+      final result = record.copyWith(
+        description: 'a' * (DescriptionRules.maxLength + 1),
+      );
+
+      expect(result.asLeft(), isA<OweRecordValidationFailure>());
+      expect(result.asLeft().cause, isA<DescriptionExceedsLimitFailure>());
     });
   });
 

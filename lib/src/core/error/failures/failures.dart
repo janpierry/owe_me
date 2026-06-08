@@ -1,6 +1,7 @@
 abstract class Failure {
   final String message;
-  const Failure(this.message);
+  final Failure? cause;
+  const Failure(this.message, {this.cause});
 }
 
 class DefaultFailure extends Failure {

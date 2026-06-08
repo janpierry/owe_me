@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:owe_me/src/domain/validation/failures/description_validation_failures.dart';
+import 'package:owe_me/src/domain/failures/owe_record_failures.dart';
 import 'package:owe_me/src/domain/validation/rules/description_rules.dart';
 import 'package:owe_me/src/domain/value_objects/money.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
