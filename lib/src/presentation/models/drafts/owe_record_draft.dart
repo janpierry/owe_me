@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
+import 'package:owe_me/src/core/presentation/extensions/failure_extensions.dart';
 import 'package:owe_me/src/core/presentation/failures.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/domain/value_objects/money.dart';
@@ -45,14 +46,15 @@ class OweRecordDraft {
       return Left(InvalidDraftFailure('Data é obrigatória'));
     }
 
-    return Right(
-      OweRecord(
-        id: null, // ID will be assigned when saved in database
-        amount: amount.asRight(),
-        description: description,
-        date: date!,
-        oweType: oweType,
-      ),
+    return OweRecord.create(
+      id: null, // ID will be assigned when saved in database
+      amount: amount.asRight(),
+      description: description,
+      date: date!,
+      oweType: oweType,
+    ).fold(
+      (failure) => Left(InvalidDraftFailure(failure.uiMessage)),
+      (record) => Right(record),
     );
   }
 }

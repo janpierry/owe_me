@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:owe_me/src/domain/failures/favorite_description_failures.dart';
+import 'package:owe_me/src/domain/validation/rules/favorite_description_rules.dart';
 
 class FavoriteDescription extends Equatable {
   final int? id; // Null ID for new records
@@ -19,10 +20,9 @@ class FavoriteDescription extends Equatable {
     required String description,
     required OweType favoriteType,
   }) {
-    if (description.trim().isEmpty) {
-      return Left(
-        FavoriteDescriptionEmptyFailure(),
-      );
+    final failure = FavoriteDescriptionRules.validate(description);
+    if (failure != null) {
+      return Left(failure);
     }
     return Right(
       FavoriteDescription._(

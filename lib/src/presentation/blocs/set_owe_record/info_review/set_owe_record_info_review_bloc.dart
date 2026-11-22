@@ -53,14 +53,23 @@ class SetOweRecordInfoReviewBloc
       }
 
       final oweRecord = value.asRight();
+      var recordToSave = oweRecord;
+      if (_isEdition) {
+        final editedRecord = oweRecord.copyWith(id: _oweRecordToEdit!.id);
+        if (editedRecord.isLeft()) {
+          emit(SetOweRecordInfoReviewError());
+          return;
+        }
+        recordToSave = editedRecord.asRight();
+      }
       final result = _isEdition
           ? await _editMonetaryRecordAndUpdateDebtorUseCase(
-              newMonetaryRecord: oweRecord.copyWith(id: _oweRecordToEdit!.id),
+              newMonetaryRecord: recordToSave,
               oldMonetaryRecord: _oweRecordToEdit!,
               recordDebtor: _recordDebtor,
             )
           : await _addMonetaryRecordAndUpdateDebtorUseCase(
-              monetaryRecord: oweRecord,
+              monetaryRecord: recordToSave,
               recordDebtor: _recordDebtor,
             );
 

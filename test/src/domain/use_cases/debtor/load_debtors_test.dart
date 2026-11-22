@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:owe_me/src/core/error/failures/failures.dart';
+import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/value_objects/money.dart';
 import 'package:owe_me/src/domain/repositories/debtor_repository.dart';
@@ -22,11 +23,11 @@ void main() {
     test('should return a list of debtors when repository returns data', () async {
       // arrange
       final tDebtors = [
-        const Debtor(
+        Debtor.create(
           id: 1,
           nickname: 'Nickname',
-          totalDebt: Money(cents: 1000),
-        )
+          totalDebt: const Money(cents: 1000),
+        ).asRight()
       ];
 
       when(() => mockRepository.loadAllDebtors())

@@ -3,6 +3,8 @@ import 'package:owe_me/src/core/presentation/callbacks.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_shadows.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
+import 'package:owe_me/src/domain/validation/rules/nickname_rules.dart';
+import 'package:owe_me/src/presentation/validation_mappers/nickname_validation_mapper.dart';
 
 class SetDebtorDialog extends StatefulWidget {
   final String? initialNickname;
@@ -58,9 +60,10 @@ class _SetDebtorDialogState extends State<SetDebtorDialog> {
 
   void _validateAndSubmit() {
     final nickname = _controller.text.trim();
-    if (nickname.isEmpty) {
+    final failure = NicknameRules.validate(nickname);
+    if (failure != null) {
       setState(() {
-        _errorText = 'Apelido é obrigatório';
+        _errorText = failure.uiMessage;
       });
     } else {
       widget.onSetDebtorPressed?.call(nickname);
@@ -118,6 +121,8 @@ class _SetDebtorDialogState extends State<SetDebtorDialog> {
                     ),
                   ),
                   style: OweMeTextStyles.body,
+                  textCapitalization: TextCapitalization.words,
+                  maxLength: NicknameRules.maxLength,
                 ),
                 if (_errorText != null)
                   Padding(

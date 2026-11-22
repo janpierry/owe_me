@@ -13,3 +13,8 @@ class FavoriteDescriptionEmptyFailure extends FavoriteDescriptionFailure {
   const FavoriteDescriptionEmptyFailure()
       : super('Favorite description cannot be empty.');
 }
+
+class FavoriteDescriptionTooLongFailure extends FavoriteDescriptionFailure {
+  const FavoriteDescriptionTooLongFailure()
+      : super('Favorite description exceeds the maximum allowed limit.');
+}

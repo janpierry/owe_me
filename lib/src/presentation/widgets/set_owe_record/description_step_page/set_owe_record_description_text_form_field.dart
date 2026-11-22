@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/presentation/blocs/set_owe_record/description_step/set_owe_record_description_step_bloc.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
+import 'package:owe_me/src/domain/validation/rules/description_rules.dart';
 
 class SetOweRecordDescriptionTextFormField extends StatefulWidget {
   final String initialDescription;
@@ -80,6 +81,8 @@ class _SetOweRecordDescriptionTextFormFieldState
         controller: _controller,
         autofocus: true,
         keyboardType: TextInputType.text,
+        textCapitalization: TextCapitalization.sentences,
+        maxLength: DescriptionRules.maxLength,
       ),
     );
   }

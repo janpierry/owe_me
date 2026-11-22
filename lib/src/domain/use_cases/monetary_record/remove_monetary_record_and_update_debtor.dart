@@ -15,16 +15,18 @@ class RemoveMonetaryRecordAndUpdateDebtor {
     required MonetaryRecord monetaryRecord,
     required Debtor recordDebtor,
   }) async {
-    final debtorWithUpdatedDebt = recordDebtor.withMonetaryRecordRemoved(monetaryRecord);
-
-    final result = await _repository.removeMonetaryRecordAndUpdateDebtor(
-      monetaryRecord,
-      debtorWithUpdatedDebt,
-    );
-
-    return result.fold(
-      (failure) => Left(failure),
-      (_) => Right(debtorWithUpdatedDebt),
+    return recordDebtor.withMonetaryRecordRemoved(monetaryRecord).fold(
+      (failure) async => Left(failure),
+      (debtorWithUpdatedDebt) async {
+        final result = await _repository.removeMonetaryRecordAndUpdateDebtor(
+          monetaryRecord,
+          debtorWithUpdatedDebt,
+        );
+        return result.fold(
+          (failure) => Left(failure),
+          (_) => Right(debtorWithUpdatedDebt),
+        );
+      },
     );
   }
 }

@@ -61,8 +61,14 @@ lib/src/
   calls it, AND form BLoCs call it directly for live per-keystroke validation — one
   shared source of truth. *Only* inline validation in the factory when it is a single
   check that is never used for live form validation.
-  - NOTE: `FavoriteDescription` currently validates inline and is the odd one out;
-    refactoring it to a rules class is a known cleanup (see Known work).
+- **Entity invariants (always-valid):** entities with validated fields are constructed
+  *only* via `create(...)` returning `Either<Failure, T>` (private constructor), and
+  `copyWith` re-validates the same way — it routes through `create` and also returns
+  `Either`, so **no mutation can produce a broken state** (`Debtor`, `OweRecord`).
+  Entities with no validated fields (e.g. `PaymentRecord`) keep a plain constructor —
+  no invariant to protect, so a factory would be ceremony. Entity-level failures (e.g.
+  `DebtorValidationFailure`) wrap the underlying rule failure as `Failure.cause` — a
+  diagnostic chain (like an exception's cause), not a UI message source.
 - **Failure → UI:** map domain failures to user-facing (Portuguese) strings via
   extensions in `presentation/validation_mappers/` (`uiMessage`). Keep UI strings out
   of the domain.
@@ -132,8 +138,6 @@ These are real items in the codebase (good candidates for paired tasks):
   catches everything → `DefaultFailure` (has `//TODO: handle specific Failures`):
   should map specific sqflite exceptions to domain failures.
 - `DebtorIdNotFoundFailure` is marked for renaming to something more specific.
-- Unify validation: refactor `FavoriteDescription` to a separated rules class to
-  match `RecordAmount`.
 - No DB migration strategy yet (schema version hardcoded to 1).
 - `provider` is in `pubspec.yaml` but unused.
 
