@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
+import 'package:owe_me/src/core/presentation/extensions/failure_extensions.dart';
 import 'package:owe_me/src/core/presentation/failures.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/domain/value_objects/money.dart';
@@ -52,7 +53,7 @@ class OweRecordDraft {
       date: date!,
       oweType: oweType,
     ).fold(
-      (failure) => Left(InvalidDraftFailure(failure.message)),
+      (failure) => Left(InvalidDraftFailure(failure.uiMessage)),
       (record) => Right(record),
     );
   }

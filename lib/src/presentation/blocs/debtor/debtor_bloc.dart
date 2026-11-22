@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
+import 'package:owe_me/src/core/presentation/extensions/failure_extensions.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/domain/use_cases/debtor/edit_debtor.dart';
@@ -85,7 +86,7 @@ class DebtorBloc extends Bloc<DebtorEvent, DebtorState> {
       totalDebt: _debtor.totalDebt,
     );
     if (editedDebtor.isLeft()) {
-      emit(DebtorEditError(message: editedDebtor.asLeft().message));
+      emit(DebtorEditError(message: editedDebtor.asLeft().uiMessage));
       return;
     }
     final debtor = editedDebtor.asRight();

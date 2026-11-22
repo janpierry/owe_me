@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
 import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/value_objects/money.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
@@ -96,6 +97,40 @@ void main() {
       );
       final updatedDraft = draft.copyWith(removeDate: true);
       expect(updatedDraft.date, isNull);
+    });
+  });
+
+  group('toEntity tests:', () {
+    test(
+        'When the description exceeds the limit, it returns InvalidDraftFailure with the pt-BR message',
+        () {
+      final draft = OweRecordDraft(
+        amount: const Money(cents: 100),
+        description: 'a' * 101, // DescriptionRules.maxLength + 1
+        date: DateTime(2000),
+        oweType: OweType.debt,
+      );
+
+      final result = draft.toEntity();
+
+      expect(
+        result.asLeft().message,
+        'A descrição não pode ter mais de 100 caracteres.',
+      );
+    });
+
+    test('When every field is valid, it returns the OweRecord', () {
+      final draft = OweRecordDraft(
+        amount: const Money(cents: 100),
+        description: 'Pizza',
+        date: DateTime(2000),
+        oweType: OweType.debt,
+      );
+
+      final record = draft.toEntity().asRight();
+
+      expect(record.description, 'Pizza');
+      expect(record.amount.value, const Money(cents: 100));
     });
   });
 }
