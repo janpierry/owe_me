@@ -33,9 +33,7 @@ class DebtorPage extends StatelessWidget {
   }
 
   void _showDebtorRemovedSnackbar(BuildContext context) {
-    const snackBar = SnackBar(
-      content: Text('Devedor removido com sucesso'),
-    );
+    const snackBar = SnackBar(content: Text('Devedor removido com sucesso'));
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(snackBar);
@@ -43,17 +41,13 @@ class DebtorPage extends StatelessWidget {
 
   void _navigateToHomePage(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(
-        builder: (context) => const HomeContainer(),
-      ),
+      MaterialPageRoute(builder: (context) => const HomeContainer()),
       (route) => false,
     );
   }
 
   void _showDebtorEditedSnackbar(BuildContext context) {
-    const snackBar = SnackBar(
-      content: Text('Devedor editado com sucesso'),
-    );
+    const snackBar = SnackBar(content: Text('Devedor editado com sucesso'));
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(snackBar);
@@ -69,9 +63,7 @@ class DebtorPage extends StatelessWidget {
   }
 
   void _showDebtorMonetaryRecordRemovedSnackbar(BuildContext context) {
-    const snackBar = SnackBar(
-      content: Text('Registro removido com sucesso'),
-    );
+    const snackBar = SnackBar(content: Text('Registro removido com sucesso'));
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(snackBar);
@@ -101,7 +93,8 @@ class DebtorPage extends StatelessWidget {
                 buildWhen: (previous, current) =>
                     current is DebtorEditState || current is DebtorRemoveState,
                 builder: (context, state) {
-                  if (state is DebtorEditInProgress || state is DebtorRemoveInProgress) {
+                  if (state is DebtorEditInProgress ||
+                      state is DebtorRemoveInProgress) {
                     return PopScope(
                       canPop: false,
                       child: AbsorbPointer(
@@ -120,11 +113,7 @@ class DebtorPage extends StatelessWidget {
             ],
           );
         }
-        return const Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
+        return const Scaffold(body: Center(child: CircularProgressIndicator()));
       },
     );
   }

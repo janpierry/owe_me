@@ -17,9 +17,8 @@ class HomeDebtorsSection extends StatelessWidget {
       context: context,
       barrierDismissible: true,
       builder: (context) => SetDebtorDialog(
-        onSetDebtorPressed: (nickname) => bloc.add(
-          HomeAddDebtorRequested(debtorNickname: nickname),
-        ),
+        onSetDebtorPressed: (nickname) =>
+            bloc.add(HomeAddDebtorRequested(debtorNickname: nickname)),
       ),
     );
   }
@@ -32,15 +31,12 @@ class HomeDebtorsSection extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: Text(
-                'Devedores',
-                style: OweMeTextStyles.headline2,
-              ),
+              child: Text('Devedores', style: OweMeTextStyles.headline2),
             ),
             IconButton(
               icon: const Icon(Icons.add, size: 24),
               onPressed: () => _showAddNewDebtorDialog(context),
-            )
+            ),
           ],
         ),
         const SizedBox(height: 8),

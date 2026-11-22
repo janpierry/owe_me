@@ -17,9 +17,7 @@ class DebtorBody extends StatelessWidget {
     return Scaffold(
       appBar: OweMeAppBar(
         titleText: debtor.nickname,
-        actions: [
-          DebtorPopupMenuButton(debtor: debtor),
-        ],
+        actions: [DebtorPopupMenuButton(debtor: debtor)],
       ),
       backgroundColor: OweMeColors.backgroundLight,
       body: SingleChildScrollView(
@@ -34,7 +32,7 @@ class DebtorBody extends StatelessWidget {
             DebtorQuickActionSection(debtor: debtor),
             const SizedBox(height: 24),
             //Debtor Records History Section
-            const DebtorMonetaryRecordHistorySection()
+            const DebtorMonetaryRecordHistorySection(),
           ],
         ),
       ),

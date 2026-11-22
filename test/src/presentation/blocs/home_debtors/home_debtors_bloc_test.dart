@@ -34,9 +34,7 @@ void main() {
     // so an invalid nickname ends in the generic HomeDebtorsError. The dialog
     // already runs NicknameRules before dispatching, so this is a defensive
     // path.
-    test(
-        'When the nickname is invalid, it emits HomeDebtorsError and does not save',
-        () async {
+    test('When the nickname is invalid, it emits HomeDebtorsError and does not save', () async {
       final states = expectLater(
         bloc.stream,
         emitsInOrder([isA<HomeDebtorsLoading>(), isA<HomeDebtorsError>()]),
@@ -48,9 +46,7 @@ void main() {
       verifyNever(() => addDebtor(debtor: any(named: 'debtor')));
     });
 
-    test(
-        'When the nickname is valid, it saves the debtor and emits HomeDebtorsLoaded with it',
-        () async {
+    test('When the nickname is valid, it saves the debtor and emits HomeDebtorsLoaded with it', () async {
       final newDebtor = Debtor.create(nickname: 'Ana').asRight();
       final savedDebtor = Debtor.create(id: 1, nickname: 'Ana').asRight();
       when(() => addDebtor(debtor: any(named: 'debtor')))

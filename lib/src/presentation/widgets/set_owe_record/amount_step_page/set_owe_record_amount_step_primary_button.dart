@@ -14,9 +14,9 @@ class SetOweRecordAmountStepPrimaryButton extends StatelessWidget {
   });
 
   void _navigateToNextPage(BuildContext context) {
-    context
-        .read<SetOweRecordAmountStepBloc>()
-        .add(SetOweRecordAmountStepNextPageRequested());
+    context.read<SetOweRecordAmountStepBloc>().add(
+      SetOweRecordAmountStepNextPageRequested(),
+    );
   }
 
   @override

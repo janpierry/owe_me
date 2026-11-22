@@ -21,10 +21,9 @@ class SetOweRecordDebtorSelectionContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => GetIt.instance<DebtorSelectionBloc>()
-        ..add(
-          DebtorSelectionLoadDebtorsRequested(),
-        ),
+      create: (_) =>
+          GetIt.instance<DebtorSelectionBloc>()
+            ..add(DebtorSelectionLoadDebtorsRequested()),
       child: SetOweRecordDebtorSelectionPage(
         oweRecordType: oweRecordType,
         oweRecordDraftToReview: oweRecordDraftToReview,

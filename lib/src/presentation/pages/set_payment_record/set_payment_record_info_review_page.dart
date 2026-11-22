@@ -25,23 +25,16 @@ class SetPaymentRecordInfoReviewPage extends StatelessWidget {
     required this.fromDebtorPage,
   });
 
-  void _listen(
-    BuildContext context,
-    SetPaymentRecordInfoReviewState state,
-  ) {
+  void _listen(BuildContext context, SetPaymentRecordInfoReviewState state) {
     if (state is SetPaymentRecordInfoReviewRecordSetFinished) {
       final successMessage = _isEditing
           ? 'Pagamento atualizado com sucesso.'
           : 'Pagamento registrado com sucesso.';
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(content: Text(successMessage)),
-        );
+        ..showSnackBar(SnackBar(content: Text(successMessage)));
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (context) => const HomeContainer(),
-        ),
+        MaterialPageRoute(builder: (context) => const HomeContainer()),
         (route) => false,
       );
       if (fromDebtorPage) {
@@ -57,9 +50,7 @@ class SetPaymentRecordInfoReviewPage extends StatelessWidget {
           : 'Um erro ocorreu ao registrar o pagamento.';
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(content: Text(errorMessage)),
-        );
+        ..showSnackBar(SnackBar(content: Text(errorMessage)));
     }
   }
 
@@ -68,34 +59,39 @@ class SetPaymentRecordInfoReviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: OweMeAppBar(
-        titleText: 'Confira as Informações',
-      ),
+      appBar: OweMeAppBar(titleText: 'Confira as Informações'),
       backgroundColor: OweMeColors.backgroundLight,
-      body: BlocListener<SetPaymentRecordInfoReviewBloc, SetPaymentRecordInfoReviewState>(
-        listener: _listen,
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                child: SetPaymentRecordInfoReviewCard(
-                  paymentRecordDraft: paymentRecordDraft,
-                  recordDebtor: recordDebtor,
-                  paymentRecordToEdit: paymentRecordToEdit,
-                  fromDebtorPage: fromDebtorPage,
+      body:
+          BlocListener<
+            SetPaymentRecordInfoReviewBloc,
+            SetPaymentRecordInfoReviewState
+          >(
+            listener: _listen,
+            child: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 24,
+                    ),
+                    child: SetPaymentRecordInfoReviewCard(
+                      paymentRecordDraft: paymentRecordDraft,
+                      recordDebtor: recordDebtor,
+                      paymentRecordToEdit: paymentRecordToEdit,
+                      fromDebtorPage: fromDebtorPage,
+                    ),
+                  ),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: SetPaymentRecordInfoReviewFinishButton(
+                    isEditing: _isEditing,
+                  ),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: SetPaymentRecordInfoReviewFinishButton(
-                isEditing: _isEditing,
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
     );
   }
 }

@@ -8,27 +8,27 @@ import 'package:owe_me/src/domain/value_objects/money.dart';
 
 void main() {
   group('create validation:', () {
-    test('When nickname is empty, it fails with NicknameEmptyFailure as cause',
-        () {
-      final result = Debtor.create(nickname: '');
-
-      expect(result.asLeft(), isA<DebtorValidationFailure>());
-      expect(result.asLeft().cause, isA<NicknameEmptyFailure>());
-    });
-
     test(
-        'When nickname is whitespace-only, it fails with NicknameEmptyFailure as cause',
-        () {
+      'When nickname is empty, it fails with NicknameEmptyFailure as cause',
+      () {
+        final result = Debtor.create(nickname: '');
+
+        expect(result.asLeft(), isA<DebtorValidationFailure>());
+        expect(result.asLeft().cause, isA<NicknameEmptyFailure>());
+      },
+    );
+
+    test('When nickname is whitespace-only, it fails with NicknameEmptyFailure as cause', () {
       final result = Debtor.create(nickname: '   ');
 
       expect(result.asLeft(), isA<DebtorValidationFailure>());
       expect(result.asLeft().cause, isA<NicknameEmptyFailure>());
     });
 
-    test(
-        'When nickname exceeds the limit, it fails with NicknameExceedsLimitFailure as cause',
-        () {
-      final result = Debtor.create(nickname: 'a' * (NicknameRules.maxLength + 1));
+    test('When nickname exceeds the limit, it fails with NicknameExceedsLimitFailure as cause', () {
+      final result = Debtor.create(
+        nickname: 'a' * (NicknameRules.maxLength + 1),
+      );
 
       expect(result.asLeft(), isA<DebtorValidationFailure>());
       expect(result.asLeft().cause, isA<NicknameExceedsLimitFailure>());
@@ -89,26 +89,30 @@ void main() {
       assert(first != second);
     });
 
-    test('When two entities have different [nickname], they should not be equal',
-        () {
-      final second = Debtor.create(
-        id: debtorId,
-        nickname: 'Another Nickname',
-        totalDebt: totalDebt,
-      ).asRight();
+    test(
+      'When two entities have different [nickname], they should not be equal',
+      () {
+        final second = Debtor.create(
+          id: debtorId,
+          nickname: 'Another Nickname',
+          totalDebt: totalDebt,
+        ).asRight();
 
-      assert(first != second);
-    });
+        assert(first != second);
+      },
+    );
 
-    test('When two entities have different [totalDebt], they should not be equal',
-        () {
-      final second = Debtor.create(
-        id: debtorId,
-        nickname: nickname,
-        totalDebt: const Money(cents: 20000),
-      ).asRight();
+    test(
+      'When two entities have different [totalDebt], they should not be equal',
+      () {
+        final second = Debtor.create(
+          id: debtorId,
+          nickname: nickname,
+          totalDebt: const Money(cents: 20000),
+        ).asRight();
 
-      assert(first != second);
-    });
+        assert(first != second);
+      },
+    );
   });
 }

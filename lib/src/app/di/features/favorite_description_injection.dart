@@ -33,7 +33,8 @@ void initFavoriteDescriptionInjections() {
 
   //Repositories
   inj.registerLazySingleton<FavoriteDescriptionRepository>(
-    () => FavoriteDescriptionRepositoryImpl(favoriteDescriptionDataSource: inj()),
+    () =>
+        FavoriteDescriptionRepositoryImpl(favoriteDescriptionDataSource: inj()),
   );
 
   //Data Sources

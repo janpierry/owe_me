@@ -1,6 +1,1 @@
-enum FormStatus {
-  initial,
-  loading,
-  success,
-  error,
-}
+enum FormStatus { initial, loading, success, error }

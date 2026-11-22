@@ -7,7 +7,8 @@ sealed class SetOweRecordInfoReviewEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SetOweRecordInfoReviewPageInitialized extends SetOweRecordInfoReviewEvent {
+class SetOweRecordInfoReviewPageInitialized
+    extends SetOweRecordInfoReviewEvent {
   final OweRecordDraft oweRecordDraft;
   final Debtor recordDebtor;
   final OweRecord? oweRecordToEdit;
@@ -22,4 +23,5 @@ class SetOweRecordInfoReviewPageInitialized extends SetOweRecordInfoReviewEvent 
   List<Object> get props => [oweRecordDraft, recordDebtor];
 }
 
-class SetOweRecordInfoReviewSetRecordRequested extends SetOweRecordInfoReviewEvent {}
+class SetOweRecordInfoReviewSetRecordRequested
+    extends SetOweRecordInfoReviewEvent {}

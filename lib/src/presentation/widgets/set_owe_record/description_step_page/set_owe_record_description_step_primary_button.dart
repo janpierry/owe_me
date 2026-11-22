@@ -12,9 +12,9 @@ class SetOweRecordDescriptionStepPrimaryButton extends StatelessWidget {
   });
 
   void _navigateToNextPage(BuildContext context) {
-    context
-        .read<SetOweRecordDescriptionStepBloc>()
-        .add(SetOweRecordDescriptionStepNextPageRequested());
+    context.read<SetOweRecordDescriptionStepBloc>().add(
+      SetOweRecordDescriptionStepNextPageRequested(),
+    );
   }
 
   @override

@@ -7,7 +7,8 @@ sealed class SetOweRecordDescriptionStepState extends Equatable {
   List<Object> get props => [];
 }
 
-final class SetOweRecordDescriptionStepInitial extends SetOweRecordDescriptionStepState {}
+final class SetOweRecordDescriptionStepInitial
+    extends SetOweRecordDescriptionStepState {}
 
 sealed class SetOweRecordDescriptionStepPageBuildState
     extends SetOweRecordDescriptionStepState {
@@ -28,10 +29,7 @@ final class SetOweRecordDescriptionStepPageLoaded
   });
 
   @override
-  List<Object> get props => [
-        initialDescription,
-        initialFavoriteDescriptions,
-      ];
+  List<Object> get props => [initialDescription, initialFavoriteDescriptions];
 }
 
 final class SetOweRecordDescriptionStepPageError
@@ -87,7 +85,8 @@ final class SetOweRecordDescriptionStepSendingDescriptionToTextField
   List<Object> get props => [description, sendId];
 }
 
-final class SetOweRecordDescriptionStepLoading extends SetOweRecordDescriptionStepState {}
+final class SetOweRecordDescriptionStepLoading
+    extends SetOweRecordDescriptionStepState {}
 
 class SetOweRecordDescriptionStepNavigatingToNextPage
     extends SetOweRecordDescriptionStepState {

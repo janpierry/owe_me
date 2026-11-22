@@ -46,9 +46,7 @@ void initMonetaryRecordInjections() {
 
   //Repositories
   inj.registerLazySingleton<MonetaryRecordRepository>(
-    () => MonetaryRecordRepositoryImpl(
-      monetaryRecordDataSource: inj(),
-    ),
+    () => MonetaryRecordRepositoryImpl(monetaryRecordDataSource: inj()),
   );
 
   //Data Sources

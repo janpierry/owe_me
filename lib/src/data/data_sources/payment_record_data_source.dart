@@ -8,9 +8,7 @@ abstract class PaymentRecordDataSource {
 class PaymentRecordDataSourceImpl implements PaymentRecordDataSource {
   final OweMeDatabase _oweMeDatabase;
 
-  PaymentRecordDataSourceImpl({
-    required this._oweMeDatabase,
-  });
+  PaymentRecordDataSourceImpl({required this._oweMeDatabase});
 
   @override
   Future<List<PaymentRecordModel>> queryPaymentRecordsByDebtorId(

@@ -31,10 +31,7 @@ class HomeHeader extends StatelessWidget {
             children: [
               Text('Total a receber', style: OweMeTextStyles.caption),
               const SizedBox(height: 8),
-              Text(
-                _totalDebt,
-                style: OweMeTextStyles.headline1,
-              ),
+              Text(_totalDebt, style: OweMeTextStyles.headline1),
             ],
           ),
         ),

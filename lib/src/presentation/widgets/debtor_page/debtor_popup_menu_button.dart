@@ -18,9 +18,8 @@ class DebtorPopupMenuButton extends StatelessWidget {
       barrierDismissible: true,
       builder: (context) => SetDebtorDialog(
         initialNickname: debtor.nickname,
-        onSetDebtorPressed: (nickname) => bloc.add(
-          DebtorEditRequested(nickname: nickname),
-        ),
+        onSetDebtorPressed: (nickname) =>
+            bloc.add(DebtorEditRequested(nickname: nickname)),
       ),
     );
   }

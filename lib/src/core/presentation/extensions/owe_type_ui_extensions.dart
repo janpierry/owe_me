@@ -3,14 +3,14 @@ import 'package:owe_me/src/domain/enums/owe_type.dart';
 
 extension OweTypeUi on OweType {
   String get label => switch (this) {
-        OweType.debt => 'débito',
-        OweType.credit => 'crédito',
-      };
+    OweType.debt => 'débito',
+    OweType.credit => 'crédito',
+  };
 
   String get labelPlural => '${label}s';
 
   IconData get iconData => switch (this) {
-        OweType.debt => Icons.attach_money,
-        OweType.credit => Icons.money_off_csred,
-      };
+    OweType.debt => Icons.attach_money,
+    OweType.credit => Icons.money_off_csred,
+  };
 }

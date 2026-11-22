@@ -12,14 +12,14 @@ class OweMeAppBar extends AppBar {
     this.titleColor,
     super.actions,
   }) : super(
-          title: Text(
-            titleText,
-            style: OweMeTextStyles.headline1.copyWith(
-              color: titleColor ?? OweMeTextStyles.headline1.color,
-            ),
-          ),
-          centerTitle: true,
-          backgroundColor: OweMeColors.surfaceWhite,
-          elevation: 1,
-        );
+         title: Text(
+           titleText,
+           style: OweMeTextStyles.headline1.copyWith(
+             color: titleColor ?? OweMeTextStyles.headline1.color,
+           ),
+         ),
+         centerTitle: true,
+         backgroundColor: OweMeColors.surfaceWhite,
+         elevation: 1,
+       );
 }

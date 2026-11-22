@@ -25,7 +25,9 @@ class SetOweRecordDescriptionStepDescriptionChanged
     extends SetOweRecordDescriptionStepEvent {
   final String description;
 
-  const SetOweRecordDescriptionStepDescriptionChanged({required this.description});
+  const SetOweRecordDescriptionStepDescriptionChanged({
+    required this.description,
+  });
 
   @override
   List<Object> get props => [description];

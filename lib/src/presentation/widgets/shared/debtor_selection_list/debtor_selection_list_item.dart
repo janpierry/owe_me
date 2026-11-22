@@ -32,10 +32,7 @@ class DebtorSelectionListItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      debtor.nickname,
-                      style: OweMeTextStyles.subtitle,
-                    ),
+                    Text(debtor.nickname, style: OweMeTextStyles.subtitle),
                     Text(
                       MoneyFormatter.toStringCurrency(debtor.totalDebt),
                       style: OweMeTextStyles.body,

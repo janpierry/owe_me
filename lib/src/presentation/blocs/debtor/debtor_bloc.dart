@@ -18,21 +18,27 @@ class DebtorBloc extends Bloc<DebtorEvent, DebtorState> {
   final LoadDebtorMonetaryRecordHistory _loadDebtorMonetaryRecordHistoryUseCase;
   final EditDebtor _editDebtorUseCase;
   final RemoveDebtor _removeDebtorUseCase;
-  final RemoveMonetaryRecordAndUpdateDebtor _removeMonetaryRecordAndUpdateDebtorUseCase;
+  final RemoveMonetaryRecordAndUpdateDebtor
+  _removeMonetaryRecordAndUpdateDebtorUseCase;
   late Debtor _debtor;
 
   DebtorBloc({
     required LoadDebtorMonetaryRecordHistory loadDebtorMonetaryRecordHistory,
     required EditDebtor editDebtor,
     required RemoveDebtor removeDebtor,
-    required RemoveMonetaryRecordAndUpdateDebtor removeMonetaryRecordAndUpdateDebtor,
-  })  : _loadDebtorMonetaryRecordHistoryUseCase = loadDebtorMonetaryRecordHistory,
-        _editDebtorUseCase = editDebtor,
-        _removeDebtorUseCase = removeDebtor,
-        _removeMonetaryRecordAndUpdateDebtorUseCase = removeMonetaryRecordAndUpdateDebtor,
-        super(DebtorMonetaryRecordHistoryInitial()) {
+    required RemoveMonetaryRecordAndUpdateDebtor
+    removeMonetaryRecordAndUpdateDebtor,
+  }) : _loadDebtorMonetaryRecordHistoryUseCase =
+           loadDebtorMonetaryRecordHistory,
+       _editDebtorUseCase = editDebtor,
+       _removeDebtorUseCase = removeDebtor,
+       _removeMonetaryRecordAndUpdateDebtorUseCase =
+           removeMonetaryRecordAndUpdateDebtor,
+       super(DebtorMonetaryRecordHistoryInitial()) {
     on<DebtorPageInitialized>(_loadInitialData);
-    on<DebtorMonetaryRecordHistoryLoadRequested>(_loadDebtorMonetaryRecordHistory);
+    on<DebtorMonetaryRecordHistoryLoadRequested>(
+      _loadDebtorMonetaryRecordHistory,
+    );
     on<DebtorEditRequested>(_editDebtor);
     on<DebtorRemoveRequested>(_removeDebtor);
     on<DebtorRemoveMonetaryRecordRequested>(_removeDebtorMonetaryRecord);
@@ -59,7 +65,8 @@ class DebtorBloc extends Bloc<DebtorEvent, DebtorState> {
     emit(DebtorMonetaryRecordHistoryLoading());
     final response = await _loadDebtorMonetaryRecordHistoryUseCase(_debtor);
     response.fold(
-      (exception) => emit(DebtorMonetaryRecordHistoryError(message: exception.message)),
+      (exception) =>
+          emit(DebtorMonetaryRecordHistoryError(message: exception.message)),
       (monetaryRecordHistory) {
         if (monetaryRecordHistory.isEmpty) {
           emit(DebtorMonetaryRecordHistoryEmpty());
@@ -90,9 +97,7 @@ class DebtorBloc extends Bloc<DebtorEvent, DebtorState> {
       return;
     }
     final debtor = editedDebtor.asRight();
-    final response = await _editDebtorUseCase(
-      debtor: debtor,
-    );
+    final response = await _editDebtorUseCase(debtor: debtor);
     response.fold(
       (exception) => emit(DebtorEditError(message: exception.message)),
       (_) {
@@ -126,7 +131,8 @@ class DebtorBloc extends Bloc<DebtorEvent, DebtorState> {
       recordDebtor: _debtor,
     );
     response.fold(
-      (exception) => emit(DebtorRemoveMonetaryRecordError(message: exception.message)),
+      (exception) =>
+          emit(DebtorRemoveMonetaryRecordError(message: exception.message)),
       (updatedDebtor) {
         emit(DebtorRemoveMonetaryRecordSuccess(updatedDebtor: updatedDebtor));
       },

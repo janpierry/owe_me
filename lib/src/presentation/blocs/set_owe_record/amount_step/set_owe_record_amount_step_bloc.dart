@@ -13,15 +13,12 @@ part 'set_owe_record_amount_step_state.dart';
 
 class SetOweRecordAmountStepBloc
     extends Bloc<SetOweRecordAmountStepEvent, SetOweRecordAmountStepState> {
-  SetOweRecordAmountStepBloc({
-    required Money? amountToEdit,
-  }) : super(
-          SetOweRecordAmountStepState.initial(
-            amountToEdit: amountToEdit,
-          ),
-        ) {
+  SetOweRecordAmountStepBloc({required Money? amountToEdit})
+    : super(SetOweRecordAmountStepState.initial(amountToEdit: amountToEdit)) {
     on<SetOweRecordAmountStepAmountChanged>(_setAmount);
-    on<SetOweRecordAmountStepNextPageRequested>(_sendAmountToNavigateToNextPage);
+    on<SetOweRecordAmountStepNextPageRequested>(
+      _sendAmountToNavigateToNextPage,
+    );
   }
 
   FutureOr<void> _setAmount(

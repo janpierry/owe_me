@@ -7,7 +7,8 @@ sealed class SetPaymentRecordInfoReviewState extends Equatable {
   List<Object?> get props => [];
 }
 
-final class SetPaymentRecordInfoReviewInitial extends SetPaymentRecordInfoReviewState {}
+final class SetPaymentRecordInfoReviewInitial
+    extends SetPaymentRecordInfoReviewState {}
 
 final class SetPaymentRecordInfoReviewSettingRecord
     extends SetPaymentRecordInfoReviewState {}
@@ -16,13 +17,16 @@ final class SetPaymentRecordInfoReviewRecordSetFinished
     extends SetPaymentRecordInfoReviewState {
   final Debtor updatedDebtor;
 
-  const SetPaymentRecordInfoReviewRecordSetFinished({required this.updatedDebtor});
+  const SetPaymentRecordInfoReviewRecordSetFinished({
+    required this.updatedDebtor,
+  });
 
   @override
   List<Object> get props => [updatedDebtor];
 }
 
-final class SetPaymentRecordInfoReviewError extends SetPaymentRecordInfoReviewState {
+final class SetPaymentRecordInfoReviewError
+    extends SetPaymentRecordInfoReviewState {
   final String? message;
 
   const SetPaymentRecordInfoReviewError({this.message});

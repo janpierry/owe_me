@@ -20,27 +20,30 @@ void main() {
   });
 
   group('LoadDebtors UseCase', () {
-    test('should return a list of debtors when repository returns data', () async {
-      // arrange
-      final tDebtors = [
-        Debtor.create(
-          id: 1,
-          nickname: 'Nickname',
-          totalDebt: const Money(cents: 1000),
-        ).asRight()
-      ];
+    test(
+      'should return a list of debtors when repository returns data',
+      () async {
+        // arrange
+        final tDebtors = [
+          Debtor.create(
+            id: 1,
+            nickname: 'Nickname',
+            totalDebt: const Money(cents: 1000),
+          ).asRight(),
+        ];
 
-      when(() => mockRepository.loadAllDebtors())
-          .thenAnswer((_) async => Right(tDebtors));
+        when(() => mockRepository.loadAllDebtors())
+            .thenAnswer((_) async => Right(tDebtors));
 
-      // act
-      final result = await usecase();
+        // act
+        final result = await usecase();
 
-      // assert
-      expect(result, Right(tDebtors));
-      verify(() => mockRepository.loadAllDebtors()).called(1);
-      verifyNoMoreInteractions(mockRepository);
-    });
+        // assert
+        expect(result, Right(tDebtors));
+        verify(() => mockRepository.loadAllDebtors()).called(1);
+        verifyNoMoreInteractions(mockRepository);
+      },
+    );
 
     test('should return an exception when repository fails', () async {
       // arrange
@@ -58,17 +61,20 @@ void main() {
       verifyNoMoreInteractions(mockRepository);
     });
 
-    test('should not call repository multiple times for a single invocation', () async {
-      // arrange
-      when(() => mockRepository.loadAllDebtors())
-          .thenAnswer((_) async => const Right([]));
+    test(
+      'should not call repository multiple times for a single invocation',
+      () async {
+        // arrange
+        when(() => mockRepository.loadAllDebtors())
+            .thenAnswer((_) async => const Right([]));
 
-      // act
-      await usecase();
+        // act
+        await usecase();
 
-      // assert
-      verify(() => mockRepository.loadAllDebtors()).called(1);
-      verifyNoMoreInteractions(mockRepository);
-    });
+        // assert
+        verify(() => mockRepository.loadAllDebtors()).called(1);
+        verifyNoMoreInteractions(mockRepository);
+      },
+    );
   });
 }

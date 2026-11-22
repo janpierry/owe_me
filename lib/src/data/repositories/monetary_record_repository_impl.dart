@@ -11,9 +11,7 @@ import 'package:owe_me/src/domain/repositories/monetary_record_repository.dart';
 class MonetaryRecordRepositoryImpl implements MonetaryRecordRepository {
   final MonetaryRecordDataSource _monetaryRecordDataSource;
 
-  const MonetaryRecordRepositoryImpl({
-    required this._monetaryRecordDataSource,
-  });
+  const MonetaryRecordRepositoryImpl({required this._monetaryRecordDataSource});
 
   @override
   Future<Either<Failure, void>> addMonetaryRecordAndUpdateDebtor(
@@ -100,13 +98,12 @@ class MonetaryRecordRepositoryImpl implements MonetaryRecordRepository {
         return const Left(DebtorIdNotFoundFailure('Debtor ID cannot be null'));
       }
 
-      final monetaryRecordModels =
-          await _monetaryRecordDataSource.queryMonetaryRecordsByDebtorId(debtorId);
+      final monetaryRecordModels = await _monetaryRecordDataSource
+          .queryMonetaryRecordsByDebtorId(debtorId);
 
       final monetaryRecords = monetaryRecordModels.map((monetaryRecordModel) {
         return MonetaryRecordAdapter.toEntity(monetaryRecordModel);
-      }).toList()
-        ..sort((a, b) => b.date.compareTo(a.date));
+      }).toList()..sort((a, b) => b.date.compareTo(a.date));
 
       return Right(monetaryRecords);
     } on DataIntegrityException catch (e) {

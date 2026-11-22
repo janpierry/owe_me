@@ -27,25 +27,16 @@ class SetOweRecordInfoReviewPage extends StatelessWidget {
     required this.fromDebtorPage,
   });
 
-  void _listen(
-    BuildContext context,
-    SetOweRecordInfoReviewState state,
-  ) {
+  void _listen(BuildContext context, SetOweRecordInfoReviewState state) {
     if (state is SetOweRecordInfoReviewRecordSetFinished) {
       final successMessage = _isEditing
           ? '${oweRecordDraft.oweType.label.capitalize()} atualizado com sucesso.'
           : '${oweRecordDraft.oweType.label.capitalize()} registrado com sucesso.';
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(
-            content: Text(successMessage),
-          ),
-        );
+        ..showSnackBar(SnackBar(content: Text(successMessage)));
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (context) => const HomeContainer(),
-        ),
+        MaterialPageRoute(builder: (context) => const HomeContainer()),
         (route) => false,
       );
       if (fromDebtorPage) {
@@ -61,11 +52,7 @@ class SetOweRecordInfoReviewPage extends StatelessWidget {
           : 'Um erro ocorreu ao registrar o ${oweRecordDraft.oweType.label}.';
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(
-            content: Text(errorMessage),
-          ),
-        );
+        ..showSnackBar(SnackBar(content: Text(errorMessage)));
     }
   }
 
@@ -74,34 +61,36 @@ class SetOweRecordInfoReviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: OweMeAppBar(
-        titleText: 'Confira as Informações',
-      ),
+      appBar: OweMeAppBar(titleText: 'Confira as Informações'),
       backgroundColor: OweMeColors.backgroundLight,
-      body: BlocListener<SetOweRecordInfoReviewBloc, SetOweRecordInfoReviewState>(
-        listener: _listen,
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                child: SetOweRecordInfoReviewCard(
-                  oweRecordDraft: oweRecordDraft,
-                  recordDebtor: recordDebtor,
-                  oweRecordToEdit: oweRecordToEdit,
-                  fromDebtorPage: fromDebtorPage,
+      body:
+          BlocListener<SetOweRecordInfoReviewBloc, SetOweRecordInfoReviewState>(
+            listener: _listen,
+            child: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 24,
+                    ),
+                    child: SetOweRecordInfoReviewCard(
+                      oweRecordDraft: oweRecordDraft,
+                      recordDebtor: recordDebtor,
+                      oweRecordToEdit: oweRecordToEdit,
+                      fromDebtorPage: fromDebtorPage,
+                    ),
+                  ),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: SetOweRecordInfoReviewFinishButton(
+                    isEditing: _isEditing,
+                  ),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: SetOweRecordInfoReviewFinishButton(
-                isEditing: _isEditing,
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
     );
   }
 }

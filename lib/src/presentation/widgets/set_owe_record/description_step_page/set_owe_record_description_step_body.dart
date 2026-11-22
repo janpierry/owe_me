@@ -23,7 +23,8 @@ class SetOweRecordDescriptionStepBody extends StatelessWidget {
     required this.isReviewing,
   });
 
-  String get _stepTitle => 'Descreva a que se refere este ${oweRecordType.label}:';
+  String get _stepTitle =>
+      'Descreva a que se refere este ${oweRecordType.label}:';
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,7 @@ class SetOweRecordDescriptionStepBody extends StatelessWidget {
           child: SetOweRecordDescriptionStepPrimaryButton(
             isReviewing: isReviewing,
           ),
-        )
+        ),
       ],
     );
   }

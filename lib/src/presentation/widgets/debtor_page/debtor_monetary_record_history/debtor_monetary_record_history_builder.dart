@@ -10,7 +10,8 @@ class DebtorMonetaryRecordHistoryBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DebtorBloc, DebtorState>(
-      buildWhen: (previous, current) => current is DebtorMonetaryRecordHistoryState,
+      buildWhen: (previous, current) =>
+          current is DebtorMonetaryRecordHistoryState,
       builder: (context, state) {
         if (state is DebtorMonetaryRecordHistoryLoaded) {
           return DebtorMonetaryRecordHistoryList(
@@ -22,9 +23,7 @@ class DebtorMonetaryRecordHistoryBuilder extends StatelessWidget {
           return const DebtorMonetaryRecordHistoryEmptyPlaceholder();
         }
         if (state is DebtorMonetaryRecordHistoryLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const Center(child: CircularProgressIndicator());
         }
         if (state is DebtorMonetaryRecordHistoryError) {
           return Center(

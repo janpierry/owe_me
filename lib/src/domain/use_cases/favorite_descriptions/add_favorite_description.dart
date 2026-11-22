@@ -9,11 +9,11 @@ import 'package:owe_me/src/domain/repositories/favorite_description_repository.d
 class AddFavoriteDescription {
   final FavoriteDescriptionRepository _repository;
 
-  AddFavoriteDescription({
-    required this._repository,
-  });
+  AddFavoriteDescription({required this._repository});
 
-  Future<Either<Failure, void>> call(AddFavoriteDescriptionParams params) async {
+  Future<Either<Failure, void>> call(
+    AddFavoriteDescriptionParams params,
+  ) async {
     final result = await _repository.isDescriptionInFavorites(
       params.favoriteDescription,
       params.debtor,

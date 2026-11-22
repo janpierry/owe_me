@@ -7,9 +7,7 @@ import 'package:owe_me/src/domain/repositories/monetary_record_repository.dart';
 class EditMonetaryRecordAndUpdateDebtor {
   final MonetaryRecordRepository _repository;
 
-  EditMonetaryRecordAndUpdateDebtor({
-    required this._repository,
-  });
+  EditMonetaryRecordAndUpdateDebtor({required this._repository});
 
   Future<Either<Failure, Debtor>> call({
     required MonetaryRecord newMonetaryRecord,
@@ -18,21 +16,18 @@ class EditMonetaryRecordAndUpdateDebtor {
   }) async {
     return recordDebtor
         .withMonetaryRecordEdited(
-      newRecord: newMonetaryRecord,
-      oldRecord: oldMonetaryRecord,
-    )
-        .fold(
-      (failure) async => Left(failure),
-      (debtorWithUpdatedDebt) async {
-        final result = await _repository.editMonetaryRecordAndUpdateDebtor(
-          newMonetaryRecord,
-          debtorWithUpdatedDebt,
-        );
-        return result.fold(
-          (failure) => Left(failure),
-          (_) => Right(debtorWithUpdatedDebt),
-        );
-      },
-    );
+          newRecord: newMonetaryRecord,
+          oldRecord: oldMonetaryRecord,
+        )
+        .fold((failure) async => Left(failure), (debtorWithUpdatedDebt) async {
+          final result = await _repository.editMonetaryRecordAndUpdateDebtor(
+            newMonetaryRecord,
+            debtorWithUpdatedDebt,
+          );
+          return result.fold(
+            (failure) => Left(failure),
+            (_) => Right(debtorWithUpdatedDebt),
+          );
+        });
   }
 }

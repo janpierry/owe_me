@@ -8,13 +8,13 @@ import 'package:owe_me/src/domain/use_cases/debtor/load_debtors.dart';
 part 'debtor_selection_event.dart';
 part 'debtor_selection_state.dart';
 
-class DebtorSelectionBloc extends Bloc<DebtorSelectionEvent, DebtorSelectionState> {
+class DebtorSelectionBloc
+    extends Bloc<DebtorSelectionEvent, DebtorSelectionState> {
   final LoadDebtors _loadDebtorsUseCase;
 
-  DebtorSelectionBloc({
-    required LoadDebtors loadDebtors,
-  })  : _loadDebtorsUseCase = loadDebtors,
-        super(DebtorSelectionLoadDebtorsInitial()) {
+  DebtorSelectionBloc({required LoadDebtors loadDebtors})
+    : _loadDebtorsUseCase = loadDebtors,
+      super(DebtorSelectionLoadDebtorsInitial()) {
     on<DebtorSelectionLoadDebtorsRequested>(_loadDebtors);
   }
 
@@ -24,11 +24,10 @@ class DebtorSelectionBloc extends Bloc<DebtorSelectionEvent, DebtorSelectionStat
   ) async {
     emit(DebtorSelectionLoadDebtorsInProgress());
     final response = await _loadDebtorsUseCase();
-    response.fold(
-      (failure) => emit(DebtorSelectionLoadDebtorsError()),
-      (debtors) {
-        emit(DebtorSelectionLoadDebtorsSuccess(debtors: debtors));
-      },
-    );
+    response.fold((failure) => emit(DebtorSelectionLoadDebtorsError()), (
+      debtors,
+    ) {
+      emit(DebtorSelectionLoadDebtorsSuccess(debtors: debtors));
+    });
   }
 }

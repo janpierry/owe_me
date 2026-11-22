@@ -9,10 +9,7 @@ class OweMeSpacer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: SizedBox(
-        width: minWidth,
-        height: minHeight,
-      ),
+      child: SizedBox(width: minWidth, height: minHeight),
     );
   }
 }

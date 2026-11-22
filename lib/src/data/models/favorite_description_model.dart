@@ -37,5 +37,6 @@ class FavoriteDescriptionModel extends Model {
   }
 
   @override
-  List<Object?> get props => super.props + [debtorId, description, favoriteType];
+  List<Object?> get props =>
+      super.props + [debtorId, description, favoriteType];
 }

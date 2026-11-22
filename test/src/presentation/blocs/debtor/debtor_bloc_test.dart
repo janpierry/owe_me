@@ -61,9 +61,7 @@ void main() {
   tearDown(() => bloc.close());
 
   group('DebtorEditRequested', () {
-    test(
-        'When the nickname is too long, it emits DebtorEditError with the pt-BR message and does not save',
-        () async {
+    test('When the nickname is too long, it emits DebtorEditError with the pt-BR message and does not save', () async {
       final states = expectLater(
         bloc.stream,
         emitsInOrder([
@@ -80,9 +78,7 @@ void main() {
       verifyNever(() => editDebtor(debtor: any(named: 'debtor')));
     });
 
-    test(
-        'When the nickname is blank, it emits DebtorEditError with the pt-BR message and does not save',
-        () async {
+    test('When the nickname is blank, it emits DebtorEditError with the pt-BR message and does not save', () async {
       final states = expectLater(
         bloc.stream,
         emitsInOrder([
@@ -97,9 +93,7 @@ void main() {
       verifyNever(() => editDebtor(debtor: any(named: 'debtor')));
     });
 
-    test(
-        'When the nickname is valid, it saves the edited debtor, reloads it and emits DebtorEditSuccess with it',
-        () async {
+    test('When the nickname is valid, it saves the edited debtor, reloads it and emits DebtorEditSuccess with it', () async {
       final editedDebtor = Debtor.create(
         id: 1,
         nickname: 'Ana Maria',

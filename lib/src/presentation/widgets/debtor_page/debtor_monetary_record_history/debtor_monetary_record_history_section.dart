@@ -10,10 +10,7 @@ class DebtorMonetaryRecordHistorySection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Histórico',
-          style: OweMeTextStyles.headline2,
-        ),
+        Text('Histórico', style: OweMeTextStyles.headline2),
         const SizedBox(height: 8),
         const DebtorMonetaryRecordHistoryBuilder(),
       ],

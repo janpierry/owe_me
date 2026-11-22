@@ -84,9 +84,7 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: OweMeColors.surfaceWhite,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -113,7 +111,10 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                             color: OweMeColors.primaryBlue,
                           ),
                         ),
-                        TextSpan(text: ' com você', style: OweMeTextStyles.subtitle),
+                        TextSpan(
+                          text: ' com você',
+                          style: OweMeTextStyles.subtitle,
+                        ),
                       ],
                     ),
                     overflow: TextOverflow.clip,
@@ -197,7 +198,9 @@ class SetOweRecordInfoReviewCard extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: oweRecordDraft.date != null
-                            ? OweMeDateUtils.getFormattedDate(oweRecordDraft.date!)
+                            ? OweMeDateUtils.getFormattedDate(
+                                oweRecordDraft.date!,
+                              )
                             : 'Não informada',
                         style: OweMeTextStyles.subtitle.copyWith(
                           color: OweMeColors.primaryBlue,

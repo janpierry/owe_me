@@ -54,12 +54,12 @@ class RemoveConfirmationDialog extends StatelessWidget {
               children: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                  ),
+                  style: TextButton.styleFrom(padding: EdgeInsets.zero),
                   child: Text(
                     'Cancelar',
-                    style: OweMeTextStyles.subtitle.copyWith(color: OweMeColors.textGray),
+                    style: OweMeTextStyles.subtitle.copyWith(
+                      color: OweMeColors.textGray,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -76,7 +76,9 @@ class RemoveConfirmationDialog extends StatelessWidget {
                   ),
                   child: Text(
                     'Excluir',
-                    style: OweMeTextStyles.subtitle.copyWith(color: OweMeColors.white),
+                    style: OweMeTextStyles.subtitle.copyWith(
+                      color: OweMeColors.white,
+                    ),
                   ),
                 ),
               ],

@@ -9,9 +9,11 @@ sealed class SetOweRecordInfoReviewState extends Equatable {
 
 final class SetOweRecordInfoReviewInitial extends SetOweRecordInfoReviewState {}
 
-final class SetOweRecordInfoReviewSettingRecord extends SetOweRecordInfoReviewState {}
+final class SetOweRecordInfoReviewSettingRecord
+    extends SetOweRecordInfoReviewState {}
 
-final class SetOweRecordInfoReviewRecordSetFinished extends SetOweRecordInfoReviewState {
+final class SetOweRecordInfoReviewRecordSetFinished
+    extends SetOweRecordInfoReviewState {
   final Debtor updatedDebtor;
 
   const SetOweRecordInfoReviewRecordSetFinished({required this.updatedDebtor});

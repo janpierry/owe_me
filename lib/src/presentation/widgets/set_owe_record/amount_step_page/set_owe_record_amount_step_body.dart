@@ -24,8 +24,8 @@ class SetOweRecordAmountStepBody extends StatelessWidget {
 
   void _onAmountChanged(Money amount, BuildContext context) {
     context.read<SetOweRecordAmountStepBloc>().add(
-          SetOweRecordAmountStepAmountChanged(amount: amount),
-        );
+      SetOweRecordAmountStepAmountChanged(amount: amount),
+    );
   }
 
   String get _stepTitle =>
@@ -43,31 +43,40 @@ class SetOweRecordAmountStepBody extends StatelessWidget {
               children: [
                 Text(_stepTitle, style: OweMeTextStyles.subtitle),
                 const SizedBox(height: 8),
-                BlocBuilder<SetOweRecordAmountStepBloc, SetOweRecordAmountStepState>(
+                BlocBuilder<
+                  SetOweRecordAmountStepBloc,
+                  SetOweRecordAmountStepState
+                >(
                   builder: (context, state) {
                     return OweMeAmountTextFormField(
                       initialAmount: state.amount.value,
-                      onAmountChanged: (money) => _onAmountChanged(money, context),
-                      errorText:
-                          state.amount.showError ? state.amount.failure?.uiMessage : null,
+                      onAmountChanged: (money) =>
+                          _onAmountChanged(money, context),
+                      errorText: state.amount.showError
+                          ? state.amount.failure?.uiMessage
+                          : null,
                       autoFocus: true,
                     );
                   },
-                )
+                ),
               ],
             ),
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(16),
-          child: BlocBuilder<SetOweRecordAmountStepBloc, SetOweRecordAmountStepState>(
-            builder: (context, state) {
-              return SetOweRecordAmountStepPrimaryButton(
-                isEnabled: state.isValid,
-                isReviewing: isReviewing,
-              );
-            },
-          ),
+          child:
+              BlocBuilder<
+                SetOweRecordAmountStepBloc,
+                SetOweRecordAmountStepState
+              >(
+                builder: (context, state) {
+                  return SetOweRecordAmountStepPrimaryButton(
+                    isEnabled: state.isValid,
+                    isReviewing: isReviewing,
+                  );
+                },
+              ),
         ),
       ],
     );

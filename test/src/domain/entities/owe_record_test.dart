@@ -39,9 +39,7 @@ void main() {
       expect(result.asRight(), isA<OweRecord>());
     });
 
-    test(
-        'When description exceeds the limit, it fails with DescriptionExceedsLimitFailure as cause',
-        () {
+    test('When description exceeds the limit, it fails with DescriptionExceedsLimitFailure as cause', () {
       final result = OweRecord.create(
         id: 1,
         amount: amount,
@@ -85,48 +83,55 @@ void main() {
       expect(entity, equals(buildOweRecord()));
     });
 
-    test('When two OweRecords have different [id], they should not be equal',
-        () {
-      expect(entity, isNot(equals(buildOweRecord(id: 2))));
+    test(
+      'When two OweRecords have different [id], they should not be equal',
+      () {
+        expect(entity, isNot(equals(buildOweRecord(id: 2))));
+      },
+    );
+
+    test(
+      'When two OweRecords have different [amount], they should not be equal',
+      () {
+        final second = OweRecord.create(
+          id: 1,
+          amount: RecordAmount.create(Money(cents: 200)).asRight(),
+          date: date,
+          description: 'Description',
+          oweType: OweType.debt,
+        ).asRight();
+
+        expect(entity, isNot(equals(second)));
+      },
+    );
+
+    test(
+      'When two OweRecords have different [date], they should not be equal',
+      () {
+        final second = OweRecord.create(
+          id: 1,
+          amount: amount,
+          date: DateTime(2024),
+          description: 'Description',
+          oweType: OweType.debt,
+        ).asRight();
+
+        expect(entity, isNot(equals(second)));
+      },
+    );
+
+    test('When two OweRecords have different [description], they should not be equal', () {
+      expect(
+        entity,
+        isNot(equals(buildOweRecord(description: 'Another Description'))),
+      );
     });
 
     test(
-        'When two OweRecords have different [amount], they should not be equal',
-        () {
-      final second = OweRecord.create(
-        id: 1,
-        amount: RecordAmount.create(Money(cents: 200)).asRight(),
-        date: date,
-        description: 'Description',
-        oweType: OweType.debt,
-      ).asRight();
-
-      expect(entity, isNot(equals(second)));
-    });
-
-    test('When two OweRecords have different [date], they should not be equal',
-        () {
-      final second = OweRecord.create(
-        id: 1,
-        amount: amount,
-        date: DateTime(2024),
-        description: 'Description',
-        oweType: OweType.debt,
-      ).asRight();
-
-      expect(entity, isNot(equals(second)));
-    });
-
-    test(
-        'When two OweRecords have different [description], they should not be equal',
-        () {
-      expect(entity,
-          isNot(equals(buildOweRecord(description: 'Another Description'))));
-    });
-
-    test('When two OweRecords have different [type], they should not be equal',
-        () {
-      expect(entity, isNot(equals(buildOweRecord(oweType: OweType.credit))));
-    });
+      'When two OweRecords have different [type], they should not be equal',
+      () {
+        expect(entity, isNot(equals(buildOweRecord(oweType: OweType.credit))));
+      },
+    );
   });
 }

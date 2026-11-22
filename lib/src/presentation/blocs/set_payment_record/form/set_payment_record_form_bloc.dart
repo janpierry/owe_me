@@ -20,11 +20,11 @@ class SetPaymentRecordFormBloc
     required PaymentRecordDraft? paymentRecordDraftToReview,
     required PaymentRecord? paymentRecordToEdit,
   }) : super(
-          SetPaymentRecordFormState.initial(
-            paymentRecordDraftToReview: paymentRecordDraftToReview,
-            paymentRecordToEdit: paymentRecordToEdit,
-          ),
-        ) {
+         SetPaymentRecordFormState.initial(
+           paymentRecordDraftToReview: paymentRecordDraftToReview,
+           paymentRecordToEdit: paymentRecordToEdit,
+         ),
+       ) {
     on<SetPaymentRecordFormAmountChanged>(_onAmountChanged);
     on<SetPaymentRecordFormPaymentMethodChanged>(_onPaymentMethodChanged);
     on<SetPaymentRecordFormDateChanged>(_onDateChanged);
@@ -59,18 +59,14 @@ class SetPaymentRecordFormBloc
     SetPaymentRecordFormPaymentMethodChanged event,
     Emitter<SetPaymentRecordFormState> emit,
   ) {
-    emit(
-      state.copyWith(paymentMethod: event.paymentMethod),
-    );
+    emit(state.copyWith(paymentMethod: event.paymentMethod));
   }
 
   FutureOr<void> _onDateChanged(
     SetPaymentRecordFormDateChanged event,
     Emitter<SetPaymentRecordFormState> emit,
   ) {
-    emit(
-      state.copyWith(date: event.date),
-    );
+    emit(state.copyWith(date: event.date));
   }
 
   FutureOr<void> _onNextPageRequested(

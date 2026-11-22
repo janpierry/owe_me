@@ -57,7 +57,9 @@ class SetOweRecordDescriptionStepPage extends StatelessWidget {
     );
   }
 
-  void _popCurrentDescriptionPageAndPreviousInfoReviewPage(BuildContext context) {
+  void _popCurrentDescriptionPageAndPreviousInfoReviewPage(
+    BuildContext context,
+  ) {
     Navigator.of(context).pop();
     Navigator.of(context).pop();
   }
@@ -82,28 +84,28 @@ class SetOweRecordDescriptionStepPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: OweMeAppBar(
-        titleText: 'Descreva o ${oweRecordType.label}',
-      ),
+      appBar: OweMeAppBar(titleText: 'Descreva o ${oweRecordType.label}'),
       body:
-          BlocConsumer<SetOweRecordDescriptionStepBloc, SetOweRecordDescriptionStepState>(
-        listener: _listen,
-        buildWhen: (previous, current) =>
-            current is SetOweRecordDescriptionStepPageBuildState,
-        builder: (context, state) {
-          if (state is SetOweRecordDescriptionStepPageLoaded) {
-            return SetOweRecordDescriptionStepBody(
-              initialDescription: state.initialDescription,
-              initialFavoriteDescriptions: state.initialFavoriteDescriptions,
-              oweRecordType: oweRecordType,
-              isReviewing: isReviewing,
-            );
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-      ),
+          BlocConsumer<
+            SetOweRecordDescriptionStepBloc,
+            SetOweRecordDescriptionStepState
+          >(
+            listener: _listen,
+            buildWhen: (previous, current) =>
+                current is SetOweRecordDescriptionStepPageBuildState,
+            builder: (context, state) {
+              if (state is SetOweRecordDescriptionStepPageLoaded) {
+                return SetOweRecordDescriptionStepBody(
+                  initialDescription: state.initialDescription,
+                  initialFavoriteDescriptions:
+                      state.initialFavoriteDescriptions,
+                  oweRecordType: oweRecordType,
+                  isReviewing: isReviewing,
+                );
+              }
+              return const Center(child: CircularProgressIndicator());
+            },
+          ),
     );
   }
 }

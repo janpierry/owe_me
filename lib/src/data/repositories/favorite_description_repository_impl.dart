@@ -8,7 +8,8 @@ import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/entities/favorite_description.dart';
 import 'package:owe_me/src/domain/repositories/favorite_description_repository.dart';
 
-class FavoriteDescriptionRepositoryImpl implements FavoriteDescriptionRepository {
+class FavoriteDescriptionRepositoryImpl
+    implements FavoriteDescriptionRepository {
   final FavoriteDescriptionDataSource _favoriteDescriptionDataSource;
 
   FavoriteDescriptionRepositoryImpl({
@@ -53,10 +54,8 @@ class FavoriteDescriptionRepositoryImpl implements FavoriteDescriptionRepository
       debtorId: debtorId,
     );
     try {
-      final isInFavorites =
-          await _favoriteDescriptionDataSource.queryFavoriteDescriptionExists(
-        favoriteDescriptionModel,
-      );
+      final isInFavorites = await _favoriteDescriptionDataSource
+          .queryFavoriteDescriptionExists(favoriteDescriptionModel);
       return Right(isInFavorites);
     } on Exception catch (e) {
       //TODO: handle specific Failures
@@ -73,11 +72,12 @@ class FavoriteDescriptionRepositoryImpl implements FavoriteDescriptionRepository
       if (debtorId == null) {
         return const Left(DebtorIdNotFoundFailure('Debtor ID cannot be null'));
       }
-      final favoriteDescriptionModels =
-          await _favoriteDescriptionDataSource.queryFavoriteDebtsByDebtorId(debtorId);
+      final favoriteDescriptionModels = await _favoriteDescriptionDataSource
+          .queryFavoriteDebtsByDebtorId(debtorId);
 
-      final favoriteDescriptions =
-          favoriteDescriptionModels.map((favoriteDescriptionModel) {
+      final favoriteDescriptions = favoriteDescriptionModels.map((
+        favoriteDescriptionModel,
+      ) {
         return FavoriteDescriptionAdapter.toEntity(favoriteDescriptionModel);
       }).toList();
 
@@ -100,11 +100,12 @@ class FavoriteDescriptionRepositoryImpl implements FavoriteDescriptionRepository
       if (debtorId == null) {
         return const Left(DebtorIdNotFoundFailure('Debtor ID cannot be null'));
       }
-      final favoriteDescriptionModels =
-          await _favoriteDescriptionDataSource.queryFavoriteCreditsByDebtorId(debtorId);
+      final favoriteDescriptionModels = await _favoriteDescriptionDataSource
+          .queryFavoriteCreditsByDebtorId(debtorId);
 
-      final favoriteDescriptions =
-          favoriteDescriptionModels.map((favoriteDescriptionModel) {
+      final favoriteDescriptions = favoriteDescriptionModels.map((
+        favoriteDescriptionModel,
+      ) {
         return FavoriteDescriptionAdapter.toEntity(favoriteDescriptionModel);
       }).toList();
 

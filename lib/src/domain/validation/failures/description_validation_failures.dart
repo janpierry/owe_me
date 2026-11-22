@@ -6,5 +6,5 @@ sealed class DescriptionValidationFailure extends ValidationFailure {
 
 class DescriptionExceedsLimitFailure extends DescriptionValidationFailure {
   const DescriptionExceedsLimitFailure()
-      : super('Description exceeds the maximum allowed limit.');
+    : super('Description exceeds the maximum allowed limit.');
 }

@@ -7,11 +7,7 @@ class OweMeDatePicker extends StatefulWidget {
   final DateTime? initialDate;
   final ValueChanged<DateTime>? onDateChanged;
 
-  const OweMeDatePicker({
-    super.key,
-    this.initialDate,
-    this.onDateChanged,
-  });
+  const OweMeDatePicker({super.key, this.initialDate, this.onDateChanged});
 
   @override
   State<OweMeDatePicker> createState() => _OweMeDatePickerState();
@@ -74,10 +70,7 @@ class _OweMeDatePickerState extends State<OweMeDatePicker> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-            color: OweMeColors.borderGray,
-            width: 1,
-          ),
+          borderSide: const BorderSide(color: OweMeColors.borderGray, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),

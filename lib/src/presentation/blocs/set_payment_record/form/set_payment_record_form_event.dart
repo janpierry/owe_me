@@ -7,23 +7,21 @@ sealed class SetPaymentRecordFormEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-final class SetPaymentRecordFormAmountChanged extends SetPaymentRecordFormEvent {
+final class SetPaymentRecordFormAmountChanged
+    extends SetPaymentRecordFormEvent {
   final Money amount;
 
-  const SetPaymentRecordFormAmountChanged({
-    required this.amount,
-  });
+  const SetPaymentRecordFormAmountChanged({required this.amount});
 
   @override
   List<Object?> get props => [amount];
 }
 
-final class SetPaymentRecordFormPaymentMethodChanged extends SetPaymentRecordFormEvent {
+final class SetPaymentRecordFormPaymentMethodChanged
+    extends SetPaymentRecordFormEvent {
   final PaymentMethod? paymentMethod;
 
-  const SetPaymentRecordFormPaymentMethodChanged({
-    required this.paymentMethod,
-  });
+  const SetPaymentRecordFormPaymentMethodChanged({required this.paymentMethod});
 
   @override
   List<Object?> get props => [paymentMethod];
@@ -38,4 +36,5 @@ final class SetPaymentRecordFormDateChanged extends SetPaymentRecordFormEvent {
   List<Object?> get props => [date];
 }
 
-final class SetPaymentRecordFormNextPageRequested extends SetPaymentRecordFormEvent {}
+final class SetPaymentRecordFormNextPageRequested
+    extends SetPaymentRecordFormEvent {}

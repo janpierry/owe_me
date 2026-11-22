@@ -11,9 +11,7 @@ final class SetOweRecordAmountStepState extends Equatable {
 
   bool get isValid => amount.isValid;
 
-  factory SetOweRecordAmountStepState.initial({
-    required Money? amountToEdit,
-  }) {
+  factory SetOweRecordAmountStepState.initial({required Money? amountToEdit}) {
     final initialAmount = amountToEdit ?? Money.zero;
     final failure = RecordAmountRules.validate(initialAmount);
     return SetOweRecordAmountStepState(

@@ -7,9 +7,7 @@ import 'package:owe_me/src/domain/repositories/monetary_record_repository.dart';
 class RemoveMonetaryRecordAndUpdateDebtor {
   final MonetaryRecordRepository _repository;
 
-  RemoveMonetaryRecordAndUpdateDebtor({
-    required this._repository,
-  });
+  RemoveMonetaryRecordAndUpdateDebtor({required this._repository});
 
   Future<Either<Failure, Debtor>> call({
     required MonetaryRecord monetaryRecord,

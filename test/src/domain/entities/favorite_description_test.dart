@@ -37,9 +37,7 @@ void main() {
       assert(first != second);
     });
 
-    test(
-        'When two entities have different [description], they should not be equal',
-        () {
+    test('When two entities have different [description], they should not be equal', () {
       final second = FavoriteDescription.create(
         id: id,
         description: 'another description',
@@ -49,9 +47,7 @@ void main() {
       assert(first != second);
     });
 
-    test(
-        'When two entities have different [favoriteType], they should not be equal',
-        () {
+    test('When two entities have different [favoriteType], they should not be equal', () {
       final second = FavoriteDescription.create(
         id: id,
         description: description,
@@ -64,19 +60,18 @@ void main() {
 
   group('create validation:', () {
     test(
-        'When description is empty, it returns FavoriteDescriptionEmptyFailure',
-        () {
-      final result = FavoriteDescription.create(
-        description: '',
-        favoriteType: OweType.debt,
-      );
+      'When description is empty, it returns FavoriteDescriptionEmptyFailure',
+      () {
+        final result = FavoriteDescription.create(
+          description: '',
+          favoriteType: OweType.debt,
+        );
 
-      expect(result.asLeft(), isA<FavoriteDescriptionEmptyFailure>());
-    });
+        expect(result.asLeft(), isA<FavoriteDescriptionEmptyFailure>());
+      },
+    );
 
-    test(
-        'When description is whitespace-only, it returns FavoriteDescriptionEmptyFailure',
-        () {
+    test('When description is whitespace-only, it returns FavoriteDescriptionEmptyFailure', () {
       final result = FavoriteDescription.create(
         description: '   ',
         favoriteType: OweType.debt,
@@ -85,9 +80,7 @@ void main() {
       expect(result.asLeft(), isA<FavoriteDescriptionEmptyFailure>());
     });
 
-    test(
-        'When description exceeds the limit, it returns FavoriteDescriptionTooLongFailure',
-        () {
+    test('When description exceeds the limit, it returns FavoriteDescriptionTooLongFailure', () {
       final result = FavoriteDescription.create(
         description: 'a' * (DescriptionRules.maxLength + 1),
         favoriteType: OweType.debt,

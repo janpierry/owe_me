@@ -33,7 +33,9 @@ class SetOweRecordDebtorSelectionBody extends StatelessWidget {
               children: [
                 Text(
                   _stepTitle,
-                  style: OweMeTextStyles.body.copyWith(color: OweMeColors.textGray),
+                  style: OweMeTextStyles.body.copyWith(
+                    color: OweMeColors.textGray,
+                  ),
                 ),
                 const SizedBox(height: 12),
                 //TODO filter

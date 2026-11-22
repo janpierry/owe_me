@@ -11,16 +11,11 @@ import 'package:owe_me/src/presentation/containers/set_payment_record/set_paymen
 class DebtorListItem extends StatelessWidget {
   final Debtor debtor;
 
-  const DebtorListItem({
-    super.key,
-    required this.debtor,
-  });
+  const DebtorListItem({super.key, required this.debtor});
 
   void _navigateToDebtorPage(BuildContext context) {
     Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => DebtorContainer(debtor: debtor),
-      ),
+      MaterialPageRoute(builder: (context) => DebtorContainer(debtor: debtor)),
     );
   }
 
@@ -76,10 +71,7 @@ class DebtorListItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      debtor.nickname,
-                      style: OweMeTextStyles.subtitle,
-                    ),
+                    Text(debtor.nickname, style: OweMeTextStyles.subtitle),
                     const SizedBox(width: 8),
                     Text(
                       MoneyFormatter.toStringCurrency(debtor.totalDebt),

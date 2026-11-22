@@ -27,7 +27,8 @@ class FavoriteDescriptionAdapter {
 
     return value.getOrElse(() {
       throw DataIntegrityException(
-          'Invalid FavoriteDescriptionModel data of id ${model.id}');
+        'Invalid FavoriteDescriptionModel data of id ${model.id}',
+      );
     });
   }
 }

@@ -12,21 +12,27 @@ part 'set_payment_record_info_review_event.dart';
 part 'set_payment_record_info_review_state.dart';
 
 class SetPaymentRecordInfoReviewBloc
-    extends Bloc<SetPaymentRecordInfoReviewEvent, SetPaymentRecordInfoReviewState> {
+    extends
+        Bloc<SetPaymentRecordInfoReviewEvent, SetPaymentRecordInfoReviewState> {
   late PaymentRecordDraft _paymentRecordDraft;
   late Debtor _recordDebtor;
   PaymentRecord? _paymentRecordToEdit;
-  final AddMonetaryRecordAndUpdateDebtor _addMonetaryRecordAndUpdateDebtorUseCase;
-  final EditMonetaryRecordAndUpdateDebtor _editMonetaryRecordAndUpdateDebtorUseCase;
+  final AddMonetaryRecordAndUpdateDebtor
+  _addMonetaryRecordAndUpdateDebtorUseCase;
+  final EditMonetaryRecordAndUpdateDebtor
+  _editMonetaryRecordAndUpdateDebtorUseCase;
 
   bool get _isEdition => _paymentRecordToEdit != null;
 
   SetPaymentRecordInfoReviewBloc({
     required AddMonetaryRecordAndUpdateDebtor addMonetaryRecordAndUpdateDebtor,
-    required EditMonetaryRecordAndUpdateDebtor editMonetaryRecordAndUpdateDebtor,
-  })  : _addMonetaryRecordAndUpdateDebtorUseCase = addMonetaryRecordAndUpdateDebtor,
-        _editMonetaryRecordAndUpdateDebtorUseCase = editMonetaryRecordAndUpdateDebtor,
-        super(SetPaymentRecordInfoReviewInitial()) {
+    required EditMonetaryRecordAndUpdateDebtor
+    editMonetaryRecordAndUpdateDebtor,
+  }) : _addMonetaryRecordAndUpdateDebtorUseCase =
+           addMonetaryRecordAndUpdateDebtor,
+       _editMonetaryRecordAndUpdateDebtorUseCase =
+           editMonetaryRecordAndUpdateDebtor,
+       super(SetPaymentRecordInfoReviewInitial()) {
     on<SetPaymentRecordInfoReviewPageInitialized>(_loadInitialData);
     on<SetPaymentRecordInfoReviewSetRecordRequested>(
       _setPaymentRecord,
@@ -59,7 +65,9 @@ class SetPaymentRecordInfoReviewBloc
       final paymentRecord = value.asRight();
       final result = _isEdition
           ? await _editMonetaryRecordAndUpdateDebtorUseCase(
-              newMonetaryRecord: paymentRecord.copyWith(id: _paymentRecordToEdit!.id),
+              newMonetaryRecord: paymentRecord.copyWith(
+                id: _paymentRecordToEdit!.id,
+              ),
               oldMonetaryRecord: _paymentRecordToEdit!,
               recordDebtor: _recordDebtor,
             )
@@ -73,7 +81,9 @@ class SetPaymentRecordInfoReviewBloc
           emit(SetPaymentRecordInfoReviewError());
         },
         (updatedDebtor) => emit(
-          SetPaymentRecordInfoReviewRecordSetFinished(updatedDebtor: updatedDebtor),
+          SetPaymentRecordInfoReviewRecordSetFinished(
+            updatedDebtor: updatedDebtor,
+          ),
         ),
       );
     } catch (e) {

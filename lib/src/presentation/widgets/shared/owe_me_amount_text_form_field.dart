@@ -20,7 +20,8 @@ class OweMeAmountTextFormField extends StatefulWidget {
   });
 
   @override
-  State<OweMeAmountTextFormField> createState() => _OweMeAmountTextFormFieldState();
+  State<OweMeAmountTextFormField> createState() =>
+      _OweMeAmountTextFormFieldState();
 }
 
 class _OweMeAmountTextFormFieldState extends State<OweMeAmountTextFormField> {
@@ -32,7 +33,9 @@ class _OweMeAmountTextFormFieldState extends State<OweMeAmountTextFormField> {
   void initState() {
     super.initState();
 
-    _controller.text = _formatter.formatNumber(widget.initialAmount?.cents ?? 0);
+    _controller.text = _formatter.formatNumber(
+      widget.initialAmount?.cents ?? 0,
+    );
     _controller.addListener(_onTextChanged);
   }
 
@@ -62,10 +65,7 @@ class _OweMeAmountTextFormFieldState extends State<OweMeAmountTextFormField> {
         fillColor: OweMeColors.surfaceWhite,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-            color: OweMeColors.borderGray,
-            width: 1,
-          ),
+          borderSide: const BorderSide(color: OweMeColors.borderGray, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -76,17 +76,11 @@ class _OweMeAmountTextFormFieldState extends State<OweMeAmountTextFormField> {
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-            color: OweMeColors.red,
-            width: 1,
-          ),
+          borderSide: const BorderSide(color: OweMeColors.red, width: 1),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-            color: OweMeColors.red,
-            width: 1,
-          ),
+          borderSide: const BorderSide(color: OweMeColors.red, width: 1),
         ),
       ),
       style: OweMeTextStyles.body,

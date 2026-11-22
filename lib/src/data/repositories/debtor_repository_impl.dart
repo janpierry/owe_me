@@ -8,9 +8,7 @@ import 'package:owe_me/src/domain/repositories/debtor_repository.dart';
 class DebtorRepositoryImpl implements DebtorRepository {
   final DebtorDataSource _debtorDataSource;
 
-  DebtorRepositoryImpl({
-    required this._debtorDataSource,
-  });
+  DebtorRepositoryImpl({required this._debtorDataSource});
 
   @override
   Future<Either<Failure, List<Debtor>>> loadAllDebtors() async {

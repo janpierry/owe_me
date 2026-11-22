@@ -48,8 +48,9 @@ class SetOweRecordDateStepPrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OweMeElevatedButton(
       label: isReviewing ? 'Salvar alterações' : 'Continuar',
-      onPressed: () =>
-          isReviewing ? _finishInfoReview(context) : _navigateToInfoReviewPage(context),
+      onPressed: () => isReviewing
+          ? _finishInfoReview(context)
+          : _navigateToInfoReviewPage(context),
     );
   }
 }
