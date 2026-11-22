@@ -31,7 +31,6 @@ class SetOweRecordDescriptionStepContainer extends StatelessWidget {
           SetOweRecordDescriptionStepPageInitialized(
             oweRecordDraft: oweRecordDraft,
             recordDebtor: recordDebtor,
-            oweRecordToEdit: oweRecordToEdit,
           ),
         ),
       child: SetOweRecordDescriptionStepPage(

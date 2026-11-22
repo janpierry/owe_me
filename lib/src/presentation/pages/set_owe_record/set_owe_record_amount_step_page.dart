@@ -74,9 +74,12 @@ class SetOweRecordAmountStepPage extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SetOweRecordDescriptionStepContainer(
+          // When editing, the draft starts with the record's description, so
+          // from here on the draft alone decides it (a cleared one stays cleared).
           oweRecordDraft: OweRecordDraft(
             oweType: oweRecordType,
             amount: amount,
+            description: oweRecordToEdit?.description,
           ),
           recordDebtor: recordDebtor,
           oweRecordToEdit: oweRecordToEdit,
