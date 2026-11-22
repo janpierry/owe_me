@@ -10,8 +10,8 @@ class AddFavoriteDescription {
   final FavoriteDescriptionRepository _repository;
 
   AddFavoriteDescription({
-    required FavoriteDescriptionRepository repository,
-  }) : _repository = repository;
+    required this._repository,
+  });
 
   Future<Either<Failure, void>> call(AddFavoriteDescriptionParams params) async {
     final result = await _repository.isDescriptionInFavorites(

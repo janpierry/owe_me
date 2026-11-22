@@ -13,8 +13,8 @@ class DebtorDataSourceImpl implements DebtorDataSource {
   final OweMeDatabase _oweMeDatabase;
 
   DebtorDataSourceImpl({
-    required OweMeDatabase oweMeDatabase,
-  }) : _oweMeDatabase = oweMeDatabase;
+    required this._oweMeDatabase,
+  });
 
   @override
   Future<List<DebtorModel>> queryAllDebtors() async {

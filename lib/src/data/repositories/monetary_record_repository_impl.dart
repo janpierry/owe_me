@@ -12,8 +12,8 @@ class MonetaryRecordRepositoryImpl implements MonetaryRecordRepository {
   final MonetaryRecordDataSource _monetaryRecordDataSource;
 
   const MonetaryRecordRepositoryImpl({
-    required MonetaryRecordDataSource monetaryRecordDataSource,
-  }) : _monetaryRecordDataSource = monetaryRecordDataSource;
+    required this._monetaryRecordDataSource,
+  });
 
   @override
   Future<Either<Failure, void>> addMonetaryRecordAndUpdateDebtor(

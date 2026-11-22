@@ -7,8 +7,7 @@ import 'package:owe_me/src/domain/repositories/favorite_description_repository.d
 class LoadDebtorFavoriteCredits {
   final FavoriteDescriptionRepository _repository;
 
-  LoadDebtorFavoriteCredits({required FavoriteDescriptionRepository repository})
-      : _repository = repository;
+  LoadDebtorFavoriteCredits({required this._repository});
 
   Future<Either<Failure, List<FavoriteDescription>>> call(Debtor debtor) async {
     return await _repository.loadDebtorFavoriteCredits(debtor);

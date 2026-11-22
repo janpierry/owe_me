@@ -8,8 +8,8 @@ class RemoveMonetaryRecordAndUpdateDebtor {
   final MonetaryRecordRepository _repository;
 
   RemoveMonetaryRecordAndUpdateDebtor({
-    required MonetaryRecordRepository repository,
-  }) : _repository = repository;
+    required this._repository,
+  });
 
   Future<Either<Failure, Debtor>> call({
     required MonetaryRecord monetaryRecord,

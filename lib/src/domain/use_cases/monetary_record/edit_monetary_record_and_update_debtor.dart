@@ -8,8 +8,8 @@ class EditMonetaryRecordAndUpdateDebtor {
   final MonetaryRecordRepository _repository;
 
   EditMonetaryRecordAndUpdateDebtor({
-    required MonetaryRecordRepository repository,
-  }) : _repository = repository;
+    required this._repository,
+  });
 
   Future<Either<Failure, Debtor>> call({
     required MonetaryRecord newMonetaryRecord,

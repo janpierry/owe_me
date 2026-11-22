@@ -12,8 +12,8 @@ class FavoriteDescriptionRepositoryImpl implements FavoriteDescriptionRepository
   final FavoriteDescriptionDataSource _favoriteDescriptionDataSource;
 
   FavoriteDescriptionRepositoryImpl({
-    required FavoriteDescriptionDataSource favoriteDescriptionDataSource,
-  }) : _favoriteDescriptionDataSource = favoriteDescriptionDataSource;
+    required this._favoriteDescriptionDataSource,
+  });
 
   @override
   Future<Either<Failure, void>> addFavoriteDescription(

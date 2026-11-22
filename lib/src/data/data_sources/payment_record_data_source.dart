@@ -9,8 +9,8 @@ class PaymentRecordDataSourceImpl implements PaymentRecordDataSource {
   final OweMeDatabase _oweMeDatabase;
 
   PaymentRecordDataSourceImpl({
-    required OweMeDatabase oweMeDatabase,
-  }) : _oweMeDatabase = oweMeDatabase;
+    required this._oweMeDatabase,
+  });
 
   @override
   Future<List<PaymentRecordModel>> queryPaymentRecordsByDebtorId(

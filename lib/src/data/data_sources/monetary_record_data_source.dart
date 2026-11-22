@@ -27,12 +27,10 @@ class MonetaryRecordDataSourceImpl implements MonetaryRecordDataSource {
   final PaymentRecordDataSource _paymentRecordDataSource;
 
   MonetaryRecordDataSourceImpl({
-    required OweMeDatabase oweMeDatabase,
-    required OweRecordDataSource oweRecordDataSource,
-    required PaymentRecordDataSource paymentRecordDataSource,
-  })  : _oweMeDatabase = oweMeDatabase,
-        _oweRecordDataSource = oweRecordDataSource,
-        _paymentRecordDataSource = paymentRecordDataSource;
+    required this._oweMeDatabase,
+    required this._oweRecordDataSource,
+    required this._paymentRecordDataSource,
+  });
 
   @override
   Future<void> insertMonetaryRecordAndUpdateDebtor(

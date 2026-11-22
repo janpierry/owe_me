@@ -7,8 +7,7 @@ import 'package:owe_me/src/domain/repositories/monetary_record_repository.dart';
 class LoadDebtorMonetaryRecordHistory {
   final MonetaryRecordRepository _repository;
 
-  LoadDebtorMonetaryRecordHistory({required MonetaryRecordRepository repository})
-      : _repository = repository;
+  LoadDebtorMonetaryRecordHistory({required this._repository});
 
   Future<Either<Failure, List<MonetaryRecord>>> call(Debtor debtor) async {
     return await _repository.loadDebtorMonetaryRecordHistory(debtor);

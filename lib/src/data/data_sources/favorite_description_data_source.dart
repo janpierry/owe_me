@@ -18,8 +18,8 @@ class FavoriteDescriptionDataSourceImpl implements FavoriteDescriptionDataSource
   final OweMeDatabase _oweMeDatabase;
 
   FavoriteDescriptionDataSourceImpl({
-    required OweMeDatabase oweMeDatabase,
-  }) : _oweMeDatabase = oweMeDatabase;
+    required this._oweMeDatabase,
+  });
 
   @override
   Future<void> insertFavoriteDescription(

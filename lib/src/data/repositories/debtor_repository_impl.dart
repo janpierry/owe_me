@@ -9,8 +9,8 @@ class DebtorRepositoryImpl implements DebtorRepository {
   final DebtorDataSource _debtorDataSource;
 
   DebtorRepositoryImpl({
-    required DebtorDataSource debtorDataSource,
-  }) : _debtorDataSource = debtorDataSource;
+    required this._debtorDataSource,
+  });
 
   @override
   Future<Either<Failure, List<Debtor>>> loadAllDebtors() async {
