@@ -66,7 +66,14 @@ abstract class DebtorEditState extends DebtorState {
 
 final class DebtorEditInProgress extends DebtorEditState {}
 
-final class DebtorEditSuccess extends DebtorEditState {}
+final class DebtorEditSuccess extends DebtorEditState {
+  final Debtor updatedDebtor;
+
+  const DebtorEditSuccess({required this.updatedDebtor});
+
+  @override
+  List<Object> get props => [updatedDebtor];
+}
 
 final class DebtorEditError extends DebtorEditState {
   final String message;

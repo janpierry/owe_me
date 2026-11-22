@@ -97,7 +97,7 @@ class DebtorBloc extends Bloc<DebtorEvent, DebtorState> {
       (exception) => emit(DebtorEditError(message: exception.message)),
       (_) {
         _loadDebtor(emit, debtor);
-        emit(DebtorEditSuccess());
+        emit(DebtorEditSuccess(updatedDebtor: debtor));
       },
     );
   }
