@@ -33,10 +33,7 @@ class DebtorRepositoryImpl implements DebtorRepository {
     try {
       final debtorModel = DebtorAdapter.toModel(debtor);
       final savedDebtorId = await _debtorDataSource.insertDebtor(debtorModel);
-      return debtor.copyWith(id: savedDebtorId).fold(
-            (failure) => Left(failure),
-            (savedDebtor) => Right(savedDebtor),
-          );
+      return debtor.copyWith(id: savedDebtorId);
     } on Exception catch (e) {
       //TODO: handle specific Failures
       return Left(DefaultFailure(e.toString()));
