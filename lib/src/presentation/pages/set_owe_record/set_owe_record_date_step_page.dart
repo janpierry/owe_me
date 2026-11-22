@@ -67,7 +67,7 @@ class _SetOweRecordDateStepPageState extends State<SetOweRecordDateStepPage> {
                   Text(_stepTitle, style: OweMeTextStyles.subtitle),
                   const SizedBox(height: 8),
                   OweMeDatePicker(
-                    initialDate: widget.oweRecordDraft.date ?? DateTime.now(),
+                    initialDate: _selectedDate,
                     onDateChanged: _onDateChanged,
                   ),
                 ],
