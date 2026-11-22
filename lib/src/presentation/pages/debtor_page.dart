@@ -16,6 +16,7 @@ class DebtorPage extends StatelessWidget {
       _showDebtorRemovedSnackbar(context);
       _navigateToHomePage(context);
     } else if (state is DebtorEditSuccess) {
+      _refreshHomeAndDebtorPages(context, state.updatedDebtor);
       _showDebtorEditedSnackbar(context);
     } else if (state is DebtorRemoveMonetaryRecordSuccess) {
       _refreshHomeAndDebtorPages(context, state.updatedDebtor);
