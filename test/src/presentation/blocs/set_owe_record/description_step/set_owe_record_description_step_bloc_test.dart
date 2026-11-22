@@ -104,6 +104,15 @@ void main() {
     return field = FakeDescriptionField(bloc, text: loaded.initialDescription);
   }
 
+  Future<void> tapFavorite(FavoriteDescription favorite) async {
+    bloc.add(
+      SetOweRecordDescriptionStepFavoriteDescriptionSelected(
+        selectedDescription: favorite,
+      ),
+    );
+    await pumpEventQueue();
+  }
+
   Future<void> type(String text) async {
     field!.type(text);
     await pumpEventQueue();
@@ -174,5 +183,40 @@ void main() {
         expect(nextDraft.description, isNull);
       },
     );
+  });
+
+  group('favorite descriptions', () {
+    test(
+      'the field shows the favorite and the draft saves it when the same chip '
+      'is tapped again after typing',
+      () async {
+        final field = await openStep(
+          OweRecordDraft(oweType: OweType.debt, amount: amount),
+        );
+
+        await tapFavorite(lunchFavorite);
+        expect(field.text, 'Almoço');
+
+        await type('Almoço com João');
+        await tapFavorite(lunchFavorite);
+        expect(field.text, 'Almoço');
+
+        final nextDraft = await continueToNextPage();
+        expect(nextDraft.description, field.text);
+      },
+    );
+
+    test('the draft saves what was typed after picking a favorite', () async {
+      final field = await openStep(
+        OweRecordDraft(oweType: OweType.debt, amount: amount),
+      );
+
+      await tapFavorite(lunchFavorite);
+      await type('Almoço com João');
+      final nextDraft = await continueToNextPage();
+
+      expect(nextDraft.description, 'Almoço com João');
+      expect(nextDraft.description, field.text);
+    });
   });
 }

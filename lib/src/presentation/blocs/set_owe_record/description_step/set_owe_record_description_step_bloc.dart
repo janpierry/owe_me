@@ -21,6 +21,7 @@ part 'set_owe_record_description_step_state.dart';
 class SetOweRecordDescriptionStepBloc
     extends Bloc<SetOweRecordDescriptionStepEvent, SetOweRecordDescriptionStepState> {
   late String _description;
+  int _textFieldSendCount = 0;
   late List<FavoriteDescription> _favoriteDescriptions;
   late final OweRecordDraft _oweRecordDraft;
   late final Debtor _recordDebtor;
@@ -108,7 +109,10 @@ class SetOweRecordDescriptionStepBloc
   ) async {
     _description = event.selectedDescription.description;
     emit(
-      SetOweRecordDescriptionStepSendingDescriptionToTextField(description: _description),
+      SetOweRecordDescriptionStepSendingDescriptionToTextField(
+        description: _description,
+        sendId: ++_textFieldSendCount,
+      ),
     );
   }
 

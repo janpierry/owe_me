@@ -73,12 +73,18 @@ final class SetOweRecordDescriptionStepSendingDescriptionToTextField
     extends SetOweRecordDescriptionStepState {
   final String description;
 
+  /// Different on every send, so two sends of the same text are still two
+  /// states. Without it the bloc drops a send equal to the previous one (the
+  /// same favorite tapped twice) and the field keeps text the bloc no longer has.
+  final int sendId;
+
   const SetOweRecordDescriptionStepSendingDescriptionToTextField({
     required this.description,
+    required this.sendId,
   });
 
   @override
-  List<Object> get props => [description];
+  List<Object> get props => [description, sendId];
 }
 
 final class SetOweRecordDescriptionStepLoading extends SetOweRecordDescriptionStepState {}
