@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
@@ -27,7 +28,10 @@ class SetOweRecordInfoReviewBloc
         _editMonetaryRecordAndUpdateDebtorUseCase = editMonetaryRecordAndUpdateDebtor,
         super(SetOweRecordInfoReviewInitial()) {
     on<SetOweRecordInfoReviewPageInitialized>(_loadInitialData);
-    on<SetOweRecordInfoReviewSetRecordRequested>(_setOweRecord);
+    on<SetOweRecordInfoReviewSetRecordRequested>(
+      _setOweRecord,
+      transformer: droppable(),
+    );
   }
 
   Future<void> _loadInitialData(
