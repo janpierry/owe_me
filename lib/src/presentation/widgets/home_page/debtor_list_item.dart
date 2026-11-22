@@ -69,7 +69,6 @@ class DebtorListItem extends StatelessWidget {
         onTap: () => _navigateToDebtorPage(context),
         borderRadius: BorderRadius.circular(12),
         child: Container(
-          // height: 80,
           padding: const EdgeInsets.all(16),
           child: Row(
             children: [
