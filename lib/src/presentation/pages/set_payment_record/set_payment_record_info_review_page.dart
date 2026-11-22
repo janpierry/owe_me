@@ -10,6 +10,7 @@ import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
 import 'package:owe_me/src/presentation/widgets/set_payment_record/info_review/set_payment_record_info_review_card.dart';
 import 'package:owe_me/src/presentation/widgets/set_payment_record/info_review/set_payment_record_info_review_finish_button.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_app_bar.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_bottom_action_area.dart';
 
 class SetPaymentRecordInfoReviewPage extends StatelessWidget {
   final PaymentRecordDraft paymentRecordDraft;
@@ -83,8 +84,7 @@ class SetPaymentRecordInfoReviewPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16),
+                OweMeBottomActionArea(
                   child: SetPaymentRecordInfoReviewFinishButton(
                     isEditing: _isEditing,
                   ),

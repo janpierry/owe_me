@@ -12,6 +12,7 @@ import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/info_review_page/set_owe_record_info_review_card.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/info_review_page/set_owe_record_info_review_finish_button.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_app_bar.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_bottom_action_area.dart';
 
 class SetOweRecordInfoReviewPage extends StatelessWidget {
   final OweRecordDraft oweRecordDraft;
@@ -82,8 +83,7 @@ class SetOweRecordInfoReviewPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16),
+                OweMeBottomActionArea(
                   child: SetOweRecordInfoReviewFinishButton(
                     isEditing: _isEditing,
                   ),

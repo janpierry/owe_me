@@ -6,6 +6,7 @@ import 'package:owe_me/src/core/presentation/extensions/owe_type_ui_extensions.d
 import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/date_step_page/set_owe_record_date_step_primary_button.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_app_bar.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_bottom_action_area.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_date_picker.dart';
 
 class SetOweRecordDateStepPage extends StatefulWidget {
@@ -72,8 +73,7 @@ class _SetOweRecordDateStepPageState extends State<SetOweRecordDateStepPage> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16),
+          OweMeBottomActionArea(
             child: SetOweRecordDateStepPrimaryButton(
               oweRecordDraft: _updatedOweRecordDraft,
               recordDebtor: widget.recordDebtor,
