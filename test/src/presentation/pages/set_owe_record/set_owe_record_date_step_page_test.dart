@@ -15,6 +15,7 @@ import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record
 import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/presentation/pages/set_owe_record/set_owe_record_date_step_page.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_date_picker.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_elevated_button.dart';
 
 class MockAddMonetaryRecordAndUpdateDebtor extends Mock
     implements AddMonetaryRecordAndUpdateDebtor {}
@@ -110,6 +111,45 @@ void main() {
           findsNothing,
         );
       },
+    );
+  });
+
+  testWidgets('"Continuar" sits above the iPhone home indicator', (
+    tester,
+  ) async {
+    const screen = Size(390, 844);
+    tester.view
+      ..physicalSize = screen
+      ..devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+
+    await tester.pumpWidget(
+      MediaQuery(
+        data: const MediaQueryData(
+          size: screen,
+          padding: EdgeInsets.only(bottom: 34),
+          viewPadding: EdgeInsets.only(bottom: 34),
+        ),
+        child: MaterialApp(
+          home: SetOweRecordDateStepPage(
+            oweRecordDraft: OweRecordDraft(
+              amount: const Money(cents: 1000),
+              oweType: OweType.debt,
+            ),
+            recordDebtor: debtor,
+            oweRecordToEdit: null,
+            isReviewing: false,
+            fromDebtorPage: false,
+          ),
+        ),
+      ),
+    );
+
+    expect(
+      tester
+          .getBottomLeft(find.widgetWithText(OweMeElevatedButton, 'Continuar'))
+          .dy,
+      lessThanOrEqualTo(844 - 34 - 16),
     );
   });
 }

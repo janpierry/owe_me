@@ -9,6 +9,7 @@ import 'package:owe_me/src/core/presentation/design_system/owe_me_text_styles.da
 import 'package:owe_me/src/presentation/validation_mappers/amount_validation_mapper.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/amount_step_page/set_owe_record_amount_step_primary_button.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_amount_text_form_field.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_bottom_action_area.dart';
 
 class SetOweRecordAmountStepBody extends StatelessWidget {
   final Debtor recordDebtor;
@@ -63,8 +64,7 @@ class SetOweRecordAmountStepBody extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(16),
+        OweMeBottomActionArea(
           child:
               BlocBuilder<
                 SetOweRecordAmountStepBloc,

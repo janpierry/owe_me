@@ -8,6 +8,7 @@ import 'package:owe_me/src/presentation/widgets/set_owe_record/description_step_
 import 'package:owe_me/src/presentation/widgets/set_owe_record/description_step_page/set_owe_record_description_step_favorite_descriptions_section.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/description_step_page/set_owe_record_description_step_primary_button.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/description_step_page/set_owe_record_description_text_form_field.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_bottom_action_area.dart';
 
 class SetOweRecordDescriptionStepBody extends StatelessWidget {
   final String initialDescription;
@@ -60,8 +61,7 @@ class SetOweRecordDescriptionStepBody extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(16),
+        OweMeBottomActionArea(
           child: SetOweRecordDescriptionStepPrimaryButton(
             isReviewing: isReviewing,
           ),

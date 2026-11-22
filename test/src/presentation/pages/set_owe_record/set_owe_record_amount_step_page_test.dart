@@ -13,6 +13,7 @@ import 'package:owe_me/src/presentation/blocs/set_owe_record/description_step/se
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_amount_step_container.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/description_step_page/set_owe_record_description_text_form_field.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_amount_text_form_field.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_elevated_button.dart';
 
 class MockAddFavoriteDescription extends Mock
     implements AddFavoriteDescription {}
@@ -70,4 +71,63 @@ void main() {
       expect(descriptionField.controller.text, isEmpty);
     },
   );
+
+  group('the "Continuar" button', () {
+    const screen = Size(390, 844);
+
+    Future<void> pumpPage(
+      WidgetTester tester,
+      MediaQueryData mediaQuery,
+    ) async {
+      tester.view
+        ..physicalSize = screen
+        ..devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+
+      await tester.pumpWidget(
+        MediaQuery(
+          data: mediaQuery.copyWith(size: screen),
+          child: MaterialApp(
+            home: SetOweRecordAmountStepContainer(
+              recordDebtor: debtor,
+              oweRecordType: OweType.debt,
+              fromDebtorPage: true,
+            ),
+          ),
+        ),
+      );
+    }
+
+    double continueButtonBottom(WidgetTester tester) => tester
+        .getBottomLeft(find.widgetWithText(OweMeElevatedButton, 'Continuar'))
+        .dy;
+
+    testWidgets('sits above the iPhone home indicator', (tester) async {
+      await pumpPage(
+        tester,
+        const MediaQueryData(
+          padding: EdgeInsets.only(bottom: 34),
+          viewPadding: EdgeInsets.only(bottom: 34),
+        ),
+      );
+
+      expect(continueButtonBottom(tester), lessThanOrEqualTo(844 - 34 - 16));
+    });
+
+    // The amount field takes focus on open, so this is how the step first
+    // shows up on a phone.
+    testWidgets('sits right above the keyboard, with no home-indicator gap', (
+      tester,
+    ) async {
+      await pumpPage(
+        tester,
+        const MediaQueryData(
+          viewInsets: EdgeInsets.only(bottom: 300),
+          viewPadding: EdgeInsets.only(bottom: 34),
+        ),
+      );
+
+      expect(continueButtonBottom(tester), 844 - 300 - 16);
+    });
+  });
 }

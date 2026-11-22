@@ -14,6 +14,7 @@ import 'package:owe_me/src/presentation/validation_mappers/amount_validation_map
 import 'package:owe_me/src/presentation/widgets/set_payment_record/form/set_payment_record_form_primary_button.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_amount_text_form_field.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_app_bar.dart';
+import 'package:owe_me/src/presentation/widgets/shared/owe_me_bottom_action_area.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_date_picker.dart';
 import 'package:owe_me/src/presentation/widgets/shared/owe_me_dropdown.dart';
 
@@ -187,8 +188,7 @@ class SetPaymentRecordFormPage extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16),
+            OweMeBottomActionArea(
               child:
                   BlocBuilder<
                     SetPaymentRecordFormBloc,
