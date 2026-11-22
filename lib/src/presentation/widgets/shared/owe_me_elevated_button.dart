@@ -7,11 +7,16 @@ class OweMeElevatedButton extends StatelessWidget {
   final Color? backgroundColor;
   final VoidCallback? onPressed;
 
+  /// Shows a spinner instead of the label and ignores taps, keeping the
+  /// button's color so it reads as "working" rather than "unavailable".
+  final bool isLoading;
+
   const OweMeElevatedButton({
     super.key,
     required this.label,
     this.backgroundColor = OweMeColors.primaryBlue,
     this.onPressed,
+    this.isLoading = false,
   });
 
   @override
@@ -22,16 +27,25 @@ class OweMeElevatedButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: backgroundColor,
+          disabledBackgroundColor: isLoading ? backgroundColor : null,
           padding: const EdgeInsets.all(12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        onPressed: onPressed,
-        child: Text(
-          label,
-          style: OweMeTextStyles.subtitle.copyWith(color: OweMeColors.white),
-        ),
+        onPressed: isLoading ? null : onPressed,
+        child: isLoading
+            ? const SizedBox.square(
+                dimension: 24,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2.5,
+                  color: OweMeColors.white,
+                ),
+              )
+            : Text(
+                label,
+                style: OweMeTextStyles.subtitle.copyWith(color: OweMeColors.white),
+              ),
       ),
     );
   }
