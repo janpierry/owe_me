@@ -5,8 +5,10 @@ import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/presentation/blocs/debtor/debtor_bloc.dart';
 import 'package:owe_me/src/core/presentation/design_system/owe_me_colors.dart';
-import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_amount_step_container.dart';
-import 'package:owe_me/src/presentation/containers/set_payment_record/set_payment_record_form_container.dart';
+import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_info_review_container.dart';
+import 'package:owe_me/src/presentation/containers/set_payment_record/set_payment_record_info_review_container.dart';
+import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
+import 'package:owe_me/src/presentation/models/drafts/payment_record_draft.dart';
 import 'package:owe_me/src/presentation/widgets/debtor_page/debtor_monetary_record_history/debtor_monetary_record_list_item/remove_debtor_monetary_record_confirmation_dialog.dart';
 
 class DebtorMonetaryRecordListItemPopupMenuButton extends StatelessWidget {
@@ -19,17 +21,20 @@ class DebtorMonetaryRecordListItemPopupMenuButton extends StatelessWidget {
     required this.recordDebtor,
   });
 
-  void _navigateToEditMonetaryRecordPage(BuildContext context) {
+  // Editing opens the review prefilled from the record: the user changes only
+  // what they need through its pencils, which come back to it, then saves.
+  void _navigateToEditMonetaryRecordReview(BuildContext context) {
     final record = monetaryRecord;
     final page = switch (record) {
-      PaymentRecord() => SetPaymentRecordFormContainer(
+      PaymentRecord() => SetPaymentRecordInfoReviewContainer(
+        paymentRecordDraft: PaymentRecordDraft.fromEntity(record),
         recordDebtor: recordDebtor,
         paymentRecordToEdit: record,
         fromDebtorPage: true,
       ),
-      OweRecord() => SetOweRecordAmountStepContainer(
+      OweRecord() => SetOweRecordInfoReviewContainer(
+        oweRecordDraft: OweRecordDraft.fromEntity(record),
         recordDebtor: recordDebtor,
-        oweRecordType: record.oweType,
         oweRecordToEdit: record,
         fromDebtorPage: true,
       ),
@@ -60,7 +65,7 @@ class DebtorMonetaryRecordListItemPopupMenuButton extends StatelessWidget {
       onSelected: (value) {
         switch (value) {
           case _PopupMenuButtonOptions.edit:
-            _navigateToEditMonetaryRecordPage(context);
+            _navigateToEditMonetaryRecordReview(context);
             break;
           case _PopupMenuButtonOptions.remove:
             _showRemoveMonetaryRecordConfirmationDialog(context);

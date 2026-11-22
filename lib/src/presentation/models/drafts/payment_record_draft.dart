@@ -13,6 +13,16 @@ class PaymentRecordDraft {
 
   PaymentRecordDraft({this.amount, this.date, this.paymentMethod});
 
+  /// The draft of an existing record, so editing starts on the review with
+  /// every field filled in. The inverse of [toEntity], except for the id: the
+  /// review keeps it from the record being edited.
+  PaymentRecordDraft.fromEntity(PaymentRecord record)
+    : this(
+        amount: record.amount.value,
+        date: record.date,
+        paymentMethod: record.paymentMethod,
+      );
+
   PaymentRecordDraft copyWith({
     Money? amount,
     bool removeAmount = false,
