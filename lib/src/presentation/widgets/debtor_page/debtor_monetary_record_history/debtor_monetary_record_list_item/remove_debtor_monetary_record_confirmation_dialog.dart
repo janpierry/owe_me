@@ -18,7 +18,7 @@ class RemoveDebtorMonetaryRecordConfirmationDialog extends StatelessWidget {
     return RemoveConfirmationDialog(
       title: 'Excluir o ${monetaryRecord.typeLabel}?',
       description:
-          'Esta ação vai excluir permatentemente este ${monetaryRecord.typeLabel}. Esta ação não poderá ser desfeita.',
+          'Esta ação vai excluir permanentemente este ${monetaryRecord.typeLabel} e não poderá ser desfeita.',
       onRemovePressed: onRemoveMonetaryRecordPressed,
     );
   }

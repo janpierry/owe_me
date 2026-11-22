@@ -10,7 +10,7 @@ class RemoveDebtorConfirmationDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return RemoveConfirmationDialog(
       title: 'Excluir o Devedor?',
-      description: 'Esta ação vai excluir permatentemente este devedor e todos os registros associados a ele. Esta ação não poderá ser desfeita.',
+      description: 'Esta ação vai excluir permanentemente este devedor e todos os registros associados a ele, e não poderá ser desfeita.',
       onRemovePressed: onRemoveDebtorPressed,
     );
   }
