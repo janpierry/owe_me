@@ -26,15 +26,6 @@ class _MockOweRecordDraft extends Mock implements OweRecordDraft {}
 
 class _MockOweRecord extends Mock implements OweRecord {}
 
-// RecordAmount has no value equality, so two OweRecords built from the same
-// data are not ==. Compare field by field instead.
-Matcher _isOweRecordLike(OweRecord expected) => isA<OweRecord>()
-    .having((r) => r.id, 'id', expected.id)
-    .having((r) => r.amount.value, 'amount', expected.amount.value)
-    .having((r) => r.date, 'date', expected.date)
-    .having((r) => r.description, 'description', expected.description)
-    .having((r) => r.oweType, 'oweType', expected.oweType);
-
 void main() {
   late _MockAddMonetaryRecordAndUpdateDebtor mockAdd;
   late _MockEditMonetaryRecordAndUpdateDebtor mockEdit;
@@ -132,7 +123,7 @@ void main() {
           () => mockAdd(
             monetaryRecord: any(
               named: 'monetaryRecord',
-              that: _isOweRecordLike(tRecordFromDraft),
+              that: equals(tRecordFromDraft),
             ),
             recordDebtor: any(named: 'recordDebtor', that: equals(tDebtor)),
           ),
@@ -242,9 +233,7 @@ void main() {
             () => mockEdit(
               newMonetaryRecord: any(
                 named: 'newMonetaryRecord',
-                that: _isOweRecordLike(
-                  tRecordFromDraft.copyWith(id: 42).asRight(),
-                ),
+                that: equals(tRecordFromDraft.copyWith(id: 42).asRight()),
               ),
               oldMonetaryRecord: any(
                 named: 'oldMonetaryRecord',

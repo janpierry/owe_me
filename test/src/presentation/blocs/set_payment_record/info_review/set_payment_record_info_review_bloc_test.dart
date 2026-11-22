@@ -21,14 +21,6 @@ class _MockAddMonetaryRecordAndUpdateDebtor extends Mock
 class _MockEditMonetaryRecordAndUpdateDebtor extends Mock
     implements EditMonetaryRecordAndUpdateDebtor {}
 
-// RecordAmount has no value equality, so two PaymentRecords built from the
-// same data are not ==. Compare field by field instead.
-Matcher _isPaymentRecordLike(PaymentRecord expected) => isA<PaymentRecord>()
-    .having((r) => r.id, 'id', expected.id)
-    .having((r) => r.amount.value, 'amount', expected.amount.value)
-    .having((r) => r.date, 'date', expected.date)
-    .having((r) => r.paymentMethod, 'paymentMethod', expected.paymentMethod);
-
 void main() {
   late _MockAddMonetaryRecordAndUpdateDebtor mockAdd;
   late _MockEditMonetaryRecordAndUpdateDebtor mockEdit;
@@ -124,7 +116,7 @@ void main() {
           () => mockAdd(
             monetaryRecord: any(
               named: 'monetaryRecord',
-              that: _isPaymentRecordLike(tRecordFromDraft),
+              that: equals(tRecordFromDraft),
             ),
             recordDebtor: any(named: 'recordDebtor', that: equals(tDebtor)),
           ),
@@ -236,7 +228,7 @@ void main() {
             () => mockEdit(
               newMonetaryRecord: any(
                 named: 'newMonetaryRecord',
-                that: _isPaymentRecordLike(tRecordFromDraft.copyWith(id: 42)),
+                that: equals(tRecordFromDraft.copyWith(id: 42)),
               ),
               oldMonetaryRecord: any(
                 named: 'oldMonetaryRecord',
