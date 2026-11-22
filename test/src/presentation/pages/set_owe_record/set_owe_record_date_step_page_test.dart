@@ -39,17 +39,9 @@ void main() {
     oweType: OweType.debt,
   ).asRight();
 
-  // The draft as it reaches the date step while editing: amount and
-  // description already filled in, date not touched yet.
-  final draftWithoutDate = OweRecordDraft(
-    amount: const Money(cents: 1000),
-    description: 'Almoço',
-    oweType: OweType.debt,
-  );
-
   setUp(() {
-    // "Continuar" pushes the info review container, which pulls its BLoC
-    // from get_it.
+    // "Salvar alterações" pushes the info review container, which pulls its
+    // BLoC from get_it.
     GetIt.instance.registerFactory<SetOweRecordInfoReviewBloc>(
       () => SetOweRecordInfoReviewBloc(
         addMonetaryRecordAndUpdateDebtor:
@@ -62,23 +54,35 @@ void main() {
 
   tearDown(() => GetIt.instance.reset());
 
-  Future<void> pumpDateStep(WidgetTester tester) {
-    return tester.pumpWidget(
-      MaterialApp(
-        home: SetOweRecordDateStepPage(
-          oweRecordDraft: draftWithoutDate,
-          recordDebtor: debtor,
-          oweRecordToEdit: oweRecordToEdit,
-          isReviewing: false,
-          fromDebtorPage: false,
-        ),
-      ),
+  /// Opens the date step the way the review's date pencil does: on top of the
+  /// review it will replace, with the draft built from the record.
+  Future<void> openFromReview(WidgetTester tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: Text('Página do devedor'))),
     );
+    tester.state<NavigatorState>(find.byType(Navigator))
+      ..push(
+        MaterialPageRoute<void>(
+          builder: (_) => const Scaffold(body: Text('Revisão anterior')),
+        ),
+      )
+      ..push(
+        MaterialPageRoute<void>(
+          builder: (_) => SetOweRecordDateStepPage(
+            oweRecordDraft: OweRecordDraft.fromEntity(oweRecordToEdit),
+            recordDebtor: debtor,
+            oweRecordToEdit: oweRecordToEdit,
+            isReviewing: true,
+            fromDebtorPage: true,
+          ),
+        ),
+      );
+    await tester.pumpAndSettle();
   }
 
-  group('when editing a record and the draft has no date:', () {
+  group('when editing a record from the review:', () {
     testWidgets('the picker shows the record date', (tester) async {
-      await pumpDateStep(tester);
+      await openFromReview(tester);
 
       expect(
         find.descendant(
@@ -89,18 +93,23 @@ void main() {
       );
     });
 
-    testWidgets('continuing without changes keeps the record date', (
-      tester,
-    ) async {
-      await pumpDateStep(tester);
+    testWidgets(
+      'saving without changes keeps the record date and replaces the review',
+      (tester) async {
+        await openFromReview(tester);
 
-      await tester.tap(find.text('Continuar'));
-      await tester.pumpAndSettle();
+        await tester.tap(find.text('Salvar alterações'));
+        await tester.pumpAndSettle();
 
-      final reviewContainer = tester.widget<SetOweRecordInfoReviewContainer>(
-        find.byType(SetOweRecordInfoReviewContainer),
-      );
-      expect(reviewContainer.oweRecordDraft.date, recordDate);
-    });
+        final reviewContainer = tester.widget<SetOweRecordInfoReviewContainer>(
+          find.byType(SetOweRecordInfoReviewContainer),
+        );
+        expect(reviewContainer.oweRecordDraft.date, recordDate);
+        expect(
+          find.text('Revisão anterior', skipOffstage: false),
+          findsNothing,
+        );
+      },
+    );
   });
 }

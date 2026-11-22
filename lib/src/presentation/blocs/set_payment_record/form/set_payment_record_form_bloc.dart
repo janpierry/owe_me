@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/domain/validation/rules/record_amount_rules.dart';
 import 'package:owe_me/src/domain/value_objects/money.dart';
 import 'package:owe_me/src/domain/enums/payment_method.dart';
@@ -18,11 +17,9 @@ class SetPaymentRecordFormBloc
     extends Bloc<SetPaymentRecordFormEvent, SetPaymentRecordFormState> {
   SetPaymentRecordFormBloc({
     required PaymentRecordDraft? paymentRecordDraftToReview,
-    required PaymentRecord? paymentRecordToEdit,
   }) : super(
          SetPaymentRecordFormState.initial(
            paymentRecordDraftToReview: paymentRecordDraftToReview,
-           paymentRecordToEdit: paymentRecordToEdit,
          ),
        ) {
     on<SetPaymentRecordFormAmountChanged>(_onAmountChanged);
