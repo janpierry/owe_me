@@ -17,11 +17,21 @@ class SetOweRecordInfoReviewFinishButton extends StatelessWidget {
         .add(SetOweRecordInfoReviewSetRecordRequested());
   }
 
+  // Stays locked after success too: the page is navigating away, and a tap
+  // during the transition would start a second save.
+  bool _isSaving(SetOweRecordInfoReviewState state) =>
+      state is SetOweRecordInfoReviewSettingRecord ||
+      state is SetOweRecordInfoReviewRecordSetFinished;
+
   @override
   Widget build(BuildContext context) {
-    return OweMeElevatedButton(
-      label: isEditing ? 'Salvar alterações' : 'Confirmar',
-      onPressed: () => _requestToSetRecord(context),
+    return BlocBuilder<SetOweRecordInfoReviewBloc, SetOweRecordInfoReviewState>(
+      buildWhen: (previous, current) => _isSaving(previous) != _isSaving(current),
+      builder: (context, state) => OweMeElevatedButton(
+        label: isEditing ? 'Salvar alterações' : 'Confirmar',
+        isLoading: _isSaving(state),
+        onPressed: () => _requestToSetRecord(context),
+      ),
     );
   }
 }

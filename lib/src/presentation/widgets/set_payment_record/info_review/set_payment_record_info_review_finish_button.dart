@@ -14,11 +14,21 @@ class SetPaymentRecordInfoReviewFinishButton extends StatelessWidget {
         .add(SetPaymentRecordInfoReviewSetRecordRequested());
   }
 
+  // Stays locked after success too: the page is navigating away, and a tap
+  // during the transition would start a second save.
+  bool _isSaving(SetPaymentRecordInfoReviewState state) =>
+      state is SetPaymentRecordInfoReviewSettingRecord ||
+      state is SetPaymentRecordInfoReviewRecordSetFinished;
+
   @override
   Widget build(BuildContext context) {
-    return OweMeElevatedButton(
-      label: isEditing ? 'Salvar alterações' : 'Confirmar',
-      onPressed: () => _requestToSetRecord(context),
+    return BlocBuilder<SetPaymentRecordInfoReviewBloc, SetPaymentRecordInfoReviewState>(
+      buildWhen: (previous, current) => _isSaving(previous) != _isSaving(current),
+      builder: (context, state) => OweMeElevatedButton(
+        label: isEditing ? 'Salvar alterações' : 'Confirmar',
+        isLoading: _isSaving(state),
+        onPressed: () => _requestToSetRecord(context),
+      ),
     );
   }
 }
