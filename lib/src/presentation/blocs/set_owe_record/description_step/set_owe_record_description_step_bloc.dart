@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
 import 'package:owe_me/src/core/presentation/extensions/failure_extensions.dart';
 import 'package:owe_me/src/core/error/failures/failures.dart';
-import 'package:owe_me/src/domain/entities/monetary_record.dart';
 import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/entities/debtor.dart';
 import 'package:owe_me/src/domain/entities/favorite_description.dart';
@@ -22,6 +21,7 @@ part 'set_owe_record_description_step_state.dart';
 class SetOweRecordDescriptionStepBloc
     extends Bloc<SetOweRecordDescriptionStepEvent, SetOweRecordDescriptionStepState> {
   late String _description;
+  int _textFieldSendCount = 0;
   late List<FavoriteDescription> _favoriteDescriptions;
   late final OweRecordDraft _oweRecordDraft;
   late final Debtor _recordDebtor;
@@ -60,10 +60,12 @@ class SetOweRecordDescriptionStepBloc
     emit(SetOweRecordDescriptionStepPageLoading());
     final oweRecordDraft = event.oweRecordDraft;
     final oweRecordType = oweRecordDraft.oweType;
-    final oweRecordToEdit = event.oweRecordToEdit;
     final recordDebtor = event.recordDebtor;
 
-    _description = oweRecordDraft.description ?? oweRecordToEdit?.description ?? '';
+    // The draft is the only source of the description. When editing, it starts
+    // with the record's description, so null here means "no description",
+    // including one the user cleared on a previous visit to this step.
+    _description = oweRecordDraft.description ?? '';
     _oweRecordDraft = oweRecordDraft;
     _recordDebtor = recordDebtor;
 
@@ -107,7 +109,10 @@ class SetOweRecordDescriptionStepBloc
   ) async {
     _description = event.selectedDescription.description;
     emit(
-      SetOweRecordDescriptionStepSendingDescriptionToTextField(description: _description),
+      SetOweRecordDescriptionStepSendingDescriptionToTextField(
+        description: _description,
+        sendId: ++_textFieldSendCount,
+      ),
     );
   }
 
@@ -168,10 +173,14 @@ class SetOweRecordDescriptionStepBloc
     Emitter<SetOweRecordDescriptionStepState> emit,
   ) async {
     emit(SetOweRecordDescriptionStepLoading());
-    final description = _description.isNotEmpty ? _description : null;
+    // copyWith(description: null) would keep the previous description, so an
+    // empty field has to remove it explicitly.
+    final oweRecordDraft = _description.isEmpty
+        ? _oweRecordDraft.copyWith(removeDescription: true)
+        : _oweRecordDraft.copyWith(description: _description);
     emit(
       SetOweRecordDescriptionStepNavigatingToNextPage(
-        oweRecordDraft: _oweRecordDraft.copyWith(description: description),
+        oweRecordDraft: oweRecordDraft,
         recordDebtor: _recordDebtor,
       ),
     );
