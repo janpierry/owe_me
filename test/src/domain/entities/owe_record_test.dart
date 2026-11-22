@@ -84,6 +84,21 @@ void main() {
     });
 
     test(
+      'When two OweRecords are built from identical data, they should be equal',
+      () {
+        OweRecord buildFromScratch() => OweRecord.create(
+          id: 1,
+          amount: RecordAmount.create(const Money(cents: 100)).asRight(),
+          date: DateTime(2023),
+          description: 'Description',
+          oweType: OweType.debt,
+        ).asRight();
+
+        expect(buildFromScratch(), equals(buildFromScratch()));
+      },
+    );
+
+    test(
       'When two OweRecords have different [id], they should not be equal',
       () {
         expect(entity, isNot(equals(buildOweRecord(id: 2))));

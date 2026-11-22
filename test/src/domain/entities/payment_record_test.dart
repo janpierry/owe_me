@@ -30,6 +30,20 @@ void main() {
       assert(entity == second);
     });
 
+    test(
+      'When two entities are built from identical data, they should be equal',
+      () {
+        PaymentRecord buildFromScratch() => PaymentRecord(
+          id: 1,
+          amount: RecordAmount.create(const Money(cents: 1000)).asRight(),
+          date: DateTime(2023),
+          paymentMethod: PaymentMethod.cash,
+        );
+
+        expect(buildFromScratch(), equals(buildFromScratch()));
+      },
+    );
+
     test('When two entities have different [id], they should not be equal', () {
       PaymentRecord second = PaymentRecord(
         id: 2,
