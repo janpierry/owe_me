@@ -98,7 +98,7 @@ void main() {
     });
 
     test(
-        'When the nickname is valid, it saves the edited debtor, reloads it and emits DebtorEditSuccess',
+        'When the nickname is valid, it saves the edited debtor, reloads it and emits DebtorEditSuccess with it',
         () async {
       final editedDebtor = Debtor.create(
         id: 1,
@@ -114,7 +114,9 @@ void main() {
           isA<DebtorEditInProgress>(),
           const DebtorPageLoading(),
           DebtorPageLoaded(debtor: editedDebtor),
-          isA<DebtorEditSuccess>(),
+          // The page rebuilds Home and itself from this debtor, so Home
+          // shows the new nickname (#26).
+          DebtorEditSuccess(updatedDebtor: editedDebtor),
         ]),
       );
 
