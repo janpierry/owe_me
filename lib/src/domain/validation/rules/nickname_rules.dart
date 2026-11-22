@@ -1,3 +1,4 @@
+import 'package:characters/characters.dart';
 import 'package:owe_me/src/domain/validation/failures/nickname_validation_failures.dart';
 
 class NicknameRules {
@@ -10,7 +11,7 @@ class NicknameRules {
       return const NicknameEmptyFailure();
     }
 
-    if (nickname.length > NicknameRules.maxLength) {
+    if (nickname.characters.length > NicknameRules.maxLength) {
       return const NicknameExceedsLimitFailure();
     }
 

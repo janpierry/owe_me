@@ -1,3 +1,4 @@
+import 'package:characters/characters.dart';
 import 'package:owe_me/src/domain/validation/failures/description_validation_failures.dart';
 
 class DescriptionRules {
@@ -6,7 +7,7 @@ class DescriptionRules {
   static const maxLength = 100;
 
   static DescriptionValidationFailure? validate(String description) {
-    if (description.length > DescriptionRules.maxLength) {
+    if (description.characters.length > DescriptionRules.maxLength) {
       return const DescriptionExceedsLimitFailure();
     }
 
