@@ -6,12 +6,15 @@ import 'package:owe_me/src/presentation/widgets/shared/owe_me_elevated_button.da
 class SetPaymentRecordInfoReviewFinishButton extends StatelessWidget {
   final bool isEditing;
 
-  const SetPaymentRecordInfoReviewFinishButton({super.key, required this.isEditing});
+  const SetPaymentRecordInfoReviewFinishButton({
+    super.key,
+    required this.isEditing,
+  });
 
   void _requestToSetRecord(BuildContext context) {
-    context
-        .read<SetPaymentRecordInfoReviewBloc>()
-        .add(SetPaymentRecordInfoReviewSetRecordRequested());
+    context.read<SetPaymentRecordInfoReviewBloc>().add(
+      SetPaymentRecordInfoReviewSetRecordRequested(),
+    );
   }
 
   // Stays locked after success too: the page is navigating away, and a tap
@@ -22,8 +25,12 @@ class SetPaymentRecordInfoReviewFinishButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SetPaymentRecordInfoReviewBloc, SetPaymentRecordInfoReviewState>(
-      buildWhen: (previous, current) => _isSaving(previous) != _isSaving(current),
+    return BlocBuilder<
+      SetPaymentRecordInfoReviewBloc,
+      SetPaymentRecordInfoReviewState
+    >(
+      buildWhen: (previous, current) =>
+          _isSaving(previous) != _isSaving(current),
       builder: (context, state) => OweMeElevatedButton(
         label: isEditing ? 'Salvar alterações' : 'Confirmar',
         isLoading: _isSaving(state),

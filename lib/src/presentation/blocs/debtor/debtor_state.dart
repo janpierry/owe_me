@@ -32,11 +32,14 @@ final class DebtorMonetaryRecordHistoryState extends DebtorState {
   const DebtorMonetaryRecordHistoryState();
 }
 
-final class DebtorMonetaryRecordHistoryInitial extends DebtorMonetaryRecordHistoryState {}
+final class DebtorMonetaryRecordHistoryInitial
+    extends DebtorMonetaryRecordHistoryState {}
 
-final class DebtorMonetaryRecordHistoryLoading extends DebtorMonetaryRecordHistoryState {}
+final class DebtorMonetaryRecordHistoryLoading
+    extends DebtorMonetaryRecordHistoryState {}
 
-final class DebtorMonetaryRecordHistoryLoaded extends DebtorMonetaryRecordHistoryState {
+final class DebtorMonetaryRecordHistoryLoaded
+    extends DebtorMonetaryRecordHistoryState {
   final List<MonetaryRecord> monetaryRecordHistory;
   final Debtor debtor;
 
@@ -49,9 +52,11 @@ final class DebtorMonetaryRecordHistoryLoaded extends DebtorMonetaryRecordHistor
   List<Object> get props => [monetaryRecordHistory, debtor];
 }
 
-final class DebtorMonetaryRecordHistoryEmpty extends DebtorMonetaryRecordHistoryState {}
+final class DebtorMonetaryRecordHistoryEmpty
+    extends DebtorMonetaryRecordHistoryState {}
 
-final class DebtorMonetaryRecordHistoryError extends DebtorMonetaryRecordHistoryState {
+final class DebtorMonetaryRecordHistoryError
+    extends DebtorMonetaryRecordHistoryState {
   final String message;
 
   const DebtorMonetaryRecordHistoryError({required this.message});

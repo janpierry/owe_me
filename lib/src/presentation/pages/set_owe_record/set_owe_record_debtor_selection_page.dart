@@ -22,7 +22,10 @@ class SetOweRecordDebtorSelectionPage extends StatelessWidget {
     required this.fromDebtorPage,
   });
 
-  void _handleNavigationOnDebtorSelected(BuildContext context, Debtor selectedDebtor) {
+  void _handleNavigationOnDebtorSelected(
+    BuildContext context,
+    Debtor selectedDebtor,
+  ) {
     final isReviewing = oweRecordDraftToReview != null;
     if (isReviewing) {
       _navigateToInfoReview(context, selectedDebtor);
@@ -57,7 +60,9 @@ class SetOweRecordDebtorSelectionPage extends StatelessWidget {
     );
   }
 
-  void _popCurrentEditDebtorPageAndPreviousInfoReviewPage(BuildContext context) {
+  void _popCurrentEditDebtorPageAndPreviousInfoReviewPage(
+    BuildContext context,
+  ) {
     Navigator.of(context).pop();
     Navigator.of(context).pop();
   }
@@ -65,26 +70,20 @@ class SetOweRecordDebtorSelectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: OweMeAppBar(
-        titleText: 'Selecione o Devedor',
-      ),
+      appBar: OweMeAppBar(titleText: 'Selecione o Devedor'),
       backgroundColor: OweMeColors.backgroundLight,
       body: BlocBuilder<DebtorSelectionBloc, DebtorSelectionState>(
         builder: (context, state) {
           if (state is DebtorSelectionLoadDebtorsSuccess) {
             return SetOweRecordDebtorSelectionBody(
               debtors: state.debtors,
-              onDebtorSelected: (debtor) => _handleNavigationOnDebtorSelected(
-                context,
-                debtor,
-              ),
+              onDebtorSelected: (debtor) =>
+                  _handleNavigationOnDebtorSelected(context, debtor),
               oweRecordType: oweRecordType,
             );
           }
           //TODO implement error state handling here and in payment selection page
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );

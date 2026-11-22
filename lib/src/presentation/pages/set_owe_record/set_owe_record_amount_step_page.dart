@@ -62,15 +62,14 @@ class SetOweRecordAmountStepPage extends StatelessWidget {
     );
   }
 
-  void _popCurrentEditAmountPageAndPreviousInfoReviewPage(BuildContext context) {
+  void _popCurrentEditAmountPageAndPreviousInfoReviewPage(
+    BuildContext context,
+  ) {
     Navigator.of(context).pop();
     Navigator.of(context).pop();
   }
 
-  void _navigateToDescriptionStep(
-    BuildContext context,
-    Money amount,
-  ) {
+  void _navigateToDescriptionStep(BuildContext context, Money amount) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SetOweRecordDescriptionStepContainer(
@@ -91,9 +90,7 @@ class SetOweRecordAmountStepPage extends StatelessWidget {
   }
 
   void _showErrorSnackBar(BuildContext context) {
-    final snackBar = SnackBar(
-      content: Text('Confira as informações.'),
-    );
+    final snackBar = SnackBar(content: Text('Confira as informações.'));
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(snackBar);
@@ -102,17 +99,16 @@ class SetOweRecordAmountStepPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: OweMeAppBar(
-        titleText: 'Informe o Valor',
-      ),
-      body: BlocListener<SetOweRecordAmountStepBloc, SetOweRecordAmountStepState>(
-        listener: _listen,
-        child: SetOweRecordAmountStepBody(
-          recordDebtor: recordDebtor,
-          oweRecordType: oweRecordType,
-          isReviewing: oweRecordDraftToReview != null,
-        ),
-      ),
+      appBar: OweMeAppBar(titleText: 'Informe o Valor'),
+      body:
+          BlocListener<SetOweRecordAmountStepBloc, SetOweRecordAmountStepState>(
+            listener: _listen,
+            child: SetOweRecordAmountStepBody(
+              recordDebtor: recordDebtor,
+              oweRecordType: oweRecordType,
+              isReviewing: oweRecordDraftToReview != null,
+            ),
+          ),
     );
   }
 }

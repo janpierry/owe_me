@@ -40,7 +40,10 @@ class SetPaymentRecordFormPage extends StatelessWidget {
     }
   }
 
-  void _navigateToNextPage(BuildContext context, SetPaymentRecordFormState state) {
+  void _navigateToNextPage(
+    BuildContext context,
+    SetPaymentRecordFormState state,
+  ) {
     if (_isReviewing) {
       _finishInfoReview(context, state.paymentRecordDraft);
     } else {
@@ -48,7 +51,10 @@ class SetPaymentRecordFormPage extends StatelessWidget {
     }
   }
 
-  void _finishInfoReview(BuildContext context, PaymentRecordDraft paymentRecordDraft) {
+  void _finishInfoReview(
+    BuildContext context,
+    PaymentRecordDraft paymentRecordDraft,
+  ) {
     _popCurrentPageAndPreviousInfoReviewPage(context);
     _navigateToInfoReviewPage(context, paymentRecordDraft);
   }
@@ -75,9 +81,7 @@ class SetPaymentRecordFormPage extends StatelessWidget {
   }
 
   void _showErrorSnackBar(BuildContext context) {
-    final snackBar = SnackBar(
-      content: Text('Confira as informações.'),
-    );
+    final snackBar = SnackBar(content: Text('Confira as informações.'));
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(snackBar);
@@ -92,9 +96,7 @@ class SetPaymentRecordFormPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: OweMeAppBar(
-        titleText: _pageTitle,
-      ),
+      appBar: OweMeAppBar(titleText: _pageTitle),
       backgroundColor: OweMeColors.backgroundLight,
       body: BlocListener<SetPaymentRecordFormBloc, SetPaymentRecordFormState>(
         listener: _listen,
@@ -102,7 +104,10 @@ class SetPaymentRecordFormPage extends StatelessWidget {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 24,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -111,14 +116,17 @@ class SetPaymentRecordFormPage extends StatelessWidget {
                       style: OweMeTextStyles.subtitle,
                     ),
                     const SizedBox(height: 8),
-                    BlocBuilder<SetPaymentRecordFormBloc, SetPaymentRecordFormState>(
+                    BlocBuilder<
+                      SetPaymentRecordFormBloc,
+                      SetPaymentRecordFormState
+                    >(
                       builder: (context, state) {
                         return OweMeAmountTextFormField(
                           initialAmount: state.paymentRecordDraft.amount,
                           onAmountChanged: (amount) {
-                            context
-                                .read<SetPaymentRecordFormBloc>()
-                                .add(SetPaymentRecordFormAmountChanged(amount: amount));
+                            context.read<SetPaymentRecordFormBloc>().add(
+                              SetPaymentRecordFormAmountChanged(amount: amount),
+                            );
                           },
                           errorText: state.amount.showError
                               ? state.amount.failure?.uiMessage
@@ -133,19 +141,23 @@ class SetPaymentRecordFormPage extends StatelessWidget {
                       style: OweMeTextStyles.subtitle,
                     ),
                     const SizedBox(height: 8),
-                    BlocBuilder<SetPaymentRecordFormBloc, SetPaymentRecordFormState>(
+                    BlocBuilder<
+                      SetPaymentRecordFormBloc,
+                      SetPaymentRecordFormState
+                    >(
                       builder: (context, state) {
                         return OweMeDropdown<PaymentMethod>(
                           hintText: 'Selecione o método de pagamento',
                           items: PaymentMethod.values,
-                          itemLabelBuilder: (paymentMethod) => paymentMethod.label,
+                          itemLabelBuilder: (paymentMethod) =>
+                              paymentMethod.label,
                           selectedItem: state.paymentRecordDraft.paymentMethod,
                           onChanged: (paymentMethod) {
                             context.read<SetPaymentRecordFormBloc>().add(
-                                  SetPaymentRecordFormPaymentMethodChanged(
-                                    paymentMethod: paymentMethod,
-                                  ),
-                                );
+                              SetPaymentRecordFormPaymentMethodChanged(
+                                paymentMethod: paymentMethod,
+                              ),
+                            );
                           },
                         );
                       },
@@ -156,14 +168,17 @@ class SetPaymentRecordFormPage extends StatelessWidget {
                       style: OweMeTextStyles.subtitle,
                     ),
                     const SizedBox(height: 8),
-                    BlocBuilder<SetPaymentRecordFormBloc, SetPaymentRecordFormState>(
+                    BlocBuilder<
+                      SetPaymentRecordFormBloc,
+                      SetPaymentRecordFormState
+                    >(
                       builder: (context, state) {
                         return OweMeDatePicker(
                           initialDate: state.paymentRecordDraft.date,
                           onDateChanged: (date) {
-                            context
-                                .read<SetPaymentRecordFormBloc>()
-                                .add(SetPaymentRecordFormDateChanged(date: date));
+                            context.read<SetPaymentRecordFormBloc>().add(
+                              SetPaymentRecordFormDateChanged(date: date),
+                            );
                           },
                         );
                       },
@@ -174,14 +189,18 @@ class SetPaymentRecordFormPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(16),
-              child: BlocBuilder<SetPaymentRecordFormBloc, SetPaymentRecordFormState>(
-                builder: (context, state) {
-                  return SetPaymentRecordFormPrimaryButton(
-                    isEnabled: state.isValid,
-                    isReviewing: _isReviewing,
-                  );
-                },
-              ),
+              child:
+                  BlocBuilder<
+                    SetPaymentRecordFormBloc,
+                    SetPaymentRecordFormState
+                  >(
+                    builder: (context, state) {
+                      return SetPaymentRecordFormPrimaryButton(
+                        isEnabled: state.isValid,
+                        isReviewing: _isReviewing,
+                      );
+                    },
+                  ),
             ),
           ],
         ),

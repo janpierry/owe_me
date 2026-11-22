@@ -11,11 +11,7 @@ class PaymentRecordDraft {
   final DateTime? date;
   final PaymentMethod? paymentMethod;
 
-  PaymentRecordDraft({
-    this.amount,
-    this.date,
-    this.paymentMethod,
-  });
+  PaymentRecordDraft({this.amount, this.date, this.paymentMethod});
 
   PaymentRecordDraft copyWith({
     Money? amount,
@@ -28,7 +24,9 @@ class PaymentRecordDraft {
     return PaymentRecordDraft(
       amount: removeAmount ? null : (amount ?? this.amount),
       date: removeDate ? null : (date ?? this.date),
-      paymentMethod: removePaymentMethod ? null : (paymentMethod ?? this.paymentMethod),
+      paymentMethod: removePaymentMethod
+          ? null
+          : (paymentMethod ?? this.paymentMethod),
     );
   }
 

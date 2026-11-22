@@ -7,9 +7,9 @@ class SetOweRecordDescriptionStepFavoriteButton extends StatelessWidget {
   const SetOweRecordDescriptionStepFavoriteButton({super.key});
 
   void _addDescriptionToFavorites(BuildContext context) {
-    context
-        .read<SetOweRecordDescriptionStepBloc>()
-        .add(const SetOweRecordDescriptionStepDescriptionAddedToFavorites());
+    context.read<SetOweRecordDescriptionStepBloc>().add(
+      const SetOweRecordDescriptionStepDescriptionAddedToFavorites(),
+    );
   }
 
   @override

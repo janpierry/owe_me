@@ -6,7 +6,7 @@ import 'package:owe_me/src/domain/repositories/debtor_repository.dart';
 class RemoveDebtor {
   final DebtorRepository _repository;
 
-  RemoveDebtor({required DebtorRepository repository}) : _repository = repository;
+  RemoveDebtor({required this._repository});
 
   Future<Either<Failure, void>> call({required Debtor debtor}) async {
     return await _repository.removeDebtor(debtor);

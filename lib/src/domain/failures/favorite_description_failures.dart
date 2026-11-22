@@ -4,17 +4,18 @@ sealed class FavoriteDescriptionFailure extends Failure {
   const FavoriteDescriptionFailure(super.message);
 }
 
-class FavoriteDescriptionAlreadyInFavoritesFailure extends FavoriteDescriptionFailure {
+class FavoriteDescriptionAlreadyInFavoritesFailure
+    extends FavoriteDescriptionFailure {
   const FavoriteDescriptionAlreadyInFavoritesFailure()
-      : super('Favorite description is already in favorites.');
+    : super('Favorite description is already in favorites.');
 }
 
 class FavoriteDescriptionEmptyFailure extends FavoriteDescriptionFailure {
   const FavoriteDescriptionEmptyFailure()
-      : super('Favorite description cannot be empty.');
+    : super('Favorite description cannot be empty.');
 }
 
 class FavoriteDescriptionTooLongFailure extends FavoriteDescriptionFailure {
   const FavoriteDescriptionTooLongFailure()
-      : super('Favorite description exceeds the maximum allowed limit.');
+    : super('Favorite description exceeds the maximum allowed limit.');
 }

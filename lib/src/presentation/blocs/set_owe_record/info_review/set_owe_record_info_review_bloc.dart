@@ -16,17 +16,22 @@ class SetOweRecordInfoReviewBloc
   late OweRecordDraft _oweRecordDraft;
   late Debtor _recordDebtor;
   OweRecord? _oweRecordToEdit;
-  final AddMonetaryRecordAndUpdateDebtor _addMonetaryRecordAndUpdateDebtorUseCase;
-  final EditMonetaryRecordAndUpdateDebtor _editMonetaryRecordAndUpdateDebtorUseCase;
+  final AddMonetaryRecordAndUpdateDebtor
+  _addMonetaryRecordAndUpdateDebtorUseCase;
+  final EditMonetaryRecordAndUpdateDebtor
+  _editMonetaryRecordAndUpdateDebtorUseCase;
 
   bool get _isEdition => _oweRecordToEdit != null;
 
   SetOweRecordInfoReviewBloc({
     required AddMonetaryRecordAndUpdateDebtor addMonetaryRecordAndUpdateDebtor,
-    required EditMonetaryRecordAndUpdateDebtor editMonetaryRecordAndUpdateDebtor,
-  })  : _addMonetaryRecordAndUpdateDebtorUseCase = addMonetaryRecordAndUpdateDebtor,
-        _editMonetaryRecordAndUpdateDebtorUseCase = editMonetaryRecordAndUpdateDebtor,
-        super(SetOweRecordInfoReviewInitial()) {
+    required EditMonetaryRecordAndUpdateDebtor
+    editMonetaryRecordAndUpdateDebtor,
+  }) : _addMonetaryRecordAndUpdateDebtorUseCase =
+           addMonetaryRecordAndUpdateDebtor,
+       _editMonetaryRecordAndUpdateDebtorUseCase =
+           editMonetaryRecordAndUpdateDebtor,
+       super(SetOweRecordInfoReviewInitial()) {
     on<SetOweRecordInfoReviewPageInitialized>(_loadInitialData);
     on<SetOweRecordInfoReviewSetRecordRequested>(
       _setOweRecord,

@@ -25,7 +25,8 @@ class SetOweRecordDateStepPage extends StatefulWidget {
   });
 
   @override
-  State<SetOweRecordDateStepPage> createState() => _SetOweRecordDateStepPageState();
+  State<SetOweRecordDateStepPage> createState() =>
+      _SetOweRecordDateStepPageState();
 }
 
 class _SetOweRecordDateStepPageState extends State<SetOweRecordDateStepPage> {
@@ -35,7 +36,9 @@ class _SetOweRecordDateStepPageState extends State<SetOweRecordDateStepPage> {
   void initState() {
     super.initState();
     _selectedDate =
-        widget.oweRecordDraft.date ?? widget.oweRecordToEdit?.date ?? DateTime.now();
+        widget.oweRecordDraft.date ??
+        widget.oweRecordToEdit?.date ??
+        DateTime.now();
   }
 
   void _onDateChanged(DateTime date) {
@@ -53,9 +56,7 @@ class _SetOweRecordDateStepPageState extends State<SetOweRecordDateStepPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: OweMeAppBar(
-        titleText: 'Informe a Data',
-      ),
+      appBar: OweMeAppBar(titleText: 'Informe a Data'),
       body: Column(
         children: [
           Expanded(

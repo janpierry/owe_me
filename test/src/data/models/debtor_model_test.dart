@@ -34,17 +34,19 @@ void main() {
 
       assert(model != second);
     });
-    test('When two models have different [nickname], they should not be equal', () {
-      const second = DebtorModel(
-        id: debtorId,
-        nickname: 'Another Nickname',
-        totalDebtInCents: totalDebtInCents,
-      );
+    test(
+      'When two models have different [nickname], they should not be equal',
+      () {
+        const second = DebtorModel(
+          id: debtorId,
+          nickname: 'Another Nickname',
+          totalDebtInCents: totalDebtInCents,
+        );
 
-      assert(model != second);
-    });
-    test('When two models have different [totalDebtInCents], they should not be equal',
-        () {
+        assert(model != second);
+      },
+    );
+    test('When two models have different [totalDebtInCents], they should not be equal', () {
       const second = DebtorModel(
         id: debtorId,
         nickname: nickname,

@@ -52,9 +52,7 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: OweMeColors.surfaceWhite,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -125,7 +123,9 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
                     style: OweMeTextStyles.subtitle,
                     children: [
                       TextSpan(
-                        text: paymentRecordDraft.paymentMethod?.label ?? 'Não informado',
+                        text:
+                            paymentRecordDraft.paymentMethod?.label ??
+                            'Não informado',
                         style: OweMeTextStyles.subtitle.copyWith(
                           color: OweMeColors.primaryBlue,
                         ),
@@ -151,7 +151,9 @@ class SetPaymentRecordInfoReviewCard extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: paymentRecordDraft.date != null
-                            ? OweMeDateUtils.getFormattedDate(paymentRecordDraft.date!)
+                            ? OweMeDateUtils.getFormattedDate(
+                                paymentRecordDraft.date!,
+                              )
                             : 'Não informada',
                         style: OweMeTextStyles.subtitle.copyWith(
                           color: OweMeColors.primaryBlue,

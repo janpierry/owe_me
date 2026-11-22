@@ -7,7 +7,8 @@ sealed class SetPaymentRecordInfoReviewEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class SetPaymentRecordInfoReviewPageInitialized extends SetPaymentRecordInfoReviewEvent {
+class SetPaymentRecordInfoReviewPageInitialized
+    extends SetPaymentRecordInfoReviewEvent {
   final PaymentRecordDraft paymentRecordDraft;
   final Debtor recordDebtor;
   final PaymentRecord? paymentRecordToEdit;
@@ -19,7 +20,11 @@ class SetPaymentRecordInfoReviewPageInitialized extends SetPaymentRecordInfoRevi
   });
 
   @override
-  List<Object?> get props => [paymentRecordDraft, recordDebtor, paymentRecordToEdit];
+  List<Object?> get props => [
+    paymentRecordDraft,
+    recordDebtor,
+    paymentRecordToEdit,
+  ];
 }
 
 class SetPaymentRecordInfoReviewSetRecordRequested

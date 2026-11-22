@@ -23,23 +23,23 @@ class DebtorMonetaryRecordListItemPopupMenuButton extends StatelessWidget {
     final record = monetaryRecord;
     final page = switch (record) {
       PaymentRecord() => SetPaymentRecordFormContainer(
-          recordDebtor: recordDebtor,
-          paymentRecordToEdit: record,
-          fromDebtorPage: true,
-        ),
+        recordDebtor: recordDebtor,
+        paymentRecordToEdit: record,
+        fromDebtorPage: true,
+      ),
       OweRecord() => SetOweRecordAmountStepContainer(
-          recordDebtor: recordDebtor,
-          oweRecordType: record.oweType,
-          oweRecordToEdit: record,
-          fromDebtorPage: true,
-        ),
+        recordDebtor: recordDebtor,
+        oweRecordType: record.oweType,
+        oweRecordToEdit: record,
+        fromDebtorPage: true,
+      ),
     };
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => page),
-    );
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => page));
   }
 
-  Future<void> _showRemoveMonetaryRecordConfirmationDialog(BuildContext context) {
+  Future<void> _showRemoveMonetaryRecordConfirmationDialog(
+    BuildContext context,
+  ) {
     final bloc = context.read<DebtorBloc>();
     return showDialog(
       context: context,
@@ -56,10 +56,7 @@ class DebtorMonetaryRecordListItemPopupMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<_PopupMenuButtonOptions>(
-      icon: const Icon(
-        Icons.more_vert,
-        color: OweMeColors.textGray,
-      ),
+      icon: const Icon(Icons.more_vert, color: OweMeColors.textGray),
       onSelected: (value) {
         switch (value) {
           case _PopupMenuButtonOptions.edit:

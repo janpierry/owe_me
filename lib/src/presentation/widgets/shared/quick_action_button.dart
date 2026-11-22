@@ -29,7 +29,9 @@ class QuickActionButton extends StatelessWidget {
           height: 80,
           width: 104,
           decoration: BoxDecoration(
-            border: Border.fromBorderSide(BorderSide(color: _primaryColor, width: 2)),
+            border: Border.fromBorderSide(
+              BorderSide(color: _primaryColor, width: 2),
+            ),
             borderRadius: BorderRadius.circular(24),
           ),
           child: Padding(
@@ -37,11 +39,7 @@ class QuickActionButton extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  icon,
-                  size: 28,
-                  color: _primaryColor,
-                ),
+                Icon(icon, size: 28, color: _primaryColor),
                 const SizedBox(height: 4),
                 Text(
                   label,

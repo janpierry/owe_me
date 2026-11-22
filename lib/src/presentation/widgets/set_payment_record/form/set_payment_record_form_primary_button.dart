@@ -14,7 +14,9 @@ class SetPaymentRecordFormPrimaryButton extends StatelessWidget {
   });
 
   void _navigateToNextPage(BuildContext context) {
-    context.read<SetPaymentRecordFormBloc>().add(SetPaymentRecordFormNextPageRequested());
+    context.read<SetPaymentRecordFormBloc>().add(
+      SetPaymentRecordFormNextPageRequested(),
+    );
   }
 
   @override

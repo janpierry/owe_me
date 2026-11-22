@@ -21,7 +21,8 @@ class DebtorAdapter {
       totalDebt: Money(cents: model.totalDebtInCents),
     ).getOrElse(() {
       throw DataIntegrityException(
-          'Invalid DebtorModel data of id ${model.id}');
+        'Invalid DebtorModel data of id ${model.id}',
+      );
     });
   }
 }

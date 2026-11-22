@@ -48,19 +48,22 @@ class HomeQuickActionButtons extends StatelessWidget {
         QuickActionButton(
           label: 'Pagamento',
           icon: Icons.credit_card,
-          onPressed: () => _navigateToSetPaymentRecordDebtorSelectionPage(context),
+          onPressed: () =>
+              _navigateToSetPaymentRecordDebtorSelectionPage(context),
         ),
         const SizedBox(width: 8),
         QuickActionButton(
           label: 'Crédito',
           icon: Icons.money_off_csred,
-          onPressed: () => _navigateToSetRecordDebtorSelectionPageAsCredit(context),
+          onPressed: () =>
+              _navigateToSetRecordDebtorSelectionPageAsCredit(context),
         ),
         const SizedBox(width: 8),
         QuickActionButton(
           label: 'Débito',
           icon: Icons.attach_money,
-          onPressed: () => _navigateToSetRecordDebtorSelectionPageAsDebt(context),
+          onPressed: () =>
+              _navigateToSetRecordDebtorSelectionPageAsDebt(context),
         ),
       ],
     );

@@ -8,9 +8,7 @@ abstract class OweRecordDataSource {
 class OweRecordDataSourceImpl implements OweRecordDataSource {
   final OweMeDatabase _oweMeDatabase;
 
-  OweRecordDataSourceImpl({
-    required OweMeDatabase oweMeDatabase,
-  }) : _oweMeDatabase = oweMeDatabase;
+  OweRecordDataSourceImpl({required this._oweMeDatabase});
 
   @override
   Future<List<OweRecordModel>> queryOweRecordsByDebtorId(int debtorId) async {

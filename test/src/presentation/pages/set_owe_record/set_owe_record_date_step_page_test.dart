@@ -52,8 +52,10 @@ void main() {
     // from get_it.
     GetIt.instance.registerFactory<SetOweRecordInfoReviewBloc>(
       () => SetOweRecordInfoReviewBloc(
-        addMonetaryRecordAndUpdateDebtor: MockAddMonetaryRecordAndUpdateDebtor(),
-        editMonetaryRecordAndUpdateDebtor: MockEditMonetaryRecordAndUpdateDebtor(),
+        addMonetaryRecordAndUpdateDebtor:
+            MockAddMonetaryRecordAndUpdateDebtor(),
+        editMonetaryRecordAndUpdateDebtor:
+            MockEditMonetaryRecordAndUpdateDebtor(),
       ),
     );
   });
@@ -87,8 +89,9 @@ void main() {
       );
     });
 
-    testWidgets('continuing without changes keeps the record date',
-        (tester) async {
+    testWidgets('continuing without changes keeps the record date', (
+      tester,
+    ) async {
       await pumpDateStep(tester);
 
       await tester.tap(find.text('Continuar'));

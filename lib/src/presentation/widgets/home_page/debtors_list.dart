@@ -6,10 +6,7 @@ import '../../../domain/entities/debtor.dart';
 class DebtorsList extends StatelessWidget {
   final List<Debtor> debtors;
 
-  const DebtorsList({
-    super.key,
-    required this.debtors,
-  });
+  const DebtorsList({super.key, required this.debtors});
 
   @override
   Widget build(BuildContext context) {

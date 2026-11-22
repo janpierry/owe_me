@@ -16,17 +16,18 @@ class SetPaymentRecordFormState extends Equatable {
   bool get isValid => amount.isValid;
 
   PaymentRecordDraft get paymentRecordDraft => PaymentRecordDraft(
-        amount: amount.value,
-        paymentMethod: paymentMethod,
-        date: date,
-      );
+    amount: amount.value,
+    paymentMethod: paymentMethod,
+    date: date,
+  );
 
   factory SetPaymentRecordFormState.initial({
     required PaymentRecordDraft? paymentRecordDraftToReview,
     required PaymentRecord? paymentRecordToEdit,
   }) {
     final amountToReview = paymentRecordDraftToReview?.amount;
-    final amount = amountToReview ?? paymentRecordToEdit?.amount.value ?? Money.zero;
+    final amount =
+        amountToReview ?? paymentRecordToEdit?.amount.value ?? Money.zero;
     final failure = RecordAmountRules.validate(amount);
     final amountFieldState = ValidatableAmountState(
       value: amount,
@@ -36,7 +37,9 @@ class SetPaymentRecordFormState extends Equatable {
 
     final paymentMethodToReview = paymentRecordDraftToReview?.paymentMethod;
     final paymentMethod =
-        paymentMethodToReview ?? paymentRecordToEdit?.paymentMethod ?? PaymentMethod.cash;
+        paymentMethodToReview ??
+        paymentRecordToEdit?.paymentMethod ??
+        PaymentMethod.cash;
 
     final dateToReview = paymentRecordDraftToReview?.date;
     final date = dateToReview ?? paymentRecordToEdit?.date ?? DateTime.now();
@@ -63,11 +66,5 @@ class SetPaymentRecordFormState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        amount,
-        paymentMethod,
-        date,
-        isValid,
-        status,
-      ];
+  List<Object?> get props => [amount, paymentMethod, date, isValid, status];
 }

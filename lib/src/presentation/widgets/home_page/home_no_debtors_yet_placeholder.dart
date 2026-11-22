@@ -15,9 +15,8 @@ class HomeNoDebtorsYetPlaceholder extends StatelessWidget {
       context: context,
       barrierDismissible: true,
       builder: (context) => SetDebtorDialog(
-        onSetDebtorPressed: (nickname) => bloc.add(
-          HomeAddDebtorRequested(debtorNickname: nickname),
-        ),
+        onSetDebtorPressed: (nickname) =>
+            bloc.add(HomeAddDebtorRequested(debtorNickname: nickname)),
       ),
     );
   }
@@ -44,9 +43,7 @@ class HomeNoDebtorsYetPlaceholder extends StatelessWidget {
             Text(
               'Comece adicionando um devedor para acompanhar os débitos, créditos e pagamentos que ele tem com você.',
               textAlign: TextAlign.center,
-              style: OweMeTextStyles.body.copyWith(
-                color: OweMeColors.gray600,
-              ),
+              style: OweMeTextStyles.body.copyWith(color: OweMeColors.gray600),
             ),
             const SizedBox(height: 24),
             OweMeElevatedButton(

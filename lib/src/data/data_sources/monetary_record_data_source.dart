@@ -18,7 +18,9 @@ abstract class MonetaryRecordDataSource {
     MonetaryRecordModel monetaryRecordModel,
     int debtorTotalDebtInCents,
   );
-  Future<List<MonetaryRecordModel>> queryMonetaryRecordsByDebtorId(int debtorId);
+  Future<List<MonetaryRecordModel>> queryMonetaryRecordsByDebtorId(
+    int debtorId,
+  );
 }
 
 class MonetaryRecordDataSourceImpl implements MonetaryRecordDataSource {
@@ -27,12 +29,10 @@ class MonetaryRecordDataSourceImpl implements MonetaryRecordDataSource {
   final PaymentRecordDataSource _paymentRecordDataSource;
 
   MonetaryRecordDataSourceImpl({
-    required OweMeDatabase oweMeDatabase,
-    required OweRecordDataSource oweRecordDataSource,
-    required PaymentRecordDataSource paymentRecordDataSource,
-  })  : _oweMeDatabase = oweMeDatabase,
-        _oweRecordDataSource = oweRecordDataSource,
-        _paymentRecordDataSource = paymentRecordDataSource;
+    required this._oweMeDatabase,
+    required this._oweRecordDataSource,
+    required this._paymentRecordDataSource,
+  });
 
   @override
   Future<void> insertMonetaryRecordAndUpdateDebtor(
@@ -71,27 +71,25 @@ class MonetaryRecordDataSourceImpl implements MonetaryRecordDataSource {
   ) async {
     final db = await _oweMeDatabase.database;
 
-    await db.transaction(
-      (txn) async {
-        final dataMap = monetaryRecordModel.toMap();
+    await db.transaction((txn) async {
+      final dataMap = monetaryRecordModel.toMap();
 
-        // Update monetary record
-        await txn.update(
-          monetaryRecordModel.tableName,
-          dataMap,
-          where: 'id = ?',
-          whereArgs: [monetaryRecordModel.id],
-        );
+      // Update monetary record
+      await txn.update(
+        monetaryRecordModel.tableName,
+        dataMap,
+        where: 'id = ?',
+        whereArgs: [monetaryRecordModel.id],
+      );
 
-        // Update the debtor's total debt
-        await txn.update(
-          DebtorModel.table,
-          {'total_debt_in_cents': debtorTotalDebtInCents},
-          where: 'id = ?',
-          whereArgs: [monetaryRecordModel.debtorId],
-        );
-      },
-    );
+      // Update the debtor's total debt
+      await txn.update(
+        DebtorModel.table,
+        {'total_debt_in_cents': debtorTotalDebtInCents},
+        where: 'id = ?',
+        whereArgs: [monetaryRecordModel.debtorId],
+      );
+    });
   }
 
   @override
@@ -120,16 +118,18 @@ class MonetaryRecordDataSourceImpl implements MonetaryRecordDataSource {
   }
 
   @override
-  Future<List<MonetaryRecordModel>> queryMonetaryRecordsByDebtorId(int debtorId) async {
-    final oweRecordModels =
-        await _oweRecordDataSource.queryOweRecordsByDebtorId(debtorId);
-    final paymentRecordModels =
-        await _paymentRecordDataSource.queryPaymentRecordsByDebtorId(debtorId);
+  Future<List<MonetaryRecordModel>> queryMonetaryRecordsByDebtorId(
+    int debtorId,
+  ) async {
+    final oweRecordModels = await _oweRecordDataSource
+        .queryOweRecordsByDebtorId(debtorId);
+    final paymentRecordModels = await _paymentRecordDataSource
+        .queryPaymentRecordsByDebtorId(debtorId);
     //TODO Open/Closed Principle problem - Handle future problem, what if there are more types of monetary records?
 
     final List<MonetaryRecordModel> monetaryRecordsModels = [
       ...oweRecordModels,
-      ...paymentRecordModels
+      ...paymentRecordModels,
     ];
     return monetaryRecordsModels;
   }

@@ -7,9 +7,7 @@ import 'package:owe_me/src/domain/repositories/monetary_record_repository.dart';
 class AddMonetaryRecordAndUpdateDebtor {
   final MonetaryRecordRepository _repository;
 
-  AddMonetaryRecordAndUpdateDebtor({
-    required MonetaryRecordRepository repository,
-  }) : _repository = repository;
+  AddMonetaryRecordAndUpdateDebtor({required this._repository});
 
   Future<Either<Failure, Debtor>> call({
     required MonetaryRecord monetaryRecord,

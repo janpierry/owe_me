@@ -41,30 +41,35 @@ void main() {
       assert(entity != second);
     });
 
-    test('When two entities have different [date], they should not be equal', () {
-      PaymentRecord second = PaymentRecord(
-        id: id,
-        date: DateTime(2024),
-        amount: amount,
-        paymentMethod: paymentType,
-      );
+    test(
+      'When two entities have different [date], they should not be equal',
+      () {
+        PaymentRecord second = PaymentRecord(
+          id: id,
+          date: DateTime(2024),
+          amount: amount,
+          paymentMethod: paymentType,
+        );
 
-      assert(entity != second);
-    });
+        assert(entity != second);
+      },
+    );
 
-    test('When two entities have different [amount], they should not be equal', () {
-      PaymentRecord second = PaymentRecord(
-        id: id,
-        date: date,
-        amount: RecordAmount.create(Money(cents: 2000)).asRight(),
-        paymentMethod: paymentType,
-      );
+    test(
+      'When two entities have different [amount], they should not be equal',
+      () {
+        PaymentRecord second = PaymentRecord(
+          id: id,
+          date: date,
+          amount: RecordAmount.create(Money(cents: 2000)).asRight(),
+          paymentMethod: paymentType,
+        );
 
-      assert(entity != second);
-    });
+        assert(entity != second);
+      },
+    );
 
-    test('When two entities have different [paymentMethod], they should not be equal',
-        () {
+    test('When two entities have different [paymentMethod], they should not be equal', () {
       PaymentRecord second = PaymentRecord(
         id: id,
         date: date,

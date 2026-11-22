@@ -46,18 +46,21 @@ void main() {
       expect(model, isNot(equals(second)));
     });
 
-    test('When two models have different [debtorId], they should not be equal', () {
-      final second = OweRecordModel(
-        id: id,
-        debtorId: 3,
-        amountInCents: amountInCents,
-        description: description,
-        date: date,
-        oweType: oweType,
-      );
+    test(
+      'When two models have different [debtorId], they should not be equal',
+      () {
+        final second = OweRecordModel(
+          id: id,
+          debtorId: 3,
+          amountInCents: amountInCents,
+          description: description,
+          date: date,
+          oweType: oweType,
+        );
 
-      expect(model, isNot(equals(second)));
-    });
+        expect(model, isNot(equals(second)));
+      },
+    );
 
     test('When two models have different [amountInCents], they should not be equal', () {
       final second = OweRecordModel(
@@ -72,18 +75,21 @@ void main() {
       expect(model, isNot(equals(second)));
     });
 
-    test('When two models have different [description], they should not be equal', () {
-      final second = OweRecordModel(
-        id: id,
-        debtorId: debtorId,
-        amountInCents: amountInCents,
-        description: 'Dinner',
-        date: date,
-        oweType: oweType,
-      );
+    test(
+      'When two models have different [description], they should not be equal',
+      () {
+        final second = OweRecordModel(
+          id: id,
+          debtorId: debtorId,
+          amountInCents: amountInCents,
+          description: 'Dinner',
+          date: date,
+          oweType: oweType,
+        );
 
-      expect(model, isNot(equals(second)));
-    });
+        expect(model, isNot(equals(second)));
+      },
+    );
 
     test('When two models have different [date], they should not be equal', () {
       final second = OweRecordModel(
@@ -98,18 +104,21 @@ void main() {
       expect(model, isNot(equals(second)));
     });
 
-    test('When two models have different [oweType], they should not be equal', () {
-      final second = OweRecordModel(
-        id: id,
-        debtorId: debtorId,
-        amountInCents: amountInCents,
-        description: description,
-        date: date,
-        oweType: OweType.credit.name,
-      );
+    test(
+      'When two models have different [oweType], they should not be equal',
+      () {
+        final second = OweRecordModel(
+          id: id,
+          debtorId: debtorId,
+          amountInCents: amountInCents,
+          description: description,
+          date: date,
+          oweType: OweType.credit.name,
+        );
 
-      expect(model, isNot(equals(second)));
-    });
+        expect(model, isNot(equals(second)));
+      },
+    );
   });
 
   group('fromMap tests', () {

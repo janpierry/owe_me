@@ -29,7 +29,9 @@ class SetPaymentRecordDebtorSelectionBody extends StatelessWidget {
               children: [
                 Text(
                   _title,
-                  style: OweMeTextStyles.body.copyWith(color: OweMeColors.textGray),
+                  style: OweMeTextStyles.body.copyWith(
+                    color: OweMeColors.textGray,
+                  ),
                 ),
                 const SizedBox(height: 12),
                 //TODO filter

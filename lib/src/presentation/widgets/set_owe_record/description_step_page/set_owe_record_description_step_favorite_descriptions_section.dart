@@ -5,7 +5,8 @@ import 'package:owe_me/src/domain/enums/owe_type.dart';
 import 'package:owe_me/src/presentation/blocs/set_owe_record/description_step/set_owe_record_description_step_bloc.dart';
 import 'package:owe_me/src/core/presentation/extensions/owe_type_ui_extensions.dart';
 
-class SetOweRecordDescriptionStepFavoriteDescriptionsSection extends StatelessWidget {
+class SetOweRecordDescriptionStepFavoriteDescriptionsSection
+    extends StatelessWidget {
   final List<FavoriteDescription> initialFavoriteDescriptions;
   final OweType oweRecordType;
 
@@ -23,10 +24,10 @@ class SetOweRecordDescriptionStepFavoriteDescriptionsSection extends StatelessWi
     FavoriteDescription selectedDescription,
   ) {
     context.read<SetOweRecordDescriptionStepBloc>().add(
-          SetOweRecordDescriptionStepFavoriteDescriptionSelected(
-            selectedDescription: selectedDescription,
-          ),
-        );
+      SetOweRecordDescriptionStepFavoriteDescriptionSelected(
+        selectedDescription: selectedDescription,
+      ),
+    );
   }
 
   void _listen(BuildContext context, SetOweRecordDescriptionStepState state) {
@@ -40,21 +41,21 @@ class SetOweRecordDescriptionStepFavoriteDescriptionsSection extends StatelessWi
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SetOweRecordDescriptionStepBloc,
-        SetOweRecordDescriptionStepState>(
+    return BlocConsumer<
+      SetOweRecordDescriptionStepBloc,
+      SetOweRecordDescriptionStepState
+    >(
       listener: _listen,
       buildWhen: (previous, current) =>
           current is SetOweRecordDescriptionStepFavoriteDescriptionsState,
       builder: (context, state) {
         if (state is SetOweRecordDescriptionStepFavoriteDescriptionsLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const Center(child: CircularProgressIndicator());
         }
         final favoriteDescriptions =
             state is SetOweRecordDescriptionStepFavoriteDescriptionsUpdated
-                ? state.favoriteDescriptions
-                : initialFavoriteDescriptions;
+            ? state.favoriteDescriptions
+            : initialFavoriteDescriptions;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -69,8 +70,10 @@ class SetOweRecordDescriptionStepFavoriteDescriptionsSection extends StatelessWi
                       label: Text(favoriteDescription.description),
                       selected: false,
                       shape: const StadiumBorder(),
-                      onSelected: (value) =>
-                          _selectFavoriteDescription(context, favoriteDescription),
+                      onSelected: (value) => _selectFavoriteDescription(
+                        context,
+                        favoriteDescription,
+                      ),
                     ),
                   )
                   .toList(),

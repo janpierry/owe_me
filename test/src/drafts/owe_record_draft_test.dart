@@ -5,15 +5,12 @@ import 'package:owe_me/src/domain/value_objects/money.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
 
 void main() {
-  test(
-    'Should create an instance with nullable values as null',
-    () {
-      final draft = OweRecordDraft(oweType: OweType.debt);
-      expect(draft.amount, isNull);
-      expect(draft.description, isNull);
-      expect(draft.date, isNull);
-    },
-  );
+  test('Should create an instance with nullable values as null', () {
+    final draft = OweRecordDraft(oweType: OweType.debt);
+    expect(draft.amount, isNull);
+    expect(draft.description, isNull);
+    expect(draft.date, isNull);
+  });
 
   group('copyWith tests:', () {
     const amountTest = Money(cents: 100);
@@ -73,10 +70,7 @@ void main() {
     });
 
     test('Should erase [amount] when [eraseAmount] is true', () {
-      final draft = OweRecordDraft(
-        amount: amountTest,
-        oweType: OweType.debt,
-      );
+      final draft = OweRecordDraft(amount: amountTest, oweType: OweType.debt);
       final updatedDraft = draft.copyWith(removeAmount: true);
       expect(updatedDraft.amount, isNull);
     });
@@ -91,19 +85,14 @@ void main() {
     });
 
     test('Should erase [date] when [eraseDate] is true', () {
-      final draft = OweRecordDraft(
-        date: dateTest,
-        oweType: OweType.debt,
-      );
+      final draft = OweRecordDraft(date: dateTest, oweType: OweType.debt);
       final updatedDraft = draft.copyWith(removeDate: true);
       expect(updatedDraft.date, isNull);
     });
   });
 
   group('toEntity tests:', () {
-    test(
-        'When the description exceeds the limit, it returns InvalidDraftFailure with the pt-BR message',
-        () {
+    test('When the description exceeds the limit, it returns InvalidDraftFailure with the pt-BR message', () {
       final draft = OweRecordDraft(
         amount: const Money(cents: 100),
         description: 'a' * 101, // DescriptionRules.maxLength + 1

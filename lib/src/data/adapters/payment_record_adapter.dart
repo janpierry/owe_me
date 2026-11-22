@@ -22,10 +22,12 @@ class PaymentRecordAdapter {
   }
 
   static PaymentRecord toEntity(PaymentRecordModel model) {
-    final amount = RecordAmount.create(Money(cents: model.amountInCents)).getOrElse(() {
-      throw DataIntegrityException(
-          'Invalid amountInCents ${model.amountInCents} for PaymentRecordModel id ${model.id}');
-    });
+    final amount = RecordAmount.create(Money(cents: model.amountInCents))
+        .getOrElse(() {
+          throw DataIntegrityException(
+            'Invalid amountInCents ${model.amountInCents} for PaymentRecordModel id ${model.id}',
+          );
+        });
 
     return PaymentRecord(
       id: model.id,

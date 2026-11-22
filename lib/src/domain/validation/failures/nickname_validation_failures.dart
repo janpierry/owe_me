@@ -10,5 +10,5 @@ class NicknameEmptyFailure extends NicknameValidationFailure {
 
 class NicknameExceedsLimitFailure extends NicknameValidationFailure {
   const NicknameExceedsLimitFailure()
-      : super('Nickname exceeds the maximum allowed limit.');
+    : super('Nickname exceeds the maximum allowed limit.');
 }

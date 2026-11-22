@@ -25,21 +25,13 @@ class Debtor extends Equatable {
     if (failure != null) {
       return Left(DebtorValidationFailure(failure));
     }
-    return Right(
-      Debtor._(
-        id: id,
-        nickname: nickname,
-        totalDebt: totalDebt,
-      ),
-    );
+    return Right(Debtor._(id: id, nickname: nickname, totalDebt: totalDebt));
   }
 
   Either<DebtorValidationFailure, Debtor> withMonetaryRecordAdded(
     MonetaryRecord record,
   ) {
-    return copyWith(
-      totalDebt: record.applyAmountToTotalDebt(totalDebt),
-    );
+    return copyWith(totalDebt: record.applyAmountToTotalDebt(totalDebt));
   }
 
   Either<DebtorValidationFailure, Debtor> withMonetaryRecordRemoved(

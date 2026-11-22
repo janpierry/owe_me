@@ -35,7 +35,9 @@ void initDebtorInjections() {
     ..registerLazySingleton<LoadDebtors>(() => LoadDebtors(repository: inj()))
     ..registerLazySingleton<AddDebtor>(() => AddDebtor(repository: inj()))
     ..registerLazySingleton<EditDebtor>(() => EditDebtor(repository: inj()))
-    ..registerLazySingleton<RemoveDebtor>(() => RemoveDebtor(repository: inj()));
+    ..registerLazySingleton<RemoveDebtor>(
+      () => RemoveDebtor(repository: inj()),
+    );
 
   //Repositories
   inj.registerLazySingleton<DebtorRepository>(
@@ -44,5 +46,6 @@ void initDebtorInjections() {
 
   //Data Sources
   inj.registerLazySingleton<DebtorDataSource>(
-      () => DebtorDataSourceImpl(oweMeDatabase: inj()));
+    () => DebtorDataSourceImpl(oweMeDatabase: inj()),
+  );
 }

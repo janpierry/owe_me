@@ -16,11 +16,14 @@ import 'package:owe_me/src/presentation/blocs/set_owe_record/description_step/se
 import 'package:owe_me/src/presentation/containers/set_owe_record/set_owe_record_amount_step_container.dart';
 import 'package:owe_me/src/presentation/widgets/set_owe_record/description_step_page/set_owe_record_description_text_form_field.dart';
 
-class MockAddFavoriteDescription extends Mock implements AddFavoriteDescription {}
+class MockAddFavoriteDescription extends Mock
+    implements AddFavoriteDescription {}
 
-class MockLoadDebtorFavoriteDebts extends Mock implements LoadDebtorFavoriteDebts {}
+class MockLoadDebtorFavoriteDebts extends Mock
+    implements LoadDebtorFavoriteDebts {}
 
-class MockLoadDebtorFavoriteCredits extends Mock implements LoadDebtorFavoriteCredits {}
+class MockLoadDebtorFavoriteCredits extends Mock
+    implements LoadDebtorFavoriteCredits {}
 
 void main() {
   final debtor = Debtor.create(id: 1, nickname: 'João').asRight();

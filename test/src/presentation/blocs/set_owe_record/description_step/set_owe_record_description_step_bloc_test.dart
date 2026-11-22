@@ -16,11 +16,14 @@ import 'package:owe_me/src/domain/value_objects/record_amount.dart';
 import 'package:owe_me/src/presentation/blocs/set_owe_record/description_step/set_owe_record_description_step_bloc.dart';
 import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 
-class MockAddFavoriteDescription extends Mock implements AddFavoriteDescription {}
+class MockAddFavoriteDescription extends Mock
+    implements AddFavoriteDescription {}
 
-class MockLoadDebtorFavoriteDebts extends Mock implements LoadDebtorFavoriteDebts {}
+class MockLoadDebtorFavoriteDebts extends Mock
+    implements LoadDebtorFavoriteDebts {}
 
-class MockLoadDebtorFavoriteCredits extends Mock implements LoadDebtorFavoriteCredits {}
+class MockLoadDebtorFavoriteCredits extends Mock
+    implements LoadDebtorFavoriteCredits {}
 
 /// Stands in for `SetOweRecordDescriptionTextFormField`: it shows whatever text
 /// the bloc sends to it, and reports every change of its text back to the
@@ -42,7 +45,9 @@ class FakeDescriptionField {
 
   void _changeText(String newText) {
     text = newText;
-    _bloc.add(SetOweRecordDescriptionStepDescriptionChanged(description: newText));
+    _bloc.add(
+      SetOweRecordDescriptionStepDescriptionChanged(description: newText),
+    );
   }
 
   Future<void> dispose() => _subscription.cancel();
@@ -100,7 +105,9 @@ void main() {
       ),
     );
     await pumpEventQueue();
-    final loaded = states.whereType<SetOweRecordDescriptionStepPageLoaded>().single;
+    final loaded = states
+        .whereType<SetOweRecordDescriptionStepPageLoaded>()
+        .single;
     return field = FakeDescriptionField(bloc, text: loaded.initialDescription);
   }
 
@@ -130,24 +137,21 @@ void main() {
   }
 
   group('clearing the description', () {
-    test(
-      'new record: clearing a description set earlier removes it from the draft',
-      () async {
-        // Coming back from the review page with a description already chosen.
-        final draft = OweRecordDraft(
-          oweType: OweType.debt,
-          amount: amount,
-          description: 'Almoço',
-        );
-        final field = await openStep(draft);
-        expect(field.text, 'Almoço');
+    test('new record: clearing a description set earlier removes it from the draft', () async {
+      // Coming back from the review page with a description already chosen.
+      final draft = OweRecordDraft(
+        oweType: OweType.debt,
+        amount: amount,
+        description: 'Almoço',
+      );
+      final field = await openStep(draft);
+      expect(field.text, 'Almoço');
 
-        await type('');
-        final nextDraft = await continueToNextPage();
+      await type('');
+      final nextDraft = await continueToNextPage();
 
-        expect(nextDraft.description, isNull);
-      },
-    );
+      expect(nextDraft.description, isNull);
+    });
 
     test(
       'edited record: clearing the description it started with removes it',
@@ -168,21 +172,21 @@ void main() {
       },
     );
 
-    test(
-      'edited record: a cleared description stays cleared when the step is '
-      'opened again from the review page',
-      () async {
-        // The record still has "Almoço", but the user already cleared it, so
-        // the draft coming back from the review page has no description.
-        final clearedDraft = OweRecordDraft(oweType: OweType.debt, amount: amount);
-        final field = await openStep(clearedDraft);
-        expect(field.text, isEmpty);
+    test('edited record: a cleared description stays cleared when the step is '
+        'opened again from the review page', () async {
+      // The record still has "Almoço", but the user already cleared it, so
+      // the draft coming back from the review page has no description.
+      final clearedDraft = OweRecordDraft(
+        oweType: OweType.debt,
+        amount: amount,
+      );
+      final field = await openStep(clearedDraft);
+      expect(field.text, isEmpty);
 
-        final nextDraft = await continueToNextPage();
+      final nextDraft = await continueToNextPage();
 
-        expect(nextDraft.description, isNull);
-      },
-    );
+      expect(nextDraft.description, isNull);
+    });
   });
 
   group('favorite descriptions', () {

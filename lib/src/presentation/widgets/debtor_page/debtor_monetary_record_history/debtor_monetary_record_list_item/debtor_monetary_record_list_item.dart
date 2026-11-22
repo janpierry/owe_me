@@ -39,20 +39,14 @@ class DebtorMonetaryRecordListItem extends StatelessWidget {
         padding: const EdgeInsets.only(top: 8, bottom: 8, left: 12, right: 4),
         child: Row(
           children: [
-            Icon(
-              monetaryRecord.iconData,
-              color: OweMeColors.primaryBlue,
-            ),
+            Icon(monetaryRecord.iconData, color: OweMeColors.primaryBlue),
             const SizedBox(width: 8),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    _description,
-                    style: OweMeTextStyles.body,
-                  ),
+                  Text(_description, style: OweMeTextStyles.body),
                   const SizedBox(height: 4),
                   Text(
                     DateFormats.ddMMMyyyy.format(monetaryRecord.date),

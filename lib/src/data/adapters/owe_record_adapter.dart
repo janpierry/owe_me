@@ -23,10 +23,12 @@ class OweRecordAdapter {
   }
 
   static OweRecord toEntity(OweRecordModel model) {
-    final amount = RecordAmount.create(Money(cents: model.amountInCents)).getOrElse(() {
-      throw DataIntegrityException(
-          'Invalid amountInCents ${model.amountInCents} for OweRecordModel id ${model.id}');
-    });
+    final amount = RecordAmount.create(Money(cents: model.amountInCents))
+        .getOrElse(() {
+          throw DataIntegrityException(
+            'Invalid amountInCents ${model.amountInCents} for OweRecordModel id ${model.id}',
+          );
+        });
 
     return OweRecord.create(
       id: model.id,
@@ -36,7 +38,8 @@ class OweRecordAdapter {
       oweType: OweType.values.byName(model.oweType),
     ).getOrElse(() {
       throw DataIntegrityException(
-          'Invalid description for OweRecordModel id ${model.id}');
+        'Invalid description for OweRecordModel id ${model.id}',
+      );
     });
   }
 }

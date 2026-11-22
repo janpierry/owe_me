@@ -45,7 +45,9 @@ void main() {
     nickname: 'João',
     totalDebt: const Money(cents: 10000),
   ).asRight();
-  final tUpdatedDebtor = tDebtor.copyWith(totalDebt: const Money(cents: 15000)).asRight();
+  final tUpdatedDebtor = tDebtor
+      .copyWith(totalDebt: const Money(cents: 15000))
+      .asRight();
   final tDraft = OweRecordDraft(
     amount: const Money(cents: 5000),
     description: 'Almoço',
@@ -110,15 +112,16 @@ void main() {
 
   group('SetOweRecordInfoReviewBloc', () {
     group('when adding a new record', () {
-      test('emits [SettingRecord, RecordSetFinished] when the add use case succeeds',
-          () async {
+      test('emits [SettingRecord, RecordSetFinished] when the add use case succeeds', () async {
         stubAdd(() async => Right(tUpdatedDebtor));
 
         final expectation = expectLater(
           bloc.stream,
           emitsInOrder([
             SetOweRecordInfoReviewSettingRecord(),
-            SetOweRecordInfoReviewRecordSetFinished(updatedDebtor: tUpdatedDebtor),
+            SetOweRecordInfoReviewRecordSetFinished(
+              updatedDebtor: tUpdatedDebtor,
+            ),
           ]),
         );
         initialize();
@@ -137,38 +140,43 @@ void main() {
         verifyZeroInteractions(mockEdit);
       });
 
-      test('emits [SettingRecord, Error] when the add use case fails', () async {
-        stubAdd(() async => const Left(DefaultFailure()));
+      test(
+        'emits [SettingRecord, Error] when the add use case fails',
+        () async {
+          stubAdd(() async => const Left(DefaultFailure()));
 
-        final expectation = expectLater(
-          bloc.stream,
-          emitsInOrder([
-            SetOweRecordInfoReviewSettingRecord(),
-            const SetOweRecordInfoReviewError(),
-          ]),
-        );
-        initialize();
-        bloc.add(SetOweRecordInfoReviewSetRecordRequested());
-        await expectation;
-      });
+          final expectation = expectLater(
+            bloc.stream,
+            emitsInOrder([
+              SetOweRecordInfoReviewSettingRecord(),
+              const SetOweRecordInfoReviewError(),
+            ]),
+          );
+          initialize();
+          bloc.add(SetOweRecordInfoReviewSetRecordRequested());
+          await expectation;
+        },
+      );
 
-      test('emits [SettingRecord, Error] when the add use case throws', () async {
-        stubAdd(() async => throw Exception('db exploded'));
+      test(
+        'emits [SettingRecord, Error] when the add use case throws',
+        () async {
+          stubAdd(() async => throw Exception('db exploded'));
 
-        final expectation = expectLater(
-          bloc.stream,
-          emitsInOrder([
-            SetOweRecordInfoReviewSettingRecord(),
-            const SetOweRecordInfoReviewError(),
-          ]),
-        );
-        initialize();
-        bloc.add(SetOweRecordInfoReviewSetRecordRequested());
-        await expectation;
-      });
+          final expectation = expectLater(
+            bloc.stream,
+            emitsInOrder([
+              SetOweRecordInfoReviewSettingRecord(),
+              const SetOweRecordInfoReviewError(),
+            ]),
+          );
+          initialize();
+          bloc.add(SetOweRecordInfoReviewSetRecordRequested());
+          await expectation;
+        },
+      );
 
-      test('emits [SettingRecord, Error(message)] and saves nothing when the draft is invalid',
-          () async {
+      test('emits [SettingRecord, Error(message)] and saves nothing when the draft is invalid', () async {
         final expectation = expectLater(
           bloc.stream,
           emitsInOrder([
@@ -184,8 +192,7 @@ void main() {
         verifyZeroInteractions(mockEdit);
       });
 
-      test('calls the add use case only once when save is requested twice in a row',
-          () async {
+      test('calls the add use case only once when save is requested twice in a row', () async {
         final saveCompleter = Completer<Either<Failure, Debtor>>();
         stubAdd(() => saveCompleter.future);
 
@@ -205,66 +212,76 @@ void main() {
         ).called(1);
         expect(
           bloc.state,
-          SetOweRecordInfoReviewRecordSetFinished(updatedDebtor: tUpdatedDebtor),
+          SetOweRecordInfoReviewRecordSetFinished(
+            updatedDebtor: tUpdatedDebtor,
+          ),
         );
       });
     });
 
     group('when editing an existing record', () {
-      test('calls the edit use case with the draft record carrying the edited id',
-          () async {
-        stubEdit(() async => Right(tUpdatedDebtor));
+      test(
+        'calls the edit use case with the draft record carrying the edited id',
+        () async {
+          stubEdit(() async => Right(tUpdatedDebtor));
 
-        final expectation = expectLater(
-          bloc.stream,
-          emitsInOrder([
-            SetOweRecordInfoReviewSettingRecord(),
-            SetOweRecordInfoReviewRecordSetFinished(updatedDebtor: tUpdatedDebtor),
-          ]),
-        );
-        initialize(recordToEdit: tRecordToEdit);
-        bloc.add(SetOweRecordInfoReviewSetRecordRequested());
-        await expectation;
+          final expectation = expectLater(
+            bloc.stream,
+            emitsInOrder([
+              SetOweRecordInfoReviewSettingRecord(),
+              SetOweRecordInfoReviewRecordSetFinished(
+                updatedDebtor: tUpdatedDebtor,
+              ),
+            ]),
+          );
+          initialize(recordToEdit: tRecordToEdit);
+          bloc.add(SetOweRecordInfoReviewSetRecordRequested());
+          await expectation;
 
-        verify(
-          () => mockEdit(
-            newMonetaryRecord: any(
-              named: 'newMonetaryRecord',
-              that: _isOweRecordLike(tRecordFromDraft.copyWith(id: 42).asRight()),
+          verify(
+            () => mockEdit(
+              newMonetaryRecord: any(
+                named: 'newMonetaryRecord',
+                that: _isOweRecordLike(
+                  tRecordFromDraft.copyWith(id: 42).asRight(),
+                ),
+              ),
+              oldMonetaryRecord: any(
+                named: 'oldMonetaryRecord',
+                that: same(tRecordToEdit),
+              ),
+              recordDebtor: any(named: 'recordDebtor', that: equals(tDebtor)),
             ),
-            oldMonetaryRecord: any(
-              named: 'oldMonetaryRecord',
-              that: same(tRecordToEdit),
-            ),
-            recordDebtor: any(named: 'recordDebtor', that: equals(tDebtor)),
-          ),
-        ).called(1);
-        verifyZeroInteractions(mockAdd);
-      });
+          ).called(1);
+          verifyZeroInteractions(mockAdd);
+        },
+      );
 
-      test('emits [SettingRecord, Error] when the edit use case fails', () async {
-        stubEdit(() async => const Left(DefaultFailure()));
+      test(
+        'emits [SettingRecord, Error] when the edit use case fails',
+        () async {
+          stubEdit(() async => const Left(DefaultFailure()));
 
-        final expectation = expectLater(
-          bloc.stream,
-          emitsInOrder([
-            SetOweRecordInfoReviewSettingRecord(),
-            const SetOweRecordInfoReviewError(),
-          ]),
-        );
-        initialize(recordToEdit: tRecordToEdit);
-        bloc.add(SetOweRecordInfoReviewSetRecordRequested());
-        await expectation;
-      });
+          final expectation = expectLater(
+            bloc.stream,
+            emitsInOrder([
+              SetOweRecordInfoReviewSettingRecord(),
+              const SetOweRecordInfoReviewError(),
+            ]),
+          );
+          initialize(recordToEdit: tRecordToEdit);
+          bloc.add(SetOweRecordInfoReviewSetRecordRequested());
+          await expectation;
+        },
+      );
 
-      test('emits [SettingRecord, Error] and saves nothing when copyWith returns Left',
-          () async {
+      test('emits [SettingRecord, Error] and saves nothing when copyWith returns Left', () async {
         final mockDraft = _MockOweRecordDraft();
         final mockRecord = _MockOweRecord();
         when(() => mockDraft.toEntity()).thenReturn(Right(mockRecord));
-        when(() => mockRecord.copyWith(id: any(named: 'id'))).thenReturn(
-          Left(OweRecordValidationFailure(const DefaultFailure())),
-        );
+        when(
+          () => mockRecord.copyWith(id: any(named: 'id')),
+        ).thenReturn(Left(OweRecordValidationFailure(const DefaultFailure())));
 
         final expectation = expectLater(
           bloc.stream,
@@ -282,8 +299,7 @@ void main() {
         verifyZeroInteractions(mockEdit);
       });
 
-      test('calls the edit use case only once when save is requested twice in a row',
-          () async {
+      test('calls the edit use case only once when save is requested twice in a row', () async {
         final saveCompleter = Completer<Either<Failure, Debtor>>();
         stubEdit(() => saveCompleter.future);
 
@@ -304,7 +320,9 @@ void main() {
         ).called(1);
         expect(
           bloc.state,
-          SetOweRecordInfoReviewRecordSetFinished(updatedDebtor: tUpdatedDebtor),
+          SetOweRecordInfoReviewRecordSetFinished(
+            updatedDebtor: tUpdatedDebtor,
+          ),
         );
       });
     });

@@ -4,5 +4,6 @@ import 'package:owe_me/src/core/error/failures/failures.dart';
 /// underlying rule failure as [cause] (diagnostic, like an exception's cause
 /// chain).
 class OweRecordValidationFailure extends Failure {
-  OweRecordValidationFailure(Failure cause) : super(cause.message, cause: cause);
+  OweRecordValidationFailure(Failure cause)
+    : super(cause.message, cause: cause);
 }

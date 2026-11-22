@@ -27,7 +27,8 @@ class SetOweRecordAmountStepContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => SetOweRecordAmountStepBloc(
-        amountToEdit: oweRecordDraftToReview?.amount ?? oweRecordToEdit?.amount.value,
+        amountToEdit:
+            oweRecordDraftToReview?.amount ?? oweRecordToEdit?.amount.value,
       ),
       child: SetOweRecordAmountStepPage(
         recordDebtor: recordDebtor,

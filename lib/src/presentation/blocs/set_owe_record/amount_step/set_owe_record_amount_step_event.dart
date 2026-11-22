@@ -16,4 +16,5 @@ class SetOweRecordAmountStepAmountChanged extends SetOweRecordAmountStepEvent {
   List<Object> get props => [amount];
 }
 
-class SetOweRecordAmountStepNextPageRequested extends SetOweRecordAmountStepEvent {}
+class SetOweRecordAmountStepNextPageRequested
+    extends SetOweRecordAmountStepEvent {}

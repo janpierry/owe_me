@@ -30,10 +30,10 @@ void main() {
         {'id': 2, 'nickname': 'Jane', 'total_debt_in_cents': 1000},
       ];
 
-      when(() => mockOweMeDatabase.database).thenAnswer((_) async => mockDatabase);
-      when(() => mockDatabase.query(DebtorModel.table)).thenAnswer(
-        (_) async => mockMapList,
-      );
+      when(() => mockOweMeDatabase.database)
+          .thenAnswer((_) async => mockDatabase);
+      when(() => mockDatabase.query(DebtorModel.table))
+          .thenAnswer((_) async => mockMapList);
 
       // Act
       final result = await dataSource.queryAllDebtors();
@@ -41,17 +41,24 @@ void main() {
       // Assert
       expect(result, isA<List<DebtorModel>>());
       expect(result.length, 2);
-      expect(result[0], const DebtorModel(id: 1, nickname: 'John', totalDebtInCents: 0));
       expect(
-          result[1], const DebtorModel(id: 2, nickname: 'Jane', totalDebtInCents: 1000));
+        result[0],
+        const DebtorModel(id: 1, nickname: 'John', totalDebtInCents: 0),
+      );
+      expect(
+        result[1],
+        const DebtorModel(id: 2, nickname: 'Jane', totalDebtInCents: 1000),
+      );
 
       verify(() => mockOweMeDatabase.database).called(1);
       verify(() => mockDatabase.query(DebtorModel.table)).called(1);
     });
 
     test('should return an empty list when no records are found', () async {
-      when(() => mockOweMeDatabase.database).thenAnswer((_) async => mockDatabase);
-      when(() => mockDatabase.query(DebtorModel.table)).thenAnswer((_) async => []);
+      when(() => mockOweMeDatabase.database)
+          .thenAnswer((_) async => mockDatabase);
+      when(() => mockDatabase.query(DebtorModel.table))
+          .thenAnswer((_) async => []);
 
       final result = await dataSource.queryAllDebtors();
 
@@ -59,8 +66,10 @@ void main() {
     });
 
     test('should throw when database throws', () async {
-      when(() => mockOweMeDatabase.database).thenAnswer((_) async => mockDatabase);
-      when(() => mockDatabase.query(DebtorModel.table)).thenThrow(Exception('DB error'));
+      when(() => mockOweMeDatabase.database)
+          .thenAnswer((_) async => mockDatabase);
+      when(() => mockDatabase.query(DebtorModel.table))
+          .thenThrow(Exception('DB error'));
 
       expect(() => dataSource.queryAllDebtors(), throwsException);
     });

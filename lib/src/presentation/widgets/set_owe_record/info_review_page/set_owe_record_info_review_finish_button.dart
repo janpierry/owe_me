@@ -12,9 +12,9 @@ class SetOweRecordInfoReviewFinishButton extends StatelessWidget {
   });
 
   void _requestToSetRecord(BuildContext context) {
-    context
-        .read<SetOweRecordInfoReviewBloc>()
-        .add(SetOweRecordInfoReviewSetRecordRequested());
+    context.read<SetOweRecordInfoReviewBloc>().add(
+      SetOweRecordInfoReviewSetRecordRequested(),
+    );
   }
 
   // Stays locked after success too: the page is navigating away, and a tap
@@ -26,7 +26,8 @@ class SetOweRecordInfoReviewFinishButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SetOweRecordInfoReviewBloc, SetOweRecordInfoReviewState>(
-      buildWhen: (previous, current) => _isSaving(previous) != _isSaving(current),
+      buildWhen: (previous, current) =>
+          _isSaving(previous) != _isSaving(current),
       builder: (context, state) => OweMeElevatedButton(
         label: isEditing ? 'Salvar alterações' : 'Confirmar',
         isLoading: _isSaving(state),

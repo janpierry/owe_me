@@ -10,28 +10,25 @@ void main() {
       assert(first == second);
     });
 
-    test('When two entities have different [cents], they should not be equal', () {
-      const first = Money(cents: 111);
-      const second = Money(cents: 121);
+    test(
+      'When two entities have different [cents], they should not be equal',
+      () {
+        const first = Money(cents: 111);
+        const second = Money(cents: 121);
 
-      assert(first != second);
-    });
+        assert(first != second);
+      },
+    );
   });
 
   group('inReal tests:', () {
-    test(
-      'Should return the correct value of money in Real currency',
-      () {
-        const value = Money(cents: 111);
-        expect(value.inReal, 1.11);
-      },
-    );
-    test(
-      'Should return the correct value of money in Real currency when there is not more than 1 Real',
-      () {
-        const value = Money(cents: 11);
-        expect(value.inReal, 0.11);
-      },
-    );
+    test('Should return the correct value of money in Real currency', () {
+      const value = Money(cents: 111);
+      expect(value.inReal, 1.11);
+    });
+    test('Should return the correct value of money in Real currency when there is not more than 1 Real', () {
+      const value = Money(cents: 11);
+      expect(value.inReal, 0.11);
+    });
   });
 }

@@ -18,9 +18,9 @@ class HomeDebtorsBloc extends Bloc<HomeDebtorsEvent, HomeDebtorsState> {
   HomeDebtorsBloc({
     required LoadDebtors loadDebtors,
     required AddDebtor addDebtor,
-  })  : _loadDebtorsUseCase = loadDebtors,
-        _addDebtorUseCase = addDebtor,
-        super(HomeDebtorsInitial()) {
+  }) : _loadDebtorsUseCase = loadDebtors,
+       _addDebtorUseCase = addDebtor,
+       super(HomeDebtorsInitial()) {
     on<HomeLoadDebtorsRequested>(_loadDebtors);
     on<HomeAddDebtorRequested>(_addNewDebtor);
   }
@@ -31,13 +31,10 @@ class HomeDebtorsBloc extends Bloc<HomeDebtorsEvent, HomeDebtorsState> {
   ) async {
     emit(HomeDebtorsLoading());
     final response = await _loadDebtorsUseCase();
-    response.fold(
-      (exception) => emit(HomeDebtorsError()),
-      (debtors) {
-        _debtors = debtors;
-        emit(HomeDebtorsLoaded(debtors: _debtors));
-      },
-    );
+    response.fold((exception) => emit(HomeDebtorsError()), (debtors) {
+      _debtors = debtors;
+      emit(HomeDebtorsLoaded(debtors: _debtors));
+    });
   }
 
   FutureOr<void> _addNewDebtor(
@@ -50,15 +47,10 @@ class HomeDebtorsBloc extends Bloc<HomeDebtorsEvent, HomeDebtorsState> {
       emit(HomeDebtorsError());
       return;
     }
-    final response = await _addDebtorUseCase(
-      debtor: newDebtor.asRight(),
-    );
-    response.fold(
-      (exception) => emit(HomeDebtorsError()),
-      (savedDebtor) {
-        _debtors.add(savedDebtor);
-        emit(HomeDebtorsLoaded(debtors: _debtors));
-      },
-    );
+    final response = await _addDebtorUseCase(debtor: newDebtor.asRight());
+    response.fold((exception) => emit(HomeDebtorsError()), (savedDebtor) {
+      _debtors.add(savedDebtor);
+      emit(HomeDebtorsLoaded(debtors: _debtors));
+    });
   }
 }

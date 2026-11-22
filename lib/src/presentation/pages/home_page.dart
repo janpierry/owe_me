@@ -25,9 +25,7 @@ class HomePage extends StatelessWidget {
             }
             return HomeBody(debtors: state.debtors);
           }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );

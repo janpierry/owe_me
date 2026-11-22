@@ -12,9 +12,7 @@ abstract class DebtorDataSource {
 class DebtorDataSourceImpl implements DebtorDataSource {
   final OweMeDatabase _oweMeDatabase;
 
-  DebtorDataSourceImpl({
-    required OweMeDatabase oweMeDatabase,
-  }) : _oweMeDatabase = oweMeDatabase;
+  DebtorDataSourceImpl({required this._oweMeDatabase});
 
   @override
   Future<List<DebtorModel>> queryAllDebtors() async {
@@ -51,10 +49,6 @@ class DebtorDataSourceImpl implements DebtorDataSource {
   @override
   Future<void> deleteDebtor(int debtorId) async {
     final db = await _oweMeDatabase.database;
-    await db.delete(
-      DebtorModel.table,
-      where: 'id = ?',
-      whereArgs: [debtorId],
-    );
+    await db.delete(DebtorModel.table, where: 'id = ?', whereArgs: [debtorId]);
   }
 }

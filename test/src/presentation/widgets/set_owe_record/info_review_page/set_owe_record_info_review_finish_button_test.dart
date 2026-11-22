@@ -38,58 +38,62 @@ void main() {
   ElevatedButton findButton(WidgetTester tester) =>
       tester.widget<ElevatedButton>(find.byType(ElevatedButton));
 
-  testWidgets('is disabled with a spinner while saving, and re-enabled after an error',
-      (tester) async {
-    final mockAdd = _MockAddMonetaryRecordAndUpdateDebtor();
-    final saveCompleter = Completer<Either<Failure, Debtor>>();
-    when(
-      () => mockAdd(
-        monetaryRecord: any(named: 'monetaryRecord'),
-        recordDebtor: any(named: 'recordDebtor'),
-      ),
-    ).thenAnswer((_) => saveCompleter.future);
+  testWidgets(
+    'is disabled with a spinner while saving, and re-enabled after an error',
+    (tester) async {
+      final mockAdd = _MockAddMonetaryRecordAndUpdateDebtor();
+      final saveCompleter = Completer<Either<Failure, Debtor>>();
+      when(
+        () => mockAdd(
+          monetaryRecord: any(named: 'monetaryRecord'),
+          recordDebtor: any(named: 'recordDebtor'),
+        ),
+      ).thenAnswer((_) => saveCompleter.future);
 
-    final bloc = SetOweRecordInfoReviewBloc(
-      addMonetaryRecordAndUpdateDebtor: mockAdd,
-      editMonetaryRecordAndUpdateDebtor: _MockEditMonetaryRecordAndUpdateDebtor(),
-    )..add(
-        SetOweRecordInfoReviewPageInitialized(
-          oweRecordDraft: tDraft,
-          recordDebtor: tDebtor,
-          oweRecordToEdit: null,
+      final bloc =
+          SetOweRecordInfoReviewBloc(
+            addMonetaryRecordAndUpdateDebtor: mockAdd,
+            editMonetaryRecordAndUpdateDebtor:
+                _MockEditMonetaryRecordAndUpdateDebtor(),
+          )..add(
+            SetOweRecordInfoReviewPageInitialized(
+              oweRecordDraft: tDraft,
+              recordDebtor: tDebtor,
+              oweRecordToEdit: null,
+            ),
+          );
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: BlocProvider(
+              // Like the real container: the provider owns the bloc and closes it
+              // when the tree is torn down.
+              create: (_) => bloc,
+              child: const SetOweRecordInfoReviewFinishButton(isEditing: false),
+            ),
+          ),
         ),
       );
 
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: BlocProvider(
-            // Like the real container: the provider owns the bloc and closes it
-            // when the tree is torn down.
-            create: (_) => bloc,
-            child: const SetOweRecordInfoReviewFinishButton(isEditing: false),
-          ),
-        ),
-      ),
-    );
+      expect(find.text('Confirmar'), findsOneWidget);
+      expect(findButton(tester).onPressed, isNotNull);
 
-    expect(find.text('Confirmar'), findsOneWidget);
-    expect(findButton(tester).onPressed, isNotNull);
+      await tester.tap(find.byType(ElevatedButton));
+      await tester.pump();
 
-    await tester.tap(find.byType(ElevatedButton));
-    await tester.pump();
+      expect(bloc.state, isA<SetOweRecordInfoReviewSettingRecord>());
+      expect(find.text('Confirmar'), findsNothing);
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(findButton(tester).onPressed, isNull);
 
-    expect(bloc.state, isA<SetOweRecordInfoReviewSettingRecord>());
-    expect(find.text('Confirmar'), findsNothing);
-    expect(find.byType(CircularProgressIndicator), findsOneWidget);
-    expect(findButton(tester).onPressed, isNull);
+      saveCompleter.complete(const Left(DefaultFailure()));
+      await tester.pump();
 
-    saveCompleter.complete(const Left(DefaultFailure()));
-    await tester.pump();
-
-    expect(bloc.state, isA<SetOweRecordInfoReviewError>());
-    expect(find.text('Confirmar'), findsOneWidget);
-    expect(find.byType(CircularProgressIndicator), findsNothing);
-    expect(findButton(tester).onPressed, isNotNull);
-  });
+      expect(bloc.state, isA<SetOweRecordInfoReviewError>());
+      expect(find.text('Confirmar'), findsOneWidget);
+      expect(find.byType(CircularProgressIndicator), findsNothing);
+      expect(findButton(tester).onPressed, isNotNull);
+    },
+  );
 }

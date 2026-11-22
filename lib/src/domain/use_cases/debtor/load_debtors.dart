@@ -6,7 +6,7 @@ import 'package:owe_me/src/domain/repositories/debtor_repository.dart';
 class LoadDebtors {
   final DebtorRepository _repository;
 
-  LoadDebtors({required DebtorRepository repository}) : _repository = repository;
+  LoadDebtors({required this._repository});
 
   Future<Either<Failure, List<Debtor>>> call() async {
     return await _repository.loadAllDebtors();

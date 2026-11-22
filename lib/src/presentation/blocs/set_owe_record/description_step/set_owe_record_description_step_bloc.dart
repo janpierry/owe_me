@@ -19,7 +19,11 @@ part 'set_owe_record_description_step_event.dart';
 part 'set_owe_record_description_step_state.dart';
 
 class SetOweRecordDescriptionStepBloc
-    extends Bloc<SetOweRecordDescriptionStepEvent, SetOweRecordDescriptionStepState> {
+    extends
+        Bloc<
+          SetOweRecordDescriptionStepEvent,
+          SetOweRecordDescriptionStepState
+        > {
   late String _description;
   int _textFieldSendCount = 0;
   late List<FavoriteDescription> _favoriteDescriptions;
@@ -33,10 +37,10 @@ class SetOweRecordDescriptionStepBloc
     required AddFavoriteDescription addFavoriteDescription,
     required LoadDebtorFavoriteDebts loadDebtorFavoriteDebts,
     required LoadDebtorFavoriteCredits loadDebtorFavoriteCredits,
-  })  : _addFavoriteDescriptionUseCase = addFavoriteDescription,
-        _loadDebtorFavoriteDebtsUseCase = loadDebtorFavoriteDebts,
-        _loadDebtorFavoriteCreditsUseCase = loadDebtorFavoriteCredits,
-        super(SetOweRecordDescriptionStepInitial()) {
+  }) : _addFavoriteDescriptionUseCase = addFavoriteDescription,
+       _loadDebtorFavoriteDebtsUseCase = loadDebtorFavoriteDebts,
+       _loadDebtorFavoriteCreditsUseCase = loadDebtorFavoriteCredits,
+       super(SetOweRecordDescriptionStepInitial()) {
     on<SetOweRecordDescriptionStepPageInitialized>(_loadInitialData);
     on<SetOweRecordDescriptionStepDescriptionChanged>(_setDescription);
     on<SetOweRecordDescriptionStepFavoriteDescriptionSelected>(
@@ -84,10 +88,8 @@ class SetOweRecordDescriptionStepBloc
     );
   }
 
-  FutureOr<Either<Failure, List<FavoriteDescription>>> _loadFavoriteDescriptions(
-    OweType oweRecordType,
-    Debtor debtor,
-  ) async {
+  FutureOr<Either<Failure, List<FavoriteDescription>>>
+  _loadFavoriteDescriptions(OweType oweRecordType, Debtor debtor) async {
     final favoriteDescriptions = switch (oweRecordType) {
       OweType.debt => await _loadDebtorFavoriteDebtsUseCase(debtor),
       OweType.credit => await _loadDebtorFavoriteCreditsUseCase(debtor),
@@ -148,7 +150,9 @@ class SetOweRecordDescriptionStepBloc
 
     _favoriteDescriptions.add(favoriteDescription);
     _favoriteDescriptions.sort(
-        (a, b) => a.description.toLowerCase().compareTo(b.description.toLowerCase()));
+      (a, b) =>
+          a.description.toLowerCase().compareTo(b.description.toLowerCase()),
+    );
 
     emit(
       SetOweRecordDescriptionStepFavoriteDescriptionsUpdated(

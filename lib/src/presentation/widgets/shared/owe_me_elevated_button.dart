@@ -44,7 +44,9 @@ class OweMeElevatedButton extends StatelessWidget {
               )
             : Text(
                 label,
-                style: OweMeTextStyles.subtitle.copyWith(color: OweMeColors.white),
+                style: OweMeTextStyles.subtitle.copyWith(
+                  color: OweMeColors.white,
+                ),
               ),
       ),
     );

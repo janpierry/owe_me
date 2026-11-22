@@ -43,10 +43,7 @@ class OweMeDropdown<T> extends StatelessWidget {
         fillColor: OweMeColors.surfaceWhite,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-            color: OweMeColors.borderGray,
-            width: 1,
-          ),
+          borderSide: const BorderSide(color: OweMeColors.borderGray, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),

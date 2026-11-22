@@ -4,12 +4,12 @@ import 'package:owe_me/src/domain/entities/monetary_record.dart';
 
 extension MonetaryRecordUi on MonetaryRecord {
   String get typeLabel => switch (this) {
-        PaymentRecord() => 'pagamento',
-        OweRecord(:final oweType) => oweType.label,
-      };
+    PaymentRecord() => 'pagamento',
+    OweRecord(:final oweType) => oweType.label,
+  };
 
   IconData get iconData => switch (this) {
-        PaymentRecord() => Icons.payment,
-        OweRecord(:final oweType) => oweType.iconData
-      };
+    PaymentRecord() => Icons.payment,
+    OweRecord(:final oweType) => oweType.iconData,
+  };
 }

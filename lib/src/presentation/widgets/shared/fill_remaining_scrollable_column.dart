@@ -28,7 +28,7 @@ class FillRemainingScrollableColumn extends StatelessWidget {
               children: children,
             ),
           ),
-        )
+        ),
       ],
     );
   }

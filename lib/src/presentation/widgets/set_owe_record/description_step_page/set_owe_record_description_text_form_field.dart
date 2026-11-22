@@ -29,10 +29,10 @@ class _SetOweRecordDescriptionTextFormFieldState
     _controller.text = widget.initialDescription;
     _controller.addListener(
       () => context.read<SetOweRecordDescriptionStepBloc>().add(
-            SetOweRecordDescriptionStepDescriptionChanged(
-              description: _controller.text,
-            ),
-          ),
+        SetOweRecordDescriptionStepDescriptionChanged(
+          description: _controller.text,
+        ),
+      ),
     );
   }
 
@@ -50,15 +50,15 @@ class _SetOweRecordDescriptionTextFormFieldState
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SetOweRecordDescriptionStepBloc,
-        SetOweRecordDescriptionStepState>(
+    return BlocListener<
+      SetOweRecordDescriptionStepBloc,
+      SetOweRecordDescriptionStepState
+    >(
       listener: _listen,
       child: TextFormField(
         decoration: InputDecoration(
           hintText: 'Descrição não informada',
-          hintStyle: OweMeTextStyles.body.copyWith(
-            color: OweMeColors.textGray,
-          ),
+          hintStyle: OweMeTextStyles.body.copyWith(color: OweMeColors.textGray),
           contentPadding: const EdgeInsets.all(12),
           filled: true,
           fillColor: OweMeColors.surfaceWhite,

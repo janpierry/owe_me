@@ -9,5 +9,6 @@ class AmountZeroOrLessFailure extends AmountValidationFailure {
 }
 
 class AmountExceedsLimitFailure extends AmountValidationFailure {
-  const AmountExceedsLimitFailure() : super('Amount exceeds the maximum allowed limit.');
+  const AmountExceedsLimitFailure()
+    : super('Amount exceeds the maximum allowed limit.');
 }

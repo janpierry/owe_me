@@ -129,7 +129,9 @@ class _SetDebtorDialogState extends State<SetDebtorDialog> {
                     padding: const EdgeInsets.only(top: 4, left: 4),
                     child: Text(
                       _errorText!,
-                      style: OweMeTextStyles.body.copyWith(color: OweMeColors.red),
+                      style: OweMeTextStyles.body.copyWith(
+                        color: OweMeColors.red,
+                      ),
                     ),
                   ),
               ],
@@ -140,12 +142,12 @@ class _SetDebtorDialogState extends State<SetDebtorDialog> {
               children: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                  ),
+                  style: TextButton.styleFrom(padding: EdgeInsets.zero),
                   child: Text(
                     'Cancelar',
-                    style: OweMeTextStyles.subtitle.copyWith(color: OweMeColors.textGray),
+                    style: OweMeTextStyles.subtitle.copyWith(
+                      color: OweMeColors.textGray,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -162,7 +164,9 @@ class _SetDebtorDialogState extends State<SetDebtorDialog> {
                   ),
                   child: Text(
                     _isEditing ? 'Editar' : 'Adicionar',
-                    style: OweMeTextStyles.subtitle.copyWith(color: OweMeColors.white),
+                    style: OweMeTextStyles.subtitle.copyWith(
+                      color: OweMeColors.white,
+                    ),
                   ),
                 ),
               ],

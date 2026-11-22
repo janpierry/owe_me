@@ -10,16 +10,19 @@ abstract class FavoriteDescriptionDataSource {
   Future<bool> queryFavoriteDescriptionExists(
     FavoriteDescriptionModel favoriteDescription,
   );
-  Future<List<FavoriteDescriptionModel>> queryFavoriteDebtsByDebtorId(int debtorId);
-  Future<List<FavoriteDescriptionModel>> queryFavoriteCreditsByDebtorId(int debtorId);
+  Future<List<FavoriteDescriptionModel>> queryFavoriteDebtsByDebtorId(
+    int debtorId,
+  );
+  Future<List<FavoriteDescriptionModel>> queryFavoriteCreditsByDebtorId(
+    int debtorId,
+  );
 }
 
-class FavoriteDescriptionDataSourceImpl implements FavoriteDescriptionDataSource {
+class FavoriteDescriptionDataSourceImpl
+    implements FavoriteDescriptionDataSource {
   final OweMeDatabase _oweMeDatabase;
 
-  FavoriteDescriptionDataSourceImpl({
-    required OweMeDatabase oweMeDatabase,
-  }) : _oweMeDatabase = oweMeDatabase;
+  FavoriteDescriptionDataSourceImpl({required this._oweMeDatabase});
 
   @override
   Future<void> insertFavoriteDescription(
@@ -74,7 +77,7 @@ class FavoriteDescriptionDataSourceImpl implements FavoriteDescriptionDataSource
   }
 
   Future<List<FavoriteDescriptionModel>>
-      _queryFavoriteDescriptionsByDebtorIdAndFavoriteType(
+  _queryFavoriteDescriptionsByDebtorIdAndFavoriteType(
     int debtorId,
     OweType favoriteType,
   ) async {
