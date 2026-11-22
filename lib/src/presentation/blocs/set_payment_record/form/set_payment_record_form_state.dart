@@ -23,11 +23,8 @@ class SetPaymentRecordFormState extends Equatable {
 
   factory SetPaymentRecordFormState.initial({
     required PaymentRecordDraft? paymentRecordDraftToReview,
-    required PaymentRecord? paymentRecordToEdit,
   }) {
-    final amountToReview = paymentRecordDraftToReview?.amount;
-    final amount =
-        amountToReview ?? paymentRecordToEdit?.amount.value ?? Money.zero;
+    final amount = paymentRecordDraftToReview?.amount ?? Money.zero;
     final failure = RecordAmountRules.validate(amount);
     final amountFieldState = ValidatableAmountState(
       value: amount,
@@ -35,14 +32,9 @@ class SetPaymentRecordFormState extends Equatable {
       showError: false,
     );
 
-    final paymentMethodToReview = paymentRecordDraftToReview?.paymentMethod;
     final paymentMethod =
-        paymentMethodToReview ??
-        paymentRecordToEdit?.paymentMethod ??
-        PaymentMethod.cash;
-
-    final dateToReview = paymentRecordDraftToReview?.date;
-    final date = dateToReview ?? paymentRecordToEdit?.date ?? DateTime.now();
+        paymentRecordDraftToReview?.paymentMethod ?? PaymentMethod.cash;
+    final date = paymentRecordDraftToReview?.date ?? DateTime.now();
 
     return SetPaymentRecordFormState(
       amount: amountFieldState,

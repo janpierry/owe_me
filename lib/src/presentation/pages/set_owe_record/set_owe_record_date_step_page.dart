@@ -35,10 +35,7 @@ class _SetOweRecordDateStepPageState extends State<SetOweRecordDateStepPage> {
   @override
   void initState() {
     super.initState();
-    _selectedDate =
-        widget.oweRecordDraft.date ??
-        widget.oweRecordToEdit?.date ??
-        DateTime.now();
+    _selectedDate = widget.oweRecordDraft.date ?? DateTime.now();
   }
 
   void _onDateChanged(DateTime date) {

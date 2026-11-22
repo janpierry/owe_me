@@ -24,7 +24,6 @@ class SetPaymentRecordFormContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => SetPaymentRecordFormBloc(
-        paymentRecordToEdit: paymentRecordToEdit,
         paymentRecordDraftToReview: paymentRecordDraftToReview,
       ),
       child: SetPaymentRecordFormPage(

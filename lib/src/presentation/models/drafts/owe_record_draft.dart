@@ -20,6 +20,17 @@ class OweRecordDraft {
     required this.oweType,
   });
 
+  /// The draft of an existing record, so editing starts on the review with
+  /// every field filled in. The inverse of [toEntity], except for the id: the
+  /// review keeps it from the record being edited.
+  OweRecordDraft.fromEntity(OweRecord record)
+    : this(
+        amount: record.amount.value,
+        description: record.description,
+        date: record.date,
+        oweType: record.oweType,
+      );
+
   OweRecordDraft copyWith({
     Money? amount,
     bool removeAmount = false,

@@ -1,5 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:owe_me/src/core/presentation/extensions/dartz_extensions.dart';
+import 'package:owe_me/src/domain/entities/monetary_record.dart';
+import 'package:owe_me/src/domain/value_objects/record_amount.dart';
 import 'package:owe_me/src/presentation/models/drafts/owe_record_draft.dart';
 import 'package:owe_me/src/domain/value_objects/money.dart';
 import 'package:owe_me/src/domain/enums/owe_type.dart';
@@ -88,6 +90,31 @@ void main() {
       final draft = OweRecordDraft(date: dateTest, oweType: OweType.debt);
       final updatedDraft = draft.copyWith(removeDate: true);
       expect(updatedDraft.date, isNull);
+    });
+  });
+
+  group('fromEntity tests:', () {
+    final record = OweRecord.create(
+      id: 7,
+      amount: RecordAmount.create(const Money(cents: 2500)).asRight(),
+      description: 'Almoço',
+      date: DateTime(2025, 1, 10),
+      oweType: OweType.credit,
+    ).asRight();
+
+    test('Should fill every field from the record', () {
+      final draft = OweRecordDraft.fromEntity(record);
+
+      expect(draft.amount, const Money(cents: 2500));
+      expect(draft.description, 'Almoço');
+      expect(draft.date, DateTime(2025, 1, 10));
+      expect(draft.oweType, OweType.credit);
+    });
+
+    test('Should round-trip through toEntity, except for the id', () {
+      final roundTripped = OweRecordDraft.fromEntity(record).toEntity();
+
+      expect(roundTripped.asRight(), record.copyWith(removeId: true).asRight());
     });
   });
 
