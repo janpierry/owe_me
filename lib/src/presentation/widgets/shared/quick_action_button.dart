@@ -25,9 +25,12 @@ class QuickActionButton extends StatelessWidget {
         onTap: onPressed,
         borderRadius: BorderRadius.circular(24),
         highlightColor: OweMeColors.primaryBlueLight,
+        // Fixed width so three buttons plus two 8px gaps fit a 360dp-wide
+        // screen. The height is only a minimum: it grows with the system text
+        // scale (or a wrapped label) instead of overflowing.
         child: Container(
-          height: 80,
           width: 104,
+          constraints: const BoxConstraints(minHeight: 80),
           decoration: BoxDecoration(
             border: Border.fromBorderSide(
               BorderSide(color: _primaryColor, width: 2),
@@ -37,6 +40,7 @@ class QuickActionButton extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(icon, size: 28, color: _primaryColor),

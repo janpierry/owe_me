@@ -41,31 +41,36 @@ class HomeQuickActionButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        QuickActionButton(
-          label: 'Pagamento',
-          icon: Icons.credit_card,
-          onPressed: () =>
-              _navigateToSetPaymentRecordDebtorSelectionPage(context),
-        ),
-        const SizedBox(width: 8),
-        QuickActionButton(
-          label: 'Crédito',
-          icon: Icons.money_off_csred,
-          onPressed: () =>
-              _navigateToSetRecordDebtorSelectionPageAsCredit(context),
-        ),
-        const SizedBox(width: 8),
-        QuickActionButton(
-          label: 'Débito',
-          icon: Icons.attach_money,
-          onPressed: () =>
-              _navigateToSetRecordDebtorSelectionPageAsDebt(context),
-        ),
-      ],
+    // IntrinsicHeight + stretch: when one label grows (larger text scale or a
+    // wrapped label), every button takes the height of the tallest one.
+    return IntrinsicHeight(
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          QuickActionButton(
+            label: 'Pagamento',
+            icon: Icons.credit_card,
+            onPressed: () =>
+                _navigateToSetPaymentRecordDebtorSelectionPage(context),
+          ),
+          const SizedBox(width: 8),
+          QuickActionButton(
+            label: 'Crédito',
+            icon: Icons.money_off_csred,
+            onPressed: () =>
+                _navigateToSetRecordDebtorSelectionPageAsCredit(context),
+          ),
+          const SizedBox(width: 8),
+          QuickActionButton(
+            label: 'Débito',
+            icon: Icons.attach_money,
+            onPressed: () =>
+                _navigateToSetRecordDebtorSelectionPageAsDebt(context),
+          ),
+        ],
+      ),
     );
   }
 }
